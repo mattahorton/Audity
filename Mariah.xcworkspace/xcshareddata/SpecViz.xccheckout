@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3909398E-38CE-4AA9-B866-F570D0D51BA6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SpecViz</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6B96E17F0CD43695CD08FEFA03FB2187254DF8BC</key>
+		<string>https://github.com/mattahorton/SpecViz-new.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SpecViz.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6B96E17F0CD43695CD08FEFA03FB2187254DF8BC</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mattahorton/SpecViz-new.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6B96E17F0CD43695CD08FEFA03FB2187254DF8BC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6B96E17F0CD43695CD08FEFA03FB2187254DF8BC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SpecViz</string>
+		</dict>
+	</array>
+</dict>
+</plist>
