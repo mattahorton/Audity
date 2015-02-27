@@ -11,16 +11,26 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="Bbs-IZ-g7c">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1030"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="eeN-KZ-dFa">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUDITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8y-Lv-Adg">
+                    <rect key="frame" x="291" y="476" width="187" height="72"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="52"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Bbs-IZ-g7c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FeY-aF-dLr"/>
-                <constraint firstAttribute="trailing" secondItem="Bbs-IZ-g7c" secondAttribute="trailing" id="UHf-IZ-3hc"/>
-                <constraint firstItem="Bbs-IZ-g7c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iwJ-52-zwB"/>
-                <constraint firstAttribute="bottom" secondItem="Bbs-IZ-g7c" secondAttribute="bottom" constant="-6" id="vO8-67-4fh"/>
+                <constraint firstAttribute="centerX" secondItem="c8y-Lv-Adg" secondAttribute="centerX" id="2Oh-dC-cTo"/>
+                <constraint firstAttribute="bottom" secondItem="eeN-KZ-dFa" secondAttribute="bottom" id="AaX-tl-WG2"/>
+                <constraint firstAttribute="centerY" secondItem="c8y-Lv-Adg" secondAttribute="centerY" id="Ng2-IE-BGA"/>
+                <constraint firstItem="eeN-KZ-dFa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bqV-lT-nnf"/>
+                <constraint firstItem="eeN-KZ-dFa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="f0d-fS-mdo"/>
+                <constraint firstAttribute="centerY" secondItem="eeN-KZ-dFa" secondAttribute="centerY" id="ume-om-y2P"/>
+                <constraint firstAttribute="trailing" secondItem="eeN-KZ-dFa" secondAttribute="trailing" id="x2V-wk-Pld"/>
+                <constraint firstAttribute="centerX" secondItem="eeN-KZ-dFa" secondAttribute="centerX" id="zjo-Ka-FZi"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
@@ -28,6 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Splash" width="768" height="1024"/>
+        <image name="Splash" width="375" height="667"/>
     </resources>
 </document>

@@ -76,12 +76,12 @@
     AEAudioFilePlayer *postcardsPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:postcards audioController:self.audioController error:NULL];
     
     [postcardsPlayer setPan:0.0];
-    [postcardsPlayer setVolume:0.8];
+    [postcardsPlayer setVolume:0.9];
     [postcardsPlayer setLoop:YES];
     
     AEAudioFilePlayer *ethanPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:ethan audioController:self.audioController error:NULL];
     [ethanPlayer setPan:1.0];
-    [ethanPlayer setVolume:0.2];
+    [ethanPlayer setVolume:0.1];
     [ethanPlayer setLoop:YES];
     
     [audioOut setChannelIsMuted:YES];
