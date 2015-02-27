@@ -37,6 +37,11 @@
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     
+    file = [[NSBundle mainBundle] URLForResource:@"alley" withExtension:@"m4a"];
+    NSURL *postcards = [[NSBundle mainBundle] URLForResource:@"Postcards" withExtension:@"mp3"];
+    NSURL *ethan = [[NSBundle mainBundle] URLForResource:@"rightRecord" withExtension:@"wav"];
+    NSLog(@"%@ file",file);
+    
     self.audioController = [[AEAudioController alloc]
                             initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
                             inputEnabled:NO];
@@ -61,8 +66,26 @@
         }
     }];
     
+    NSError *errorFilePlayer = NULL;
+    
+    filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+    [filePlayer setPan:-1.0];
+    [filePlayer setVolume:0.1];
+    [filePlayer setLoop:YES];
+    
+    AEAudioFilePlayer *postcardsPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:postcards audioController:self.audioController error:NULL];
+    
+    [postcardsPlayer setPan:0.0];
+    [postcardsPlayer setVolume:0.8];
+    [postcardsPlayer setLoop:YES];
+    
+    AEAudioFilePlayer *ethanPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:ethan audioController:self.audioController error:NULL];
+    [ethanPlayer setPan:1.0];
+    [ethanPlayer setVolume:0.2];
+    [ethanPlayer setLoop:YES];
+    
     [audioOut setChannelIsMuted:YES];
-    [self.audioController addChannels:@[audioOut]];
+    [self.audioController addChannels:@[filePlayer,postcardsPlayer,ethanPlayer]];
     
 }
 

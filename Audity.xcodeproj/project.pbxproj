@@ -18,6 +18,10 @@
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
 		B9138ADC1A6DBD12009BFC86 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */; };
+		B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B93553A91A9FE9CA00F6E7B7 /* alley.m4a */; };
+		B93553AB1A9FE9D300F6E7B7 /* alley.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B93553A91A9FE9CA00F6E7B7 /* alley.m4a */; };
+		B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */; };
+		B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */ = {isa = PBXBuildFile; fileRef = B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */; };
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
 		B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C951A688DAD00799680 /* Main.storyboard */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
@@ -55,6 +59,9 @@
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B93553A91A9FE9CA00F6E7B7 /* alley.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = alley.m4a; sourceTree = "<group>"; };
+		B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Postcards.mp3; sourceTree = "<group>"; };
+		B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rightRecord.wav; sourceTree = "<group>"; };
 		B945CB391A6A0AE200091DC3 /* MHCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHCore.h; sourceTree = "<group>"; };
 		B945CB3A1A6A0AE200091DC3 /* MHCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHCore.mm; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -111,6 +118,9 @@
 		86C89C8A1A688DAD00799680 /* Audity */ = {
 			isa = PBXGroup;
 			children = (
+				B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */,
+				B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */,
+				B93553A91A9FE9CA00F6E7B7 /* alley.m4a */,
 				86C89C8F1A688DAD00799680 /* AppDelegate.h */,
 				86C89C901A688DAD00799680 /* AppDelegate.mm */,
 				86C89CFF1A689A5000799680 /* DismissSegue.h */,
@@ -276,7 +286,10 @@
 			files = (
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
 				B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */,
+				B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */,
 				B9B80B5E1A690B8300A08B9B /* Podfile in Resources */,
+				B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */,
+				B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B93553AB1A9FE9D300F6E7B7 /* alley.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

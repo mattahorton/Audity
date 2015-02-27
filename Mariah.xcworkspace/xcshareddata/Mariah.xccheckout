@@ -12,22 +12,34 @@
 	<dict>
 		<key>8186169DE1ADDD22E2AD242F943BE626AE355EC5</key>
 		<string>https://github.com/mattahorton/Mariah.git</string>
+		<key>A19541179C75A25C62EEC13AA0F98EC65A08E604</key>
+		<string>https://github.com/mattahorton/Audity.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Mariah.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8186169DE1ADDD22E2AD242F943BE626AE355EC5</key>
+		<string>../../Mariah</string>
+		<key>A19541179C75A25C62EEC13AA0F98EC65A08E604</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/mattahorton/Mariah.git</string>
+	<string>https://github.com/mattahorton/Audity.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8186169DE1ADDD22E2AD242F943BE626AE355EC5</string>
+	<string>A19541179C75A25C62EEC13AA0F98EC65A08E604</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A19541179C75A25C62EEC13AA0F98EC65A08E604</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Audity</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
