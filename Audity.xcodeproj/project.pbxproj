@@ -517,6 +517,7 @@
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-l\"Pods-STK\"",
 					"-l\"Pods-TheAmazingAudioEngine\"",
@@ -553,6 +554,7 @@
 					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-l\"Pods-STK\"",
 					"-l\"Pods-TheAmazingAudioEngine\"",
