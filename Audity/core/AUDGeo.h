@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
 #import <GeoFire/GeoFire.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AUDGeo : NSObject
+@interface AUDGeo : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) Firebase *fireRef;
 @property (nonatomic, strong) Firebase *recordingsRef;

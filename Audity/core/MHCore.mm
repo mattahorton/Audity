@@ -88,7 +88,7 @@
     [ethanPlayer setLoop:YES];
     
     [audioOut setChannelIsMuted:YES];
-//    [self.audioController addChannels:@[filePlayer,postcardsPlayer,ethanPlayer]];
+    [self.audioController addChannels:@[filePlayer,postcardsPlayer,ethanPlayer]];
     
 }
 

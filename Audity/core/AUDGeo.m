@@ -8,7 +8,14 @@
 
 #import "AUDGeo.h"
 
-@implementation AUDGeo
+@implementation AUDGeo {
+    CLLocationManager *locManager;
+    CLLocation *currentLoc;
+    CLLocation *center;
+    GFCircleQuery *circleQuery;
+    FirebaseHandle enteredHandle;
+    FirebaseHandle exitedHandle;
+}
 
 #pragma mark Singleton Methods
 
@@ -36,16 +43,45 @@
     // Should never be called, but just here for clarity really.
 }
 
+#pragma mark Initialization
+
 -(void)geoInit {
-    CLLocation *center = [[CLLocation alloc] initWithLatitude:37.7832889 longitude:-122.4056973];
-    // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
-    GFCircleQuery *circleQuery = [self.geoFire queryAtLocation:center withRadius:0.6];
+    locManager = [[CLLocationManager alloc] init];
+    locManager.delegate = self;
+    locManager.distanceFilter = kCLDistanceFilterNone;
+    locManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locManager startUpdatingLocation];
 }
+
+#pragma mark Location Delegate Methods
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    currentLoc = newLocation;
+    center = currentLoc;
+    [circleQuery setCenter:center];
+    
+    if (!oldLocation) {
+        center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
+        // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
+        circleQuery = [self.geoFire queryAtLocation:center withRadius:0.6];
+        
+        enteredHandle = [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+            NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
+        }];
+        
+        exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
+            NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
+        }];
+
+    }
+}
+
+#pragma mark Interaction Methods
 
 -(void) addLoc {
     NSString *uuid = [[NSUUID UUID] UUIDString];
     
-    [self.geoFire setLocation:[[CLLocation alloc] initWithLatitude:37.7853889 longitude:-122.4056973]
+    [self.geoFire setLocation:currentLoc
                        forKey:uuid
           withCompletionBlock:^(NSError *error) {
               if (error != nil) {
