@@ -50,6 +50,9 @@
     locManager.delegate = self;
     locManager.distanceFilter = kCLDistanceFilterNone;
     locManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locManager requestWhenInUseAuthorization];
+    }
     [locManager startUpdatingLocation];
 }
 
@@ -59,6 +62,8 @@
     currentLoc = newLocation;
     center = currentLoc;
     [circleQuery setCenter:center];
+    
+    NSLog(@"%@ loc", currentLoc);
     
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];

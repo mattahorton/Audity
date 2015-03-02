@@ -100,4 +100,8 @@
     [audioOut setChannelIsMuted:YES];
 }
 
+-(NSString *) uploadNewAudity {
+    return @"";
+}
+
 @end
