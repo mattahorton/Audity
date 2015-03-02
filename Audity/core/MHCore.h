@@ -12,6 +12,7 @@
 #import "AERecorder.h"
 #import "AUDGeo.h"
 #import <Firebase/Firebase.h>
+#import "CognitoIdentity.h"
 
 
 @interface MHCore : NSObject

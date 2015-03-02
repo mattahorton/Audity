@@ -9,6 +9,7 @@
 #import "MHCore.h"
 #import "AEBlockAudioReceiver.h"
 #import "AEAudioFilePlayer.h"
+#import "AWSS3TransferManager.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -44,6 +45,48 @@
     NSURL *postcards = [[NSBundle mainBundle] URLForResource:@"Postcards" withExtension:@"mp3"];
     NSURL *ethan = [[NSBundle mainBundle] URLForResource:@"rightRecord" withExtension:@"wav"];
     NSLog(@"%@ file",file);
+    
+    AWSCognitoCredentialsProvider *credentialsProvider = [AWSCognitoCredentialsProvider
+                                                          credentialsWithRegionType:AWSRegionUSEast1
+                                                          identityPoolId:@"us-east-1:933227fb-7780-48c8-9250-c0fa1c1c1459"];
+    
+    AWSServiceConfiguration *configuration = [AWSServiceConfiguration configurationWithRegion:AWSRegionUSEast1
+                                                                          credentialsProvider:credentialsProvider];
+    
+    [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
+    
+    AWSS3TransferManager *transferManager = [[AWSS3TransferManager alloc] initWithConfiguration:configuration identifier:@"S3"];
+    AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
+    uploadRequest.bucket = @"audity";
+    uploadRequest.key = @"Postcards.mp3";
+    uploadRequest.body = postcards;
+    
+    [[transferManager upload:uploadRequest] continueWithExecutor:[BFExecutor mainThreadExecutor]
+                                                       withBlock:^id(BFTask *task) {
+                                                           if (task.error) {
+                                                               if ([task.error.domain isEqualToString:AWSS3TransferManagerErrorDomain]) {
+                                                                   switch (task.error.code) {
+                                                                       case AWSS3TransferManagerErrorCancelled:
+                                                                       case AWSS3TransferManagerErrorPaused:
+                                                                           break;
+                                                                           
+                                                                       default:
+                                                                           NSLog(@"Error: %@", task.error);
+                                                                           break;
+                                                                   }
+                                                               } else {
+                                                                   // Unknown error.
+                                                                   NSLog(@"Error: %@", task.error);
+                                                               }
+                                                           }
+                                                           
+                                                           if (task.result) {
+                                                               AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
+                                                               // The file uploaded successfully.
+                                                               NSLog(@"The file uploaded successfully.");
+                                                           }
+                                                           return nil;
+                                                       }];
     
     self.audioController = [[AEAudioController alloc]
                             initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
