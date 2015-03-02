@@ -13,16 +13,21 @@
 		86C89C991A688DAD00799680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C981A688DAD00799680 /* Images.xcassets */; };
 		86C89CA81A688DAD00799680 /* AudityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89CA71A688DAD00799680 /* AudityTests.m */; };
 		86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C89CFA1A68923600799680 /* AudioToolbox.framework */; };
-		86C89CFD1A68933800799680 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C89CFC1A68933800799680 /* GLKit.framework */; };
 		86C89D011A689A5000799680 /* DismissSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89D001A689A5000799680 /* DismissSegue.mm */; };
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
-		B9138ADC1A6DBD12009BFC86 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */; };
 		B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B93553A91A9FE9CA00F6E7B7 /* alley.m4a */; };
-		B93553AB1A9FE9D300F6E7B7 /* alley.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B93553A91A9FE9CA00F6E7B7 /* alley.m4a */; };
 		B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */; };
 		B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */ = {isa = PBXBuildFile; fileRef = B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */; };
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
+		B955EF101AA3E8C0000A963B /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0F1AA3E8C0000A963B /* Firebase.framework */; };
+		B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = B955EF131AA3E96A000A963B /* AUDGeo.m */; };
+		B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF031AA3E819000A963B /* libc++.dylib */; };
+		B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF051AA3E81E000A963B /* libicucore.dylib */; };
+		B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */; };
+		B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF091AA3E82D000A963B /* Security.framework */; };
+		B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF071AA3E826000A963B /* CFNetwork.framework */; };
+		B9961FC21AA3ED40002F2005 /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9961FC11AA3ED40002F2005 /* GeoFire.framework */; };
 		B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C951A688DAD00799680 /* Main.storyboard */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
@@ -64,6 +69,15 @@
 		B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rightRecord.wav; sourceTree = "<group>"; };
 		B945CB391A6A0AE200091DC3 /* MHCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHCore.h; sourceTree = "<group>"; };
 		B945CB3A1A6A0AE200091DC3 /* MHCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHCore.mm; sourceTree = "<group>"; };
+		B955EF031AA3E819000A963B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		B955EF051AA3E81E000A963B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		B955EF071AA3E826000A963B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B955EF091AA3E82D000A963B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B955EF0F1AA3E8C0000A963B /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		B955EF121AA3E96A000A963B /* AUDGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDGeo.h; sourceTree = "<group>"; };
+		B955EF131AA3E96A000A963B /* AUDGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDGeo.m; sourceTree = "<group>"; };
+		B9961FC11AA3ED40002F2005 /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = SOURCE_ROOT; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4F75F7A8A3C2513260C82B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,9 +88,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9138ADC1A6DBD12009BFC86 /* OpenGLES.framework in Frameworks */,
+				B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */,
+				B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */,
+				B9961FC21AA3ED40002F2005 /* GeoFire.framework in Frameworks */,
+				B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */,
+				B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */,
+				B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */,
+				B955EF101AA3E8C0000A963B /* Firebase.framework in Frameworks */,
 				B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */,
-				86C89CFD1A68933800799680 /* GLKit.framework in Frameworks */,
 				86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */,
 				5381B60AAEC5B644F347051B /* libPods.a in Frameworks */,
 			);
@@ -164,6 +183,8 @@
 		86C89CB41A68902100799680 /* api */ = {
 			isa = PBXGroup;
 			children = (
+				B9961FC11AA3ED40002F2005 /* GeoFire.framework */,
+				B955EF0F1AA3E8C0000A963B /* Firebase.framework */,
 			);
 			name = api;
 			path = Mariah/api;
@@ -174,6 +195,8 @@
 			children = (
 				B945CB391A6A0AE200091DC3 /* MHCore.h */,
 				B945CB3A1A6A0AE200091DC3 /* MHCore.mm */,
+				B955EF121AA3E96A000A963B /* AUDGeo.h */,
+				B955EF131AA3E96A000A963B /* AUDGeo.m */,
 			);
 			name = core;
 			path = Audity/core;
@@ -182,6 +205,11 @@
 		86C89CFE1A68969900799680 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */,
+				B955EF091AA3E82D000A963B /* Security.framework */,
+				B955EF071AA3E826000A963B /* CFNetwork.framework */,
+				B955EF051AA3E81E000A963B /* libicucore.dylib */,
+				B955EF031AA3E819000A963B /* libc++.dylib */,
 				B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */,
 				B9138AD91A6DBCE1009BFC86 /* UIKit.framework */,
 				86C89CFC1A68933800799680 /* GLKit.framework */,
@@ -298,7 +326,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B93553AB1A9FE9D300F6E7B7 /* alley.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +373,7 @@
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
 				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
+				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +499,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/MattH/Downloads,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Audity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -487,6 +520,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/MattH/Downloads,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Audity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -503,6 +541,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Mariah/api",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -510,6 +549,12 @@
 				);
 				INFOPLIST_FILE = Audity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = AudityTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Audity.app/Audity";
 			};
@@ -522,9 +567,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Mariah/api",
 				);
 				INFOPLIST_FILE = Audity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = AudityTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Audity.app/Audity";
 			};

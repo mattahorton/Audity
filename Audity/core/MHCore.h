@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "MHViewController.h"
 #import "AERecorder.h"
+#import "AUDGeo.h"
 
 
 @interface MHCore : NSObject
@@ -17,6 +18,7 @@
 @property (nonatomic) MHViewController* vc;
 @property (nonatomic) BOOL fromFile;
 @property (nonatomic) AEAudioController *audioController;
+@property (nonatomic,strong) AUDGeo *geo;
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
 -(void) coreInit;
