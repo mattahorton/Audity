@@ -12,7 +12,12 @@
 
 @interface AUDGeo : NSObject
 
+@property (nonatomic, strong) Firebase *fireRef;
+@property (nonatomic, strong) Firebase *recordingsRef;
 @property (nonatomic, strong) Firebase *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
+
++ (id)sharedInstance;
+-(void)addLoc;
 
 @end

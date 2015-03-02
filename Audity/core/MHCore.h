@@ -11,6 +11,7 @@
 #import "MHViewController.h"
 #import "AERecorder.h"
 #import "AUDGeo.h"
+#import <Firebase/Firebase.h>
 
 
 @interface MHCore : NSObject
@@ -19,6 +20,7 @@
 @property (nonatomic) BOOL fromFile;
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic,strong) AUDGeo *geo;
+@property (nonatomic,strong) Firebase *firebase;
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
 -(void) coreInit;

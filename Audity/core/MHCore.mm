@@ -37,6 +37,9 @@
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     
+    self.geo = [AUDGeo sharedInstance];
+    self.firebase = [self.geo fireRef];
+    
     file = [[NSBundle mainBundle] URLForResource:@"alley" withExtension:@"m4a"];
     NSURL *postcards = [[NSBundle mainBundle] URLForResource:@"Postcards" withExtension:@"mp3"];
     NSURL *ethan = [[NSBundle mainBundle] URLForResource:@"rightRecord" withExtension:@"wav"];
@@ -85,7 +88,7 @@
     [ethanPlayer setLoop:YES];
     
     [audioOut setChannelIsMuted:YES];
-    [self.audioController addChannels:@[filePlayer,postcardsPlayer,ethanPlayer]];
+//    [self.audioController addChannels:@[filePlayer,postcardsPlayer,ethanPlayer]];
     
 }
 

@@ -30,6 +30,12 @@
     
     // initialize
     [self.core coreInit];
+    
+    //The setup code (in viewDidLoad in your view controller)
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleFingerTap];
 }
 
 
@@ -44,6 +50,14 @@
     
     // Dispose of any resources that can be recreated.
 }
+
+//The event handling method
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    
+    [self.core.geo addLoc];
+}
+
 
 
 @end
