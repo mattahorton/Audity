@@ -24,6 +24,7 @@
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
+		B98B383E1AA5141C0085912F /* AUDS3.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B383D1AA5141C0085912F /* AUDS3.m */; };
 		B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF031AA3E819000A963B /* libc++.dylib */; };
 		B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF051AA3E81E000A963B /* libicucore.dylib */; };
 		B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */; };
@@ -80,6 +81,8 @@
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
+		B98B383C1AA5141C0085912F /* AUDS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDS3.h; sourceTree = "<group>"; };
+		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4F75F7A8A3C2513260C82B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				B945CB3A1A6A0AE200091DC3 /* MHCore.mm */,
 				B955EF121AA3E96A000A963B /* AUDGeo.h */,
 				B955EF131AA3E96A000A963B /* AUDGeo.m */,
+				B98B383C1AA5141C0085912F /* AUDS3.h */,
+				B98B383D1AA5141C0085912F /* AUDS3.m */,
 			);
 			name = core;
 			path = Audity/core;
@@ -377,6 +382,7 @@
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
 				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
+				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
 			);

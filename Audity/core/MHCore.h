@@ -11,8 +11,8 @@
 #import "MHViewController.h"
 #import "AERecorder.h"
 #import "AUDGeo.h"
+#import "AUDS3.h"
 #import <Firebase/Firebase.h>
-#import "CognitoIdentity.h"
 
 
 @interface MHCore : NSObject
@@ -22,8 +22,13 @@
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic,strong) AUDGeo *geo;
 @property (nonatomic,strong) Firebase *firebase;
+@property (nonatomic,strong) AUDS3 *s3;
+@property (nonatomic,strong) AERecorder *recorder;
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
+-(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
+-(void) startRecording;
+-(void) endRecording;
 -(void) coreInit;
 -(void) unmute;
 -(void) mute;

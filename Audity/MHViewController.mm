@@ -53,9 +53,8 @@
 
 //The event handling method
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
-    
-    [self.core.geo addLoc];
+//    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    [self.core startRecording];
 }
 
 

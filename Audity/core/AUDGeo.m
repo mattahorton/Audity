@@ -63,7 +63,7 @@
     center = currentLoc;
     [circleQuery setCenter:center];
     
-    NSLog(@"%@ loc", currentLoc);
+//    NSLog(@"%@ loc", currentLoc);
     
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
@@ -71,7 +71,9 @@
         circleQuery = [self.geoFire queryAtLocation:center withRadius:0.6];
         
         enteredHandle = [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+            CLLocationDistance distance = [location distanceFromLocation:currentLoc];
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
+            NSLog(@"It is %f meters away from you",distance);
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
@@ -83,8 +85,7 @@
 
 #pragma mark Interaction Methods
 
--(void) addLoc {
-    NSString *uuid = [[NSUUID UUID] UUIDString];
+-(void) addLoc:(NSString *) uuid {
     
     [self.geoFire setLocation:currentLoc
                        forKey:uuid
@@ -96,11 +97,13 @@
               }
     }];
     
-    NSDictionary *dict = @{@"recording":@"url"};
+    NSString *url = @"https://s3.amazonaws.com/audity/";
+    url = [[url stringByAppendingString:uuid] stringByAppendingString:@".aiff"];
+    
+    NSDictionary *dict = @{@"recording":url};
     Firebase *hqRef = [self.recordingsRef childByAppendingPath:uuid];
     
     [hqRef setValue:dict];
-    
 }
 
 @end

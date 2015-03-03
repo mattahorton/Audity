@@ -19,6 +19,6 @@
 @property (nonatomic, strong) GeoFire *geoFire;
 
 + (id)sharedInstance;
--(void)addLoc;
+-(void)addLoc:(NSString *) uuid;
 
 @end
