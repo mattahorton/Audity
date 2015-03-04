@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4926147F1AA7B5D20088DA31 /* RecButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4926147E1AA7B5D20088DA31 /* RecButton.png */; };
 		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4926147E1AA7B5D20088DA31 /* RecButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecButton.png; sourceTree = SOURCE_ROOT; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -175,6 +177,7 @@
 				86C89C8B1A688DAD00799680 /* Supporting Files */,
 				B9138AD61A6DB9E2009BFC86 /* MHViewController.h */,
 				B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */,
+				4926147E1AA7B5D20088DA31 /* RecButton.png */,
 			);
 			path = Audity;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				B9B80B5E1A690B8300A08B9B /* Podfile in Resources */,
 				B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */,
 				B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */,
+				4926147F1AA7B5D20088DA31 /* RecButton.png in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
