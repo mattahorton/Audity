@@ -20,7 +20,6 @@
     float viewHeight;
     float viewWidth;
     RMMapView *mapView;
-    NSMutableDictionary *audities;
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title{
@@ -28,11 +27,11 @@
     
     [mapView addAnnotation:annotation];
     // OMG CHANGE THIS. MAKE THE KEY UNIQUE. THIS IS A STAND-IN
-    [audities setObject:annotation forKey:title];
+    [self.core.audities setObject:annotation forKey:title];
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    RMPointAnnotation *audity = (RMPointAnnotation *)[audities objectForKey:key];
+    RMPointAnnotation *audity = (RMPointAnnotation *)[self.core.audities objectForKey:key];
     [audity setCoordinate:loc.coordinate];
 }
 
@@ -53,16 +52,16 @@
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
     [self.view addSubview:mapView];
     
+    // disable dragging on the map
     mapView.draggingEnabled = false;
     
+    // init the dict for on-screen audities
+    self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
+    
+    // get the center location
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
     
-    audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
-    
-    //CLLocation *currentPoint = [[CLLocation alloc] initWithLatitude:0 longitude:0];
-    
-    //[self changeMapCenterWithLocation:currentPoint];
-    
+    // add center loc to screen. We'll change this loc later.
     [self addAudityToMapWithLocation:loc andTitle:@"You"];
     
 }

@@ -25,6 +25,7 @@
 @property (nonatomic,strong) Firebase *firebase;
 @property (nonatomic,strong) AUDS3 *s3;
 @property (nonatomic,strong) AERecorder *recorder;
+@property (nonatomic, strong) NSMutableDictionary *audities;
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
 -(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
