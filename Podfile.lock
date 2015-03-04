@@ -145,11 +145,19 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
+  - GRMustache (7.3.0):
+    - JRSwizzle (~> 1.0)
   - GZIP (1.0.3)
+  - JRSwizzle (1.0)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
+  - Mapbox-iOS-SDK (1.6.0):
+    - FMDB (~> 2.4)
+    - GRMustache (= 7.3.0)
+    - SMCalloutView (= 2.0)
   - Reachability (3.2)
+  - SMCalloutView (2.0)
   - STK (4.5.2)
   - TheAmazingAudioEngine (1.4.6)
   - TMCache (1.2.3)
@@ -158,14 +166,20 @@ PODS:
 
 DEPENDENCIES:
   - AWSiOSSDKv2
+  - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine
 
 EXTERNAL SOURCES:
+  Mapbox-iOS-SDK:
+    :git: https://github.com/mattahorton/mapbox-ios-sdk.git
   STK:
     :git: https://github.com/mattahorton/stk.git
 
 CHECKOUT OPTIONS:
+  Mapbox-iOS-SDK:
+    :commit: 3179eb10aa6eadf099c5ddfda7a73b27101ff13d
+    :git: https://github.com/mattahorton/mapbox-ios-sdk.git
   STK:
     :commit: 1f87d8cada31480f6e753c2a81a32ae0fff10475
     :git: https://github.com/mattahorton/stk.git
@@ -174,9 +188,13 @@ SPEC CHECKSUMS:
   AWSiOSSDKv2: bcf17afda187f45901b07369f1f59bfbc68922bc
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  GRMustache: efecd3b603f0a7a99cf6bdf3998782ee0c465726
   GZIP: f27c434ffee5e9a9b34f4e9c19e91350fa8bbde1
+  JRSwizzle: 30da7a2c539a4ebf954b16d15f6dd8221c9f6fa5
   Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
+  Mapbox-iOS-SDK: c84b5a017e463ab1467b4a932eec30a61def8af2
   Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
+  SMCalloutView: c1906604d47c058400ade5c9d52ab98aa77b7e76
   STK: b18355d6f4dac95c45a6a0ef8f57a07b5825686f
   TheAmazingAudioEngine: d4c027506d6b8b025c5947fb401a972ccf7574f3
   TMCache: 11589ef8c40909114a5e60132711c9a559e01d97
