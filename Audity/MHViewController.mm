@@ -8,6 +8,7 @@
 
 #import "MHViewController.h"
 #import "MHCore.h"
+#import "Mapbox.h"
 
 @interface MHViewController()
 
@@ -18,6 +19,42 @@
 @implementation MHViewController {
     float viewHeight;
     float viewWidth;
+    RMMapView *mapView;
+}
+
+- (void) addAudityToMapWithLocation:(CLLocation *)loc{
+    RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:@"Hello, world!"];
+    
+    [mapView addAnnotation:annotation];
+}
+
+- (void) changeMapCenterWithLocation:(CLLocation *)loc{
+    [mapView setCenterCoordinate:loc.coordinate animated:YES];
+    //mapView.centerCoordinate = loc.coordinate;
+}
+
+- (void)initMapBox {
+    //public key access token for mapbox
+    NSString *token = @"pk.eyJ1IjoiZm9yc3l0aGFjIiwiYSI6InZtbU51b28ifQ.zb7d5t9yri__gm8IPK0d6Q";
+    [[RMConfiguration sharedInstance] setAccessToken:token];
+    
+    //get source for tiles
+    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:@"forsythac.lbjne02n"];
+    
+    //get our mapview and add it to our view
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
+    [self.view addSubview:mapView];
+    
+    mapView.draggingEnabled = false;
+    
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+    
+    //CLLocation *currentPoint = [[CLLocation alloc] initWithLatitude:0 longitude:0];
+    
+    //[self changeMapCenterWithLocation:currentPoint];
+    
+    [self addAudityToMapWithLocation:loc];
+    
 }
 
 - (void)viewDidLoad {
@@ -27,17 +64,16 @@
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
     
     self.core = [[MHCore alloc] initWithViewController:self];
-    
     // initialize
     [self.core coreInit];
-    
+
     //The setup code (in viewDidLoad in your view controller)
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
     [self.view addGestureRecognizer:singleFingerTap];
+    [self initMapBox];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -56,6 +92,7 @@
 //    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
     [self.core startRecording];
 }
+//maps code here
 
 
 
