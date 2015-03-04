@@ -10,7 +10,6 @@
 
 @implementation AUDGeo {
     CLLocationManager *locManager;
-    CLLocation *currentLoc;
     CLLocation *center;
     GFCircleQuery *circleQuery;
     FirebaseHandle enteredHandle;
@@ -59,11 +58,9 @@
 #pragma mark Location Delegate Methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    currentLoc = newLocation;
-    center = currentLoc;
+    self.currentLoc = newLocation;
+    center = self.currentLoc;
     [circleQuery setCenter:center];
-    
-//    NSLog(@"%@ loc", currentLoc);
     
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
@@ -71,7 +68,7 @@
         circleQuery = [self.geoFire queryAtLocation:center withRadius:0.6];
         
         enteredHandle = [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-            CLLocationDistance distance = [location distanceFromLocation:currentLoc];
+            CLLocationDistance distance = [location distanceFromLocation:self.currentLoc];
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
             NSLog(@"It is %f meters away from you",distance);
         }];
@@ -87,7 +84,7 @@
 
 -(void) addLoc:(NSString *) uuid {
     
-    [self.geoFire setLocation:currentLoc
+    [self.geoFire setLocation:self.currentLoc
                        forKey:uuid
           withCompletionBlock:^(NSError *error) {
               if (error != nil) {

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) Firebase *recordingsRef;
 @property (nonatomic, strong) Firebase *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
+@property (nonatomic, strong) CLLocation *currentLoc;
 
 + (id)sharedInstance;
 -(void)addLoc:(NSString *) uuid;
