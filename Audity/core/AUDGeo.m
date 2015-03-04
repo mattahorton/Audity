@@ -78,6 +78,9 @@
         }];
 
     }
+    
+    [self.core centerMap:self.currentLoc];
+    
 }
 
 #pragma mark Interaction Methods

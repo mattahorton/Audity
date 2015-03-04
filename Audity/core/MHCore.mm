@@ -36,6 +36,7 @@
     
     // Set up backend
     self.geo = [AUDGeo sharedInstance];
+    self.geo.core = self;
     self.firebase = [self.geo fireRef];
     self.s3 = [AUDS3 sharedInstance];
 
@@ -79,6 +80,10 @@
 //    [filePlayer setLoop:YES];
 
     
+}
+
+-(void) centerMap:(CLLocation *)loc{
+    [self.vc changeMapCenterWithLocation:loc];
 }
 
 -(void)unmute{

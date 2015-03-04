@@ -10,6 +10,9 @@
 #import <Firebase/Firebase.h>
 #import <GeoFire/GeoFire.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MHCore.h"
+
+@class MHCore;
 
 @interface AUDGeo : NSObject <CLLocationManagerDelegate>
 
@@ -18,6 +21,7 @@
 @property (nonatomic, strong) Firebase *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
 @property (nonatomic, strong) CLLocation *currentLoc;
+@property (nonatomic, strong) MHCore *core;
 
 + (id)sharedInstance;
 -(void)addLoc:(NSString *) uuid;

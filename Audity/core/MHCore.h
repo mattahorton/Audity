@@ -14,6 +14,7 @@
 #import "AUDS3.h"
 #import <Firebase/Firebase.h>
 
+@class AUDGeo;
 
 @interface MHCore : NSObject
 
@@ -27,6 +28,7 @@
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
 -(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
+-(void) centerMap:(CLLocation *)loc;
 -(void) startRecording;
 -(void) endRecording;
 -(void) coreInit;
