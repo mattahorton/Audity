@@ -20,12 +20,20 @@
     float viewHeight;
     float viewWidth;
     RMMapView *mapView;
+    NSMutableDictionary *audities;
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title{
     RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
+    // OMG CHANGE THIS. MAKE THE KEY UNIQUE. THIS IS A STAND-IN
+    [audities setObject:annotation forKey:title];
+}
+
+-(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
+    RMPointAnnotation *audity = (RMPointAnnotation *)[audities objectForKey:key];
+    [audity setCoordinate:loc.coordinate];
 }
 
 - (void) changeMapCenterWithLocation:(CLLocation *)loc{
@@ -48,6 +56,8 @@
     mapView.draggingEnabled = false;
     
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+    
+    audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
     
     //CLLocation *currentPoint = [[CLLocation alloc] initWithLatitude:0 longitude:0];
     

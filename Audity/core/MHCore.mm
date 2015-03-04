@@ -84,6 +84,7 @@
 
 -(void) centerMap:(CLLocation *)loc{
     [self.vc changeMapCenterWithLocation:loc];
+    [self.vc moveAudityToLocation:loc forKey:@"You"];
 }
 
 -(void)unmute{

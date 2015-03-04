@@ -81,8 +81,7 @@
 
     }
     
-    [self.core centerMap:self.currentLoc];
-    
+    [self.core centerMap:self.currentLoc];    
 }
 
 #pragma mark Interaction Methods

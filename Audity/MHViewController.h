@@ -14,6 +14,7 @@
 @interface MHViewController : UIViewController
 
 - (void)addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title;
+-(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key;
 - (void) changeMapCenterWithLocation:(CLLocation *)loc;
 
 @end
