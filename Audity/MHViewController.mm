@@ -68,10 +68,6 @@
     [self.core coreInit];
 
     //The setup code (in viewDidLoad in your view controller)
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleFingerTap];
     [self initMapBox];
 }
 
