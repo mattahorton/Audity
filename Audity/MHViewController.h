@@ -9,7 +9,10 @@
 @class AEAudioController;
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface MHViewController : UIViewController
+
+- (void)addAudityToMapWithLocation:(CLLocation *)coord;
 
 @end
