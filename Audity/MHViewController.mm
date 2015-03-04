@@ -10,6 +10,9 @@
 #import "MHCore.h"
 #import "Mapbox.h"
 
+#define BUTTON_HEIGHT 40
+#define BUTTON_WIDTH 40
+
 @interface MHViewController()
 
 @property (strong, nonatomic) MHCore *core;
@@ -57,6 +60,15 @@
     
 }
 
+- (void) initButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Record Audity" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/2, viewHeight/2 - BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
+    [mapView addSubview:button];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -69,6 +81,7 @@
 
     //The setup code (in viewDidLoad in your view controller)
     [self initMapBox];
+    [self initButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,8 +101,10 @@
 //    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
     [self.core startRecording];
 }
-//maps code here
 
+-(IBAction)handleButtonPress:(id)sender {
+    NSLog(@"shit on my dick");
+}
 
 
 @end
