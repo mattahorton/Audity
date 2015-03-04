@@ -13,7 +13,7 @@
 
 @interface MHViewController : UIViewController
 
-- (void)addAudityToMapWithLocation:(CLLocation *)coord;
+- (void)addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title;
 - (void) changeMapCenterWithLocation:(CLLocation *)loc;
 
 @end

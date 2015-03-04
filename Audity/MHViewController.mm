@@ -22,8 +22,8 @@
     RMMapView *mapView;
 }
 
-- (void) addAudityToMapWithLocation:(CLLocation *)loc{
-    RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:@"Hello, world!"];
+- (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title{
+    RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
 }
@@ -53,7 +53,7 @@
     
     //[self changeMapCenterWithLocation:currentPoint];
     
-    [self addAudityToMapWithLocation:loc];
+    [self addAudityToMapWithLocation:loc andTitle:@"You"];
     
 }
 

@@ -71,10 +71,12 @@
             CLLocationDistance distance = [location distanceFromLocation:self.currentLoc];
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
             NSLog(@"It is %f meters away from you",distance);
+            [self.core.vc addAudityToMapWithLocation:location andTitle:@"Audity"];
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
             NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
+//            [self.core.vc addAudityToMapWithLocation:location];
         }];
 
     }
