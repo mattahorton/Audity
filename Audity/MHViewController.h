@@ -10,8 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MapBox.h"
 
-@interface MHViewController : UIViewController
+@interface MHViewController : UIViewController <RMMapViewDelegate>
 
 - (void)addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title;
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key;

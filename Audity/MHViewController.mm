@@ -57,15 +57,18 @@
     
     // disable dragging on the map
     mapView.draggingEnabled = false;
+    mapView.zoomingInPivotsAroundCenter = YES;
+//    mapView.clusteringEnabled = YES;
+    mapView.showsUserLocation = YES;
     
     // init the dict for on-screen audities
     self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
     
     // get the center location
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
-    
-    // add center loc to screen. We'll change this loc later.
-    [self addAudityToMapWithLocation:loc andTitle:@"You"];
+//    CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+//    
+//    // add center loc to screen. We'll change this loc later.
+//    [self addAudityToMapWithLocation:loc andTitle:@"You"];
     
 }
 
@@ -113,6 +116,10 @@
 
 -(IBAction)handleButtonPress:(id)sender {
     NSLog(@"shit on my dick");
+}
+
+- (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
+    [self.core centerMap:self.core.geo.currentLoc];
 }
 
 
