@@ -19,6 +19,7 @@
     long framesize;
     AEBlockChannel *audioOut;
     NSString *documentsFolder;
+    NSUserDefaults *defaults;
 }
 
 -(instancetype)initWithViewController:(MHViewController *) viewController {
@@ -39,6 +40,22 @@
     self.geo.core = self;
     self.firebase = [self.geo fireRef];
     self.s3 = [AUDS3 sharedInstance];
+    Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
+    
+    // Find user ID in NSUserDefaults
+    defaults = [NSUserDefaults standardUserDefaults];
+    self.userID = [defaults stringForKey:@"userId"];
+    
+    if (!self.userID) {
+        // Generate ID if there is none
+        self.userID = [[NSUUID UUID] UUIDString];
+        // Store ID in NSUserDefaults
+        [defaults setValue:self.userID forKey:@"userId"];
+        
+        // Store ID in Firebase
+        Firebase *thisUser = [userRef childByAppendingPath:self.userID];
+        [thisUser setValue:@{@"userId":self.userID}];
+    }
 
     
     // Set up audio controller

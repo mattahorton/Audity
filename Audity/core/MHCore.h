@@ -26,6 +26,7 @@
 @property (nonatomic,strong) AUDS3 *s3;
 @property (nonatomic,strong) AERecorder *recorder;
 @property (nonatomic, strong) NSMutableDictionary *audities;
+@property (nonatomic, strong) NSString *userID;
 
 -(instancetype)initWithViewController:(MHViewController *)vc;
 -(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;

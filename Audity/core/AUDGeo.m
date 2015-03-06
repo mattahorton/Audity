@@ -101,7 +101,7 @@
     NSString *url = @"https://s3.amazonaws.com/audity/";
     url = [[url stringByAppendingString:uuid] stringByAppendingString:@".aiff"];
     
-    NSDictionary *dict = @{@"recording":url};
+    NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":@"KillaT"};
     Firebase *hqRef = [self.recordingsRef childByAppendingPath:uuid];
     
     [hqRef setValue:dict];
