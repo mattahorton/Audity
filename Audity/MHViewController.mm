@@ -25,12 +25,15 @@
     RMMapView *mapView;
 }
 
-- (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title{
+- (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
     RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
-    // OMG CHANGE THIS. MAKE THE KEY UNIQUE. THIS IS A STAND-IN
-    [self.core.audities setObject:annotation forKey:title];
+    [self.core.audities[key] setObject:annotation forKey:@"annotation"];
+}
+
+-(void) removeAudityFromMapWithKey:(NSString *)key{
+    [mapView removeAnnotation:self.core.audities[key][@"annotation"]];
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
@@ -87,7 +90,8 @@
     viewHeight = [[UIScreen mainScreen] bounds].size.height;
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
     
-    self.core = [[MHCore alloc] initWithViewController:self];
+    self.core = [MHCore sharedInstance];
+    self.core.vc = self;
     // initialize
     [self.core coreInit];
 
@@ -116,6 +120,7 @@
 
 -(IBAction)handleButtonPress:(id)sender {
     NSLog(@"shit on my dick");
+    [self.core startRecording];
 }
 
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {

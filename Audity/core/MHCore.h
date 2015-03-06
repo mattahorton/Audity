@@ -15,6 +15,7 @@
 #import <Firebase/Firebase.h>
 
 @class AUDGeo;
+@class AUDS3;
 
 @interface MHCore : NSObject
 
@@ -27,10 +28,14 @@
 @property (nonatomic,strong) AERecorder *recorder;
 @property (nonatomic, strong) NSMutableDictionary *audities;
 @property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSDictionary *apiKeys;
 
--(instancetype)initWithViewController:(MHViewController *)vc;
++(id) sharedInstance;
+
 -(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
 -(void) centerMap:(CLLocation *)loc;
+-(void) playAudio:(NSURL *)file withKey:(NSString *)key;
+-(void) stopAudioWithKey:(NSString *)key;
 -(void) startRecording;
 -(void) endRecording;
 -(void) coreInit;

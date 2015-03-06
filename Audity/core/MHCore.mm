@@ -22,25 +22,29 @@
     NSUserDefaults *defaults;
 }
 
--(instancetype)initWithViewController:(MHViewController *) viewController {
-    self.vc = viewController;
-    self.fromFile = NO;
-    return self;
-}
-
--(instancetype)init {
-    return [[MHCore alloc] initWithViewController:nil];
++ (id)sharedInstance {
+    static MHCore *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
 }
 
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     
+    self.audities = @{};
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
+    self.apiKeys = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    
     // Set up backend
     self.geo = [AUDGeo sharedInstance];
-    self.geo.core = self;
     self.firebase = [self.geo fireRef];
     self.s3 = [AUDS3 sharedInstance];
     Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
+    self.s3.core = self;
     
     // Find user ID in NSUserDefaults
     defaults = [NSUserDefaults standardUserDefaults];
@@ -88,15 +92,6 @@
             ((float*)audio->mBuffers[0].mData)[i] = ((float*)audio->mBuffers[1].mData)[i] = 0;
         }
     }];
-    
-//    NSError *errorFilePlayer = NULL;
-//    
-//    filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
-//    [filePlayer setPan:-1.0];
-//    [filePlayer setVolume:0.1];
-//    [filePlayer setLoop:YES];
-
-    
 }
 
 -(void) centerMap:(CLLocation *)loc{
@@ -141,14 +136,40 @@
     
     NSURL *file = [NSURL URLWithString:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    [self.geo addLoc:uuid];
     [self uploadNewAudity:file withKey:uuid];
 }
 
 -(NSString *) uploadNewAudity:(NSURL *)file withKey:(NSString *)key {
+    NSString *uuid = key;
     key = [key stringByAppendingString:@".aiff"];
     NSURL * s3url = [self.s3 uploadFile:file withKey:key];
+    [self.geo addLoc:uuid];
     return [s3url absoluteString];
+}
+
+-(void) playAudio:(NSURL *)file withKey:(NSString *)key {
+    // Play audio
+    if(!self.audities[key][@"filePlayer"]){
+        NSLog(@" play %@ ", file);
+        NSError *errorFilePlayer = NULL;
+
+        AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+        [filePlayer setPan:-1.0];
+        [filePlayer setVolume:0.5];
+        [filePlayer setLoop:YES];
+        
+        [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
+        
+        [self.audioController addChannels:@[filePlayer]];
+    }
+}
+
+-(void) stopAudioWithKey:(NSString *)key {
+    NSLog(@"stopping %@", key);
+    AEAudioFilePlayer *filePlayer = self.audities[key][@"filePlayer"];
+    [filePlayer setVolume:0.0];
+    [self.audioController removeChannels:@[filePlayer]];
+    [self.audities[key] removeObjectForKey:@"filePlayer"];
 }
 
 @end

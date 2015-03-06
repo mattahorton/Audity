@@ -9,15 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "CognitoIdentity.h"
 #import "AWSS3TransferManager.h"
+#import "MHCore.h"
+
+@class MHCore;
 
 @interface AUDS3 : NSObject
 
 @property (strong,nonatomic) AWSCognitoCredentialsProvider *credentialsProvider;
 @property (strong,nonatomic) AWSServiceConfiguration *configuration;
 @property (strong,nonatomic) AWSS3TransferManager *transferManager;
+@property (strong,nonatomic) MHCore *core;
+@property (nonatomic, strong) NSString *s3Secret;
+@property (nonatomic, strong) NSString *awsAccessKey;
 
 + (id)sharedInstance;
 
 -(NSURL *) uploadFile:(NSURL *)file withKey:(NSString *)key;
+-(NSURL *) downloadFileWithKey:(NSString *)key;
 
 @end

@@ -45,6 +45,8 @@
 #pragma mark Initialization
 
 -(void)geoInit {
+    self.core = [MHCore sharedInstance];
+    
     locManager = [[CLLocationManager alloc] init];
     locManager.delegate = self;
     locManager.distanceFilter = kCLDistanceFilterNone;
@@ -71,12 +73,29 @@
             CLLocationDistance distance = [location distanceFromLocation:self.currentLoc];
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
             NSLog(@"It is %f meters away from you",distance);
-            [self.core.vc addAudityToMapWithLocation:location andTitle:@"Audity"];
+            
+            NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
+            
+            Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
+
+            
+            [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                              @"location":location,
+                                                                                              @"key":key,
+                                                                                        @"signature":snapshot.value[@"signature"],
+                                                                                              @"userId":snapshot.value[@"userId"],
+                                                                                              @"localUrl": localUrl,
+                                                                                              }]
+                                       forKey:key];
+                [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
+            }];
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
             NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
 //            [self.core.vc addAudityToMapWithLocation:location];
+            [self.core stopAudioWithKey:key];
         }];
 
     }
@@ -102,9 +121,9 @@
     url = [[url stringByAppendingString:uuid] stringByAppendingString:@".aiff"];
     
     NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":@"KillaT"};
-    Firebase *hqRef = [self.recordingsRef childByAppendingPath:uuid];
+    Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
     
-    [hqRef setValue:dict];
+    [locRef setValue:dict];
 }
 
 @end
