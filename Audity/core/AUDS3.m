@@ -103,6 +103,8 @@
     // Construct the NSURL for the download location.
     NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:key];
     NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
+    [[NSFileManager defaultManager] removeItemAtPath:downloadingFilePath error:NULL];
+    
     
     // Construct the download request.
     AWSS3TransferManagerDownloadRequest *downloadRequest = [AWSS3TransferManagerDownloadRequest new];
