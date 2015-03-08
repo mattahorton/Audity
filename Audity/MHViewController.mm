@@ -10,8 +10,12 @@
 #import "MHCore.h"
 #import "Mapbox.h"
 
-#define BUTTON_HEIGHT 40
-#define BUTTON_WIDTH 40
+#define BUTTON_HEIGHT 80
+#define BUTTON_WIDTH 80
+#define BUTTON_BORDER_OFFSET 14
+
+#define MIN_ZOOM 7
+#define MAX_ZOOM 17
 
 @interface MHViewController()
 
@@ -59,19 +63,19 @@
     [self.view addSubview:mapView];
     
     // disable dragging on the map
-    mapView.draggingEnabled = false;
+    mapView.draggingEnabled = NO;
     mapView.zoomingInPivotsAroundCenter = YES;
 //    mapView.clusteringEnabled = YES;
     mapView.showsUserLocation = YES;
-    
+
     // init the dict for on-screen audities
     self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
+
+    mapView.minZoom = MIN_ZOOM;
+    mapView.maxZoom = MAX_ZOOM;
+    mapView.bouncingEnabled = YES;
     
-    // get the center location
-//    CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
-//    
-//    // add center loc to screen. We'll change this loc later.
-//    [self addAudityToMapWithLocation:loc andTitle:@"You"];
+    [mapView setZoom:MAX_ZOOM animated:NO];
     
 }
 
@@ -80,7 +84,9 @@
     [button addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Record Audity" forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
-    button.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/2, viewHeight/2 - BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
+    button.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                              viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
+                              BUTTON_WIDTH, BUTTON_HEIGHT);
     [mapView addSubview:button];
 }
 
