@@ -10,8 +10,12 @@
 #import "MHCore.h"
 #import "Mapbox.h"
 
-#define BUTTON_HEIGHT 40
-#define BUTTON_WIDTH 40
+#define BUTTON_HEIGHT 80
+#define BUTTON_WIDTH 80
+#define BUTTON_BORDER_OFFSET 14
+
+#define MIN_ZOOM 7
+#define MAX_ZOOM 17
 
 @interface MHViewController()
 
@@ -50,13 +54,11 @@
     
     mapView.draggingEnabled = false;
     
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+    mapView.minZoom = MIN_ZOOM;
+    mapView.maxZoom = MAX_ZOOM;
+    mapView.bouncingEnabled = YES;
     
-    //CLLocation *currentPoint = [[CLLocation alloc] initWithLatitude:0 longitude:0];
-    
-    //[self changeMapCenterWithLocation:currentPoint];
-    
-    [self addAudityToMapWithLocation:loc];
+    [mapView setZoom:MAX_ZOOM animated:NO];
     
 }
 
@@ -65,7 +67,9 @@
     [button addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Record Audity" forState:UIControlStateNormal];
     [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
-    button.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/2, viewHeight/2 - BUTTON_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
+    button.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                              viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
+                              BUTTON_WIDTH, BUTTON_HEIGHT);
     [mapView addSubview:button];
 }
 
@@ -103,7 +107,7 @@
 }
 
 -(IBAction)handleButtonPress:(id)sender {
-    NSLog(@"shit on my dick");
+    NSLog(@"shit on my dick. zoom level %f", mapView.zoom);
 }
 
 
