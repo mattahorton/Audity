@@ -159,6 +159,36 @@
 }
 
 
+-(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withAngle:(float)theta distance:(float)distance{
+    AudioUnitSetParameter(reverb.audioUnit,
+                          kReverb2Param_DryWetMix,
+                          kAudioUnitScope_Global,
+                          0,
+                          100.f,
+                          0);
+}
+
+-(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
+    AudioUnitSetParameter(lp.audioUnit,
+                          kReverb2Param_DryWetMix,
+                          kAudioUnitScope_Global,
+                          0,
+                          100.f,
+                          0);
+}
+
+-(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
+    CLLocation *loc = [[self.audities objectForKey:key] valueForKey:@"location"];
+    AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
+    
+    AudioUnitSetParameter(reverb.audioUnit,
+                          kReverb2Param_DryWetMix,
+                          kAudioUnitScope_Global,
+                          0,
+                          100.f,
+                          0);
+}
+
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
     if(!self.audities[key][@"filePlayer"]){
@@ -179,18 +209,22 @@
         NSError *error = NULL;
         AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
         
-        AudioUnitSetParameter(reverb.audioUnit,
-                              kReverb2Param_DryWetMix,
-                              kAudioUnitScope_Global,
-                              0,
-                              100.f,
-                              0);
+        desc = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                               kAudioUnitType_Effect,
+                                               kAudioUnitSubType_LowPassFilter);
+        
+        AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
+        
+        
         
         [self.audioController addFilter:reverb toChannel:filePlayer];
         
         // Save file player and filters to the audities object
         [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
         [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
+        [[self.audities objectForKey:key] setValue:lp forKey:@"lp"];
+        
+        [self setAllAudioParametersForAudityWithKey:key];
     }
 }
 
