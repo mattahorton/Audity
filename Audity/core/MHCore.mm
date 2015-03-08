@@ -178,6 +178,7 @@
 }
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
+    AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
     CLLocation *loc = [[self.audities objectForKey:key] valueForKey:@"location"];
     AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
     
@@ -216,15 +217,18 @@
         AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
         
         
-        
-        [self.audioController addFilter:reverb toChannel:filePlayer];
-        
+
         // Save file player and filters to the audities object
+        key = [key stringByDeletingPathExtension];
         [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
         [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
         [[self.audities objectForKey:key] setValue:lp forKey:@"lp"];
         
         [self setAllAudioParametersForAudityWithKey:key];
+        
+        
+        [self.audioController addFilter:reverb toChannel:filePlayer];
+        
     }
 }
 
