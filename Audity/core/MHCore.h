@@ -32,10 +32,11 @@
 
 +(id) sharedInstance;
 
--(NSString *)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
+-(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
 -(void) stopAudioWithKey:(NSString *)key;
+-(void) addLocAfterUpload;
 -(void) startRecording;
 -(void) endRecording;
 -(void) coreInit;

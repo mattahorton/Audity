@@ -20,6 +20,8 @@
     AEBlockChannel *audioOut;
     NSString *documentsFolder;
     NSUserDefaults *defaults;
+    NSString *tempKey;
+    BOOL isRecording;
 }
 
 + (id)sharedInstance {
@@ -33,6 +35,7 @@
 
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
+    isRecording = NO;
     
     self.audities = @{};
     
@@ -108,24 +111,27 @@
 }
 
 -(void) startRecording {
-    self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
-    NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.aiff"];
-    // Start the recording process
-    NSError *error = NULL;
-    if ( ![_recorder beginRecordingToFileAtPath:filePath
-                                       fileType:kAudioFileAIFFType
-                                          error:&error] ) {
-        // Report error
-        return;
+    if(!isRecording){
+        isRecording = YES;
+        self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+        NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.aiff"];
+        // Start the recording process
+        NSError *error = NULL;
+        if ( ![_recorder beginRecordingToFileAtPath:filePath
+                                           fileType:kAudioFileAIFFType
+                                              error:&error] ) {
+            // Report error
+            return;
+        }
+        
+        [_audioController addInputReceiver:_recorder];
+        
+        [NSTimer scheduledTimerWithTimeInterval:30.0
+                                         target:self
+                                       selector:@selector(endRecording)
+                                       userInfo:nil
+                                        repeats:NO];
     }
-    
-    [_audioController addInputReceiver:_recorder];
-    
-    [NSTimer scheduledTimerWithTimeInterval:30.0
-                                     target:self
-                                   selector:@selector(endRecording)
-                                   userInfo:nil
-                                    repeats:NO];
 }
 
 - (void)endRecording {
@@ -139,13 +145,18 @@
     [self uploadNewAudity:file withKey:uuid];
 }
 
--(NSString *) uploadNewAudity:(NSURL *)file withKey:(NSString *)key {
-    NSString *uuid = key;
+-(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key {
+    tempKey = [NSString stringWithString:key];
     key = [key stringByAppendingString:@".aiff"];
-    NSURL * s3url = [self.s3 uploadFile:file withKey:key];
-    [self.geo addLoc:uuid];
-    return [s3url absoluteString];
+    [self.s3 uploadFile:file withKey:key];
 }
+
+-(void) addLocAfterUpload {
+    [self.geo addLoc:tempKey];
+    tempKey = nil;
+    isRecording = NO;
+}
+
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio

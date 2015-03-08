@@ -87,6 +87,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Clear Temp Directory
+    NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+    for (NSString *file in tmpDirectory) {
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+    }
+    
     viewHeight = [[UIScreen mainScreen] bounds].size.height;
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
     
