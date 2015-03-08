@@ -9,6 +9,7 @@
 #import "MHCore.h"
 #import "AEBlockAudioReceiver.h"
 #import "AEAudioFilePlayer.h"
+#import "AEUtilities.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -168,6 +169,21 @@
         [filePlayer setPan:-1.0];
         [filePlayer setVolume:0.5];
         [filePlayer setLoop:YES];
+        
+        AudioComponentDescription desc = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                         kAudioUnitType_Effect,
+                                                                         kAudioUnitSubType_Reverb2);
+        
+        NSError *error = NULL;
+        AEAudioUnitFilter *filter = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
+        
+        [self.audioController addFilter:filter toChannel:filePlayer];
+        AudioUnitSetParameter(filter.audioUnit,
+                              kReverb2Param_DryWetMix,
+                              kAudioUnitScope_Global,
+                              0,
+                              100.f,
+                              0);
         
         [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
         
