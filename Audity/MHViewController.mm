@@ -125,7 +125,7 @@
 }
 
 -(IBAction)handleButtonPress:(id)sender {
-    NSLog(@"shit on my dick");
+    NSLog(@"Recording");
     [self.core startRecording];
 }
 
