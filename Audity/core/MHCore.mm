@@ -162,7 +162,7 @@
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
     if(!self.audities[key][@"filePlayer"]){
-        NSLog(@" play %@ ", file);
+//        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
         AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
@@ -170,24 +170,27 @@
         [filePlayer setVolume:0.5];
         [filePlayer setLoop:YES];
         
+        [self.audioController addChannels:@[filePlayer]];
+        
         AudioComponentDescription desc = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
                                                                          kAudioUnitType_Effect,
                                                                          kAudioUnitSubType_Reverb2);
         
         NSError *error = NULL;
-        AEAudioUnitFilter *filter = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
+        AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
         
-        [self.audioController addFilter:filter toChannel:filePlayer];
-        AudioUnitSetParameter(filter.audioUnit,
+        AudioUnitSetParameter(reverb.audioUnit,
                               kReverb2Param_DryWetMix,
                               kAudioUnitScope_Global,
                               0,
                               100.f,
                               0);
         
-        [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
+        [self.audioController addFilter:reverb toChannel:filePlayer];
         
-        [self.audioController addChannels:@[filePlayer]];
+        // Save file player and filters to the audities object
+        [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
+        [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
     }
 }
 

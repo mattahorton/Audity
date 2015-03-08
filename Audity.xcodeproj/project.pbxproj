@@ -313,10 +313,11 @@
 				TargetAttributes = {
 					86C89C871A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = AM6T4M5QD9;
+						DevelopmentTeam = 3N2PU8Q3L6;
 					};
 					86C89CA01A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 3N2PU8Q3L6;
 						TestTargetID = 86C89C871A688DAD00799680;
 					};
 				};
