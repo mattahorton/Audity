@@ -74,28 +74,34 @@
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
             NSLog(@"It is %f meters away from you",distance);
             
-            NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
+            if (![self.core.audities objectForKey:key]){
             
-            Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
+                NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
+                
+                Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
 
-            
-            [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
-                                                                                              @"location":location,
-                                                                                              @"key":key,
-                                                                                        @"signature":snapshot.value[@"signature"],
-                                                                                              @"userId":snapshot.value[@"userId"],
-                                                                                              @"localUrl": localUrl,
-                                                                                              }]
-                                       forKey:key];
-                [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
-            }];
+                
+                [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                                  @"location":location,
+                                                                                                  @"key":key,
+                                                                                            @"signature":snapshot.value[@"signature"],
+                                                                                                  @"userId":snapshot.value[@"userId"],
+                                                                                                  @"localUrl": localUrl,
+                                                                                                  }]
+                                           forKey:key];
+                    [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
+                }];
+            }
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
             NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
 //            [self.core.vc addAudityToMapWithLocation:location];
             [self.core stopAudioWithKey:key];
+            
+            // Remove file from temp directory
+            [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:key] error:NULL];
         }];
 
     }
