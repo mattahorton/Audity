@@ -159,35 +159,80 @@
 }
 
 
--(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withAngle:(float)theta distance:(float)distance{
-    AudioUnitSetParameter(reverb.audioUnit,
-                          kReverb2Param_DryWetMix,
-                          kAudioUnitScope_Global,
-                          0,
-                          100.f,
-                          0);
+//returns a scale factor between 1.0 (furthest) and 0.0 (nearest)
+-(float) getScaleFactorFromDistance:(float)distance{
+    float maxRadius = 15.0; //this max radius should be declared elsewhere. Right now it is 600m elsewhere
+    float scale = distance/maxRadius;
+    if(scale > 1.0) scale = 1.0; //make sure we don't go below 100%
+    return scale;
 }
 
--(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
-    AudioUnitSetParameter(lp.audioUnit,
-                          kReverb2Param_DryWetMix,
-                          kAudioUnitScope_Global,
-                          0,
-                          100.f,
-                          0);
-}
 
--(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
-    AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
-    CLLocation *loc = [[self.audities objectForKey:key] valueForKey:@"location"];
-    AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
+
+-(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withDistance:(float)distance{
+    
+    float scl = [self getScaleFactorFromDistance:distance];
+    float maxWetness = 100.0;
     
     AudioUnitSetParameter(reverb.audioUnit,
                           kReverb2Param_DryWetMix,
                           kAudioUnitScope_Global,
                           0,
-                          100.f,
+                          maxWetness * scl,
                           0);
+}
+
+-(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
+    
+    float scl = [self getScaleFactorFromDistance:distance];
+    float maxCutoff = 20000; //20kHz max cutoff
+    
+    AudioUnitSetParameter(lp.audioUnit,
+                          kLowPassParam_CutoffFrequency,
+                          kAudioUnitScope_Global,
+                          0,
+                          maxCutoff * scl,
+                          0);
+}
+
+double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
+double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
+
+-(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
+    AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
+    CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
+    CLLocation *SelfLoc = self.geo.currentLoc;
+    
+    //gotta get that theta
+    float lat1 = DegreesToRadians(AudLoc.coordinate.latitude);
+    float lon1 = DegreesToRadians(AudLoc.coordinate.longitude);
+        
+    float lat2 = DegreesToRadians(SelfLoc.coordinate.latitude);
+    float lon2 = DegreesToRadians(SelfLoc.coordinate.longitude);
+        
+    float dLon = lon2 - lon1;
+        
+    float y = sin(dLon) * cos(lat2);
+    float x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+    float radiansBearing = atan2(y, x);
+    float distance = [AudLoc distanceFromLocation:SelfLoc];
+    
+    NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
+    
+    //set volume based on distance
+    float scl = [self getScaleFactorFromDistance:distance];
+    [fp setVolume:(0.5 - (scl * 0.5))];
+    
+    //set pan based on theta
+    float pan = cosf(radiansBearing);
+    [fp setPan:pan];
+    
+    AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
+    AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
+    
+    [self setFilterParametersForLP:lp withDistance:distance];
+    [self setFilterParametersForReverb:reverb withDistance:distance];
+    
 }
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
@@ -228,6 +273,8 @@
         
         
         [self.audioController addFilter:reverb toChannel:filePlayer];
+        [self.audioController addFilter:lp toChannel:filePlayer];
+
         
     }
 }
