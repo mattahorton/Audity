@@ -14,6 +14,8 @@
 #import "AUDS3.h"
 #import <Firebase/Firebase.h>
 
+#define MAXRADIUS 1200.0
+
 @class AUDGeo;
 @class AUDS3;
 
@@ -29,6 +31,7 @@
 @property (nonatomic, strong) NSMutableDictionary *audities;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDictionary *apiKeys;
+@property (nonatomic) BOOL isRecording;
 
 +(id) sharedInstance;
 

@@ -67,7 +67,7 @@
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
         // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
-        circleQuery = [self.geoFire queryAtLocation:center withRadius:0.6];
+        circleQuery = [self.geoFire queryAtLocation:center withRadius:MAXRADIUS/100.0];
         
         enteredHandle = [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
             CLLocationDistance distance = [location distanceFromLocation:self.currentLoc];

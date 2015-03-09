@@ -22,7 +22,6 @@
     NSString *documentsFolder;
     NSUserDefaults *defaults;
     NSString *tempKey;
-    BOOL isRecording;
 }
 
 + (id)sharedInstance {
@@ -36,7 +35,7 @@
 
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
-    isRecording = NO;
+    self.isRecording = NO;
     
     self.audities = @{};
     
@@ -112,8 +111,8 @@
 }
 
 -(void) startRecording {
-    if(!isRecording){
-        isRecording = YES;
+    if(!self.isRecording){
+        self.isRecording = YES;
         self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
         NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.aiff"];
         // Start the recording process
@@ -126,12 +125,6 @@
         }
         
         [_audioController addInputReceiver:_recorder];
-        
-        [NSTimer scheduledTimerWithTimeInterval:30.0
-                                         target:self
-                                       selector:@selector(endRecording)
-                                       userInfo:nil
-                                        repeats:NO];
     }
 }
 
@@ -141,7 +134,7 @@
     [_recorder finishRecording];
     self.recorder = nil;
     
-    NSURL *file = [NSURL URLWithString:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+    NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
     NSString *uuid = [[NSUUID UUID] UUIDString];
     [self uploadNewAudity:file withKey:uuid];
 }
@@ -155,13 +148,13 @@
 -(void) addLocAfterUpload {
     [self.geo addLoc:tempKey];
     tempKey = nil;
-    isRecording = NO;
+    self.isRecording = NO;
 }
 
 
 //returns a scale factor between 1.0 (furthest) and 0.0 (nearest)
 -(float) getScaleFactorFromDistance:(float)distance{
-    float maxRadius = 15.0; //this max radius should be declared elsewhere. Right now it is 600m elsewhere
+    float maxRadius = MAXRADIUS; //this max radius should be declared elsewhere. Right now it is 600m elsewhere
     float scale = distance/maxRadius;
     if(scale > 1.0) scale = 1.0; //make sure we don't go below 100%
     return scale;
