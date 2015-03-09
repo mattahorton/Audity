@@ -23,6 +23,10 @@
 		86C89D011A689A5000799680 /* DismissSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89D001A689A5000799680 /* DismissSegue.mm */; };
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
+		B92BFDD81AAD414600AF9347 /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = B92BFDD41AAD414600AF9347 /* Start.png */; };
+		B92BFDD91AAD414600AF9347 /* Start@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B92BFDD51AAD414600AF9347 /* Start@100w.png */; };
+		B92BFDDA1AAD414600AF9347 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = B92BFDD61AAD414600AF9347 /* Stop.png */; };
+		B92BFDDB1AAD414600AF9347 /* Stop@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B92BFDD71AAD414600AF9347 /* Stop@100w.png */; };
 		B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B93553A91A9FE9CA00F6E7B7 /* alley.m4a */; };
 		B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */; };
 		B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */ = {isa = PBXBuildFile; fileRef = B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */; };
@@ -82,6 +86,10 @@
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B92BFDD41AAD414600AF9347 /* Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start.png; sourceTree = "<group>"; };
+		B92BFDD51AAD414600AF9347 /* Start@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start@100w.png"; sourceTree = "<group>"; };
+		B92BFDD61AAD414600AF9347 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
+		B92BFDD71AAD414600AF9347 /* Stop@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stop@100w.png"; sourceTree = "<group>"; };
 		B93553A91A9FE9CA00F6E7B7 /* alley.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = alley.m4a; sourceTree = "<group>"; };
 		B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Postcards.mp3; sourceTree = "<group>"; };
 		B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rightRecord.wav; sourceTree = "<group>"; };
@@ -168,6 +176,10 @@
 		86C89C8A1A688DAD00799680 /* Audity */ = {
 			isa = PBXGroup;
 			children = (
+				B92BFDD41AAD414600AF9347 /* Start.png */,
+				B92BFDD51AAD414600AF9347 /* Start@100w.png */,
+				B92BFDD61AAD414600AF9347 /* Stop.png */,
+				B92BFDD71AAD414600AF9347 /* Stop@100w.png */,
 				B9D3B5821AA7BEE8000C58D4 /* RecButton@100w.png */,
 				B93553B01A9FEEDE00F6E7B7 /* rightRecord.wav */,
 				B93553AE1A9FEE4700F6E7B7 /* Postcards.mp3 */,
@@ -347,10 +359,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9CFF6531AA9851800597788 /* keys.plist in Resources */,
+				B92BFDDB1AAD414600AF9347 /* Stop@100w.png in Resources */,
 				B9D3B5831AA7BEE8000C58D4 /* RecButton@100w.png in Resources */,
+				B92BFDD81AAD414600AF9347 /* Start.png in Resources */,
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
+				B92BFDD91AAD414600AF9347 /* Start@100w.png in Resources */,
 				B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */,
 				B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */,
+				B92BFDDA1AAD414600AF9347 /* Stop.png in Resources */,
 				B9B80B5E1A690B8300A08B9B /* Podfile in Resources */,
 				B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */,
 				B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */,

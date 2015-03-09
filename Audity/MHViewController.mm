@@ -124,15 +124,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-//The event handling method
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-//    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
-    [self.core startRecording];
-}
-
 -(IBAction)handleButtonPress:(id)sender {
-    NSLog(@"Recording");
-    [self.core startRecording];
+    UIButton *button = (UIButton *)sender;
+    if(!self.core.isRecording) {
+        NSLog(@"Recording");
+        [self.core startRecording];
+        [button setImage:[UIImage imageNamed:@"Stop.png"] forState:UIControlStateNormal];
+    } else {
+        [self.core endRecording];
+        [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
