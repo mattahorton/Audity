@@ -40,8 +40,6 @@
     
     self.s3Secret = keys[@"S3SECRET"];
     self.awsAccessKey = keys[@"AWSACCESSKEY"];
-    NSLog(@"%@",self.s3Secret);
-    NSLog(@"%@",self.awsAccessKey);
     
     _credentialsProvider = [AWSCognitoCredentialsProvider credentialsWithRegionType:AWSRegionUSEast1
                                                                      identityPoolId:@"us-east-1:933227fb-7780-48c8-9250-c0fa1c1c1459"];
