@@ -30,7 +30,7 @@
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
-    RMPointAnnotation *annotation = [[RMPointAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
+    RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
     [self.core.audities[key] setObject:annotation forKey:@"annotation"];
@@ -41,7 +41,7 @@
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    RMPointAnnotation *audity = (RMPointAnnotation *)[self.core.audities objectForKey:key];
+    RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
     [audity setCoordinate:loc.coordinate];
 }
 
@@ -60,6 +60,7 @@
     
     //get our mapview and add it to our view
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
+    mapView.delegate = self;
     [self.view addSubview:mapView];
     
     // disable dragging on the map
@@ -142,5 +143,34 @@
     [self.core centerMap:self.core.geo.currentLoc];
 }
 
+
+#pragma mark MapView Delegate Methods
+
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
+{
+    if (annotation.isUserLocationAnnotation)
+        return nil;
+    
+    RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
+    
+    marker.canShowCallout = YES;
+    
+    UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
+    [respond addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [respond setImage:[UIImage imageNamed:@"Start.png"] forState:UIControlStateNormal];
+    respondh.frame = CGRectMake(0,0,30,30);
+    
+    marker.leftCalloutAccessoryView = respond;
+    
+    UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
+    [focus addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [focus setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    focus.frame = CGRectMake(0,0,30,30);
+    
+    marker.rightCalloutAccessoryView = focus;
+
+    
+    return marker;
+}
 
 @end
