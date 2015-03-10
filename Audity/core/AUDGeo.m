@@ -106,7 +106,13 @@
 
     }
     
-    [self.core centerMap:self.currentLoc];    
+    [self.core centerMap:self.currentLoc];
+    
+    NSArray *keys = [self.core.audities allKeys];
+    
+    for (NSString *key in keys){
+        [self.core setAllAudioParametersForAudityWithKey:key];
+    }
 }
 
 #pragma mark Interaction Methods

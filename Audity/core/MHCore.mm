@@ -178,7 +178,7 @@
 -(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
     
     float scl = [self getScaleFactorFromDistance:distance];
-    float maxCutoff = 20000; //20kHz max cutoff
+    float maxCutoff = 8000; //20kHz max cutoff
     
     AudioUnitSetParameter(lp.audioUnit,
                           kLowPassParam_CutoffFrequency,
@@ -235,8 +235,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         NSError *errorFilePlayer = NULL;
 
         AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
-        [filePlayer setPan:-1.0];
-        [filePlayer setVolume:0.5];
+        [filePlayer setVolume:0];
         [filePlayer setLoop:YES];
         
         [self.audioController addChannels:@[filePlayer]];

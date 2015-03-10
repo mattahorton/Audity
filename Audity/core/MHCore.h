@@ -14,7 +14,7 @@
 #import "AUDS3.h"
 #import <Firebase/Firebase.h>
 
-#define MAXRADIUS 1200.0
+#define MAXRADIUS 500.0
 
 @class AUDGeo;
 @class AUDS3;
@@ -35,6 +35,7 @@
 
 +(id) sharedInstance;
 
+-(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
 -(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
