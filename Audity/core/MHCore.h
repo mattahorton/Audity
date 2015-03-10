@@ -14,12 +14,12 @@
 #import "AUDS3.h"
 #import <Firebase/Firebase.h>
 
-#define MAXRADIUS 500.0
+#define MAXRADIUS 100.0
 
 @class AUDGeo;
 @class AUDS3;
 
-@interface MHCore : NSObject
+@interface MHCore : NSObject <UIAlertViewDelegate>
 
 @property (nonatomic) MHViewController* vc;
 @property (nonatomic) BOOL fromFile;
@@ -36,11 +36,11 @@
 +(id) sharedInstance;
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
--(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key;
+-(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
 -(void) stopAudioWithKey:(NSString *)key;
--(void) addLocAfterUpload;
+-(void) addLocAfterUploadWithSignature:(NSString *)signature;
 -(void) startRecording;
 -(void) endRecording;
 -(void) coreInit;

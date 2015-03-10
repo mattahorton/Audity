@@ -54,7 +54,7 @@
     _transferManager = [[AWSS3TransferManager alloc] initWithConfiguration:_configuration identifier:@"S3"];
 }
 
--(void) uploadFile:(NSURL *)file withKey:(NSString *)key {
+-(void) uploadFile:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature {
     
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = @"audity";
@@ -92,7 +92,7 @@
                                          objectAtIndex:0];
             [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"] error:nil];
             
-            [self.core addLocAfterUpload];
+            [self.core addLocAfterUploadWithSignature:signature];
             
         }
         return nil;

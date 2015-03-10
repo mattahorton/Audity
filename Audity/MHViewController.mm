@@ -102,16 +102,16 @@
     viewHeight = [[UIScreen mainScreen] bounds].size.height;
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
 
-    //The setup code (in viewDidLoad in your view controller)
-    [self initMapBox];
-    [self initButton];
-    
     
     //Init the core
     self.core = [MHCore sharedInstance];
     self.core.vc = self;
     // initialize
     [self.core coreInit];
+    
+    //The setup code (in viewDidLoad in your view controller)
+    [self initMapBox];
+    [self initButton];
 }
 
 - (void)didReceiveMemoryWarning

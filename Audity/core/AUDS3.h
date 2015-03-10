@@ -24,7 +24,7 @@
 
 + (id)sharedInstance;
 
--(void) uploadFile:(NSURL *)file withKey:(NSString *)key;
+-(void) uploadFile:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
 -(NSURL *) downloadFileWithKey:(NSString *)key;
 
 @end

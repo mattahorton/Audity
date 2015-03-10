@@ -134,19 +134,19 @@
     [_recorder finishRecording];
     self.recorder = nil;
     
-    NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
-    NSString *uuid = [[NSUUID UUID] UUIDString];
-    [self uploadNewAudity:file withKey:uuid];
+    UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+    alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
+    [alertViewStopRecording show];
 }
 
--(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key {
+-(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
     key = [key stringByAppendingString:@".aiff"];
-    [self.s3 uploadFile:file withKey:key];
+    [self.s3 uploadFile:file withKey:key andSignature:signature];
 }
 
--(void) addLocAfterUpload {
-    [self.geo addLoc:tempKey];
+-(void) addLocAfterUploadWithSignature:(NSString *)signature {
+    [self.geo addLoc:tempKey bySignature:signature];
     tempKey = nil;
     self.isRecording = NO;
 }
@@ -277,6 +277,21 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     [filePlayer setVolume:0.0];
     [self.audioController removeChannels:@[filePlayer]];
     [self.audities[key] removeObjectForKey:@"filePlayer"];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UITextField *textfield = [alertView textFieldAtIndex:0];
+    if(buttonIndex != [alertView cancelButtonIndex]) {
+        NSString *signature = textfield.text;
+        if (!signature) signature = @"anonymous";
+        if ([signature isEqualToString:@""]) signature = @"anonymous";
+        
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        [self uploadNewAudity:file withKey:uuid andSignature:signature];
+    } else {
+        self.isRecording = NO;
+    }
 }
 
 @end

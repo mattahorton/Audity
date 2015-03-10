@@ -24,6 +24,6 @@
 @property (nonatomic, strong) MHCore *core;
 
 + (id)sharedInstance;
--(void)addLoc:(NSString *) uuid;
+-(void)addLoc:(NSString *) uuid bySignature:(NSString *)signature;
 
 @end

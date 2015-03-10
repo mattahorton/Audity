@@ -117,7 +117,7 @@
 
 #pragma mark Interaction Methods
 
--(void) addLoc:(NSString *) uuid {
+-(void) addLoc:(NSString *) uuid bySignature:(NSString *)signature{
     
     [self.geoFire setLocation:self.currentLoc
                        forKey:uuid
@@ -132,7 +132,7 @@
     NSString *url = @"https://s3.amazonaws.com/audity/";
     url = [[url stringByAppendingString:uuid] stringByAppendingString:@".aiff"];
     
-    NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":@"KillaT"};
+    NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":signature, @"uploaded":[[NSDate date] description]};
     Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
     
     [locRef setValue:dict];
