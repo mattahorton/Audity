@@ -22,6 +22,10 @@
 		86C89CA81A688DAD00799680 /* AudityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89CA71A688DAD00799680 /* AudityTests.m */; };
 		86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C89CFA1A68923600799680 /* AudioToolbox.framework */; };
 		86C89D011A689A5000799680 /* DismissSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89D001A689A5000799680 /* DismissSegue.mm */; };
+		B90AD8161AB174AB00654BF6 /* Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = B90AD8121AB174AB00654BF6 /* Focus.png */; };
+		B90AD8171AB174AB00654BF6 /* Focus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B90AD8131AB174AB00654BF6 /* Focus@100w.png */; };
+		B90AD8181AB174AB00654BF6 /* Unfocus.png in Resources */ = {isa = PBXBuildFile; fileRef = B90AD8141AB174AB00654BF6 /* Unfocus.png */; };
+		B90AD8191AB174AB00654BF6 /* Unfocus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B90AD8151AB174AB00654BF6 /* Unfocus@100w.png */; };
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
 		B92BFDD81AAD414600AF9347 /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = B92BFDD41AAD414600AF9347 /* Start.png */; };
@@ -83,6 +87,10 @@
 		86C89CFC1A68933800799680 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		86C89CFF1A689A5000799680 /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
 		86C89D001A689A5000799680 /* DismissSegue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DismissSegue.mm; sourceTree = "<group>"; };
+		B90AD8121AB174AB00654BF6 /* Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Focus.png; sourceTree = "<group>"; };
+		B90AD8131AB174AB00654BF6 /* Focus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Focus@100w.png"; sourceTree = "<group>"; };
+		B90AD8141AB174AB00654BF6 /* Unfocus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unfocus.png; sourceTree = "<group>"; };
+		B90AD8151AB174AB00654BF6 /* Unfocus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unfocus@100w.png"; sourceTree = "<group>"; };
 		B9138AD61A6DB9E2009BFC86 /* MHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHViewController.h; sourceTree = "<group>"; };
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -176,6 +184,10 @@
 		86C89C8A1A688DAD00799680 /* Audity */ = {
 			isa = PBXGroup;
 			children = (
+				B90AD8121AB174AB00654BF6 /* Focus.png */,
+				B90AD8131AB174AB00654BF6 /* Focus@100w.png */,
+				B90AD8141AB174AB00654BF6 /* Unfocus.png */,
+				B90AD8151AB174AB00654BF6 /* Unfocus@100w.png */,
 				B92BFDD41AAD414600AF9347 /* Start.png */,
 				B92BFDD51AAD414600AF9347 /* Start@100w.png */,
 				B92BFDD61AAD414600AF9347 /* Stop.png */,
@@ -367,11 +379,15 @@
 				B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */,
 				B93553B11A9FEEDE00F6E7B7 /* rightRecord.wav in Resources */,
 				B92BFDDA1AAD414600AF9347 /* Stop.png in Resources */,
+				B90AD8171AB174AB00654BF6 /* Focus@100w.png in Resources */,
 				B9B80B5E1A690B8300A08B9B /* Podfile in Resources */,
 				B93553AA1A9FE9CA00F6E7B7 /* alley.m4a in Resources */,
 				B93553AF1A9FEE4700F6E7B7 /* Postcards.mp3 in Resources */,
 				4926147F1AA7B5D20088DA31 /* RecButton.png in Resources */,
+				B90AD8191AB174AB00654BF6 /* Unfocus@100w.png in Resources */,
+				B90AD8161AB174AB00654BF6 /* Focus.png in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
+				B90AD8181AB174AB00654BF6 /* Unfocus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

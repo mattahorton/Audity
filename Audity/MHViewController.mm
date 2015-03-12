@@ -27,6 +27,7 @@
     float viewHeight;
     float viewWidth;
     RMMapView *mapView;
+    NSMutableArray *focusButtons;
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
@@ -116,6 +117,8 @@
     // initialize
     [self.core coreInit];
     
+    focusButtons = [NSMutableArray arrayWithArray:@[]];
+    
     //The setup code (in viewDidLoad in your view controller)
     [self initMapBox];
     [self initButton];
@@ -171,9 +174,10 @@
     marker.leftCalloutAccessoryView = respond;
     
     UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
-    [focus setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    [focus setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
     [focus setTitle:@"focus" forState:UIControlStateNormal];
     focus.frame = CGRectMake(0,0,30,30);
+    [focusButtons addObject:focus];
     
     marker.rightCalloutAccessoryView = focus;
     
@@ -189,26 +193,28 @@
     if([[button currentTitle] isEqualToString:@"focus"]){
         NSArray *keys = [self.core.audities allKeys];
         
-        for (NSString *key in keys){ //this is the object we want to focus on
+        for (NSString *key in keys){ // Iterate through keys
             
-            if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){
-                
+            if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){ // we want to toggle this focus                
                 if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
                     NSLog(@"setting focus to false");
                     NSNumber *num = [NSNumber numberWithBool:NO];
                     [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
-                }else{                                                              //otherwise focus on it
+                    [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+                }else{                                                              //This audity is not focused on, so focus on it
                     NSLog(@"setting focus to true");
                     NSNumber *num = [NSNumber numberWithBool:YES];
                     [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                    [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];
                 }
                 
-            } else { //unfocus the other objects
+            } else { //This iteration is not the audity we tapped on
                 
-                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
+                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it's focused, unfocus
                     NSNumber *num = [NSNumber numberWithBool:NO];
                     [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
                 }
+                
             }
             
         }
@@ -216,6 +222,13 @@
         // update parameters after setting focus variables
         for (NSString *key in keys){
             [self.core setAllAudioParametersForAudityWithKey:key];
+        }
+        
+        // reset button states
+        for (UIButton *b in focusButtons){
+            if (![b isEqual:button]) {
+                [b setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+            }
         }
     }
     //NSLog(@"You tapped the callout button!");

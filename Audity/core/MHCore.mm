@@ -165,7 +165,7 @@
     
     for (NSString *key in keys){
         if([[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
-            NSLog(@"We are in focus mode");
+//            NSLog(@"We are in focus mode");
             return true;
         }
     }
@@ -199,7 +199,7 @@
 }
 
 -(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withFocus:(BOOL)focus{
-    NSLog(@"made it all the way to focused lp assignment, assignment is %d", focus);
+//    NSLog(@"made it all the way to focused lp assignment, assignment is %d", focus);
     float cutoff = 0.0;
     if(focus) cutoff = 20000;
     else cutoff = 100;
