@@ -9,6 +9,7 @@
 #import "MHViewController.h"
 #import "MHCore.h"
 #import "Mapbox.h"
+#import "AUDAnnotation.h"
 
 #define BUTTON_HEIGHT 80
 #define BUTTON_WIDTH 80
@@ -30,7 +31,8 @@
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
-    RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
+    AUDAnnotation *annotation = [[AUDAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate title:title andKey:key];
+    //RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
     [self.core.audities[key] setObject:annotation forKey:@"annotation"];
@@ -41,7 +43,8 @@
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
+    //RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
+    AUDAnnotation *audity = (AUDAnnotation *)[self.core.audities objectForKey:key];
     [audity setCoordinate:loc.coordinate];
 }
 
@@ -143,34 +146,77 @@
     [self.core centerMap:self.core.geo.currentLoc];
 }
 
+-(IBAction)handleFocus:(id)sender{
+    NSLog(@"shit+dick");
+}
 
 #pragma mark MapView Delegate Methods
+//37.42077700331567, -122.1722705104595
 
-- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(AUDAnnotation *)annotation
 {
-    if (annotation.isUserLocationAnnotation)
+    if (annotation.isUserLocationAnnotation){
+        NSLog(@"annotation was user location annotation");
         return nil;
+    }
     
     RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
     
     marker.canShowCallout = YES;
     
     UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
-    [respond addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [respond addTarget:annotation action:@selector(handleFocus:) forControlEvents:UIControlEventTouchUpInside];
     [respond setImage:[UIImage imageNamed:@"Start.png"] forState:UIControlStateNormal];
+    [respond setTitle:@"respond" forState:UIControlStateNormal];
     respond.frame = CGRectMake(0,0,30,30);
     
     marker.leftCalloutAccessoryView = respond;
     
     UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
-    [focus addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [focus addTarget:self action:@selector(handleFocus:) forControlEvents:UIControlEventTouchUpInside];
     [focus setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    [focus setTitle:@"focus" forState:UIControlStateNormal];
     focus.frame = CGRectMake(0,0,30,30);
     
     marker.rightCalloutAccessoryView = focus;
-
     
     return marker;
+}
+
+- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(AUDAnnotation *)annotation onMap:(RMMapView *)map
+{
+    UIButton * button = (UIButton *)control;
+    if([[button currentTitle] isEqualToString:@"respond"]){
+        //[annotation handleResponse];
+    }
+    if([[button currentTitle] isEqualToString:@"focus"]){
+        NSArray *keys = [self.core.audities allKeys];
+        
+        for (NSString *key in keys){ //this is the object we want to focus on
+            
+            if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){
+                
+                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
+                    NSLog(@"setting focus to false");
+                    NSNumber *num = [NSNumber numberWithBool:NO];
+                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                }else{                                                              //otherwise focus on it
+                    NSLog(@"setting focus to true");
+                    NSNumber *num = [NSNumber numberWithBool:YES];
+                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                }
+                
+            } else { //unfocus the other objects
+                
+                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
+                    NSNumber *num = [NSNumber numberWithBool:NO];
+                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                }
+            }
+            
+        }
+    }
+    //NSLog(@"You tapped the callout button!");
 }
 
 @end
