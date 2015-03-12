@@ -160,7 +160,17 @@
     return scale;
 }
 
-
+-(bool) isInFocusMode{
+    NSArray *keys = [self.audities allKeys];
+    
+    for (NSString *key in keys){
+        if([[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
+            NSLog(@"We are in focus mode");
+            return true;
+        }
+    }
+    return false;
+}
 
 -(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withDistance:(float)distance{
     
@@ -188,6 +198,20 @@
                           0);
 }
 
+-(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withFocus:(BOOL)focus{
+    NSLog(@"made it all the way to focused lp assignment, assignment is %d", focus);
+    float cutoff = 0.0;
+    if(focus) cutoff = 20000;
+    else cutoff = 100;
+    
+    AudioUnitSetParameter(lp.audioUnit,
+                          kLowPassParam_CutoffFrequency,
+                          kAudioUnitScope_Global,
+                          0,
+                          cutoff,
+                          0);
+}
+
 double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
 double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
@@ -210,7 +234,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     float radiansBearing = atan2(y, x);
     float distance = [AudLoc distanceFromLocation:SelfLoc];
     
-    NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
+    //NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
     
     //set volume based on distance
     float scl = [self getScaleFactorFromDistance:distance];
@@ -223,8 +247,14 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
     AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
     
-    [self setFilterParametersForLP:lp withDistance:distance];
-    [self setFilterParametersForReverb:reverb withDistance:distance];
+    //are we in focus mode? If so, call focus mode functions
+    if([self isInFocusMode]){
+        [self setFilterParametersForLP:lp withFocus:[[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]];
+        [self setFilterParametersForReverb:reverb withDistance:distance];
+    }else{
+        [self setFilterParametersForLP:lp withDistance:distance];
+        [self setFilterParametersForReverb:reverb withDistance:distance];
+    }
     
 }
 
@@ -253,13 +283,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
         AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
         
-        
 
         // Save file player and filters to the audities object
         key = [key stringByDeletingPathExtension];
         [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
         [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
         [[self.audities objectForKey:key] setValue:lp forKey:@"lp"];
+        
         
         [self setAllAudioParametersForAudityWithKey:key];
         

@@ -79,16 +79,16 @@
                 NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
-
                 
                 [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                     [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
-                                                                                                  @"location":location,
-                                                                                                  @"key":key,
-                                                                                            @"signature":snapshot.value[@"signature"],
-                                                                                                  @"userId":snapshot.value[@"userId"],
-                                                                                                  @"localUrl": localUrl,
-                                                                                                  }]
+                                                                                                 @"location":location,
+                                                                                                 @"key":key,
+                                                                                                 @"signature":snapshot.value[@"signature"],
+                                                                                                 @"userId":snapshot.value[@"userId"],
+                                                                                                 @"localUrl": localUrl,
+                                                                                                 @"focus": [NSNumber numberWithBool:NO],
+                                                                                                 }]
                                            forKey:key];
                     [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
                 }];

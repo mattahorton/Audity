@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4926147F1AA7B5D20088DA31 /* RecButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4926147E1AA7B5D20088DA31 /* RecButton.png */; };
+		49DD67BC1AB12163002E7560 /* AUDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DD67BB1AB12163002E7560 /* AUDAnnotation.m */; };
+		49DD67BE1AB13A6E002E7560 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49DD67BD1AB13A6E002E7560 /* keys.plist */; };
 		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
@@ -44,7 +46,6 @@
 		B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C951A688DAD00799680 /* Main.storyboard */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
-		B9CFF6531AA9851800597788 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9CFF6521AA9851800597788 /* keys.plist */; };
 		B9D3B5831AA7BEE8000C58D4 /* RecButton@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9D3B5821AA7BEE8000C58D4 /* RecButton@100w.png */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,9 @@
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4926147E1AA7B5D20088DA31 /* RecButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecButton.png; sourceTree = SOURCE_ROOT; };
+		49DD67BA1AB12163002E7560 /* AUDAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDAnnotation.h; sourceTree = "<group>"; };
+		49DD67BB1AB12163002E7560 /* AUDAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDAnnotation.m; sourceTree = "<group>"; };
+		49DD67BD1AB13A6E002E7560 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = "../../../../../Volumes/Bitchin'ASSD/Andrew/Downloads/keys.plist"; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -108,7 +112,6 @@
 		B98B383C1AA5141C0085912F /* AUDS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDS3.h; sourceTree = "<group>"; };
 		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B9CFF6521AA9851800597788 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		B9D3B5821AA7BEE8000C58D4 /* RecButton@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RecButton@100w.png"; sourceTree = "<group>"; };
 		BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4F75F7A8A3C2513260C82B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 		86C89C8A1A688DAD00799680 /* Audity */ = {
 			isa = PBXGroup;
 			children = (
+				49DD67BA1AB12163002E7560 /* AUDAnnotation.h */,
+				49DD67BB1AB12163002E7560 /* AUDAnnotation.m */,
 				B92BFDD41AAD414600AF9347 /* Start.png */,
 				B92BFDD51AAD414600AF9347 /* Start@100w.png */,
 				B92BFDD61AAD414600AF9347 /* Stop.png */,
@@ -202,9 +207,9 @@
 		86C89C8B1A688DAD00799680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49DD67BD1AB13A6E002E7560 /* keys.plist */,
 				86C89C8C1A688DAD00799680 /* Info.plist */,
 				86C89C8D1A688DAD00799680 /* main.m */,
-				B9CFF6521AA9851800597788 /* keys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -358,7 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9CFF6531AA9851800597788 /* keys.plist in Resources */,
+				49DD67BE1AB13A6E002E7560 /* keys.plist in Resources */,
 				B92BFDDB1AAD414600AF9347 /* Stop@100w.png in Resources */,
 				B9D3B5831AA7BEE8000C58D4 /* RecButton@100w.png in Resources */,
 				B92BFDD81AAD414600AF9347 /* Start.png in Resources */,
@@ -429,6 +434,7 @@
 				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
+				49DD67BC1AB12163002E7560 /* AUDAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
