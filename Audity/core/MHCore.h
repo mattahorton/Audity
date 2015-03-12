@@ -14,7 +14,7 @@
 #import "AUDS3.h"
 #import <Firebase/Firebase.h>
 
-#define MAXRADIUS 100.0
+#define MAXRADIUS 1500.0
 
 @class AUDGeo;
 @class AUDS3;

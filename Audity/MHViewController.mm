@@ -9,7 +9,6 @@
 #import "MHViewController.h"
 #import "MHCore.h"
 #import "Mapbox.h"
-#import "AUDAnnotation.h"
 
 #define BUTTON_HEIGHT 80
 #define BUTTON_WIDTH 80
@@ -31,8 +30,7 @@
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
-    AUDAnnotation *annotation = [[AUDAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate title:title andKey:key];
-    //RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
+    RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
     
     [mapView addAnnotation:annotation];
     [self.core.audities[key] setObject:annotation forKey:@"annotation"];
@@ -43,8 +41,7 @@
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    //RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
-    AUDAnnotation *audity = (AUDAnnotation *)[self.core.audities objectForKey:key];
+    RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
     [audity setCoordinate:loc.coordinate];
 }
 
@@ -146,14 +143,10 @@
     [self.core centerMap:self.core.geo.currentLoc];
 }
 
--(IBAction)handleFocus:(id)sender{
-    NSLog(@"shit+dick");
-}
-
 #pragma mark MapView Delegate Methods
 //37.42077700331567, -122.1722705104595
 
-- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(AUDAnnotation *)annotation
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
     if (annotation.isUserLocationAnnotation){
         NSLog(@"annotation was user location annotation");
@@ -165,7 +158,6 @@
     marker.canShowCallout = YES;
     
     UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
-    [respond addTarget:annotation action:@selector(handleFocus:) forControlEvents:UIControlEventTouchUpInside];
     [respond setImage:[UIImage imageNamed:@"Start.png"] forState:UIControlStateNormal];
     [respond setTitle:@"respond" forState:UIControlStateNormal];
     respond.frame = CGRectMake(0,0,30,30);
@@ -173,7 +165,6 @@
     marker.leftCalloutAccessoryView = respond;
     
     UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
-    [focus addTarget:self action:@selector(handleFocus:) forControlEvents:UIControlEventTouchUpInside];
     [focus setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
     [focus setTitle:@"focus" forState:UIControlStateNormal];
     focus.frame = CGRectMake(0,0,30,30);
@@ -183,7 +174,7 @@
     return marker;
 }
 
-- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(AUDAnnotation *)annotation onMap:(RMMapView *)map
+- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
     UIButton * button = (UIButton *)control;
     if([[button currentTitle] isEqualToString:@"respond"]){
@@ -214,6 +205,11 @@
                 }
             }
             
+        }
+        
+        // update parameters after setting focus variables
+        for (NSString *key in keys){
+            [self.core setAllAudioParametersForAudityWithKey:key];
         }
     }
     //NSLog(@"You tapped the callout button!");
