@@ -178,7 +178,7 @@
 -(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
     
     float scl = [self getScaleFactorFromDistance:distance];
-    float maxCutoff = 8000; //20kHz max cutoff
+    float maxCutoff = 20000; //20kHz max cutoff
     
     AudioUnitSetParameter(lp.audioUnit,
                           kLowPassParam_CutoffFrequency,

@@ -158,7 +158,7 @@
     UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
     [respond addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [respond setImage:[UIImage imageNamed:@"Start.png"] forState:UIControlStateNormal];
-    respondh.frame = CGRectMake(0,0,30,30);
+    respond.frame = CGRectMake(0,0,30,30);
     
     marker.leftCalloutAccessoryView = respond;
     
