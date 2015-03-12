@@ -51,12 +51,18 @@
 }
 
 - (void)initMapBox {
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
+    NSDictionary *keys = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    self.mapboxKey = keys[@"MAPBOX"];
+    self.mapID = keys[@"MAPID"];
+    
     //public key access token for mapbox
-    NSString *token = @"pk.eyJ1IjoiZm9yc3l0aGFjIiwiYSI6InZtbU51b28ifQ.zb7d5t9yri__gm8IPK0d6Q";
+    NSString *token = self.mapboxKey;
     [[RMConfiguration sharedInstance] setAccessToken:token];
     
     //get source for tiles
-    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:@"forsythac.lbjne02n"];
+    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:self.mapID];
     
     //get our mapview and add it to our view
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];

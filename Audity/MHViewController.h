@@ -14,6 +14,9 @@
 
 @interface MHViewController : UIViewController <RMMapViewDelegate>
 
+@property (nonatomic, strong) NSString *mapboxKey;
+@property (nonatomic, strong) NSString *mapID;
+
 - (void)addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key;
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key;
 - (void) changeMapCenterWithLocation:(CLLocation *)loc;
