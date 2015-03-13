@@ -31,19 +31,23 @@
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
-    RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
-    
-    [mapView addAnnotation:annotation];
-    [self.core.audities[key] setObject:annotation forKey:@"annotation"];
+    if (![self.core.audities[key] isEqual:@"taken"]) {
+        RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
+        
+        [mapView addAnnotation:annotation];
+        [self.core.audities[key] setObject:annotation forKey:@"annotation"];
+    }
 }
 
 -(void) removeAudityFromMapWithKey:(NSString *)key{
-    [mapView removeAnnotation:self.core.audities[key][@"annotation"]];
+    if (![self.core.audities[key] isEqual:@"taken"]) [mapView removeAnnotation:self.core.audities[key][@"annotation"]];
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
-    [audity setCoordinate:loc.coordinate];
+    if (![self.core.audities[key] isEqual:@"taken"]) {
+        RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
+        [audity setCoordinate:loc.coordinate];
+    }
 }
 
 - (void) changeMapCenterWithLocation:(CLLocation *)loc{
@@ -96,6 +100,15 @@
                               viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
                               BUTTON_WIDTH, BUTTON_HEIGHT);
     [mapView addSubview:button];
+    
+    UIButton *godButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
+    [godButton setTitle:@"God Mode" forState:UIControlStateNormal];
+    [godButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
+    godButton.frame = CGRectMake(BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                              viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
+                              BUTTON_WIDTH, BUTTON_HEIGHT);
+    [mapView addSubview:godButton];
 }
 
 - (void)viewDidLoad {
@@ -148,8 +161,41 @@
     }
 }
 
+-(IBAction)godModePress:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    self.core.geo.godModeCenter = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
+    
+    if(!self.core.geo.inGodMode) {
+        NSLog(@"Entering God Mode");
+        self.core.geo.inGodMode = YES;
+        mapView.draggingEnabled = YES;
+        self.core.geo.localCenter = self.core.geo.currentLoc;
+        self.core.geo.currentLoc = self.core.geo.godModeCenter;
+        [button setImage:[UIImage imageNamed:@"LocalMode.png"] forState:UIControlStateNormal];
+    } else {
+        NSLog(@"Entering Local Mode");
+        self.core.geo.inGodMode = NO;
+        mapView.draggingEnabled = NO;
+        self.core.geo.godModeCenter = nil;
+        self.core.geo.currentLoc = self.core.geo.localCenter;
+        [button setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
+        [self.core centerMap:self.core.geo.currentLoc];
+    }
+    
+    NSArray *keys = [self.core.audities allKeys];
+    
+    for (NSString *key in keys){
+        [self.core setAllAudioParametersForAudityWithKey:key];
+    }
+}
+
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
-    [self.core centerMap:self.core.geo.currentLoc];
+    if (!self.core.geo.inGodMode) [self.core centerMap:self.core.geo.currentLoc];
+}
+
+-(void)afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction {
+//    NSLog(@"map moved");
+    [self.core.geo updateAfterDragWithCenter:[[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude]];
 }
 
 #pragma mark MapView Delegate Methods
@@ -194,29 +240,29 @@
         NSArray *keys = [self.core.audities allKeys];
         
         for (NSString *key in keys){ // Iterate through keys
-            
-            if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){ // we want to toggle this focus                
-                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
-                    NSLog(@"setting focus to false");
-                    NSNumber *num = [NSNumber numberWithBool:NO];
-                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
-                    [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
-                }else{                                                              //This audity is not focused on, so focus on it
-                    NSLog(@"setting focus to true");
-                    NSNumber *num = [NSNumber numberWithBool:YES];
-                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
-                    [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];
+            if (![self.core.audities[key] isEqual:@"taken"]) {
+                if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){ // we want to toggle this focus
+                    if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
+                        NSLog(@"setting focus to false");
+                        NSNumber *num = [NSNumber numberWithBool:NO];
+                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                        [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+                    }else{                                                              //This audity is not focused on, so focus on it
+                        NSLog(@"setting focus to true");
+                        NSNumber *num = [NSNumber numberWithBool:YES];
+                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                        [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];
+                    }
+                    
+                } else { //This iteration is not the audity we tapped on
+                    
+                    if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it's focused, unfocus
+                        NSNumber *num = [NSNumber numberWithBool:NO];
+                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                    }
+                    
                 }
-                
-            } else { //This iteration is not the audity we tapped on
-                
-                if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it's focused, unfocus
-                    NSNumber *num = [NSNumber numberWithBool:NO];
-                    [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
-                }
-                
             }
-            
         }
         
         // update parameters after setting focus variables

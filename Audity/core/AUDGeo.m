@@ -46,6 +46,7 @@
 
 -(void)geoInit {
     self.core = [MHCore sharedInstance];
+    self.inGodMode = NO;
     
     locManager = [[CLLocationManager alloc] init];
     locManager.delegate = self;
@@ -60,7 +61,12 @@
 #pragma mark Location Delegate Methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    self.currentLoc = newLocation;
+    if (!self.inGodMode) {
+        self.currentLoc = newLocation;
+    } else {
+        //set loc by center
+        self.currentLoc = self.godModeCenter;
+    }
     center = self.currentLoc;
     [circleQuery setCenter:center];
     
@@ -74,7 +80,11 @@
             NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
             NSLog(@"It is %f meters away from you",distance);
             
-            if (![self.core.audities objectForKey:key]){
+            if ([self.core.audities objectForKey:key] == nil){
+                NSLog(@"adding %@", key);
+                NSLog(@"audity value %@",self.core.audities[key]);
+                
+                self.core.audities[key] = @"taken";
             
                 NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
                 
@@ -92,13 +102,15 @@
                                            forKey:key];
                     [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
                 }];
+            } else {
+                NSLog(@"Not adding %@", key);
             }
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
             NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
-//            [self.core.vc addAudityToMapWithLocation:location];
-            [self.core stopAudioWithKey:key];
+            [self.core.vc removeAudityFromMapWithKey:key];
+            [self.core stopAudioWithKey:key]; // Also removes the audity from the array. Call last!
             
             // Remove file from temp directory
             [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:key] error:NULL];
@@ -106,7 +118,7 @@
 
     }
     
-    [self.core centerMap:self.currentLoc];
+    if(!self.inGodMode)[self.core centerMap:self.currentLoc];
     
     NSArray *keys = [self.core.audities allKeys];
     
@@ -136,6 +148,19 @@
     Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
     
     [locRef setValue:dict];
+}
+
+-(void) updateAfterDragWithCenter:(CLLocation *)dragCenter {
+    self.godModeCenter = dragCenter;
+    self.currentLoc = self.godModeCenter;
+    [circleQuery setCenter:self.currentLoc];
+    
+    
+    NSArray *keys = [self.core.audities allKeys];
+    
+    for (NSString *key in keys){
+        [self.core setAllAudioParametersForAudityWithKey:key];
+    }
 }
 
 @end

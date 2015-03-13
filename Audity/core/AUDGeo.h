@@ -22,8 +22,12 @@
 @property (nonatomic, strong) GeoFire *geoFire;
 @property (nonatomic, strong) CLLocation *currentLoc;
 @property (nonatomic, strong) MHCore *core;
+@property (nonatomic) BOOL inGodMode;
+@property (nonatomic, strong) CLLocation *godModeCenter;
+@property (nonatomic, strong) CLLocation *localCenter;
 
 + (id)sharedInstance;
 -(void)addLoc:(NSString *) uuid bySignature:(NSString *)signature;
+-(void)updateAfterDragWithCenter:(CLLocation *)center;
 
 @end

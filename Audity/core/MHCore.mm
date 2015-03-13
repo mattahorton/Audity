@@ -164,9 +164,11 @@
     NSArray *keys = [self.audities allKeys];
     
     for (NSString *key in keys){
-        if([[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
-//            NSLog(@"We are in focus mode");
-            return true;
+        if(![self.audities[key] isEqual:@"taken"]){
+            if([[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
+    //            NSLog(@"We are in focus mode");
+                return true;
+            }
         }
     }
     return false;
@@ -216,51 +218,52 @@ double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
 double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
-    AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
-    CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
-    CLLocation *SelfLoc = self.geo.currentLoc;
-    
-    //gotta get that theta
-    float lat1 = DegreesToRadians(AudLoc.coordinate.latitude);
-    float lon1 = DegreesToRadians(AudLoc.coordinate.longitude);
+    if(![self.audities[key]  isEqual: @"taken"]) {
+        AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
+        CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
+        CLLocation *SelfLoc = self.geo.currentLoc;
         
-    float lat2 = DegreesToRadians(SelfLoc.coordinate.latitude);
-    float lon2 = DegreesToRadians(SelfLoc.coordinate.longitude);
+        //gotta get that theta
+        float lat1 = DegreesToRadians(AudLoc.coordinate.latitude);
+        float lon1 = DegreesToRadians(AudLoc.coordinate.longitude);
+            
+        float lat2 = DegreesToRadians(SelfLoc.coordinate.latitude);
+        float lon2 = DegreesToRadians(SelfLoc.coordinate.longitude);
+            
+        float dLon = lon2 - lon1;
+            
+        float y = sin(dLon) * cos(lat2);
+        float x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+        float radiansBearing = atan2(y, x);
+        float distance = [AudLoc distanceFromLocation:SelfLoc];
         
-    float dLon = lon2 - lon1;
+        //NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
         
-    float y = sin(dLon) * cos(lat2);
-    float x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
-    float radiansBearing = atan2(y, x);
-    float distance = [AudLoc distanceFromLocation:SelfLoc];
-    
-    //NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
-    
-    //set volume based on distance
-    float scl = [self getScaleFactorFromDistance:distance];
-    [fp setVolume:(0.5 - (scl * 0.5))];
-    
-    //set pan based on theta
-    float pan = cosf(radiansBearing);
-    [fp setPan:pan];
-    
-    AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
-    AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
-    
-    //are we in focus mode? If so, call focus mode functions
-    if([self isInFocusMode]){
-        [self setFilterParametersForLP:lp withFocus:[[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]];
-        [self setFilterParametersForReverb:reverb withDistance:distance];
-    }else{
-        [self setFilterParametersForLP:lp withDistance:distance];
-        [self setFilterParametersForReverb:reverb withDistance:distance];
+        //set volume based on distance
+        float scl = [self getScaleFactorFromDistance:distance];
+        [fp setVolume:(0.5 - (scl * 0.5))];
+        
+        //set pan based on theta
+        float pan = cosf(radiansBearing);
+        [fp setPan:pan];
+        
+        AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
+        AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
+        
+        //are we in focus mode? If so, call focus mode functions
+        if([self isInFocusMode]){
+            [self setFilterParametersForLP:lp withFocus:[[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]];
+            [self setFilterParametersForReverb:reverb withDistance:distance];
+        }else{
+            [self setFilterParametersForLP:lp withDistance:distance];
+            [self setFilterParametersForReverb:reverb withDistance:distance];
+        }
     }
-    
 }
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
-    if(!self.audities[key][@"filePlayer"]){
+    if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
 //        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
@@ -303,10 +306,14 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) stopAudioWithKey:(NSString *)key {
     NSLog(@"stopping %@", key);
-    AEAudioFilePlayer *filePlayer = self.audities[key][@"filePlayer"];
-    [filePlayer setVolume:0.0];
-    [self.audioController removeChannels:@[filePlayer]];
-    [self.audities[key] removeObjectForKey:@"filePlayer"];
+    if(self.audities[key] && ![self.audities[key] isEqual:@"taken"]) {
+        AEAudioFilePlayer *filePlayer = self.audities[key][@"filePlayer"];
+        [filePlayer setVolume:0.0];
+        if(filePlayer) {
+            [self.audioController removeChannels:@[filePlayer]];
+            [self.audities removeObjectForKey:key];
+        }
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
