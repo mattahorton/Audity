@@ -105,8 +105,8 @@
     [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
     [godButton setTitle:@"God Mode" forState:UIControlStateNormal];
     [godButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
-    godButton.frame = CGRectMake(BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
-                              viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
+    godButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                              viewHeight - 2*BUTTON_HEIGHT - BUTTON_BORDER_OFFSET,
                               BUTTON_WIDTH, BUTTON_HEIGHT);
     [mapView addSubview:godButton];
 }
