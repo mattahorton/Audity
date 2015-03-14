@@ -112,12 +112,11 @@
     [mapView addSubview:godButton];
     
     //shitty center button so I can see where the center is
-    /*UIButton *centerGodButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [centerGodButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
-    centerGodButton.frame = CGRectMake(viewWidth/2,
+    UIImageView *centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
+    centerGodMarker.frame = CGRectMake(viewWidth/2,
                                  viewHeight/2,
                                  BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
-    [mapView addSubview:centerGodButton];*/
+    [mapView addSubview:centerGodMarker];
 }
 
 - (void)viewDidLoad {
