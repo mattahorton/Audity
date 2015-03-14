@@ -155,7 +155,7 @@
 //returns a scale factor between 1.0 (furthest) and 0.0 (nearest)
 -(float) getScaleFactorFromDistance:(float)distance{
     float maxRadius = MAXRADIUS; //this max radius should be declared elsewhere. Right now it is 600m elsewhere
-    float scale = distance/maxRadius;
+    float scale = logf(distance)/logf(maxRadius);
     if(scale > 1.0) scale = 1.0; //make sure we don't go below 100%
     return scale;
 }
@@ -214,6 +214,18 @@
                           0);
 }
 
+-(float) getPanFromBearing:(float) bearing{
+    float pan = 0.0;
+    bool neg = false;
+    if(bearing < 0) neg = true; //left or right?
+    
+    float bear_abs = fabs(fabs(bearing/3.14159) - 0.5);
+    pan = 1.0 - (2 * bear_abs);
+    
+    if(neg) pan = -pan;
+    return pan;
+}
+
 double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
 double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
@@ -224,27 +236,25 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         CLLocation *SelfLoc = self.geo.currentLoc;
         
         //gotta get that theta
-        float lat1 = DegreesToRadians(AudLoc.coordinate.latitude);
-        float lon1 = DegreesToRadians(AudLoc.coordinate.longitude);
+        float lat1 = DegreesToRadians(SelfLoc.coordinate.latitude);
+        float lon1 = DegreesToRadians(SelfLoc.coordinate.longitude);
             
-        float lat2 = DegreesToRadians(SelfLoc.coordinate.latitude);
-        float lon2 = DegreesToRadians(SelfLoc.coordinate.longitude);
+        float lat2 = DegreesToRadians(AudLoc.coordinate.latitude);
+        float lon2 = DegreesToRadians(AudLoc.coordinate.longitude);
             
         float dLon = lon2 - lon1;
-            
+        
         float y = sin(dLon) * cos(lat2);
         float x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
         float radiansBearing = atan2(y, x);
         float distance = [AudLoc distanceFromLocation:SelfLoc];
         
-        //NSLog(@"The bearing to audity is %f and distance is %f", radiansBearing, distance);
-        
-        //set volume based on distance
-        float scl = [self getScaleFactorFromDistance:distance];
-        [fp setVolume:(0.5 - (scl * 0.5))];
+        float scl = [self getScaleFactorFromDistance:distance]; // scale based on log(distance)
         
         //set pan based on theta
-        float pan = cosf(radiansBearing);
+        float real_pan = [self getPanFromBearing:radiansBearing];
+        //float pan = ((1.0 - (scl)) * 0.5) + ((scl) * real_pan); // the closer the sound is (lower scl) the less pan will affect it.
+        float pan = real_pan;
         [fp setPan:pan];
         
         AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
@@ -252,9 +262,18 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
         //are we in focus mode? If so, call focus mode functions
         if([self isInFocusMode]){
-            [self setFilterParametersForLP:lp withFocus:[[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]];
+            BOOL focus = [[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue];
+            if(focus){
+                //NSLog(@"The scale factor for distance %f is %f", distance, scl);
+                //NSLog(@"The bearing is %fpi which gives real pan of %f and final pan of %f", radiansBearing/3.14159, real_pan, pan);
+                [fp setVolume:(0.6 - (scl * 0.5))]; //in focus, make it a bit louder
+            }else{
+                [fp setVolume:(0.3 - (scl * 0.5))]; //out of focus, make it a bit softer
+            }
+            [self setFilterParametersForLP:lp withFocus: focus];
             [self setFilterParametersForReverb:reverb withDistance:distance];
         }else{
+            [fp setVolume:(0.5 - (scl * 0.5))]; //set volume solely based on distance
             [self setFilterParametersForLP:lp withDistance:distance];
             [self setFilterParametersForReverb:reverb withDistance:distance];
         }

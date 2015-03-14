@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49DD67BE1AB13A6E002E7560 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49DD67BD1AB13A6E002E7560 /* keys.plist */; };
+		498E3A591AB4D1E200F5014D /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498E3A581AB4D1E200F5014D /* keys.plist */; };
 		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
@@ -69,7 +69,7 @@
 
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		49DD67BD1AB13A6E002E7560 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		498E3A581AB4D1E200F5014D /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = "../../../../../Volumes/Bitchin'ASSD/Andrew/Downloads/keys.plist"; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -218,7 +218,7 @@
 		86C89C8B1A688DAD00799680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				49DD67BD1AB13A6E002E7560 /* keys.plist */,
+				498E3A581AB4D1E200F5014D /* keys.plist */,
 				86C89C8C1A688DAD00799680 /* Info.plist */,
 				86C89C8D1A688DAD00799680 /* main.m */,
 			);
@@ -397,7 +397,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49DD67BE1AB13A6E002E7560 /* keys.plist in Resources */,
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
@@ -415,6 +414,7 @@
 				B9A0AD721AB2B37900F4F1C8 /* Unfocus@100w.png in Resources */,
 				B9A0AD6F1AB2B37900F4F1C8 /* Stop.png in Resources */,
 				B9A0AD691AB2B37900F4F1C8 /* GodMode.png in Resources */,
+				498E3A591AB4D1E200F5014D /* keys.plist in Resources */,
 				B9A0AD6A1AB2B37900F4F1C8 /* GodMode@100w.png in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
 				B9A0AD6C1AB2B37900F4F1C8 /* LocalMode@100w.png in Resources */,
