@@ -98,8 +98,14 @@
                                                                                                  @"userId":snapshot.value[@"userId"],
                                                                                                  @"localUrl": localUrl,
                                                                                                  @"focus": [NSNumber numberWithBool:NO],
+                                                                                                 @"likes": @0,
                                                                                                  }]
                                            forKey:key];
+                    if (snapshot.value[@"likes"] != nil) {
+                        NSNumber *likes = (NSNumber *) snapshot.value[@"likes"];
+                        self.core.audities[key][@"likes"] = likes;
+                    }
+                    
                     [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
                 }];
             } else {

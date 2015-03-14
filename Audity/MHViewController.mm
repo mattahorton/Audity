@@ -9,6 +9,7 @@
 #import "MHViewController.h"
 #import "MHCore.h"
 #import "Mapbox.h"
+#import "AUDNavViewController.h"
 
 #define BUTTON_HEIGHT 80
 #define BUTTON_WIDTH 80
@@ -208,6 +209,14 @@
         return nil;
     }
     
+//    NSString *likes = self.core.audities;
+//    
+//    NSDictionary *attributes = @{NSFontAttributeName            : [UIFont systemFontOfSize:20],
+//                                 NSForegroundColorAttributeName : [UIColor blueColor],
+//                                 NSBackgroundColorAttributeName : [UIColor clearColor]};
+//    
+//    UIImage *image = [self imageFromString:string attributes:attributes size:self.imageView.bounds.size];
+    
     RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
     
     marker.canShowCallout = YES;
@@ -234,7 +243,18 @@
 {
     UIButton * button = (UIButton *)control;
     if([[button currentTitle] isEqualToString:@"respond"]){
-        //[annotation handleResponse];
+        NSArray *keys = [self.core.audities allKeys];
+        
+        for (NSString *key in keys){ // Iterate through keys
+            if (![self.core.audities[key] isEqual:@"taken"]) {
+                NSDictionary *audity = (NSDictionary *)[self.core.audities objectForKey:key];
+                if([audity objectForKey:@"annotation"] == annotation){  // This is the Audity we want
+        
+//                    NSDictionary *dict = @{@"key":key,@"signature":(NSString *)audity[@"signature"]};
+                    [self performSegueWithIdentifier:@"activity" sender:audity];
+                }
+            }
+        }
     }
     if([[button currentTitle] isEqualToString:@"focus"]){
         NSArray *keys = [self.core.audities allKeys];
@@ -278,6 +298,28 @@
         }
     }
     //NSLog(@"You tapped the callout button!");
+}
+
+#pragma mark Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"activity"]) {
+        NSDictionary *dict = (NSDictionary *)sender;
+        AUDNavViewController *destViewController = segue.destinationViewController;
+        destViewController.info = dict;
+    }
+}
+
+#pragma mark Text to Image Utility
+
+- (UIImage *)imageFromString:(NSString *)string attributes:(NSDictionary *)attributes size:(CGSize)size
+{
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:attributes];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 @end

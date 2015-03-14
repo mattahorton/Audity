@@ -23,8 +23,12 @@
 		86C89D011A689A5000799680 /* DismissSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89D001A689A5000799680 /* DismissSegue.mm */; };
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
+		B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */; };
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
 		B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = B955EF131AA3E96A000A963B /* AUDGeo.m */; };
+		B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1B1AB3B12400BDD88A /* DislikeBG.png */; };
+		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
+		B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */; };
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
@@ -91,6 +95,8 @@
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B9138ADB1A6DBD12009BFC86 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B942DC8A1AB3C6DD00D4ED15 /* AUDNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDNavViewController.h; sourceTree = "<group>"; };
+		B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDNavViewController.m; sourceTree = "<group>"; };
 		B945CB391A6A0AE200091DC3 /* MHCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHCore.h; sourceTree = "<group>"; };
 		B945CB3A1A6A0AE200091DC3 /* MHCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHCore.mm; sourceTree = "<group>"; };
 		B955EF031AA3E819000A963B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -100,6 +106,10 @@
 		B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B955EF121AA3E96A000A963B /* AUDGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDGeo.h; sourceTree = "<group>"; };
 		B955EF131AA3E96A000A963B /* AUDGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDGeo.m; sourceTree = "<group>"; };
+		B9665A1B1AB3B12400BDD88A /* DislikeBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DislikeBG.png; sourceTree = "<group>"; };
+		B9665A1C1AB3B12400BDD88A /* LikeBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LikeBG.png; sourceTree = "<group>"; };
+		B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDActivityViewController.h; sourceTree = "<group>"; };
+		B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDActivityViewController.m; sourceTree = "<group>"; };
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
@@ -197,6 +207,10 @@
 				86C89C8B1A688DAD00799680 /* Supporting Files */,
 				B9138AD61A6DB9E2009BFC86 /* MHViewController.h */,
 				B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */,
+				B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */,
+				B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */,
+				B942DC8A1AB3C6DD00D4ED15 /* AUDNavViewController.h */,
+				B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */,
 			);
 			path = Audity;
 			sourceTree = "<group>";
@@ -278,6 +292,8 @@
 		B9A0AD771AB2B50A00F4F1C8 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
+				B9665A1B1AB3B12400BDD88A /* DislikeBG.png */,
+				B9665A1C1AB3B12400BDD88A /* LikeBG.png */,
 				B9A0AD731AB2B3F600F4F1C8 /* Start.png */,
 				B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */,
 				B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */,
@@ -383,6 +399,7 @@
 			files = (
 				49DD67BE1AB13A6E002E7560 /* keys.plist in Resources */,
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
+				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
@@ -394,6 +411,7 @@
 				B9B80B5E1A690B8300A08B9B /* Podfile in Resources */,
 				B9A0AD701AB2B37900F4F1C8 /* Stop@100w.png in Resources */,
 				B9A0AD711AB2B37900F4F1C8 /* Unfocus.png in Resources */,
+				B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */,
 				B9A0AD721AB2B37900F4F1C8 /* Unfocus@100w.png in Resources */,
 				B9A0AD6F1AB2B37900F4F1C8 /* Stop.png in Resources */,
 				B9A0AD691AB2B37900F4F1C8 /* GodMode.png in Resources */,
@@ -451,9 +469,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */,
+				B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */,
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
 				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
+				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
 				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
