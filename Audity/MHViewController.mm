@@ -113,10 +113,16 @@
     
     //shitty center button so I can see where the center is
     UIImageView *centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
-    centerGodMarker.frame = CGRectMake(viewWidth/2,
-                                 viewHeight/2,
+    centerGodMarker.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/8,
+                                 viewHeight/2 - BUTTON_HEIGHT/8,
                                  BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
     [mapView addSubview:centerGodMarker];
+}
+
+-(void)initRadius{
+    RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
+    
+//do some stuff
 }
 
 - (void)viewDidLoad {
@@ -143,6 +149,7 @@
     //The setup code (in viewDidLoad in your view controller)
     [self initMapBox];
     [self initButton];
+    [self initRadius];
 }
 
 - (void)didReceiveMemoryWarning
@@ -212,8 +219,14 @@
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
     if (annotation.isUserLocationAnnotation){
-        NSLog(@"annotation was user location annotation");
-        return nil;
+        
+        RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
+        circle.lineColor = [UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0];
+        circle.fillColor = [UIColor colorWithRed:226.0/255.0 green:220.0/255.0 blue:255.0/255.0 alpha:0.2];
+        circle.lineWidthInPixels = 2.0;
+        annotation.enabled= NO;
+        
+        return circle;
     }
     
 //    NSString *likes = self.core.audities;
@@ -224,6 +237,7 @@
 //    
 //    UIImage *image = [self imageFromString:string attributes:attributes size:self.imageView.bounds.size];
     
+    //[mapView selectAnnotation:annotation animated:false];
     RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
     
     marker.canShowCallout = YES;
