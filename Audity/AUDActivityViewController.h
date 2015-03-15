@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AUDActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AUDActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tblView;
 @property (strong, nonatomic) IBOutlet UINavigationItem *viewTitle;
@@ -19,6 +19,8 @@
 
 - (IBAction)dislike:(id)sender;
 - (IBAction)like:(id)sender;
+
+- (IBAction)respondButtonPressed:(id)sender;
 
 
 @end

@@ -148,4 +148,36 @@
         self.dislikeButton.titleLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:.2];
     }
 }
+
+- (IBAction)respondButtonPressed:(id)sender {
+    UIBarButtonItem *item = (UIBarButtonItem *)sender;
+    
+    if (self.core.isRecording) {
+        [self.core endResponseWithDelegate:self];
+        item.title = @"Respond";
+    } else {
+        [self.core startRecording];
+        item.title = @"Finish";
+    }
+}
+
+#pragma mark Alert View Delegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UITextField *textfield = [alertView textFieldAtIndex:0];
+    if(buttonIndex != [alertView cancelButtonIndex]) {
+        NSString *signature = textfield.text;
+        if (!signature) signature = @"anonymous";
+        if ([signature isEqualToString:@""]) signature = @"anonymous";
+        
+        NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+    objectAtIndex:0];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+//        [self uploadNewAudityResponse:file withKey:uuid andSignature:signature];
+    } else {
+        self.core.isRecording = NO;
+    }
+}
+
 @end

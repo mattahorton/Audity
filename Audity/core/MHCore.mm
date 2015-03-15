@@ -140,6 +140,17 @@
     [alertViewStopRecording show];
 }
 
+-(void)endResponseWithDelegate:(UIViewController *)vc{
+    [_audioController removeInputReceiver:_recorder];
+    [_audioController removeOutputReceiver:_recorder];
+    [_recorder finishRecording];
+    self.recorder = nil;
+    
+    UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+    alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
+    [alertViewStopRecording show];
+}
+
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
     key = [key stringByAppendingString:@".aiff"];

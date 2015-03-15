@@ -115,7 +115,11 @@
                                 <segue destination="eU3-LT-qhu" kind="custom" customClass="DismissSegue" id="mf6-o0-Pre"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Respond" id="AFb-ab-3c7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Respond" id="AFb-ab-3c7">
+                            <connections>
+                                <action selector="respondButtonPressed:" destination="m5k-TC-9Fp" id="X6x-CZ-0fv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dislikeButton" destination="C8s-fi-lmt" id="4eQ-Fg-xG7"/>

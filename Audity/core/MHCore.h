@@ -43,6 +43,7 @@
 -(void) addLocAfterUploadWithSignature:(NSString *)signature;
 -(void) startRecording;
 -(void) endRecording;
+-(void)endResponseWithDelegate:(UIViewController *)vc;
 -(void) coreInit;
 -(void) unmute;
 -(void) mute;
