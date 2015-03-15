@@ -58,6 +58,7 @@
         self.userID = [[NSUUID UUID] UUIDString];
         // Store ID in NSUserDefaults
         [defaults setValue:self.userID forKey:@"userId"];
+        [defaults synchronize];
         
         // Store ID in Firebase
         Firebase *thisUser = [userRef childByAppendingPath:self.userID];

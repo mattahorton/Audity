@@ -118,6 +118,8 @@
                         <barButtonItem key="rightBarButtonItem" title="Respond" id="AFb-ab-3c7"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="dislikeButton" destination="C8s-fi-lmt" id="4eQ-Fg-xG7"/>
+                        <outlet property="likeButton" destination="xSs-43-XSa" id="0WY-1p-Rch"/>
                         <outlet property="likesLabel" destination="7o0-MQ-BtB" id="Nvk-LB-2Qp"/>
                         <outlet property="tblView" destination="vge-Ln-xgO" id="83B-SS-qRO"/>
                         <outlet property="viewTitle" destination="9yk-f5-NDk" id="fJn-fj-fcM"/>

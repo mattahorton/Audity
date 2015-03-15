@@ -21,6 +21,7 @@
 @implementation AUDActivityViewController {
     Firebase *recordingsRef;
     AUDNavViewController *parent;
+    NSUserDefaults *defaults;
 }
 
 - (void)viewDidLoad {
@@ -28,6 +29,8 @@
     // Do any additional setup after loading the view.
     _tblView.delegate = self;
     _tblView.dataSource = self;
+    
+    defaults = [NSUserDefaults standardUserDefaults];
     
     parent = (AUDNavViewController *)self.parentViewController;
     _audity = (NSMutableDictionary *)parent.info;
@@ -41,6 +44,17 @@
         NSNumber *num = (NSNumber *)_audity[@"likes"];
         _likesLabel.text = [num stringValue];
     }
+    
+    NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
+    NSString *key = self.audity[@"key"];
+
+    if((dict != nil) && (dict[key] != nil)) {
+        self.likeButton.enabled = NO;
+        self.dislikeButton.enabled = NO;
+    }
+    
+    [self.likeButton setTitle:@"Voted" forState:UIControlStateDisabled];
+    [self.dislikeButton setTitle:@"You" forState:UIControlStateDisabled];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,32 +82,70 @@
 }
 
 - (IBAction)dislike:(id)sender {
-    Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
-    int current = 0;
-    if(self.audity[@"likes"] != nil) {
-        NSNumber *num = (NSNumber *)self.audity[@"likes"];
-        current = [num intValue];
-    }
+    NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
+    NSString *key = self.audity[@"key"];
     
-    current = current - 1;
-    self.audity[@"likes"] = [NSNumber numberWithInt:current];
-    self.core.audities[self.audity[@"key"]] = self.audity;
-    [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
-    self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+    if(!dict || !dict[key]) {
+        Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
+        int current = 0;
+        if(self.audity[@"likes"] != nil) {
+            NSNumber *num = (NSNumber *)self.audity[@"likes"];
+            current = [num intValue];
+        }
+        
+        current = current - 1;
+        self.audity[@"likes"] = [NSNumber numberWithInt:current];
+        self.core.audities[self.audity[@"key"]] = self.audity;
+        [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
+        self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+        
+        if (dict) {
+            dict[key] = @1;
+        } else {
+            dict = [NSMutableDictionary dictionaryWithDictionary:@{}];
+            dict[key] = @1;
+        }
+        
+        [defaults setObject:dict forKey:@"audityLikes"];
+        [defaults synchronize];
+        
+        self.likeButton.enabled = NO;
+        self.dislikeButton.enabled = NO;
+        self.dislikeButton.titleLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:.2];
+    }
 }
 
 - (IBAction)like:(id)sender {
-    Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
-    int current = 0;
-    if(self.audity[@"likes"] != nil) {
-        NSNumber *num = (NSNumber *)self.audity[@"likes"];
-        current = [num intValue];
-    }
+    NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
+    NSString *key = self.audity[@"key"];
     
-    current = current + 1;
-    self.audity[@"likes"] = [NSNumber numberWithInt:current];
-    self.core.audities[self.audity[@"key"]] = self.audity;
-    [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
-    self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+    if(!dict || !dict[key]) {
+        Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
+        int current = 0;
+        if(self.audity[@"likes"] != nil) {
+            NSNumber *num = (NSNumber *)self.audity[@"likes"];
+            current = [num intValue];
+        }
+        
+        current = current + 1;
+        self.audity[@"likes"] = [NSNumber numberWithInt:current];
+        self.core.audities[self.audity[@"key"]] = self.audity;
+        [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
+        self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+        
+        if (dict) {
+            dict[key] = @1;
+        } else {
+            dict = [NSMutableDictionary dictionaryWithDictionary:@{}];
+            dict[key] = @1;
+        }
+        
+        [defaults setObject:dict forKey:@"audityLikes"];
+        [defaults synchronize];
+        
+        self.likeButton.enabled = NO;
+        self.dislikeButton.enabled = NO;
+        self.dislikeButton.titleLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:.2];
+    }
 }
 @end
