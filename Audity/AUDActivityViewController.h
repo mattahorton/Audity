@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tblView;
 @property (strong, nonatomic) IBOutlet UINavigationItem *viewTitle;
+@property (strong, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) NSMutableDictionary *audity;
 
 - (IBAction)dislike:(id)sender;

@@ -216,14 +216,6 @@
         return nil;
     }
     
-//    NSString *likes = self.core.audities;
-//    
-//    NSDictionary *attributes = @{NSFontAttributeName            : [UIFont systemFontOfSize:20],
-//                                 NSForegroundColorAttributeName : [UIColor blueColor],
-//                                 NSBackgroundColorAttributeName : [UIColor clearColor]};
-//    
-//    UIImage *image = [self imageFromString:string attributes:attributes size:self.imageView.bounds.size];
-    
     RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
     
     marker.canShowCallout = YES;
@@ -317,16 +309,5 @@
     }
 }
 
-#pragma mark Text to Image Utility
-
-- (UIImage *)imageFromString:(NSString *)string attributes:(NSDictionary *)attributes size:(CGSize)size
-{
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-    [string drawInRect:CGRectMake(0, 0, size.width, size.height) withAttributes:attributes];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
 
 @end
