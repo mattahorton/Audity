@@ -115,6 +115,7 @@
                                 <segue destination="eU3-LT-qhu" kind="custom" customClass="DismissSegue" id="mf6-o0-Pre"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Respond" id="AFb-ab-3c7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="likesLabel" destination="7o0-MQ-BtB" id="Nvk-LB-2Qp"/>
