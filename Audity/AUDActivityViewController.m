@@ -36,6 +36,11 @@
     self.core = [MHCore sharedInstance];
     _firebase = self.core.geo.fireRef;
     recordingsRef = [_firebase childByAppendingPath:@"recordings"];
+    
+    if(_audity != nil) {
+        NSNumber *num = (NSNumber *)_audity[@"likes"];
+        _likesLabel.text = [num stringValue];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +79,7 @@
     self.audity[@"likes"] = [NSNumber numberWithInt:current];
     self.core.audities[self.audity[@"key"]] = self.audity;
     [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
+    self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
 }
 
 - (IBAction)like:(id)sender {
@@ -88,5 +94,6 @@
     self.audity[@"likes"] = [NSNumber numberWithInt:current];
     self.core.audities[self.audity[@"key"]] = self.audity;
     [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
+    self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
 }
 @end
