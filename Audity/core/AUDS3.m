@@ -95,6 +95,14 @@
         }
         return nil;
     }];
+    
+    uploadRequest.uploadProgress =  ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Update progress
+            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
+            NSLog(@"%f percent complete", percent);
+        });
+    };
 }
 
 -(void) uploadResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
@@ -140,6 +148,14 @@
         }
         return nil;
     }];
+    
+    uploadRequest.uploadProgress =  ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Update progress
+            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
+            NSLog(@"%f percent complete", percent);
+        });
+    };
 }
 
 

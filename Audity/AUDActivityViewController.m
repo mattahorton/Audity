@@ -23,6 +23,7 @@
     Firebase *responsesRef;
     AUDNavViewController *parent;
     NSUserDefaults *defaults;
+    NSMutableArray *dataArray;
 }
 
 - (void)viewDidLoad {
@@ -57,6 +58,18 @@
     
     [self.likeButton setTitle:@"Voted" forState:UIControlStateDisabled];
     [self.dislikeButton setTitle:@"You" forState:UIControlStateDisabled];
+    
+    
+    // setup TableView data
+    dataArray = [[NSMutableArray alloc] init];
+    
+    [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:(NSString *)self.audity[@"key"]]
+        observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@", snapshot.value[@"recording"]);
+            
+        [dataArray addObject:(NSDictionary *)snapshot.value];
+        [_tblView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,11 +89,22 @@
 
 #pragma mark Table View Delegate Methods
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [[UITableViewCell alloc] init];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    NSDictionary *response = dataArray[indexPath.row];
+    cell.textLabel.text = response[@"signature"];
+    cell.detailTextLabel.text = response[@"uploaded"];
+    
+    return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return [dataArray count];
 }
 
 - (IBAction)dislike:(id)sender {
