@@ -258,7 +258,8 @@
     if(volume > 1.0) volume = 1.0;
     volume = volume - (scl * volume); //scale volume based on distance
     if(volume <= 0.0) volume = 0.0;
-    NSLog(@"volume being set to %f because it has %d likes and %f scale factor", volume, likes, scl);
+    //NSLog(@"volume being set to %f because it has %d likes and %f scale factor", volume, likes, scl);
+    if(volume == NAN) volume = 0.0;
     [fp setVolume:volume];
 }
 
