@@ -37,10 +37,12 @@
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
 -(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
+-(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
 -(void) stopAudioWithKey:(NSString *)key;
 -(void) addLocAfterUploadWithSignature:(NSString *)signature;
+-(void) addResponseToViewAfterUploadWithSignature:(NSString *)signature;
 -(void) startRecording;
 -(void) endRecording;
 -(void)endResponseWithDelegate:(UIViewController *)vc;

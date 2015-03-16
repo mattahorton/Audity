@@ -22,5 +22,7 @@
 
 - (IBAction)respondButtonPressed:(id)sender;
 
+-(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key;
+
 
 @end

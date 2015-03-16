@@ -20,6 +20,7 @@
 
 @implementation AUDActivityViewController {
     Firebase *recordingsRef;
+    Firebase *responsesRef;
     AUDNavViewController *parent;
     NSUserDefaults *defaults;
 }
@@ -39,6 +40,7 @@
     self.core = [MHCore sharedInstance];
     _firebase = self.core.geo.fireRef;
     recordingsRef = [_firebase childByAppendingPath:@"recordings"];
+    responsesRef = [_firebase childByAppendingPath:@"responses"];
     
     if(_audity != nil) {
         NSNumber *num = (NSNumber *)_audity[@"likes"];
@@ -174,10 +176,31 @@
     objectAtIndex:0];
         NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];
-//        [self uploadNewAudityResponse:file withKey:uuid andSignature:signature];
+        [self.core uploadNewAudityResponse:file withKey:uuid andSignature:signature forAudity:(NSString *)self.audity[@"key"]];
     } else {
         self.core.isRecording = NO;
     }
+}
+
+#pragma mark Add Response
+
+-(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key{
+    NSString *url = @"https://s3.amazonaws.com/audity/";
+    url = [[url stringByAppendingString:key] stringByAppendingString:@".aiff"];
+    
+    NSDictionary *dict = @{@"recording":url,
+                           @"userId":self.core.userID,
+                           @"signature":signature,
+                           @"uploaded":[[NSDate date] description],
+                           @"audity":(NSString *)self.audity[@"key"],
+                           };
+    Firebase *respRef = [responsesRef childByAppendingPath:key];
+    
+    [respRef setValue:dict];
+    
+    Firebase *recRespRef = [[[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"responses"] childByAppendingPath:key];
+    
+    [recRespRef setValue:key];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "AEBlockAudioReceiver.h"
 #import "AEAudioFilePlayer.h"
 #import "AEUtilities.h"
+#import "AUDActivityViewController.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -22,6 +23,7 @@
     NSString *documentsFolder;
     NSUserDefaults *defaults;
     NSString *tempKey;
+    AUDActivityViewController *audVC;
 }
 
 + (id)sharedInstance {
@@ -146,6 +148,8 @@
     [_recorder finishRecording];
     self.recorder = nil;
     
+    audVC = (AUDActivityViewController *)vc;
+    
     UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
     alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
     [alertViewStopRecording show];
@@ -157,12 +161,23 @@
     [self.s3 uploadFile:file withKey:key andSignature:signature];
 }
 
+-(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *) audityKey {
+    tempKey = [NSString stringWithString:key];
+    key = [key stringByAppendingString:@".aiff"];
+    [self.s3 uploadResponse:file withKey:key andSignature:signature forAudity:audityKey];
+}
+
 -(void) addLocAfterUploadWithSignature:(NSString *)signature {
     [self.geo addLoc:tempKey bySignature:signature];
     tempKey = nil;
     self.isRecording = NO;
 }
 
+-(void)addResponseToViewAfterUploadWithSignature:(NSString *)signature{
+    [audVC addResponseToAudityWithSignature:signature andKey:tempKey];
+    tempKey = nil;
+    self.isRecording = NO;
+}
 
 //returns a scale factor between 1.0 (furthest) and 0.0 (nearest)
 -(float) getScaleFactorFromDistance:(float)distance{

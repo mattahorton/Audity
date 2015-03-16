@@ -97,6 +97,52 @@
     }];
 }
 
+-(void) uploadResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
+    
+    AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
+    uploadRequest.bucket = @"audity";
+    uploadRequest.key = key;
+    uploadRequest.body = file;
+    
+    [[self.transferManager upload:uploadRequest] continueWithExecutor:[BFExecutor mainThreadExecutor]
+    withBlock:^id(BFTask *task) {
+        
+        if (task.error) {
+            if ([task.error.domain isEqualToString:AWSS3TransferManagerErrorDomain]) {
+                switch (task.error.code) {
+                    case AWSS3TransferManagerErrorCancelled:
+                        NSLog(@"Cancelled");
+                    case AWSS3TransferManagerErrorPaused:
+                        break;
+                        
+                    default:
+                        NSLog(@"Error: %@", task.error);
+                        break;
+                }
+            } else {
+                // Unknown error.
+                NSLog(@"Error: %@", task.error);
+            }
+        }
+        
+        if (task.result) {
+            AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
+            // The file uploaded successfully.
+            NSLog(@"file uploaded successfully");
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                         objectAtIndex:0];
+            [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"] error:nil];
+            
+            [self.core addResponseToViewAfterUploadWithSignature:signature];
+            
+        }
+        return nil;
+    }];
+}
+
+
 -(NSURL *) downloadFileWithKey:(NSString *)key {
     // Construct the NSURL for the download location.
     NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:key];
