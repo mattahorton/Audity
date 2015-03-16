@@ -184,6 +184,7 @@
     float maxRadius = MAXRADIUS; //this max radius should be declared elsewhere. Right now it is 600m elsewhere
     float scale = logf(distance)/logf(maxRadius);
     if(scale > 1.0) scale = 1.0; //make sure we don't go below 100%
+    if(scale < 0.0) scale = 0.01;
     return scale;
 }
 
@@ -201,9 +202,20 @@
     return false;
 }
 
--(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withDistance:(float)distance{
+-(int) getTotalNumLikes{
+    NSArray *keys = [self.audities allKeys];
+    int num_likes = 0;
     
-    float scl = [self getScaleFactorFromDistance:distance];
+    for (NSString *key in keys){
+        if(![self.audities[key] isEqual:@"taken"]){
+            num_likes += [[[self.audities objectForKey:key] objectForKey:@"likes"] intValue];
+        }
+    }
+    return num_likes;
+}
+
+-(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withScaleFactor:(float)scl{
+
     float maxWetness = 100.0;
     
     AudioUnitSetParameter(reverb.audioUnit,
@@ -214,16 +226,15 @@
                           0);
 }
 
--(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withDistance:(float)distance{
+-(void) setFilterParametersForLP:(AEAudioUnitFilter *)lp withScaleFactor:(float)scl{
     
-    float scl = [self getScaleFactorFromDistance:distance];
     float maxCutoff = 20000; //20kHz max cutoff
     
     AudioUnitSetParameter(lp.audioUnit,
                           kLowPassParam_CutoffFrequency,
                           kAudioUnitScope_Global,
                           0,
-                          maxCutoff * scl,
+                          maxCutoff * (1.0 - scl),
                           0);
 }
 
@@ -239,6 +250,16 @@
                           0,
                           cutoff,
                           0);
+}
+
+-(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes{
+    int total_likes = [self getTotalNumLikes];
+    float volume = 0.5 + (float)likes/(float)total_likes; //set the base volume based on likes
+    if(volume > 1.0) volume = 1.0;
+    volume = volume - (scl * volume); //scale volume based on distance
+    if(volume <= 0.0) volume = 0.0;
+    NSLog(@"volume being set to %f because it has %d likes and %f scale factor", volume, likes, scl);
+    [fp setVolume:volume];
 }
 
 -(float) getPanFromBearing:(float) bearing{
@@ -261,6 +282,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
         CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
         CLLocation *SelfLoc = self.geo.currentLoc;
+        int num_likes = [[[self.audities objectForKey:key] valueForKey:@"likes"] integerValue];
         
         //gotta get that theta
         float lat1 = DegreesToRadians(SelfLoc.coordinate.latitude);
@@ -279,9 +301,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         float scl = [self getScaleFactorFromDistance:distance]; // scale based on log(distance)
         
         //set pan based on theta
-        float real_pan = [self getPanFromBearing:radiansBearing];
-        //float pan = ((1.0 - (scl)) * 0.5) + ((scl) * real_pan); // the closer the sound is (lower scl) the less pan will affect it.
-        float pan = real_pan;
+        float pan = [self getPanFromBearing:radiansBearing];
         [fp setPan:pan];
         
         AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
@@ -293,16 +313,16 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             if(focus){
                 //NSLog(@"The scale factor for distance %f is %f", distance, scl);
                 //NSLog(@"The bearing is %fpi which gives real pan of %f and final pan of %f", radiansBearing/3.14159, real_pan, pan);
-                [fp setVolume:(0.6 - (scl * 0.5))]; //in focus, make it a bit louder
+                [fp setVolume:(0.8 - (scl * 0.5))]; //in focus, make it a bit louder
             }else{
                 [fp setVolume:(0.3 - (scl * 0.5))]; //out of focus, make it a bit softer
             }
             [self setFilterParametersForLP:lp withFocus: focus];
-            [self setFilterParametersForReverb:reverb withDistance:distance];
+            [self setFilterParametersForReverb:reverb withScaleFactor:scl];
         }else{
-            [fp setVolume:(0.5 - (scl * 0.5))]; //set volume solely based on distance
-            [self setFilterParametersForLP:lp withDistance:distance];
-            [self setFilterParametersForReverb:reverb withDistance:distance];
+            [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes];
+            [self setFilterParametersForLP:lp withScaleFactor:scl];
+            [self setFilterParametersForReverb:reverb withScaleFactor:scl];
         }
     }
 }
