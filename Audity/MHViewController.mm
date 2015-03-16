@@ -29,6 +29,7 @@
     float viewWidth;
     RMMapView *mapView;
     NSMutableArray *focusButtons;
+    UIButton *addButton;
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
@@ -93,14 +94,14 @@
 }
 
 - (void) initButton {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Record Audity" forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
-    button.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+    addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    [addButton setTitle:@"Record Audity" forState:UIControlStateNormal];
+    [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    addButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
                               viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
                               BUTTON_WIDTH, BUTTON_HEIGHT);
-    [mapView addSubview:button];
+    [mapView addSubview:addButton];
     
     UIButton *godButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,6 +188,7 @@
         self.core.geo.localCenter = self.core.geo.currentLoc;
         self.core.geo.currentLoc = self.core.geo.godModeCenter;
         [button setImage:[UIImage imageNamed:@"LocalMode.png"] forState:UIControlStateNormal];
+        addButton.enabled = false;
     } else {
         NSLog(@"Entering Local Mode");
         self.core.geo.inGodMode = NO;
@@ -195,6 +197,7 @@
         self.core.geo.currentLoc = self.core.geo.localCenter;
         [button setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
         [self.core centerMap:self.core.geo.currentLoc];
+        addButton.enabled = true;
     }
     
     NSArray *keys = [self.core.audities allKeys];
@@ -234,7 +237,7 @@
     marker.canShowCallout = YES;
     
     UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
-    [respond setImage:[UIImage imageNamed:@"Start.png"] forState:UIControlStateNormal];
+    [respond setImage:[UIImage imageNamed:@"Respond.png"] forState:UIControlStateNormal];
     [respond setTitle:@"respond" forState:UIControlStateNormal];
     respond.frame = CGRectMake(0,0,30,30);
     
