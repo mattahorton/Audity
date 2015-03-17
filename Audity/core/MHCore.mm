@@ -38,6 +38,7 @@
 -(void) coreInit {
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     self.isRecording = NO;
+    self.muteAudities = NO;
     
     self.audities = @{};
     
@@ -308,8 +309,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
         AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
         
-        //are we in focus mode? If so, call focus mode functions
-        if([self isInFocusMode]){
+        if([self isInFocusMode] && !self.muteAudities){
             BOOL focus = [[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue];
             if(focus){
                 //NSLog(@"The scale factor for distance %f is %f", distance, scl);
@@ -320,12 +320,26 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             }
             [self setFilterParametersForLP:lp withFocus: focus];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
-        }else{
+        }else if (!self.muteAudities){
             [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes];
             [self setFilterParametersForLP:lp withScaleFactor:scl];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
+        }else if (self.muteAudities){
+            [fp setVolume:0];
         }
     }
+}
+
+-(void) playResponse:(NSURL *)file {
+    //NSLog(@"time to play this response");
+    NSError *errorFilePlayer = NULL;
+    
+    AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+    [filePlayer setVolume:0.8];
+    [filePlayer setLoop:NO];
+    
+    if(filePlayer)[self.audioController addChannels:@[filePlayer]];
+    else NSLog(@"could not initialize fileplayer, it was nil or null or something");
 }
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
@@ -360,9 +374,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
         [[self.audities objectForKey:key] setValue:lp forKey:@"lp"];
         
-        
         [self setAllAudioParametersForAudityWithKey:key];
-        
         
         [self.audioController addFilter:reverb toChannel:filePlayer];
         [self.audioController addFilter:lp toChannel:filePlayer];

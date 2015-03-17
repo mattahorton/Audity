@@ -7,6 +7,7 @@
 //
 
 #import "AUDNavViewController.h"
+#import "MHCore.h"
 
 @interface AUDNavViewController ()
 

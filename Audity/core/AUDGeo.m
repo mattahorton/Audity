@@ -87,7 +87,7 @@
                 
                 self.core.audities[key] = @"taken";
             
-                NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"]];
+                NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"] isResponse:NO];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 

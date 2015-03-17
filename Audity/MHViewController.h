@@ -22,4 +22,7 @@
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key;
 - (void) changeMapCenterWithLocation:(CLLocation *)loc;
 
+-(void) viewWillAppear:(BOOL)animated;
+-(void) viewWillDisappear:(BOOL)animated;
+
 @end

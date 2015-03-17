@@ -24,6 +24,7 @@
     AUDNavViewController *parent;
     NSUserDefaults *defaults;
     NSMutableArray *dataArray;
+    NSMutableArray *localURLS;
 }
 
 - (void)viewDidLoad {
@@ -62,14 +63,25 @@
     
     // setup TableView data
     dataArray = [[NSMutableArray alloc] init];
+    localURLS = [[NSMutableArray alloc] init];
     
     [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:(NSString *)self.audity[@"key"]]
         observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         NSLog(@"%@", snapshot.value[@"recording"]);
             
         [dataArray addObject:(NSDictionary *)snapshot.value];
+        [self reloadData];
         [_tblView reloadData];
+            
     }];
+
+}
+
+-(void)reloadData{
+    int index = [dataArray count] - 1;
+    NSDictionary *respDict = [dataArray objectAtIndex:index];
+    NSURL *localURL = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
+    [localURLS addObject:localURL];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -209,8 +221,11 @@
 #pragma mark Add Response
 
 -(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key{
-    NSString *url = @"https://s3.amazonaws.com/audity/";
-    url = [[url stringByAppendingString:key] stringByAppendingString:@".aiff"];
+    //NSString *url = @"https://s3.amazonaws.com/audity/";
+    //url = [[url stringByAppendingString:key] stringByAppendingString:@".aiff"];
+    NSString *url = [key stringByAppendingString:@".aiff"];
+    //NSLog(@"WE ARE HERE");
+    //NSLog(url);
     
     NSDictionary *dict = @{@"recording":url,
                            @"userId":self.core.userID,
@@ -225,6 +240,20 @@
     Firebase *recRespRef = [[[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"responses"] childByAppendingPath:key];
     
     [recRespRef setValue:key];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSDictionary *respDict = [dataArray objectAtIndex:[indexPath indexAtPosition:1]];
+    int index = [indexPath indexAtPosition:1];
+    if([localURLS count] > index){
+        NSURL *localURL = [localURLS objectAtIndex:index];
+        [self.core playResponse:localURL];
+    }
+    //NSLog([respDict objectForKey:@"recording"]);
+    //NSURL *localUrl = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
+    //NSLog([localUrl absoluteString]);
 }
 
 @end

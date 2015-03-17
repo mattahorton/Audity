@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDictionary *apiKeys;
 @property (nonatomic) BOOL isRecording;
+@property (nonatomic) BOOL muteAudities;
 
 +(id) sharedInstance;
 
@@ -49,5 +50,6 @@
 -(void) coreInit;
 -(void) unmute;
 -(void) mute;
+-(void) playResponse:(NSURL *)file;
 
 @end

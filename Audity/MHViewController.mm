@@ -32,6 +32,18 @@
     UIButton *addButton;
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.core.muteAudities = YES;
+    //NSLog(@"going away now");
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    //NSLog(@"appearing now");
+    self.core.muteAudities = NO;
+    [super viewWillAppear:animated];
+}
+
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
     if (![self.core.audities[key] isEqual:@"taken"]) {
         RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
@@ -144,6 +156,7 @@
     self.core.vc = self;
     // initialize
     [self.core coreInit];
+    
     
     focusButtons = [NSMutableArray arrayWithArray:@[]];
     
@@ -278,12 +291,12 @@
             if (![self.core.audities[key] isEqual:@"taken"]) {
                 if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){ // we want to toggle this focus
                     if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
-                        NSLog(@"setting focus to false");
+                        //NSLog(@"setting focus to false");
                         NSNumber *num = [NSNumber numberWithBool:NO];
                         [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
                         [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
                     }else{                                                              //This audity is not focused on, so focus on it
-                        NSLog(@"setting focus to true");
+                        //NSLog(@"setting focus to true");
                         NSNumber *num = [NSNumber numberWithBool:YES];
                         [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
                         [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];

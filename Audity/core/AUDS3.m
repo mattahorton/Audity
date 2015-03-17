@@ -158,13 +158,12 @@
     };
 }
 
-
--(NSURL *) downloadFileWithKey:(NSString *)key {
+//-(NSURL *) downloadFileWithKey:(NSString *)key{
+-(NSURL *) downloadFileWithKey:(NSString *)key isResponse:(BOOL)response{
     // Construct the NSURL for the download location.
     NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:key];
     NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
     [[NSFileManager defaultManager] removeItemAtPath:downloadingFilePath error:NULL];
-    
     
     // Construct the download request.
     AWSS3TransferManagerDownloadRequest *downloadRequest = [AWSS3TransferManagerDownloadRequest new];
@@ -172,6 +171,7 @@
     downloadRequest.bucket = @"audity";
     downloadRequest.key = key;
     downloadRequest.downloadingFileURL = downloadingFileURL;
+    NSString * urlstring =[downloadingFileURL absoluteString];
     
     __weak AUDS3 *weakSelf = self;
     // Download the file.
@@ -199,7 +199,7 @@
            if (task.result) {
                AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
                //File downloaded successfully.
-               [strongSelf.core playAudio:downloadingFileURL withKey:key];
+               if(!response)[strongSelf.core playAudio:downloadingFileURL withKey:key];
            }
            return nil;
         }];
