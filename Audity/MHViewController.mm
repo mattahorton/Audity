@@ -182,9 +182,11 @@
     UIButton *button = (UIButton *)sender;
     if(!self.core.isRecording) {
         NSLog(@"Recording");
+        self.core.muteAudities = YES;
         [self.core startRecording];
         [button setImage:[UIImage imageNamed:@"Stop.png"] forState:UIControlStateNormal];
     } else {
+        self.core.muteAudities = NO;
         [self.core endRecording];
         [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
     }
