@@ -38,6 +38,7 @@
 		B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */; };
 		B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF091AA3E82D000A963B /* Security.framework */; };
 		B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF071AA3E826000A963B /* CFNetwork.framework */; };
+		B9A099131AB6A93F007935A8 /* Respond.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A099121AB6A93F007935A8 /* Respond.png */; };
 		B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */; };
 		B9A0AD681AB2B37900F4F1C8 /* Focus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */; };
 		B9A0AD691AB2B37900F4F1C8 /* GodMode.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5D1AB2B37900F4F1C8 /* GodMode.png */; };
@@ -70,7 +71,7 @@
 
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		498E3A5A1AB5001200F5014D /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = "../../../../../Volumes/Bitchin'ASSD/Andrew/Downloads/keys.plist"; sourceTree = "<group>"; };
+		498E3A5A1AB5001200F5014D /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -116,6 +117,7 @@
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		B98B383C1AA5141C0085912F /* AUDS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDS3.h; sourceTree = "<group>"; };
 		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
+		B9A099121AB6A93F007935A8 /* Respond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Respond.png; sourceTree = "<group>"; };
 		B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Focus.png; sourceTree = "<group>"; };
 		B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Focus@100w.png"; sourceTree = "<group>"; };
 		B9A0AD5D1AB2B37900F4F1C8 /* GodMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GodMode.png; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		B9A0AD771AB2B50A00F4F1C8 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
+				B9A099121AB6A93F007935A8 /* Respond.png */,
 				B9DC39F01AB4FDD1008E741A /* Center.png */,
 				B9665A1B1AB3B12400BDD88A /* DislikeBG.png */,
 				B9665A1C1AB3B12400BDD88A /* LikeBG.png */,
@@ -401,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9DC39F11AB4FDD1008E741A /* Center.png in Resources */,
+				B9A099131AB6A93F007935A8 /* Respond.png in Resources */,
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
