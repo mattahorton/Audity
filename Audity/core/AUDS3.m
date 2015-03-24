@@ -204,6 +204,14 @@
            return nil;
         }];
     
+    downloadRequest.downloadProgress =  ^(int64_t bytesReceived, int64_t totalBytesReceived, int64_t totalBytesExpectedToReceive){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Update progress
+            double percent = (double)totalBytesReceived/(double)totalBytesExpectedToReceive;
+            NSLog(@"%f percent complete", percent);
+        });
+    };
+    
     return downloadingFileURL;
 }
 
