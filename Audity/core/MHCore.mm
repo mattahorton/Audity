@@ -256,6 +256,7 @@
 -(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes{
     int total_likes = [self getTotalNumLikes];
     float volume = 0.5 + (float)likes/(float)total_likes; //set the base volume based on likes
+    if (total_likes == 0) volume = 0.75;
     if(volume > 1.0) volume = 1.0;
     volume = volume - (scl * volume); //scale volume based on distance
     if(volume <= 0.0) volume = 0.0;
@@ -345,7 +346,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
     if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
-//        NSLog(@" play %@ ", file);
+        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
         AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
