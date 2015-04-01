@@ -154,9 +154,14 @@
         [_recorder finishRecording];
         self.recorder = nil;
         
-        UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
-        alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
-        [alertViewStopRecording show];
+//        UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+//        alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
+//        [alertViewStopRecording show];
+        SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
+                                                                         message:@"This is a message"
+                                                                  preferredStyle:SDCAlertControllerStyleAlert];
+        [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
+        [alert presentWithCompletion:nil];
         self.isRecording = NO;
     }
 }

@@ -10,4 +10,4 @@ pod 'AFAmazonS3Manager'
 pod 'SpinKit', '~> 1.1'
 pod 'MBProgressHUD', '~> 0.9.1'
 
-pod 'SDCAlertView'
+pod 'DLAlertView'
