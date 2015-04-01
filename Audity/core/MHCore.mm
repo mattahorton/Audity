@@ -52,6 +52,16 @@
     Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
     self.s3.core = self;
     
+    // Auth to Firebase
+    NSString *FBSECRET = self.apiKeys[@"FBSECRET"];
+    [self.firebase authWithCustomToken:FBSECRET withCompletionBlock:^(NSError *error, FAuthData *authData) {
+        if (error) {
+            NSLog(@"Login Failed! %@", error);
+        } else {
+            NSLog(@"Login succeeded! %@", authData);
+        }
+    }];
+    
     // Find user ID in NSUserDefaults
     defaults = [NSUserDefaults standardUserDefaults];
     self.userID = [defaults stringForKey:@"userId"];
@@ -67,7 +77,6 @@
         Firebase *thisUser = [userRef childByAppendingPath:self.userID];
         [thisUser setValue:@{@"userId":self.userID}];
     }
-
     
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]
