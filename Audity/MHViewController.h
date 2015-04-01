@@ -24,5 +24,6 @@
 
 -(void) viewWillAppear:(BOOL)animated;
 -(void) viewWillDisappear:(BOOL)animated;
+- (void) stopSpinner;
 
 @end

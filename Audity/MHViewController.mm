@@ -10,6 +10,7 @@
 #import "MHCore.h"
 #import "Mapbox.h"
 #import "AUDNavViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define BUTTON_HEIGHT 80
 #define BUTTON_WIDTH 80
@@ -30,6 +31,8 @@
     RMMapView *mapView;
     NSMutableArray *focusButtons;
     UIButton *addButton;
+    UIButton *godButton;
+    UIImageView *centerGodMarker;
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -92,6 +95,7 @@
     mapView.draggingEnabled = NO;
     mapView.zoomingInPivotsAroundCenter = YES;
 //    mapView.clusteringEnabled = YES;
+    mapView.userInteractionEnabled = NO;
     mapView.showsUserLocation = YES;
 
     // init the dict for on-screen audities
@@ -103,6 +107,8 @@
     
     [mapView setZoom:MAX_ZOOM animated:NO];
     
+    [MBProgressHUD showHUDAddedTo:mapView animated:YES];
+    
 }
 
 - (void) initButton {
@@ -113,22 +119,25 @@
     addButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
                               viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
                               BUTTON_WIDTH, BUTTON_HEIGHT);
+    [addButton setEnabled:NO];
     [mapView addSubview:addButton];
     
-    UIButton *godButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    godButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
     [godButton setTitle:@"God Mode" forState:UIControlStateNormal];
     [godButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
     godButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
                               viewHeight - 2*BUTTON_HEIGHT - BUTTON_BORDER_OFFSET,
                               BUTTON_WIDTH, BUTTON_HEIGHT);
+    [godButton setEnabled:NO];
     [mapView addSubview:godButton];
     
-    //shitty center button so I can see where the center is
-    UIImageView *centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
+    //center button so I can see where the center is
+    centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
     centerGodMarker.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/8,
                                  viewHeight/2 - BUTTON_HEIGHT/8,
                                  BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
+    centerGodMarker.hidden = YES;
     [mapView addSubview:centerGodMarker];
 }
 
@@ -340,5 +349,15 @@
     }
 }
 
+#pragma mark Spinner
+- (void) stopSpinner {
+    [addButton setEnabled:YES];
+    [godButton setEnabled:YES];
+    mapView.userInteractionEnabled = YES;
+    centerGodMarker.hidden = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:mapView animated:YES];
+    });
+}
 
 @end

@@ -165,8 +165,10 @@ PODS:
     - FMDB (~> 2.4)
     - GRMustache (= 7.3.0)
     - SMCalloutView (= 2.0)
+  - MBProgressHUD (0.9.1)
   - Reachability (3.2)
   - SMCalloutView (2.0)
+  - SpinKit (1.2.0)
   - STK (4.5.2)
   - TheAmazingAudioEngine (1.4.6)
   - TMCache (1.2.3)
@@ -177,6 +179,8 @@ DEPENDENCIES:
   - AFAmazonS3Manager
   - AWSiOSSDKv2
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
+  - MBProgressHUD (~> 0.9.1)
+  - SpinKit (~> 1.1)
   - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine
 
@@ -195,22 +199,24 @@ CHECKOUT OPTIONS:
     :git: https://github.com/mattahorton/stk.git
 
 SPEC CHECKSUMS:
-  AFAmazonS3Manager: 31a694e8db6f2cc2576ce0d4cc8619c1f5a084c0
-  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  AWSiOSSDKv2: bcf17afda187f45901b07369f1f59bfbc68922bc
-  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
-  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
-  GRMustache: efecd3b603f0a7a99cf6bdf3998782ee0c465726
-  GZIP: f27c434ffee5e9a9b34f4e9c19e91350fa8bbde1
-  JRSwizzle: 30da7a2c539a4ebf954b16d15f6dd8221c9f6fa5
-  Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
+  AFAmazonS3Manager: 688f9238511bb86011159d0155fcda09838b0e0d
+  AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
+  AWSiOSSDKv2: 0673594b4202053945bf1d7c0691b48be55404be
+  Bolts: e431c88fd02115d4a34016c2100bbfa4d2d5b146
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  GRMustache: 6baee020c5644416c034f5afb1607f6219e7f753
+  GZIP: f0863fda354e8f83316508c0a2c7bbe385e39129
+  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
+  Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
   Mapbox-iOS-SDK: c84b5a017e463ab1467b4a932eec30a61def8af2
-  Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
-  SMCalloutView: c1906604d47c058400ade5c9d52ab98aa77b7e76
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
+  SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
   STK: b18355d6f4dac95c45a6a0ef8f57a07b5825686f
-  TheAmazingAudioEngine: d4c027506d6b8b025c5947fb401a972ccf7574f3
-  TMCache: 11589ef8c40909114a5e60132711c9a559e01d97
-  UICKeyChainStore: 2399076d0950e20fe859b8f817548cf6ca542dd7
-  XMLDictionary: 735e81b9a043e220b0d24e9d4f16719606f2e0fc
+  TheAmazingAudioEngine: 014e942f20456feaf5ccb48f440402306350abf8
+  TMCache: 5f68bc38d741aa8df4c63131b847522783665d81
+  UICKeyChainStore: 69eb0c3a6f669bccf16ba88de3b9069b71501361
+  XMLDictionary: f9f51601ba76678b594ab485f2b00ec1fed23724
 
 COCOAPODS: 0.35.0

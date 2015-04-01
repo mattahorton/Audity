@@ -391,6 +391,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
         
     }
+    
+    [self.vc stopSpinner];
 }
 
 -(void) stopAudioWithKey:(NSString *)key {
