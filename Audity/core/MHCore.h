@@ -37,6 +37,7 @@
 +(id) sharedInstance;
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
+-(void) setAllAudioParameters;
 -(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey;
 -(void) centerMap:(CLLocation *)loc;

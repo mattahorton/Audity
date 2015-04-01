@@ -192,10 +192,11 @@
     if(!self.core.isRecording) {
         NSLog(@"Recording");
         self.core.muteAudities = YES;
+        [self.core setAllAudioParameters]; // trigger mute
+        
         [self.core startRecording];
         [button setImage:[UIImage imageNamed:@"Stop.png"] forState:UIControlStateNormal];
     } else {
-        self.core.muteAudities = NO;
         [self.core endRecording];
         [button setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
     }
@@ -224,11 +225,7 @@
         addButton.enabled = true;
     }
     
-    NSArray *keys = [self.core.audities allKeys];
-    
-    for (NSString *key in keys){
-        [self.core setAllAudioParametersForAudityWithKey:key];
-    }
+    [self.core setAllAudioParameters]; // update sound params for location
 }
 
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
@@ -325,9 +322,7 @@
         }
         
         // update parameters after setting focus variables
-        for (NSString *key in keys){
-            [self.core setAllAudioParametersForAudityWithKey:key];
-        }
+        [self.core setAllAudioParameters];
         
         // reset button states
         for (UIButton *b in focusButtons){

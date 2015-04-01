@@ -11,6 +11,7 @@
 #import "AEAudioFilePlayer.h"
 #import "AEUtilities.h"
 #import "AUDActivityViewController.h"
+#import <DLAlertView/DLAVAlertView.h>
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -154,14 +155,13 @@
         [_recorder finishRecording];
         self.recorder = nil;
         
-//        UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
-//        alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
-//        [alertViewStopRecording show];
-        SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-                                                                         message:@"This is a message"
-                                                                  preferredStyle:SDCAlertControllerStyleAlert];
-        [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
-        [alert presentWithCompletion:nil];
+        DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+        alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
+        [alertViewStopRecording show];
+        UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
+        content.frame = CGRectMake(0,0,80,80);
+        alertViewStopRecording.contentView = content;
+        
         self.isRecording = NO;
     }
 }
@@ -174,8 +174,8 @@
     
     audVC = (AUDActivityViewController *)vc;
     
-    UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
-    alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
+    DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+    alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
     [alertViewStopRecording show];
 }
 
@@ -354,6 +354,14 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+-(void) setAllAudioParameters {
+    NSArray *keys = [self.audities allKeys];
+    
+    for (NSString *key in keys){
+        [self setAllAudioParametersForAudityWithKey:key];
+    }
+}
+
 -(void) playResponse:(NSURL *)file {
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
@@ -434,6 +442,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
     
     [self.vc resetNewAudityButton];
+    self.muteAudities = NO;
+    [self setAllAudioParameters];
 }
 
 @end
