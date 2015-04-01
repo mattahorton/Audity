@@ -38,12 +38,14 @@
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.core.muteAudities = YES;
+    [self.core setAllAudioParameters];
     //NSLog(@"going away now");
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     //NSLog(@"appearing now");
     self.core.muteAudities = NO;
+    [self.core setAllAudioParameters];
     [super viewWillAppear:animated];
 }
 

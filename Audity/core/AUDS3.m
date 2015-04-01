@@ -100,7 +100,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
             double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
-            NSLog(@"%f percent complete", percent);
+//            NSLog(@"%f percent complete", percent*100);
         });
     };
 }
@@ -153,7 +153,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
             double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
-            NSLog(@"%f percent complete", percent);
+//            NSLog(@"%f percent complete", percent*100);
         });
     };
 }
@@ -208,7 +208,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
             double percent = (double)totalBytesReceived/(double)totalBytesExpectedToReceive;
-            NSLog(@"%f percent complete", percent);
+//            NSLog(@"%f percent complete", percent*100);
         });
     };
     
