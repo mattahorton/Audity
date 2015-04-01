@@ -139,17 +139,26 @@
         
         [_audioController addInputReceiver:_recorder];
     }
+    
+    [NSTimer scheduledTimerWithTimeInterval:60.0
+                                     target:self
+                                   selector:@selector(endRecording)
+                                   userInfo:nil
+                                    repeats:NO];
 }
 
 - (void)endRecording {
-    [_audioController removeInputReceiver:_recorder];
-    [_audioController removeOutputReceiver:_recorder];
-    [_recorder finishRecording];
-    self.recorder = nil;
-    
-    UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
-    alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
-    [alertViewStopRecording show];
+    if (self.isRecording) {
+        [_audioController removeInputReceiver:_recorder];
+        [_audioController removeOutputReceiver:_recorder];
+        [_recorder finishRecording];
+        self.recorder = nil;
+        
+        UIAlertView *alertViewStopRecording = [[UIAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
+        alertViewStopRecording.alertViewStyle=UIAlertViewStylePlainTextInput;
+        [alertViewStopRecording show];
+        self.isRecording = NO;
+    }
 }
 
 -(void)endResponseWithDelegate:(UIViewController *)vc{
@@ -417,9 +426,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];
         [self uploadNewAudity:file withKey:uuid andSignature:signature];
-    } else {
-        self.isRecording = NO;
     }
+    
+    [self.vc resetNewAudityButton];
 }
 
 @end

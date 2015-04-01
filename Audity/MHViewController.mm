@@ -349,7 +349,7 @@
     }
 }
 
-#pragma mark Spinner
+#pragma mark Outside Access to Views
 - (void) stopSpinner {
     [addButton setEnabled:YES];
     [godButton setEnabled:YES];
@@ -358,6 +358,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUDForView:mapView animated:YES];
     });
+}
+
+-(void)resetNewAudityButton {
+    [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
 }
 
 @end

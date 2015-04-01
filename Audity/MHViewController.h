@@ -25,5 +25,6 @@
 -(void) viewWillAppear:(BOOL)animated;
 -(void) viewWillDisappear:(BOOL)animated;
 - (void) stopSpinner;
+-(void) resetNewAudityButton;
 
 @end
