@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eU3-LT-qhu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D127a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eU3-LT-qhu">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -25,6 +25,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8iy-dp-jd2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.36470588235294116" green="0.25490196078431371" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="m5k-TC-9Fp" kind="relationship" relationship="rootViewController" id="lx1-rl-c1b"/>
@@ -48,7 +52,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8s-fi-lmt">
                                 <rect key="frame" x="0.0" y="531" width="300" height="69"/>
-                                <color key="backgroundColor" red="0.36470588235294116" green="0.25490196078431371" blue="0.45882352941176469" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.36470588240000001" green="0.25490196079999999" blue="0.45882352939999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="K8E-xl-LQG"/>
                                 </constraints>
@@ -82,12 +86,12 @@
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7o0-MQ-BtB">
                                 <rect key="frame" x="0.0" y="479" width="600" height="52"/>
-                                <color key="backgroundColor" red="0.49584179889060892" green="0.48267785732714147" blue="0.55946751644736847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="YT3-Av-djQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.36470588240000001" green="0.25490196079999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -111,12 +115,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Activity" id="9yk-f5-NDk">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="ceb-81-dB6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="backButtonPressed:" destination="m5k-TC-9Fp" id="cFf-or-hf1"/>
                                 <segue destination="eU3-LT-qhu" kind="custom" customClass="DismissSegue" id="mf6-o0-Pre"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Respond" id="AFb-ab-3c7">
+                            <color key="tintColor" white="0.97617701479999996" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="respondButtonPressed:" destination="m5k-TC-9Fp" id="X6x-CZ-0fv"/>
                             </connections>

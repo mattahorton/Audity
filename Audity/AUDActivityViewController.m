@@ -74,14 +74,20 @@
         [_tblView reloadData];
             
     }];
-
 }
 
 -(void)reloadData{
-    int index = [dataArray count] - 1;
-    NSDictionary *respDict = [dataArray objectAtIndex:index];
-    NSURL *localURL = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
-    [localURLS addObject:localURL];
+    if (!localURLS || !([localURLS count] > 0)) {
+        unsigned long index = [dataArray count] - 1;
+        NSDictionary *respDict = [dataArray objectAtIndex:index];
+        NSLog(@"%@ respDict",respDict);
+        NSURL *localURL = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
+        [localURLS addObject:localURL];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        UITableViewCell *cell = [self tableView:self.tblView cellForRowAtIndexPath:indexPath];
+        [self setEnabled:YES forCell:cell];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,13 +117,26 @@
     NSDictionary *response = dataArray[indexPath.row];
     cell.textLabel.text = response[@"signature"];
     cell.detailTextLabel.text = response[@"uploaded"];
-    
+    NSLog(@"%ld section", (long)indexPath.section);
+    if (!localURLS || indexPath.row >= localURLS.count || !localURLS[indexPath.row]) [self setEnabled:NO forCell:cell];
+
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [dataArray count];
 }
+
+#pragma mark Cell Enable/Disable
+
+-(void) setEnabled:(BOOL)enabled forCell:(UITableViewCell *)cell {
+    cell.userInteractionEnabled = enabled;
+    cell.selectionStyle = (enabled) ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;;
+    cell.textLabel.enabled = enabled;
+    cell.detailTextLabel.enabled = enabled;
+}
+
+#pragma mark Buttons
 
 - (IBAction)dislike:(id)sender {
     NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
@@ -246,7 +265,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSDictionary *respDict = [dataArray objectAtIndex:[indexPath indexAtPosition:1]];
-    int index = [indexPath indexAtPosition:1];
+    unsigned long index = [indexPath indexAtPosition:1];
     if([localURLS count] > index){
         NSURL *localURL = [localURLS objectAtIndex:index];
         [self.core playResponse:localURL];

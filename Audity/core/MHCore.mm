@@ -369,6 +369,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
     [filePlayer setVolume:0.8];
     [filePlayer setLoop:NO];
+    filePlayer.removeUponFinish = YES;
     
     if(filePlayer)[self.audioController addChannels:@[filePlayer]];
     else NSLog(@"could not initialize fileplayer, it was nil or null or something");
