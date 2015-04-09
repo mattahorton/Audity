@@ -378,7 +378,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
-<<<<<<< HEAD
+#pragma mark Play/Stop Audio
+
 -(void) playRecorded:(NSURL *)file {
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
@@ -391,9 +392,6 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     if(filePlayer)[self.audioController addChannels:@[filePlayer]];
     else NSLog(@"could not initialize fileplayer, it was nil or null or something");
 }
-=======
-#pragma mark Play/Stop Audio
->>>>>>> Checking for the inter webs
 
 -(void) playResponse:(NSURL *)file {
     //NSLog(@"time to play this response");
