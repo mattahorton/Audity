@@ -14,6 +14,8 @@
     GFCircleQuery *circleQuery;
     FirebaseHandle enteredHandle;
     FirebaseHandle exitedHandle;
+    FirebaseHandle readyHandle;
+    NSNumber *objectEnteredQuery;
 }
 
 #pragma mark Singleton Methods
@@ -50,7 +52,7 @@
     
     locManager = [[CLLocationManager alloc] init];
     locManager.delegate = self;
-    locManager.distanceFilter = kCLDistanceFilterNone;
+    locManager.distanceFilter = 50.0;
     locManager.desiredAccuracy = kCLLocationAccuracyBest;
     if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [locManager requestWhenInUseAuthorization];
@@ -61,6 +63,9 @@
 #pragma mark Location Delegate Methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    CLLocationAccuracy accuracy = newLocation.horizontalAccuracy;
+    
     if (!self.inGodMode) {
         self.currentLoc = newLocation;
     } else {
@@ -72,18 +77,21 @@
     
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
-        // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
-        //circleQuery = [self.geoFire queryAtLocation:center withRadius:MAXRADIUS/100.0]; //I believe this should be 1000, not 100.
+        
         circleQuery = [self.geoFire queryAtLocation:center withRadius:MAXRADIUS/1000.0];
         
+        objectEnteredQuery = @0;
+        
         enteredHandle = [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-            CLLocationDistance distance = [location distanceFromLocation:self.currentLoc];
-            NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
-            NSLog(@"It is %f meters away from you",distance);
+            
+            objectEnteredQuery = nil;
+            
+//            NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
+//            NSLog(@"It is %f meters away from you",distance);
             
             if ([self.core.audities objectForKey:key] == nil){
-                NSLog(@"adding %@", key);
-                NSLog(@"audity value %@",self.core.audities[key]);
+//                NSLog(@"adding %@", key);
+//                NSLog(@"audity value %@",self.core.audities[key]);
                 
                 self.core.audities[key] = @"taken";
             
@@ -108,19 +116,27 @@
                     }
                     
                     [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
+                    
+                    if ([objectEnteredQuery isEqualToNumber:@0] && (accuracy < 50.0)) objectEnteredQuery = @1;
                 }];
             } else {
-                NSLog(@"Not adding %@", key);
+//                NSLog(@"Not adding %@", key);
             }
         }];
         
         exitedHandle = [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
-            NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
+//            NSLog(@"Key '%@' exited the search area and is at location '%@'", key, location);
             [self.core.vc removeAudityFromMapWithKey:key];
             [self.core stopAudioWithKey:key]; // Also removes the audity from the array. Call last!
             
             // Remove file from temp directory
             [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:key] error:NULL];
+        }];
+        
+        readyHandle = [circleQuery observeReadyWithBlock:^{
+            if((objectEnteredQuery != nil) && [objectEnteredQuery isEqualToNumber:@0]) {
+                [self.core.vc stopSpinner];
+            }
         }];
 
     }

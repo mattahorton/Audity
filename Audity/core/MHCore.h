@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSDictionary *apiKeys;
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic) BOOL muteAudities;
+@property (nonatomic) BOOL firstSoundPlayed;
 
 +(id) sharedInstance;
 

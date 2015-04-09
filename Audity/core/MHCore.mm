@@ -40,6 +40,7 @@
 //    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     self.isRecording = NO;
     self.muteAudities = NO;
+    self.firstSoundPlayed = NO;
     
     self.audities = @{};
     
@@ -415,7 +416,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
     }
     
-    [self.vc stopSpinner];
+    if(!self.firstSoundPlayed)[self.vc stopSpinner];
+    self.firstSoundPlayed = YES;
 }
 
 -(void) stopAudioWithKey:(NSString *)key {
