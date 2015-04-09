@@ -11,3 +11,5 @@ pod 'SpinKit', '~> 1.1'
 pod 'MBProgressHUD', '~> 0.9.1'
 
 pod 'DLAlertView'
+
+pod 'Reachability'

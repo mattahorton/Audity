@@ -90,6 +90,7 @@
     
     //get our mapview and add it to our view
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
+    NSLog(@"%@ MAPVIEW", mapView);
     mapView.delegate = self;
     [self.view addSubview:mapView];
     
@@ -170,6 +171,10 @@
     
     
     focusButtons = [NSMutableArray arrayWithArray:@[]];
+    
+    [self.core testInternetConnectionWithTarget:self
+                               andSuccessSelector:@selector(success)
+                                andFailedSelector:@selector(failure)];
     
     //The setup code (in viewDidLoad in your view controller)
     [self initMapBox];
@@ -359,6 +364,16 @@
 
 -(void)resetNewAudityButton {
     [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+}
+
+#pragma mark Internet Connection Callbacks
+
+-(void) success {
+    NSLog(@"SUCCESS");
+}
+
+-(void) failure {
+    NSLog(@"FAILURE");
 }
 
 @end

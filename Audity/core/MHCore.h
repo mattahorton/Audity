@@ -41,6 +41,7 @@
 -(void) setAllAudioParameters;
 -(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey;
+- (void)testInternetConnectionWithTarget:(MHViewController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
 -(void) stopAudioWithKey:(NSString *)key;

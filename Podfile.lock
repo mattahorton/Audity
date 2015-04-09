@@ -182,6 +182,7 @@ DEPENDENCIES:
   - DLAlertView
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - MBProgressHUD (~> 0.9.1)
+  - Reachability
   - SpinKit (~> 1.1)
   - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine

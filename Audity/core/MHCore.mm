@@ -12,6 +12,7 @@
 #import "AEUtilities.h"
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
+#import "Reachability.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -25,6 +26,7 @@
     NSUserDefaults *defaults;
     NSString *tempKey;
     AUDActivityViewController *audVC;
+    Reachability *internetReachableFoo;
 }
 
 + (id)sharedInstance {
@@ -250,6 +252,8 @@
     return num_likes;
 }
 
+#pragma mark Filtering Methods
+
 -(void) setFilterParametersForReverb:(AEAudioUnitFilter *)reverb withScaleFactor:(float)scl{
 
     float maxWetness = 100.0;
@@ -374,6 +378,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+<<<<<<< HEAD
 -(void) playRecorded:(NSURL *)file {
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
@@ -386,6 +391,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     if(filePlayer)[self.audioController addChannels:@[filePlayer]];
     else NSLog(@"could not initialize fileplayer, it was nil or null or something");
 }
+=======
+#pragma mark Play/Stop Audio
+>>>>>>> Checking for the inter webs
 
 -(void) playResponse:(NSURL *)file {
     //NSLog(@"time to play this response");
@@ -456,6 +464,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+#pragma mark View Callbacks
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UITextField *textfield = [alertView textFieldAtIndex:0];
     if(buttonIndex != [alertView cancelButtonIndex]) {
@@ -479,8 +489,36 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     [self playRecorded:file];
 }
 
-
-
-
+#pragma mark Reachability
+// Checks if we have an internet connection or not
+- (void)testInternetConnectionWithTarget:(MHViewController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed {
+    internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Internet is reachable
+    internetReachableFoo.reachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+            if(success) {
+                [vc performSelector:success];
+            }
+        });
+    };
+    
+    // Internet is not reachable
+    internetReachableFoo.unreachableBlock = ^(Reachability*reach)
+    {
+        // Update the UI on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Someone broke the internet :(");
+            if(failed) {
+                [vc performSelector:failed];
+            }
+        });
+    };
+    
+    [internetReachableFoo startNotifier];
+}
 
 @end

@@ -26,5 +26,7 @@
 -(void) viewWillDisappear:(BOOL)animated;
 - (void) stopSpinner;
 -(void) resetNewAudityButton;
+-(void) success;
+-(void) failure;
 
 @end
