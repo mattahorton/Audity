@@ -159,9 +159,20 @@
         DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
         alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
         [alertViewStopRecording show];
-        UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
+        
+       /* UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
         content.frame = CGRectMake(0,0,80,80);
         alertViewStopRecording.contentView = content;
+        */
+        
+        NSLog(@"we make it to the middle of endrecording");
+        UIButton *replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [replayButton addTarget:self action:@selector(replayPress:) forControlEvents:UIControlEventTouchUpInside];
+        [replayButton setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+        [replayButton setTitle:@"replay" forState:UIControlStateNormal];
+        replayButton.frame = CGRectMake(0,0,80,80);
+        
+        alertViewStopRecording.contentView = replayButton;
         
         self.isRecording = NO;
     }
@@ -363,6 +374,19 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+-(void) playRecorded:(NSURL *)file {
+    //NSLog(@"time to play this response");
+    NSError *errorFilePlayer = NULL;
+    
+    AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+    [filePlayer setVolume:0.8];
+    [filePlayer setLoop:NO];
+    filePlayer.removeUponFinish = YES;
+    
+    if(filePlayer)[self.audioController addChannels:@[filePlayer]];
+    else NSLog(@"could not initialize fileplayer, it was nil or null or something");
+}
+
 -(void) playResponse:(NSURL *)file {
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
@@ -448,5 +472,15 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     self.muteAudities = NO;
     [self setAllAudioParameters];
 }
+
+- (IBAction)replayPress:(id)sender {
+    NSLog(@"replay pressed");
+    NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+    [self playRecorded:file];
+}
+
+
+
+
 
 @end

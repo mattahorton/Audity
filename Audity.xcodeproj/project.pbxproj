@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		498E3A5B1AB5001200F5014D /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498E3A5A1AB5001200F5014D /* keys.plist */; };
 		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
 		49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */; };
 		49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */; };
 		49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AED1AA3FD0F00A451BF /* libz.dylib */; };
+		49FB29411AD6036F0052D118 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49FB29401AD6036F0052D118 /* keys.plist */; };
 		5381B60AAEC5B644F347051B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C289A6CCD0326F366E69F0 /* libPods.a */; };
 		86C89C8E1A688DAD00799680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C8D1A688DAD00799680 /* main.m */; };
 		86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C901A688DAD00799680 /* AppDelegate.mm */; };
@@ -71,13 +71,13 @@
 
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		498E3A5A1AB5001200F5014D /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		49E84AED1AA3FD0F00A451BF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		49FB29401AD6036F0052D118 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		86C89C881A688DAD00799680 /* Audity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C89C8C1A688DAD00799680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C89C8D1A688DAD00799680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		86C89C8B1A688DAD00799680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				498E3A5A1AB5001200F5014D /* keys.plist */,
+				49FB29401AD6036F0052D118 /* keys.plist */,
 				86C89C8C1A688DAD00799680 /* Info.plist */,
 				86C89C8D1A688DAD00799680 /* main.m */,
 			);
@@ -408,8 +408,8 @@
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
+				49FB29411AD6036F0052D118 /* keys.plist in Resources */,
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
-				498E3A5B1AB5001200F5014D /* keys.plist in Resources */,
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
 				B9A0AD6E1AB2B37900F4F1C8 /* RecButton@100w.png in Resources */,
 				B9A0AD6B1AB2B37900F4F1C8 /* LocalMode.png in Resources */,
