@@ -175,11 +175,6 @@
     [self.core testInternetConnectionWithTarget:self
                                andSuccessSelector:@selector(success)
                                 andFailedSelector:@selector(failure)];
-    
-    //The setup code (in viewDidLoad in your view controller)
-    [self initMapBox];
-    [self initButton];
-    [self initRadius];
 }
 
 - (void)didReceiveMemoryWarning
@@ -370,6 +365,11 @@
 
 -(void) success {
     NSLog(@"SUCCESS");
+    
+    //The setup code (in viewDidLoad in your view controller)
+    [self initMapBox];
+    [self initButton];
+    [self initRadius];
 }
 
 -(void) failure {
