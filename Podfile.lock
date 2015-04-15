@@ -186,6 +186,7 @@ DEPENDENCIES:
   - SpinKit (~> 1.1)
   - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine
+  - UICKeyChainStore
 
 EXTERNAL SOURCES:
   Mapbox-iOS-SDK:

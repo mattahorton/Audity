@@ -14,6 +14,7 @@
 #import <DLAlertView/DLAVAlertView.h>
 #import "Reachability.h"
 #import "Secrets.h"
+#import "UICKeychainStore.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -71,16 +72,17 @@
         }
     }];
     
-    // Find user ID in NSUserDefaults
     defaults = [NSUserDefaults standardUserDefaults];
-    self.userID = [defaults stringForKey:@"userId"];
+    
+    // Find user ID in keychain
+    UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
+    self.userID = [keychain stringForKey:@"userId"];
     
     if (!self.userID) {
         // Generate ID if there is none
         self.userID = [[NSUUID UUID] UUIDString];
-        // Store ID in NSUserDefaults
-        [defaults setValue:self.userID forKey:@"userId"];
-        [defaults synchronize];
+        // Store ID in keychain
+        [keychain setString:self.userID forKey:@"userId"];
         
         // Store ID in Firebase
         Firebase *thisUser = [userRef childByAppendingPath:self.userID];
