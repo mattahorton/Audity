@@ -13,6 +13,7 @@
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
 #import "Reachability.h"
+#import "Secrets.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512

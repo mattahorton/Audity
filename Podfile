@@ -13,3 +13,5 @@ pod 'MBProgressHUD', '~> 0.9.1'
 pod 'DLAlertView'
 
 pod 'Reachability'
+
+pod 'UICKeyChainStore'
