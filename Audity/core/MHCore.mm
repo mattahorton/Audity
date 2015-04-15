@@ -27,6 +27,9 @@
     NSString *tempKey;
     AUDActivityViewController *audVC;
     Reachability *internetReachableFoo;
+    BOOL replaying;
+    UIButton *replayButton;
+    AEAudioFilePlayer *recordedPlayer;
 }
 
 + (id)sharedInstance {
@@ -43,6 +46,7 @@
     self.isRecording = NO;
     self.muteAudities = NO;
     self.firstSoundPlayed = NO;
+    replaying = NO;
     
     self.audities = @{};
     
@@ -168,9 +172,9 @@
         */
         
         NSLog(@"we make it to the middle of endrecording");
-        UIButton *replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [replayButton addTarget:self action:@selector(replayPress:) forControlEvents:UIControlEventTouchUpInside];
-        [replayButton setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+        [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
         [replayButton setTitle:@"replay" forState:UIControlStateNormal];
         replayButton.frame = CGRectMake(0,0,80,80);
         
@@ -384,12 +388,17 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
     
-    AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
-    [filePlayer setVolume:0.8];
-    [filePlayer setLoop:NO];
-    filePlayer.removeUponFinish = YES;
+    recordedPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+    [recordedPlayer setVolume:0.8];
+    [recordedPlayer setLoop:NO];
+    recordedPlayer.removeUponFinish = YES;
+    __weak UIButton *replayButtonWeak = replayButton;
+    recordedPlayer.completionBlock = ^ () {
+        replaying = NO;
+        [replayButtonWeak setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+    };
     
-    if(filePlayer)[self.audioController addChannels:@[filePlayer]];
+    if(recordedPlayer)[self.audioController addChannels:@[recordedPlayer]];
     else NSLog(@"could not initialize fileplayer, it was nil or null or something");
 }
 
@@ -483,8 +492,19 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 - (IBAction)replayPress:(id)sender {
     NSLog(@"replay pressed");
-    NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
-    [self playRecorded:file];
+    if (!replaying) {
+        replaying = YES;
+        [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        [self playRecorded:file];
+    } else {
+        recordedPlayer.channelIsPlaying = !recordedPlayer.channelIsPlaying;
+        if(recordedPlayer.channelIsPlaying) {
+            [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+        } else {
+            [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+        }
+    }
 }
 
 #pragma mark Reachability
