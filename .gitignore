@@ -31,4 +31,8 @@ Stop.png
 
 Audity/keys.plist
 
-Audity/core/Secrets.h
+encrypt.sh
+
+encrypted.txt
+
+Audity/core/Secrets.m

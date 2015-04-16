@@ -168,6 +168,7 @@ PODS:
     - SMCalloutView (= 2.0)
   - MBProgressHUD (0.9.1)
   - Reachability (3.2)
+  - RNCryptor (2.2)
   - SMCalloutView (2.0)
   - SpinKit (1.2.0)
   - STK (4.5.2)
@@ -183,6 +184,7 @@ DEPENDENCIES:
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - MBProgressHUD (~> 0.9.1)
   - Reachability
+  - RNCryptor
   - SpinKit (~> 1.1)
   - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine
@@ -216,6 +218,7 @@ SPEC CHECKSUMS:
   Mapbox-iOS-SDK: c84b5a017e463ab1467b4a932eec30a61def8af2
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
   SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
   STK: b18355d6f4dac95c45a6a0ef8f57a07b5825686f

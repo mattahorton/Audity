@@ -13,8 +13,10 @@
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
 #import "Reachability.h"
-#import "Secrets.h"
 #import "UICKeychainStore.h"
+#import "RNCryptor.h"
+#import "RNOpenSSLDecryptor.h"
+#import "Secrets.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -52,8 +54,32 @@
     
     self.audities = @{};
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
-    self.apiKeys = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    // Get path to encrypted data
+    NSString *encryptedPlistPath = [[NSBundle mainBundle] pathForResource:@"encrypted" ofType:@"txt"];
+    
+    // Read in encrypted data
+    NSData *encryptedData = [NSData dataWithContentsOfFile:encryptedPlistPath];
+    
+    // Decrypt data
+    NSError *error;
+    NSData *decryptedData = [RNOpenSSLDecryptor decryptData:encryptedData
+                                               withSettings:kRNCryptorAES256Settings
+                                               password:secretPwdForPlist
+                                                      error:&error];
+    // Log any errors in decryption
+    if(error) {
+        NSLog(@"%@", error);
+    }
+
+    // Get api keys
+    NSString *errr;
+    NSPropertyListFormat format;
+    self.apiKeys = [NSPropertyListSerialization propertyListFromData:decryptedData mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&errr];
+    
+    // Log any errors in serialization
+    if(errr) {
+        NSLog(@"%@", errr);
+    }
     
     // Set up backend
     self.geo = [AUDGeo sharedInstance];

@@ -15,3 +15,5 @@ pod 'DLAlertView'
 pod 'Reachability'
 
 pod 'UICKeyChainStore'
+
+pod 'RNCryptor'

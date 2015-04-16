@@ -13,7 +13,6 @@
 		49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */; };
 		49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */; };
 		49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AED1AA3FD0F00A451BF /* libz.dylib */; };
-		49FB29411AD6036F0052D118 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49FB29401AD6036F0052D118 /* keys.plist */; };
 		5381B60AAEC5B644F347051B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C289A6CCD0326F366E69F0 /* libPods.a */; };
 		86C89C8E1A688DAD00799680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C8D1A688DAD00799680 /* main.m */; };
 		86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C901A688DAD00799680 /* AppDelegate.mm */; };
@@ -40,6 +39,8 @@
 		B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF071AA3E826000A963B /* CFNetwork.framework */; };
 		B99EE72F1ADE09A1002DDCB1 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = B99EE72D1ADE09A1002DDCB1 /* Pause.png */; };
 		B99EE7301ADE09A1002DDCB1 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = B99EE72E1ADE09A1002DDCB1 /* Play.png */; };
+		B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = B99EE7341ADF0B1A002DDCB1 /* Secrets.m */; };
+		B99EE7381ADF0DB8002DDCB1 /* keys.enc in Resources */ = {isa = PBXBuildFile; fileRef = B99EE7371ADF0DB8002DDCB1 /* keys.enc */; };
 		B9A099131AB6A93F007935A8 /* Respond.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A099121AB6A93F007935A8 /* Respond.png */; };
 		B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */; };
 		B9A0AD681AB2B37900F4F1C8 /* Focus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */; };
@@ -121,7 +122,10 @@
 		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
 		B99EE72D1ADE09A1002DDCB1 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		B99EE72E1ADE09A1002DDCB1 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
-		B99EE7311ADE22DD002DDCB1 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
+		B99EE7331ADF0AB6002DDCB1 /* encrypt.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
+		B99EE7341ADF0B1A002DDCB1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
+		B99EE7361ADF0B27002DDCB1 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
+		B99EE7371ADF0DB8002DDCB1 /* keys.enc */ = {isa = PBXFileReference; lastKnownFileType = file; path = keys.enc; sourceTree = "<group>"; };
 		B9A099121AB6A93F007935A8 /* Respond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Respond.png; sourceTree = "<group>"; };
 		B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Focus.png; sourceTree = "<group>"; };
 		B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Focus@100w.png"; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 		86C89C7F1A688DAD00799680 = {
 			isa = PBXGroup;
 			children = (
+				B99EE7371ADF0DB8002DDCB1 /* keys.enc */,
+				B99EE7331ADF0AB6002DDCB1 /* encrypt.sh */,
 				49E84AA51AA3F28100A451BF /* Firebase.framework */,
 				49E84AA61AA3F28100A451BF /* GeoFire.framework */,
 				B9B80B5D1A690B8300A08B9B /* Podfile */,
@@ -260,7 +266,8 @@
 				B955EF131AA3E96A000A963B /* AUDGeo.m */,
 				B98B383C1AA5141C0085912F /* AUDS3.h */,
 				B98B383D1AA5141C0085912F /* AUDS3.m */,
-				B99EE7311ADE22DD002DDCB1 /* Secrets.h */,
+				B99EE7341ADF0B1A002DDCB1 /* Secrets.m */,
+				B99EE7361ADF0B27002DDCB1 /* Secrets.h */,
 			);
 			name = core;
 			path = Audity/core;
@@ -334,6 +341,7 @@
 			buildConfigurationList = 86C89CAB1A688DAD00799680 /* Build configuration list for PBXNativeTarget "Audity" */;
 			buildPhases = (
 				A383AD2D4711DD38AA37A548 /* Check Pods Manifest.lock */,
+				B99EE7321ADF06D0002DDCB1 /* Encrypt Keys */,
 				86C89C841A688DAD00799680 /* Sources */,
 				86C89C851A688DAD00799680 /* Frameworks */,
 				86C89C861A688DAD00799680 /* Resources */,
@@ -411,13 +419,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B99EE7381ADF0DB8002DDCB1 /* keys.enc in Resources */,
 				B9DC39F11AB4FDD1008E741A /* Center.png in Resources */,
 				B9A099131AB6A93F007935A8 /* Respond.png in Resources */,
 				B99EE7301ADE09A1002DDCB1 /* Play.png in Resources */,
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
-				49FB29411AD6036F0052D118 /* keys.plist in Resources */,
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
 				B9A0AD6E1AB2B37900F4F1C8 /* RecButton@100w.png in Resources */,
@@ -464,6 +472,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		B99EE7321ADF06D0002DDCB1 /* Encrypt Keys */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Encrypt Keys";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/MattH/Dropbox/School/Stanford/Winter\\ 15/MoMu/Audity/encrypt.sh";
+		};
 		F5E1B5803B65B4EC730832C9 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -495,6 +517,7 @@
 				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
+				B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

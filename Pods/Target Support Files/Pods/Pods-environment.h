@@ -186,6 +186,12 @@
 #define COCOAPODS_VERSION_MINOR_Mapbox_iOS_SDK 6
 #define COCOAPODS_VERSION_PATCH_Mapbox_iOS_SDK 0
 
+// RNCryptor
+#define COCOAPODS_POD_AVAILABLE_RNCryptor
+#define COCOAPODS_VERSION_MAJOR_RNCryptor 2
+#define COCOAPODS_VERSION_MINOR_RNCryptor 2
+#define COCOAPODS_VERSION_PATCH_RNCryptor 0
+
 // Reachability
 #define COCOAPODS_POD_AVAILABLE_Reachability
 #define COCOAPODS_VERSION_MAJOR_Reachability 3
