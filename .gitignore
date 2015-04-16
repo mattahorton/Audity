@@ -33,6 +33,6 @@ Audity/keys.plist
 
 encrypt.sh
 
-encrypted.txt
-
 Audity/core/Secrets.m
+
+keys.enc
