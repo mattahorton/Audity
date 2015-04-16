@@ -35,11 +35,8 @@
 #pragma mark Initialization 
 
 -(void) s3Init {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
-    NSDictionary *keys = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    
-    self.s3Secret = keys[@"S3SECRET"];
-    self.awsAccessKey = keys[@"AWSACCESSKEY"];
+    self.s3Secret = self.core.apiKeys[@"S3SECRET"];
+    self.awsAccessKey = self.core.apiKeys[@"AWSACCESSKEY"];
     
     _credentialsProvider = [AWSCognitoCredentialsProvider credentialsWithRegionType:AWSRegionUSEast1
                                                                      identityPoolId:@"us-east-1:933227fb-7780-48c8-9250-c0fa1c1c1459"];
