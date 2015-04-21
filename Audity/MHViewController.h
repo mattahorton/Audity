@@ -30,3 +30,10 @@
 -(void) failure;
 
 @end
+
+
+// Icon credits:
+// Austin Condiff
+// Jardson A.
+// Luboš Volkov
+// The Noun Project

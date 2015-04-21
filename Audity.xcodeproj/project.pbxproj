@@ -28,6 +28,7 @@
 		B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1B1AB3B12400BDD88A /* DislikeBG.png */; };
 		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
 		B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */; };
+		B9753C461AE5DC39007CF178 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B9753C451AE5DC39007CF178 /* Settings.png */; };
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
@@ -115,6 +116,7 @@
 		B9665A1C1AB3B12400BDD88A /* LikeBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LikeBG.png; sourceTree = "<group>"; };
 		B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDActivityViewController.h; sourceTree = "<group>"; };
 		B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDActivityViewController.m; sourceTree = "<group>"; };
+		B9753C451AE5DC39007CF178 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 		B99EE7331ADF0AB6002DDCB1 /* encrypt.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
 		B99EE7341ADF0B1A002DDCB1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		B99EE7361ADF0B27002DDCB1 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
-		B99EE7371ADF0DB8002DDCB1 /* keys.enc */ = {isa = PBXFileReference; lastKnownFileType = file; path = keys.enc; sourceTree = "<group>"; };
+		B99EE7371ADF0DB8002DDCB1 /* keys.enc */ = {isa = PBXFileReference; lastKnownFileType = text; path = keys.enc; sourceTree = "<group>"; };
 		B9A099121AB6A93F007935A8 /* Respond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Respond.png; sourceTree = "<group>"; };
 		B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Focus.png; sourceTree = "<group>"; };
 		B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Focus@100w.png"; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		B9A0AD771AB2B50A00F4F1C8 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
+				B9753C451AE5DC39007CF178 /* Settings.png */,
 				B99EE72D1ADE09A1002DDCB1 /* Pause.png */,
 				B99EE72E1ADE09A1002DDCB1 /* Play.png */,
 				B9A099121AB6A93F007935A8 /* Respond.png */,
@@ -429,6 +432,7 @@
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
 				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
 				B9A0AD6E1AB2B37900F4F1C8 /* RecButton@100w.png in Resources */,
+				B9753C461AE5DC39007CF178 /* Settings.png in Resources */,
 				B9A0AD6B1AB2B37900F4F1C8 /* LocalMode.png in Resources */,
 				B9A0AD6D1AB2B37900F4F1C8 /* RecButton.png in Resources */,
 				B9A0AD681AB2B37900F4F1C8 /* Focus@100w.png in Resources */,

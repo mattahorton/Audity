@@ -12,9 +12,9 @@
 #import "AUDNavViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
-#define BUTTON_HEIGHT 80
-#define BUTTON_WIDTH 80
-#define BUTTON_BORDER_OFFSET 14
+#define BUTTON_HEIGHT 60
+#define BUTTON_WIDTH 60
+#define BUTTON_BORDER_OFFSET 10
 
 #define MIN_ZOOM 7
 #define MAX_ZOOM 17
@@ -32,6 +32,7 @@
     NSMutableArray *focusButtons;
     UIButton *addButton;
     UIButton *godButton;
+    UIButton *settingsButton;
     UIImageView *centerGodMarker;
 }
 
@@ -142,6 +143,17 @@
                                  BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
     centerGodMarker.hidden = YES;
     [mapView addSubview:centerGodMarker];
+    
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton addTarget:self action:@selector(settingsPress:) forControlEvents:UIControlEventTouchUpInside];
+    [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
+    settingsButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH,
+                                 BUTTON_BORDER_OFFSET*2,
+                                 BUTTON_WIDTH, BUTTON_HEIGHT);
+    [settingsButton setEnabled:NO];
+    [mapView addSubview:settingsButton];
+    
 }
 
 -(void)initRadius{
@@ -228,6 +240,10 @@
     }
     
     [self.core setAllAudioParameters]; // update sound params for location
+}
+
+-(IBAction)settingsPress:(id)sender {
+    NSLog(@"settings");
 }
 
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
@@ -350,6 +366,7 @@
 - (void) stopSpinner {
     [addButton setEnabled:YES];
     [godButton setEnabled:YES];
+    [settingsButton setEnabled:YES];
     mapView.userInteractionEnabled = YES;
     centerGodMarker.hidden = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
