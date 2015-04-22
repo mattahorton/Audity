@@ -506,8 +506,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     UITextField *textfield = [alertView textFieldAtIndex:0];
     if(buttonIndex != [alertView cancelButtonIndex]) {
         NSString *signature = textfield.text;
-        if (!signature) signature = @"anonymous";
-        if ([signature isEqualToString:@""]) signature = @"anonymous";
+        if (!signature ||[signature isEqualToString:@""]) {
+            signature = [defaults stringForKey:@"defaultSig"];
+            if (!signature ||[signature isEqualToString:@""]) {
+                signature = @"anonymous";
+                [defaults setValue:@"anonymous" forKey:@"defaultSig"];
+            }
+        }
         
         NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];

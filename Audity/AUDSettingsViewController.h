@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *sigTextField;
 
-- (IBAction)backgroundToggle:(id)sender;
+- (IBAction)muteToggled:(id)sender;
+- (IBAction)locationToggled:(id)sender;
+- (IBAction)defaultSigChanged:(id)sender;
+
 
 @end

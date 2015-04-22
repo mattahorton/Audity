@@ -8,11 +8,23 @@
 
 #import "AUDSettingsViewController.h"
 
-@implementation AUDSettingsViewController
+@implementation AUDSettingsViewController {
+    NSUserDefaults *defaults;
+}
 
 -(void) viewDidLoad {
     [super viewDidLoad];
     self.sigTextField.delegate = self;
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *text = [defaults stringForKey:@"defaultSig"];
+    
+    if (text != nil) {
+        self.sigTextField.text = text;
+    } else {
+        self.sigTextField.text = @"anonymous";
+        [defaults setValue:@"anonymous" forKey:@"defaultSig"];
+    };
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -20,6 +32,14 @@
     return NO;
 }
 
-- (IBAction)backgroundToggle:(id)sender {
+- (IBAction)muteToggled:(id)sender {
+}
+
+- (IBAction)locationToggled:(id)sender {
+}
+
+- (IBAction)defaultSigChanged:(id)sender {
+    UITextField *sig = (UITextField *)sender;
+    [defaults setValue:sig.text forKey:@"defaultSig"];
 }
 @end
