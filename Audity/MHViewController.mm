@@ -40,6 +40,7 @@
     [super viewWillDisappear:animated];
     self.core.muteAudities = YES;
     [self.core setAllAudioParameters];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     //NSLog(@"going away now");
 }
 
@@ -47,6 +48,7 @@
     //NSLog(@"appearing now");
     self.core.muteAudities = NO;
     [self.core setAllAudioParameters];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [super viewWillAppear:animated];
 }
 
@@ -174,6 +176,7 @@
     viewHeight = [[UIScreen mainScreen] bounds].size.height;
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     
     //Init the core
     self.core = [MHCore sharedInstance];
@@ -244,6 +247,7 @@
 
 -(IBAction)settingsPress:(id)sender {
     NSLog(@"settings");
+    [self performSegueWithIdentifier:@"settingsShow" sender:nil];
 }
 
 - (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction {
