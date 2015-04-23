@@ -76,11 +76,8 @@
 }
 
 - (void)initMapBox {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
-    NSDictionary *keys = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    
-    self.mapboxKey = keys[@"MAPBOX"];
-    self.mapID = keys[@"MAPID"];
+    self.mapboxKey = self.core.apiKeys[@"MAPBOX"];
+    self.mapID = self.core.apiKeys[@"MAPID"];
     
     //public key access token for mapbox
     NSString *token = self.mapboxKey;
@@ -165,6 +162,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
     // Clear Temp Directory
     NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
     for (NSString *file in tmpDirectory) {
@@ -179,7 +179,7 @@
     //Init the core
     self.core = [MHCore sharedInstance];
     self.core.vc = self;
-    // initialize
+    // initialize core
     [self.core coreInit];
     
     
@@ -392,6 +392,20 @@
 
 -(void) failure {
     NSLog(@"FAILURE");
+}
+
+#pragma mark Background/Foreground
+
+-(void) appWillResignActive {
+    if(!self.core.geo.locationSetting) {
+        mapView.showsUserLocation = NO;
+    }
+}
+
+-(void) appWillEnterForeground {
+    if(!self.core.geo.locationSetting) {
+        mapView.showsUserLocation = YES;
+    }
 }
 
 @end

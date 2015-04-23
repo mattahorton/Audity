@@ -14,10 +14,13 @@
 
 -(void) viewDidLoad {
     [super viewDidLoad];
+    self.core = [MHCore sharedInstance];
+    
     self.sigTextField.delegate = self;
     defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *text = [defaults stringForKey:@"defaultSig"];
+    NSObject *boolCheck = [defaults objectForKey:@"muteSetting"];
     
     if (text != nil) {
         self.sigTextField.text = text;
@@ -25,6 +28,32 @@
         self.sigTextField.text = @"anonymous";
         [defaults setValue:@"anonymous" forKey:@"defaultSig"];
     };
+    
+    if (self.core.muteSetting) {
+        [self.muteSwitch setOn:self.core.muteSetting animated:YES];
+    } else {
+        if (boolCheck) {
+            self.core.muteSetting = [defaults boolForKey:@"muteSetting"];
+            [self.muteSwitch setOn:self.core.muteSetting animated:YES];
+        } else {
+            self.core.muteSetting = NO;
+            [defaults setBool:self.core.muteSetting forKey:@"muteSetting"];
+            [self.muteSwitch setOn:self.core.muteSetting animated:YES];
+        }
+    }
+    
+    if (self.core.geo.locationSetting) {
+        [self.locationSwitch setOn:self.core.geo.locationSetting animated:YES];
+    } else {
+        if (boolCheck) {
+            self.core.geo.locationSetting = [defaults boolForKey:@"locationSetting"];
+            [self.locationSwitch setOn:self.core.geo.locationSetting animated:YES];
+        } else {
+            self.core.geo.locationSetting = YES;
+            [defaults setBool:self.core.geo.locationSetting forKey:@"locationSetting"];
+            [self.locationSwitch setOn:self.core.geo.locationSetting animated:YES];
+        }
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -33,9 +62,13 @@
 }
 
 - (IBAction)muteToggled:(id)sender {
+    self.core.muteSetting = !self.core.muteSetting;
+    [defaults setBool:self.core.muteSetting forKey:@"muteSetting"];
 }
 
 - (IBAction)locationToggled:(id)sender {
+    self.core.geo.locationSetting = !self.core.geo.locationSetting;
+    [defaults setBool:self.core.geo.locationSetting forKey:@"locationSetting"];
 }
 
 - (IBAction)defaultSigChanged:(id)sender {

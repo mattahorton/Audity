@@ -25,6 +25,7 @@
 @property (nonatomic) BOOL inGodMode;
 @property (nonatomic, strong) CLLocation *godModeCenter;
 @property (nonatomic, strong) CLLocation *localCenter;
+@property (nonatomic) BOOL locationSetting;
 
 + (id)sharedInstance;
 -(void)addLoc:(NSString *) uuid bySignature:(NSString *)signature;

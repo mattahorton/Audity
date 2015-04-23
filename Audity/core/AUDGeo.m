@@ -16,6 +16,7 @@
     FirebaseHandle exitedHandle;
     FirebaseHandle readyHandle;
     NSNumber *objectEnteredQuery;
+    NSUserDefaults *defaults;
 }
 
 #pragma mark Singleton Methods
@@ -36,6 +37,9 @@
         self.geofireRef = [self.fireRef childByAppendingPath:@"geofire"];
         self.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geofireRef];
         [self geoInit];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
 }
@@ -58,6 +62,16 @@
         [locManager requestWhenInUseAuthorization];
     }
     [locManager startUpdatingLocation];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSObject *boolCheck = [defaults objectForKey:@"locationSetting"];
+    if (boolCheck) {
+        _locationSetting = [defaults boolForKey:@"locationSetting"];
+    } else {
+        _locationSetting = YES;
+        [defaults setBool:_locationSetting forKey:@"locationSetting"];
+    }
+
 }
 
 #pragma mark Location Delegate Methods
@@ -183,6 +197,18 @@
     
     for (NSString *key in keys){
         [self.core setAllAudioParametersForAudityWithKey:key];
+    }
+}
+
+-(void) appWillResignActive {
+    if(!self.locationSetting) {
+        [locManager stopUpdatingLocation];
+    }
+}
+
+-(void) appWillEnterForeground {
+    if(!self.locationSetting) {
+        [locManager startUpdatingLocation];
     }
 }
 

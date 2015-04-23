@@ -55,7 +55,7 @@
     self.audities = @{};
     
     // Get path to encrypted data
-    NSString *encryptedPlistPath = [[NSBundle mainBundle] pathForResource:@"encrypted" ofType:@"txt"];
+    NSString *encryptedPlistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"enc"];
     
     // Read in encrypted data
     NSData *encryptedData = [NSData dataWithContentsOfFile:encryptedPlistPath];
@@ -66,6 +66,7 @@
                                                withSettings:kRNCryptorAES256Settings
                                                password:secretPwdForPlist
                                                       error:&error];
+
     // Log any errors in decryption
     if(error) {
         NSLog(@"%@", error);

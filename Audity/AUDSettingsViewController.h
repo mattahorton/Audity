@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHCore.h"
 
 @interface AUDSettingsViewController : UITableViewController <UITextFieldDelegate>
 
+@property (strong, nonatomic) MHCore *core;
 @property (strong, nonatomic) IBOutlet UITextField *sigTextField;
+@property (strong, nonatomic) IBOutlet UISwitch *muteSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *locationSwitch;
 
 - (IBAction)muteToggled:(id)sender;
 - (IBAction)locationToggled:(id)sender;

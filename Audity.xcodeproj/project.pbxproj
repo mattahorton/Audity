@@ -42,7 +42,6 @@
 		B99EE72F1ADE09A1002DDCB1 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = B99EE72D1ADE09A1002DDCB1 /* Pause.png */; };
 		B99EE7301ADE09A1002DDCB1 /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = B99EE72E1ADE09A1002DDCB1 /* Play.png */; };
 		B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = B99EE7341ADF0B1A002DDCB1 /* Secrets.m */; };
-		B99EE7381ADF0DB8002DDCB1 /* keys.enc in Resources */ = {isa = PBXBuildFile; fileRef = B99EE7371ADF0DB8002DDCB1 /* keys.enc */; };
 		B9A099131AB6A93F007935A8 /* Respond.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A099121AB6A93F007935A8 /* Respond.png */; };
 		B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */; };
 		B9A0AD681AB2B37900F4F1C8 /* Focus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */; };
@@ -62,6 +61,7 @@
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
 		B9DC39F11AB4FDD1008E741A /* Center.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DC39F01AB4FDD1008E741A /* Center.png */; };
+		B9DDBFB81AE87865005A764D /* keys.enc in Resources */ = {isa = PBXBuildFile; fileRef = B9DDBFB71AE87865005A764D /* keys.enc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,7 +130,6 @@
 		B99EE7331ADF0AB6002DDCB1 /* encrypt.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
 		B99EE7341ADF0B1A002DDCB1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
 		B99EE7361ADF0B27002DDCB1 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
-		B99EE7371ADF0DB8002DDCB1 /* keys.enc */ = {isa = PBXFileReference; lastKnownFileType = text; path = keys.enc; sourceTree = "<group>"; };
 		B9A099121AB6A93F007935A8 /* Respond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Respond.png; sourceTree = "<group>"; };
 		B9A0AD5B1AB2B37900F4F1C8 /* Focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Focus.png; sourceTree = "<group>"; };
 		B9A0AD5C1AB2B37900F4F1C8 /* Focus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Focus@100w.png"; sourceTree = "<group>"; };
@@ -148,6 +147,7 @@
 		B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start@100w.png"; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B9DC39F01AB4FDD1008E741A /* Center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Center.png; sourceTree = "<group>"; };
+		B9DDBFB71AE87865005A764D /* keys.enc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.enc; sourceTree = "<group>"; };
 		BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4F75F7A8A3C2513260C82B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,7 +190,7 @@
 		86C89C7F1A688DAD00799680 = {
 			isa = PBXGroup;
 			children = (
-				B99EE7371ADF0DB8002DDCB1 /* keys.enc */,
+				B9DDBFB71AE87865005A764D /* keys.enc */,
 				B99EE7331ADF0AB6002DDCB1 /* encrypt.sh */,
 				49E84AA51AA3F28100A451BF /* Firebase.framework */,
 				49E84AA61AA3F28100A451BF /* GeoFire.framework */,
@@ -427,11 +427,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B99EE7381ADF0DB8002DDCB1 /* keys.enc in Resources */,
 				B9DC39F11AB4FDD1008E741A /* Center.png in Resources */,
 				B9A099131AB6A93F007935A8 /* Respond.png in Resources */,
 				B99EE7301ADE09A1002DDCB1 /* Play.png in Resources */,
 				B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */,
+				B9DDBFB81AE87865005A764D /* keys.enc in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
