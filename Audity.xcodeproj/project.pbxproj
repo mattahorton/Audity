@@ -493,7 +493,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/MattH/Dropbox/School/Stanford/Winter\\ 15/MoMu/Audity/encrypt.sh";
+			shellScript = ./encrypt.sh;
 		};
 		F5E1B5803B65B4EC730832C9 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
