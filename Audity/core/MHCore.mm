@@ -126,7 +126,7 @@
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]
                             initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
-                            inputEnabled:YES];
+                            inputEnabled:NO];
     
     NSError *errorAudioSetup = NULL;
     BOOL result = [[self audioController] start:&errorAudioSetup];
@@ -155,6 +155,22 @@
     }];
 }
 
+-(void) recorderInit{
+    self.recordingController = [[AEAudioController alloc]
+                                initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
+                                inputEnabled:YES];
+    
+    NSError *errorRecorderSetup = NULL;
+    BOOL result = [[self recordingController] start:&errorRecorderSetup];
+    if ( !result ) {
+        NSLog(@"Error starting recording engine: %@", errorRecorderSetup.localizedDescription);
+    }
+}
+
+-(void) destroyRecorder{
+    self.recordingController = nil;
+}
+
 -(void) centerMap:(CLLocation *)loc{
     [self.vc changeMapCenterWithLocation:loc];
 //    [self.vc moveAudityToLocation:loc forKey:@"You"];
@@ -170,8 +186,9 @@
 
 -(void) startRecording {
     if(!self.isRecording){
+        [self recorderInit];
         self.isRecording = YES;
-        self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+        self.recorder = [[AERecorder alloc] initWithAudioController:_recordingController];
         NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.aiff"];
         // Start the recording process
         NSError *error = NULL;
@@ -182,7 +199,7 @@
             return;
         }
         
-        [_audioController addInputReceiver:_recorder];
+        [_recordingController addInputReceiver:_recorder];
     }
     
     [NSTimer scheduledTimerWithTimeInterval:60.0
@@ -193,11 +210,14 @@
 }
 
 - (void)endRecording {
+    NSLog(@"entered endrecording");
     if (self.isRecording) {
-        [_audioController removeInputReceiver:_recorder];
-        [_audioController removeOutputReceiver:_recorder];
+        [_recordingController removeInputReceiver:_recorder];
+        [_recordingController removeOutputReceiver:_recorder];
         [_recorder finishRecording];
         self.recorder = nil;
+        
+        NSLog(@"about to do dis alert view");
         
         DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
         alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
@@ -218,12 +238,13 @@
         alertViewStopRecording.contentView = replayButton;
         
         self.isRecording = NO;
+        [self destroyRecorder];
     }
 }
 
 -(void)endResponseWithDelegate:(UIViewController *)vc{
-    [_audioController removeInputReceiver:_recorder];
-    [_audioController removeOutputReceiver:_recorder];
+    [_recordingController removeInputReceiver:_recorder];
+    [_recordingController removeOutputReceiver:_recorder];
     [_recorder finishRecording];
     self.recorder = nil;
     

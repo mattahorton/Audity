@@ -24,6 +24,7 @@
 @property (nonatomic) MHViewController* vc;
 @property (nonatomic) BOOL fromFile;
 @property (nonatomic) AEAudioController *audioController;
+@property (nonatomic) AEAudioController *recordingController;
 @property (nonatomic,strong) AUDGeo *geo;
 @property (nonatomic,strong) Firebase *firebase;
 @property (nonatomic,strong) AUDS3 *s3;
