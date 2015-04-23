@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSDictionary *apiKeys;
 @property (nonatomic) BOOL isRecording;
 @property (nonatomic) BOOL muteAudities;
+@property (nonatomic) BOOL muteSetting;
 @property (nonatomic) BOOL firstSoundPlayed;
 
 +(id) sharedInstance;
@@ -54,5 +55,6 @@
 -(void) unmute;
 -(void) mute;
 -(void) playResponse:(NSURL *)file;
+-(void) muteAuditiesWithBool:(BOOL)val;
 
 @end

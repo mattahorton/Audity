@@ -38,16 +38,14 @@
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.core.muteAudities = YES;
-    [self.core setAllAudioParameters];
+    [self.core muteAuditiesWithBool:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     //NSLog(@"going away now");
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     //NSLog(@"appearing now");
-    self.core.muteAudities = NO;
-    [self.core setAllAudioParameters];
+    [self.core muteAuditiesWithBool:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [super viewWillAppear:animated];
 }
@@ -208,8 +206,7 @@
     UIButton *button = (UIButton *)sender;
     if(!self.core.isRecording) {
         NSLog(@"Recording");
-        self.core.muteAudities = YES;
-        [self.core setAllAudioParameters]; // trigger mute
+        [self.core muteAuditiesWithBool:YES];
         
         [self.core startRecording];
         [button setImage:[UIImage imageNamed:@"Stop.png"] forState:UIControlStateNormal];

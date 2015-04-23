@@ -99,6 +99,13 @@
     }];
     
     defaults = [NSUserDefaults standardUserDefaults];
+    NSObject *boolCheck = [defaults objectForKey:@"muteSetting"];
+    if (boolCheck) {
+        _muteSetting = [defaults boolForKey:@"muteSetting"];
+    } else {
+        _muteSetting = NO;
+        [defaults setBool:_muteSetting forKey:@"muteSetting"];
+    }
     
     // Find user ID in keychain
     UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
@@ -382,7 +389,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
         AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
         
-        if([self isInFocusMode] && !self.muteAudities){
+        if([self isInFocusMode] && !self.muteAudities && !self.muteSetting){
             BOOL focus = [[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue];
             if(focus){
                 //NSLog(@"The scale factor for distance %f is %f", distance, scl);
@@ -393,11 +400,11 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             }
             [self setFilterParametersForLP:lp withFocus: focus];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
-        }else if (!self.muteAudities){
+        }else if (!self.muteAudities && !self.muteSetting){
             [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes];
             [self setFilterParametersForLP:lp withScaleFactor:scl];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
-        }else if (self.muteAudities){
+        }else if (self.muteAudities || self.muteSetting){
             [fp setVolume:0];
         }
     }
@@ -500,6 +507,11 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+-(void) muteAuditiesWithBool:(BOOL)val {
+    self.muteAudities = val;
+    [self setAllAudioParameters];
+}
+
 #pragma mark View Callbacks
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -520,8 +532,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
     
     [self.vc resetNewAudityButton];
-    self.muteAudities = NO;
-    [self setAllAudioParameters];
+    
+    [self muteAuditiesWithBool:NO]; // Set mute and trigger mute
 }
 
 - (IBAction)replayPress:(id)sender {
