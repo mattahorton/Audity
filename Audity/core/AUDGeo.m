@@ -38,7 +38,7 @@
         self.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geofireRef];
         [self geoInit];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
@@ -200,7 +200,7 @@
     }
 }
 
--(void) appWillResignActive {
+-(void) appDidEnterBackground {
     if(!self.locationSetting) {
         [locManager stopUpdatingLocation];
     }
