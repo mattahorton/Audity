@@ -212,12 +212,21 @@
 - (void)endRecording {
     NSLog(@"entered endrecording");
     if (self.isRecording) {
+        
         [_recordingController removeInputReceiver:_recorder];
         [_recordingController removeOutputReceiver:_recorder];
         [_recorder finishRecording];
         self.recorder = nil;
         
-        NSLog(@"about to do dis alert view");
+        //NSLog(@"about to do dis alert view");
+        
+        replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [replayButton addTarget:self action:@selector(replayPress:) forControlEvents:UIControlEventTouchUpInside];
+        [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+        [replayButton setTitle:@"replay" forState:UIControlStateNormal];
+        replayButton.frame = CGRectMake(0,0,80,80);
+        
+        NSLog(@"we make it to the middle of endrecording");
         
         DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
         alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
@@ -227,13 +236,6 @@
         content.frame = CGRectMake(0,0,80,80);
         alertViewStopRecording.contentView = content;
         */
-        
-        NSLog(@"we make it to the middle of endrecording");
-        replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [replayButton addTarget:self action:@selector(replayPress:) forControlEvents:UIControlEventTouchUpInside];
-        [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
-        [replayButton setTitle:@"replay" forState:UIControlStateNormal];
-        replayButton.frame = CGRectMake(0,0,80,80);
         
         alertViewStopRecording.contentView = replayButton;
         

@@ -162,7 +162,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     // Clear Temp Directory
@@ -396,7 +396,7 @@
 
 #pragma mark Background/Foreground
 
--(void) appWillResignActive {
+-(void) appDidEnterBackground {
     if(!self.core.geo.locationSetting) {
         mapView.showsUserLocation = NO;
     }
