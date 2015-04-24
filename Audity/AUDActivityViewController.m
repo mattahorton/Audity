@@ -273,7 +273,7 @@
     unsigned long index = [indexPath indexAtPosition:1];
     if([localURLS count] > index){
         NSURL *localURL = [localURLS objectAtIndex:index];
-        [self.core playResponse:localURL];
+        if (!self.core.muteSetting) [self.core playResponse:localURL];
     }
     //NSLog([respDict objectForKey:@"recording"]);
     //NSURL *localUrl = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];

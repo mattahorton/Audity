@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38C64D1D6C96196A973A240D"
+               BlueprintIdentifier = "2E87F12174B6E8377D1A90F4"
                BuildableName = "rawwaves.bundle"
                BlueprintName = "rawwaves"
                ReferencedContainer = "container:Pods.xcodeproj">

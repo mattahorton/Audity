@@ -36,6 +36,8 @@
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
 		B98B383E1AA5141C0085912F /* AUDS3.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B383D1AA5141C0085912F /* AUDS3.m */; };
+		B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E31AE9B8B800897195 /* AUDTutorialController.m */; };
+		B99120E71AE9BE8F00897195 /* AUDLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E61AE9BE8F00897195 /* AUDLaunchController.m */; };
 		B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF031AA3E819000A963B /* libc++.dylib */; };
 		B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF051AA3E81E000A963B /* libicucore.dylib */; };
 		B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */; };
@@ -128,6 +130,10 @@
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		B98B383C1AA5141C0085912F /* AUDS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDS3.h; sourceTree = "<group>"; };
 		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
+		B99120E21AE9B8B800897195 /* AUDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDTutorialController.h; sourceTree = "<group>"; };
+		B99120E31AE9B8B800897195 /* AUDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDTutorialController.m; sourceTree = "<group>"; };
+		B99120E51AE9BE8F00897195 /* AUDLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDLaunchController.h; sourceTree = "<group>"; };
+		B99120E61AE9BE8F00897195 /* AUDLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDLaunchController.m; sourceTree = "<group>"; };
 		B99EE72D1ADE09A1002DDCB1 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		B99EE72E1ADE09A1002DDCB1 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
 		B99EE7341ADF0B1A002DDCB1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secrets.m; sourceTree = "<group>"; };
@@ -235,6 +241,10 @@
 				B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */,
 				B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */,
 				B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */,
+				B99120E21AE9B8B800897195 /* AUDTutorialController.h */,
+				B99120E31AE9B8B800897195 /* AUDTutorialController.m */,
+				B99120E51AE9BE8F00897195 /* AUDLaunchController.h */,
+				B99120E61AE9BE8F00897195 /* AUDLaunchController.m */,
 			);
 			path = Audity;
 			sourceTree = "<group>";
@@ -521,10 +531,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B99120E71AE9BE8F00897195 /* AUDLaunchController.m in Sources */,
 				B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */,
 				B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */,
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
 				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
+				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
 				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
