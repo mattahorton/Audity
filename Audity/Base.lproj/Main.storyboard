@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="eU3-LT-qhu" kind="presentation" identifier="map" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" animates="NO" id="dnz-hZ-Odo"/>
+                        <segue destination="eU3-LT-qhu" kind="show" identifier="map" id="dnz-hZ-Odo"/>
                         <segue destination="yjL-XB-JYZ" kind="show" identifier="tutorial" id="2ci-gX-kqH"/>
                     </connections>
                 </viewController>
