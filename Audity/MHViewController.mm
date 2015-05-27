@@ -421,6 +421,7 @@
 
 -(void) appDidEnterBackground {
     if(!self.core.geo.locationSetting) {
+        NSLog(@"USER LOCATION JUST SET TO NO, THIS MAY BE AN ISSUE");
         mapView.showsUserLocation = NO;
     }
 }
