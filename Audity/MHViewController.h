@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "MapBox.h"
 
-@interface MHViewController : UIViewController <RMMapViewDelegate>
+@interface MHViewController : UIViewController <RMMapViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSString *mapboxKey;
 @property (nonatomic, strong) NSString *mapID;

@@ -230,6 +230,7 @@
         
         DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Audity" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
         alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
+        [alertViewStopRecording textFieldAtIndex:0].delegate = self.vc;
         [alertViewStopRecording show];
         
        /* UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
@@ -254,6 +255,8 @@
     
     DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
     alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
+    [alertViewStopRecording textFieldAtIndex:0].delegate = (AUDActivityViewController *)vc;
+//    alertViewStopRecording.textField
     [alertViewStopRecording show];
 }
 

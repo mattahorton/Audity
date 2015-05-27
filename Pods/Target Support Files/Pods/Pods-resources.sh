@@ -6,6 +6,14 @@ mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 RESOURCES_TO_COPY=${PODS_ROOT}/resources-to-copy-${TARGETNAME}.txt
 > "$RESOURCES_TO_COPY"
 
+XCASSET_FILES=()
+
+realpath() {
+  DIRECTORY=$(cd "${1%/*}" && pwd)
+  FILENAME="${1##*/}"
+  echo "$DIRECTORY/$FILENAME"
+}
+
 install_resource()
 {
   case $1 in
@@ -36,6 +44,8 @@ install_resource()
       xcrun mapc "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename "$1" .xcmappingmodel`.cdm"
       ;;
     *.xcassets)
+      ABSOLUTE_XCASSET_FILE=$(realpath "${PODS_ROOT}/$1")
+      XCASSET_FILES+=("$ABSOLUTE_XCASSET_FILE")
       ;;
     /*)
       echo "$1"
@@ -47,30 +57,50 @@ install_resource()
       ;;
   esac
 }
-          install_resource "AWSiOSSDKv2/AWSCore/CognitoIdentity/Resources/cognito-identity-2014-06-30.json"
-                    install_resource "AWSiOSSDKv2/AWSCore/MobileAnalyticsERS/Resources/mobileanalytics-2014-06-30.json"
-                    install_resource "AWSiOSSDKv2/AWSCore/STS/Resources/sts-2011-06-15.json"
-                    install_resource "AWSiOSSDKv2/AutoScaling/Resources/autoscaling-2011-01-01.json"
-                    install_resource "AWSiOSSDKv2/CloudWatch/Resources/monitoring-2010-08-01.json"
-                    install_resource "AWSiOSSDKv2/DynamoDB/Resources/dynamodb-2012-08-10.json"
-                    install_resource "AWSiOSSDKv2/EC2/Resources/ec2-2014-09-01.json"
-                    install_resource "AWSiOSSDKv2/ElasticLoadBalancing/Resources/elasticloadbalancing-2012-06-01.json"
-                    install_resource "AWSiOSSDKv2/Kinesis/Resources/kinesis-2013-12-02.json"
-                    install_resource "AWSiOSSDKv2/S3/Resources/s3-2006-03-01.json"
-                    install_resource "AWSiOSSDKv2/SES/Resources/email-2010-12-01.json"
-                    install_resource "AWSiOSSDKv2/SNS/Resources/sns-2010-03-31.json"
-                    install_resource "AWSiOSSDKv2/SQS/Resources/sqs-2012-11-05.json"
-                    install_resource "AWSiOSSDKv2/SimpleDB/Resources/sdb-2009-04-15.json"
-                    install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
-                    install_resource "${BUILT_PRODUCTS_DIR}/rawwaves.bundle"
-          
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "AWSiOSSDKv2/AWSCore/CognitoIdentity/Resources/cognito-identity-2014-06-30.json"
+  install_resource "AWSiOSSDKv2/AWSCore/MobileAnalyticsERS/Resources/mobileanalytics-2014-06-30.json"
+  install_resource "AWSiOSSDKv2/AWSCore/STS/Resources/sts-2011-06-15.json"
+  install_resource "AWSiOSSDKv2/AutoScaling/Resources/autoscaling-2011-01-01.json"
+  install_resource "AWSiOSSDKv2/CloudWatch/Resources/monitoring-2010-08-01.json"
+  install_resource "AWSiOSSDKv2/DynamoDB/Resources/dynamodb-2012-08-10.json"
+  install_resource "AWSiOSSDKv2/EC2/Resources/ec2-2014-09-01.json"
+  install_resource "AWSiOSSDKv2/ElasticLoadBalancing/Resources/elasticloadbalancing-2012-06-01.json"
+  install_resource "AWSiOSSDKv2/Kinesis/Resources/kinesis-2013-12-02.json"
+  install_resource "AWSiOSSDKv2/S3/Resources/s3-2006-03-01.json"
+  install_resource "AWSiOSSDKv2/SES/Resources/email-2010-12-01.json"
+  install_resource "AWSiOSSDKv2/SNS/Resources/sns-2010-03-31.json"
+  install_resource "AWSiOSSDKv2/SQS/Resources/sqs-2012-11-05.json"
+  install_resource "AWSiOSSDKv2/SimpleDB/Resources/sdb-2009-04-15.json"
+  install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/rawwaves.bundle"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "AWSiOSSDKv2/AWSCore/CognitoIdentity/Resources/cognito-identity-2014-06-30.json"
+  install_resource "AWSiOSSDKv2/AWSCore/MobileAnalyticsERS/Resources/mobileanalytics-2014-06-30.json"
+  install_resource "AWSiOSSDKv2/AWSCore/STS/Resources/sts-2011-06-15.json"
+  install_resource "AWSiOSSDKv2/AutoScaling/Resources/autoscaling-2011-01-01.json"
+  install_resource "AWSiOSSDKv2/CloudWatch/Resources/monitoring-2010-08-01.json"
+  install_resource "AWSiOSSDKv2/DynamoDB/Resources/dynamodb-2012-08-10.json"
+  install_resource "AWSiOSSDKv2/EC2/Resources/ec2-2014-09-01.json"
+  install_resource "AWSiOSSDKv2/ElasticLoadBalancing/Resources/elasticloadbalancing-2012-06-01.json"
+  install_resource "AWSiOSSDKv2/Kinesis/Resources/kinesis-2013-12-02.json"
+  install_resource "AWSiOSSDKv2/S3/Resources/s3-2006-03-01.json"
+  install_resource "AWSiOSSDKv2/SES/Resources/email-2010-12-01.json"
+  install_resource "AWSiOSSDKv2/SNS/Resources/sns-2010-03-31.json"
+  install_resource "AWSiOSSDKv2/SQS/Resources/sqs-2012-11-05.json"
+  install_resource "AWSiOSSDKv2/SimpleDB/Resources/sdb-2009-04-15.json"
+  install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/rawwaves.bundle"
+fi
+
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then
   rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${INSTALL_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 fi
 rm -f "$RESOURCES_TO_COPY"
 
-if [[ -n "${WRAPPER_EXTENSION}" ]] && [ "`xcrun --find actool`" ] && [ `find . -name '*.xcassets' | wc -l` -ne 0 ]
+if [[ -n "${WRAPPER_EXTENSION}" ]] && [ "`xcrun --find actool`" ] && [ -n "$XCASSET_FILES" ]
 then
   case "${TARGETED_DEVICE_FAMILY}" in
     1,2)
@@ -86,5 +116,14 @@ then
       TARGET_DEVICE_ARGS="--target-device mac"
       ;;
   esac
-  find "${PWD}" -name "*.xcassets" -print0 | xargs -0 actool --output-format human-readable-text --notices --warnings --platform "${PLATFORM_NAME}" --minimum-deployment-target "${IPHONEOS_DEPLOYMENT_TARGET}" ${TARGET_DEVICE_ARGS} --compress-pngs --compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+
+  # Find all other xcassets (this unfortunately includes those of path pods and other targets).
+  OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
+  while read line; do
+    if [[ $line != "`realpath $PODS_ROOT`*" ]]; then
+      XCASSET_FILES+=("$line")
+    fi
+  done <<<"$OTHER_XCASSETS"
+
+  printf "%s\0" "${XCASSET_FILES[@]}" | xargs -0 xcrun actool --output-format human-readable-text --notices --warnings --platform "${PLATFORM_NAME}" --minimum-deployment-target "${IPHONEOS_DEPLOYMENT_TARGET}" ${TARGET_DEVICE_ARGS} --compress-pngs --compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 fi

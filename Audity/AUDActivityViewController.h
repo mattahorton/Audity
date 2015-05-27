@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AUDActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface AUDActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tblView;
 @property (strong, nonatomic) IBOutlet UINavigationItem *viewTitle;
