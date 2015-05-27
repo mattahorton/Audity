@@ -512,7 +512,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         [self.audioController addFilter:reverb toChannel:filePlayer];
         [self.audioController addFilter:lp toChannel:filePlayer];
 
-        
+        [self.vc setPlayingColorForAnnotation:(RMAnnotation *) self.audities[key][@"annotation"]];
     }
     
     if(!self.firstSoundPlayed)[self.vc stopSpinner];
@@ -528,6 +528,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             [self.audioController removeChannels:@[filePlayer]];
             [self.audities removeObjectForKey:key];
         }
+        
+        [self.vc setNotPlayingColorForAnnotation:(RMAnnotation *) self.audities[key][@"annotation"]];
     }
 }
 

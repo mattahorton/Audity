@@ -50,6 +50,33 @@
     [super viewWillAppear:animated];
 }
 
+-(void) redraw {
+    [mapView setNeedsDisplay];
+}
+
+-(RMMarker *) newAudityMarkerWithColor:(UIColor *)color {
+    RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:color];
+    
+    marker.canShowCallout = YES;
+    
+    UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
+    [respond setImage:[UIImage imageNamed:@"Respond.png"] forState:UIControlStateNormal];
+    [respond setTitle:@"respond" forState:UIControlStateNormal];
+    respond.frame = CGRectMake(0,0,30,30);
+    
+    marker.leftCalloutAccessoryView = respond;
+    
+    UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
+    [focus setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
+    [focus setTitle:@"focus" forState:UIControlStateNormal];
+    focus.frame = CGRectMake(0,0,30,30);
+    [focusButtons addObject:focus];
+    
+    marker.rightCalloutAccessoryView = focus;
+    
+    return marker;
+}
+
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
     if (![self.core.audities[key] isEqual:@"taken"]) {
         RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
@@ -68,6 +95,19 @@
         RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
         [audity setCoordinate:loc.coordinate];
     }
+}
+
+-(void) setPlayingColorForAnnotation:(RMAnnotation *)annotation {
+    [self setColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0] forAnnotation:annotation];
+}
+
+-(void) setNotPlayingColorForAnnotation:(RMAnnotation *)annotation {
+    [self setColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:0.2] forAnnotation:annotation];
+}
+
+-(void) setColor:(UIColor *)color forAnnotation:(RMAnnotation *)annotation {
+    RMMarker *marker = [self newAudityMarkerWithColor:color];
+    [annotation setLayer:marker];
 }
 
 - (void) changeMapCenterWithLocation:(CLLocation *)loc{
@@ -272,24 +312,7 @@
         return circle;
     }
     
-    RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0]];
-    
-    marker.canShowCallout = YES;
-    
-    UIButton *respond = [UIButton buttonWithType:UIButtonTypeCustom];
-    [respond setImage:[UIImage imageNamed:@"Respond.png"] forState:UIControlStateNormal];
-    [respond setTitle:@"respond" forState:UIControlStateNormal];
-    respond.frame = CGRectMake(0,0,30,30);
-    
-    marker.leftCalloutAccessoryView = respond;
-    
-    UIButton *focus = [UIButton buttonWithType:UIButtonTypeCustom];
-    [focus setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
-    [focus setTitle:@"focus" forState:UIControlStateNormal];
-    focus.frame = CGRectMake(0,0,30,30);
-    [focusButtons addObject:focus];
-    
-    marker.rightCalloutAccessoryView = focus;
+    RMMarker *marker =  [self newAudityMarkerWithColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0]];
     
     return marker;
 }

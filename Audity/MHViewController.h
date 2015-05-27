@@ -21,11 +21,14 @@
 -(void) removeAudityFromMapWithKey:(NSString *)key;
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key;
 - (void) changeMapCenterWithLocation:(CLLocation *)loc;
+-(void) setPlayingColorForAnnotation:(RMAnnotation *)annotation;
+-(void) setNotPlayingColorForAnnotation:(RMAnnotation *)annotation;
 
 -(void) viewWillAppear:(BOOL)animated;
 -(void) viewWillDisappear:(BOOL)animated;
 - (void) stopSpinner;
 -(void) resetNewAudityButton;
+-(void) redraw;
 -(void) success;
 -(void) failure;
 
