@@ -228,12 +228,12 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yjL-XB-JYZ" customClass="AUDTutorialController" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="eU3-LT-qhu" kind="custom" identifier="tutToMap" customClass="DismissSegue" id="SZy-4u-eaE"/>
+                        <segue destination="9bn-Pv-4Ew" kind="custom" identifier="finishTutorial" customClass="DismissSegue" id="WXF-qQ-y04"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jM-NC-gM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18" y="774"/>
+            <point key="canvasLocation" x="-1472" y="1106"/>
         </scene>
         <!--Welcome Controller-->
         <scene sceneID="BNT-22-axS">
@@ -280,7 +280,7 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1px-oJ-HyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-300" y="1590"/>
+            <point key="canvasLocation" x="-1128" y="1822"/>
         </scene>
         <!--Loc Request Controller-->
         <scene sceneID="Nso-Sm-fed">
@@ -342,12 +342,11 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                     </view>
                     <connections>
                         <segue destination="9bn-Pv-4Ew" kind="custom" identifier="dismissLoc" customClass="DismissSegue" id="6ca-dO-5NX"/>
-                        <segue destination="eU3-LT-qhu" kind="custom" identifier="locToMap" customClass="DismissSegue" id="sRo-9n-ppJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AT1-Bh-CX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="376" y="1590"/>
+            <point key="canvasLocation" x="-488" y="1822"/>
         </scene>
         <!--Activity-->
         <scene sceneID="Lsh-Qy-Gxs">
@@ -481,7 +480,8 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
         <image name="Welcome" width="225" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C8H-qe-fJn"/>
+        <segue reference="IeZ-Vy-bfh"/>
+        <segue reference="WXF-qQ-y04"/>
         <segue reference="dnz-hZ-Odo"/>
     </inferredMetricsTieBreakers>
 </document>

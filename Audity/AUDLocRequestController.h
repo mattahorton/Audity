@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AUDTutorialController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface AUDLocRequestController : UIViewController
+@interface AUDLocRequestController : UIViewController <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) AUDTutorialController *containerController;
-@property (nonatomic) BOOL fromMap;
+@property (strong, nonatomic) CLLocationManager *locManager;
 
 - (IBAction)enableLoc:(id)sender;
 

@@ -394,9 +394,6 @@
         NSDictionary *dict = (NSDictionary *)sender;
         AUDNavViewController *destViewController = segue.destinationViewController;
         destViewController.info = dict;
-    } else if ([segue.identifier isEqualToString:@"mapToLoc"]) {
-        AUDLocRequestController *dVC = segue.destinationViewController;
-        dVC.fromMap = YES;
     }
 }
 

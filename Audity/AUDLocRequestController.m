@@ -7,19 +7,12 @@
 //
 
 #import "AUDLocRequestController.h"
-#import <CoreLocation/CoreLocation.h>
 
 @implementation AUDLocRequestController
 
 -(void) viewDidLoad {
-    switch ([CLLocationManager authorizationStatus]) {
-        case kCLAuthorizationStatusAuthorizedAlways:
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-            [self performSegueWithIdentifier:@"dismissLoc" sender:self];
-            break;
-        default:
-            break;
-    }
+    self.locManager = [[CLLocationManager alloc] init];
+    self.locManager.delegate = self;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -27,9 +20,10 @@
 }
 
 - (IBAction)enableLoc:(id)sender {
-    [self setFirstRunIfNeeded];
-    if (self.containerController != nil) {
-        [self.containerController performSegueWithIdentifier:@"tutToMap" sender:self.containerController];
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        if ([self.locManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locManager requestWhenInUseAuthorization];
+        }
     } else {
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         [[UIApplication sharedApplication] openURL:url];
@@ -46,8 +40,22 @@
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorizedAlways:
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-            if(self.fromMap) {
-                [self performSegueWithIdentifier:@"locToMap" sender:self];
+            [self performSegueWithIdentifier:@"dismissLoc" sender:self];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark Location Delegate Methods
+-(void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    [self setFirstRunIfNeeded];
+    
+    switch (status) {
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            if (self.containerController != nil) {
+                [self.containerController performSegueWithIdentifier:@"finishTutorial" sender:self.containerController];
             } else {
                 [self performSegueWithIdentifier:@"dismissLoc" sender:self];
             }

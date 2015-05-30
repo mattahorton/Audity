@@ -69,7 +69,7 @@
 {
     NSUInteger currentIndex = [myViewControllers indexOfObject:viewController];
     
-    if (!(currentIndex >= myViewControllers.count)) {
+    if (!(currentIndex >= myViewControllers.count - 1)) {
         ++currentIndex;
         currentIndex = currentIndex % (myViewControllers.count);
     } else {

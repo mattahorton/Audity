@@ -17,7 +17,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSObject *firstRunCheck = [defaults objectForKey:@"firstRun"];
-    NSLog(@"%@ firstRunCheck", firstRunCheck);
+
     if (firstRunCheck == nil) {
         [self performSegueWithIdentifier:@"tutorial" sender:self];
     } else {

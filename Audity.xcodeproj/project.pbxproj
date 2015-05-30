@@ -25,6 +25,7 @@
 		B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */; };
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
 		B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */; };
+		B94F97E61B1A807900E4428E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94F97E41B1A807900E4428E /* Main.storyboard */; };
 		B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = B955EF131AA3E96A000A963B /* AUDGeo.m */; };
 		B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1B1AB3B12400BDD88A /* DislikeBG.png */; };
 		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
@@ -62,7 +63,6 @@
 		B9A0AD721AB2B37900F4F1C8 /* Unfocus@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD661AB2B37900F4F1C8 /* Unfocus@100w.png */; };
 		B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD731AB2B3F600F4F1C8 /* Start.png */; };
 		B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */; };
-		B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C951A688DAD00799680 /* Main.storyboard */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
 		B9DC39F11AB4FDD1008E741A /* Center.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DC39F01AB4FDD1008E741A /* Center.png */; };
@@ -94,7 +94,6 @@
 		86C89C8D1A688DAD00799680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86C89C8F1A688DAD00799680 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		86C89C901A688DAD00799680 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		86C89C961A688DAD00799680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86C89C981A688DAD00799680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		86C89C9B1A688DAD00799680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		86C89CA11A688DAD00799680 /* AudityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +113,7 @@
 		B945CB3A1A6A0AE200091DC3 /* MHCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHCore.mm; sourceTree = "<group>"; };
 		B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDSettingsViewController.h; sourceTree = "<group>"; };
 		B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDSettingsViewController.m; sourceTree = "<group>"; };
+		B94F97E51B1A807900E4428E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B955EF031AA3E819000A963B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		B955EF051AA3E81E000A963B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		B955EF071AA3E826000A963B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -236,7 +236,7 @@
 				86C89C901A688DAD00799680 /* AppDelegate.mm */,
 				86C89CFF1A689A5000799680 /* DismissSegue.h */,
 				86C89D001A689A5000799680 /* DismissSegue.mm */,
-				86C89C951A688DAD00799680 /* Main.storyboard */,
+				B94F97E41B1A807900E4428E /* Main.storyboard */,
 				86C89C981A688DAD00799680 /* Images.xcassets */,
 				86C89C9A1A688DAD00799680 /* LaunchScreen.xib */,
 				86C89C8B1A688DAD00799680 /* Supporting Files */,
@@ -459,8 +459,8 @@
 				B9DDBFB81AE87865005A764D /* keys.enc in Resources */,
 				B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */,
 				B9A0AD671AB2B37900F4F1C8 /* Focus.png in Resources */,
+				B94F97E61B1A807900E4428E /* Main.storyboard in Resources */,
 				B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */,
-				B9A5CC961A6B286000CC50A3 /* Main.storyboard in Resources */,
 				B9A0AD6E1AB2B37900F4F1C8 /* RecButton@100w.png in Resources */,
 				B9753C461AE5DC39007CF178 /* Settings.png in Resources */,
 				B9A0AD6B1AB2B37900F4F1C8 /* LocalMode.png in Resources */,
@@ -580,20 +580,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		86C89C951A688DAD00799680 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				86C89C961A688DAD00799680 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		86C89C9A1A688DAD00799680 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				86C89C9B1A688DAD00799680 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		B94F97E41B1A807900E4428E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B94F97E51B1A807900E4428E /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

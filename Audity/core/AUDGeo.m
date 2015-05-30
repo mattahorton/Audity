@@ -58,9 +58,7 @@
     locManager.delegate = self;
     locManager.distanceFilter = 50.0;
     locManager.desiredAccuracy = kCLLocationAccuracyBest;
-    if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [locManager requestWhenInUseAuthorization];
-    }
+    
     [locManager startUpdatingLocation];
     
     defaults = [NSUserDefaults standardUserDefaults];
