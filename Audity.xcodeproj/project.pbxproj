@@ -30,6 +30,9 @@
 		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
 		B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */; };
 		B9753C461AE5DC39007CF178 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B9753C451AE5DC39007CF178 /* Settings.png */; };
+		B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B982CD7C1B19B2890053EBC7 /* AUDWelcomeController.m */; };
+		B982CD801B19B5790053EBC7 /* AUDLocRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */; };
+		B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */; };
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
@@ -123,6 +126,12 @@
 		B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDActivityViewController.h; sourceTree = "<group>"; };
 		B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDActivityViewController.m; sourceTree = "<group>"; };
 		B9753C451AE5DC39007CF178 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
+		B982CD7B1B19B2890053EBC7 /* AUDWelcomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDWelcomeController.h; sourceTree = "<group>"; };
+		B982CD7C1B19B2890053EBC7 /* AUDWelcomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDWelcomeController.m; sourceTree = "<group>"; };
+		B982CD7E1B19B5790053EBC7 /* AUDLocRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDLocRequestController.h; sourceTree = "<group>"; };
+		B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDLocRequestController.m; sourceTree = "<group>"; };
+		B982CD811B19C2450053EBC7 /* PushNoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNoAnimationSegue.h; sourceTree = "<group>"; };
+		B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNoAnimationSegue.m; sourceTree = "<group>"; };
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
@@ -243,6 +252,12 @@
 				B99120E31AE9B8B800897195 /* AUDTutorialController.m */,
 				B99120E51AE9BE8F00897195 /* AUDLaunchController.h */,
 				B99120E61AE9BE8F00897195 /* AUDLaunchController.m */,
+				B982CD7B1B19B2890053EBC7 /* AUDWelcomeController.h */,
+				B982CD7C1B19B2890053EBC7 /* AUDWelcomeController.m */,
+				B982CD7E1B19B5790053EBC7 /* AUDLocRequestController.h */,
+				B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */,
+				B982CD811B19C2450053EBC7 /* PushNoAnimationSegue.h */,
+				B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */,
 			);
 			path = Audity;
 			sourceTree = "<group>";
@@ -532,8 +547,11 @@
 				B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */,
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
 				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
+				B982CD801B19B5790053EBC7 /* AUDLocRequestController.m in Sources */,
 				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
+				B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
+				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
 				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
 				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,

@@ -10,6 +10,7 @@
 #import "MHCore.h"
 #import "Mapbox.h"
 #import "AUDNavViewController.h"
+#import "AUDLocRequestController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #define BUTTON_HEIGHT 60
@@ -202,6 +203,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    /// THIS SHOULD BE MOVED
+    switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusDenied:
+        case kCLAuthorizationStatusRestricted:
+            [self performSegueWithIdentifier:@"showLocReq" sender:self];
+            break;
+        default:
+            break;
+            
+    }
+
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -213,7 +227,7 @@
     
     viewHeight = [[UIScreen mainScreen] bounds].size.height;
     viewWidth = [[UIScreen mainScreen] bounds].size.width;
-
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     
     //Init the core
@@ -221,13 +235,13 @@
     self.core.vc = self;
     // initialize core
     [self.core coreInit];
-    
-    
+
     focusButtons = [NSMutableArray arrayWithArray:@[]];
     
-    [self.core testInternetConnectionWithTarget:self
-                               andSuccessSelector:@selector(success)
-                                andFailedSelector:@selector(failure)];
+    [self initMapBox];
+    [self initButton];
+    [self initRadius];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -383,6 +397,9 @@
         NSDictionary *dict = (NSDictionary *)sender;
         AUDNavViewController *destViewController = segue.destinationViewController;
         destViewController.info = dict;
+    } else if ([segue.identifier isEqualToString:@"showLocReq"]) {
+        AUDLocRequestController *dVC = segue.destinationViewController;
+        dVC.fromMap = YES;
     }
 }
 
@@ -400,21 +417,6 @@
 
 -(void)resetNewAudityButton {
     [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
-}
-
-#pragma mark Internet Connection Callbacks
-
--(void) success {
-    NSLog(@"SUCCESS");
-    
-    //The setup code (in viewDidLoad in your view controller)
-    [self initMapBox];
-    [self initButton];
-    [self initRadius];
-}
-
--(void) failure {
-    NSLog(@"FAILURE");
 }
 
 #pragma mark Background/Foreground

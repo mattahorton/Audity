@@ -30,7 +30,6 @@
     NSUserDefaults *defaults;
     NSString *tempKey;
     AUDActivityViewController *audVC;
-    Reachability *internetReachableFoo;
     BOOL replaying;
     UIButton *replayButton;
     AEAudioFilePlayer *recordedPlayer;
@@ -584,7 +583,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 #pragma mark Reachability
 // Checks if we have an internet connection or not
-- (void)testInternetConnectionWithTarget:(MHViewController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed {
++ (void)testInternetConnectionWithTarget:(AUDLaunchController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed {
+    Reachability *internetReachableFoo;
+    
     internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     // Internet is reachable

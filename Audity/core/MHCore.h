@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "MHViewController.h"
+#import "AUDLaunchController.h"
 #import "AERecorder.h"
 #import "AUDGeo.h"
 #import "AUDS3.h"
@@ -38,12 +39,12 @@
 @property (nonatomic) BOOL firstSoundPlayed;
 
 +(id) sharedInstance;
++ (void)testInternetConnectionWithTarget:(AUDLaunchController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed;
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
 -(void) setAllAudioParameters;
 -(void)uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature;
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey;
-- (void)testInternetConnectionWithTarget:(MHViewController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed;
 -(void) centerMap:(CLLocation *)loc;
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key;
 -(void) stopAudioWithKey:(NSString *)key;

@@ -10,4 +10,6 @@
 
 @interface AUDTutorialController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
+-(void) welcomeTapped;
+
 @end

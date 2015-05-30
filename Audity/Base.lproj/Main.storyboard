@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9bn-Pv-4Ew">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9bn-Pv-4Ew">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Audity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRa-6e-BxH">
-                                <rect key="frame" x="304" y="476" width="161" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRa-6e-BxH">
+                                <rect key="frame" x="219.5" y="264" width="161" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="161" id="7Zv-nL-UWT"/>
                                     <constraint firstAttribute="height" constant="72" id="vuh-28-GKQ"/>
@@ -36,8 +36,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="eU3-LT-qhu" kind="show" identifier="map" id="dnz-hZ-Odo"/>
-                        <segue destination="yjL-XB-JYZ" kind="show" identifier="tutorial" id="2ci-gX-kqH"/>
+                        <segue destination="eU3-LT-qhu" kind="custom" identifier="map" customClass="PushNoAnimationSegue" id="dnz-hZ-Odo"/>
+                        <segue destination="yjL-XB-JYZ" kind="custom" identifier="tutorial" customClass="PushNoAnimationSegue" id="2ci-gX-kqH"/>
+                        <segue destination="jRK-gh-eu6" kind="show" identifier="showLocReq" id="IeZ-Vy-bfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ga5-bK-5MC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -224,55 +225,66 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
         <!--Tutorial Controller-->
         <scene sceneID="LJm-ws-ynX">
             <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yjL-XB-JYZ" customClass="AUDTutorialController" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="eU3-LT-qhu" kind="custom" identifier="tutToMap" customClass="DismissSegue" id="SZy-4u-eaE"/>
+                    </connections>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jM-NC-gM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="yjL-XB-JYZ" customClass="AUDTutorialController" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="18" y="774"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome Controller-->
         <scene sceneID="BNT-22-axS">
             <objects>
-                <viewController storyboardIdentifier="IntroTitle" id="ybl-fc-DV1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IntroTitle" id="ybl-fc-DV1" customClass="AUDWelcomeController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="e7f-hd-fE1"/>
-                        <viewControllerLayoutGuide type="bottom" id="6j2-Ml-V2k"/>
+                        <viewControllerLayoutGuide type="top" id="r3e-pO-JSH"/>
+                        <viewControllerLayoutGuide type="bottom" id="IcF-lL-Oar"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ekc-2g-zNa">
+                    <view key="view" contentMode="scaleToFill" id="Qc5-AH-FX5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDm-ct-a6L">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Audity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3r-ey-NvP">
-                                        <rect key="frame" x="304" y="476" width="161" height="72"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="161" id="NTP-4f-Smc"/>
-                                            <constraint firstAttribute="height" constant="72" id="oaT-eF-yXe"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="52"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYE-6L-u00">
+                                <rect key="frame" x="219" y="264" width="161" height="72"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="m3r-ey-NvP" secondAttribute="centerX" id="IH6-74-C66"/>
-                                    <constraint firstAttribute="centerY" secondItem="m3r-ey-NvP" secondAttribute="centerY" id="qgf-hy-Xcz"/>
+                                    <constraint firstAttribute="height" constant="72" id="BdR-Gw-WLI"/>
+                                    <constraint firstAttribute="width" constant="161" id="cLp-Ym-Fs0"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="52"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOs-Fn-f2C">
+                                <rect key="frame" x="187.5" y="472" width="225" height="70"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                <state key="normal" backgroundImage="Welcome">
+                                    <color key="titleColor" white="0.97617701479999996" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="welcomeTapped:" destination="ybl-fc-DV1" eventType="touchUpInside" id="xSJ-94-q8o"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="HYE-6L-u00" secondAttribute="centerX" id="7JA-Kd-PLj"/>
+                            <constraint firstItem="lOs-Fn-f2C" firstAttribute="centerX" secondItem="HYE-6L-u00" secondAttribute="centerX" id="HOu-On-cQm"/>
+                            <constraint firstItem="IcF-lL-Oar" firstAttribute="top" secondItem="lOs-Fn-f2C" secondAttribute="bottom" constant="58" id="bEu-bc-Bj0"/>
+                            <constraint firstAttribute="centerY" secondItem="HYE-6L-u00" secondAttribute="centerY" id="bSa-pY-Qdr"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1px-oJ-HyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-300" y="1590"/>
         </scene>
-        <!--View Controller-->
+        <!--Loc Request Controller-->
         <scene sceneID="Nso-Sm-fed">
             <objects>
-                <viewController storyboardIdentifier="LocationRequest" id="jRK-gh-eu6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationRequest" id="jRK-gh-eu6" customClass="AUDLocRequestController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bzt-Gc-yMi"/>
                         <viewControllerLayoutGuide type="bottom" id="rk8-bg-bLs"/>
@@ -280,12 +292,61 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                     <view key="view" contentMode="scaleToFill" id="zxF-Jj-1Dy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3P-x9-kQo">
+                                <rect key="frame" x="187" y="481" width="225" height="70"/>
+                                <state key="normal" backgroundImage="Location">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="enableLoc:" destination="jRK-gh-eu6" eventType="touchUpInside" id="se2-JJ-Gd7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Audity is a sound attached to a place." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJl-A1-UVL">
+                                <rect key="frame" x="132.5" y="349.5" width="333.5" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To create and listen to Audities," textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-9a-Ffh">
+                                <rect key="frame" x="171" y="382" width="256.5" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you'll need to enable location access." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGE-J2-Duz">
+                                <rect key="frame" x="146" y="414.5" width="307" height="25"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="YoK-HL-3v3">
+                                <rect key="frame" x="159" y="14.5" width="281" height="295"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="v3P-x9-kQo" firstAttribute="centerX" secondItem="IGE-J2-Duz" secondAttribute="centerX" id="1GC-fr-46i"/>
+                            <constraint firstItem="YoK-HL-3v3" firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="EBF-HP-qDE"/>
+                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="LLw-OP-4iJ"/>
+                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="top" secondItem="RJl-A1-UVL" secondAttribute="bottom" constant="7.5" id="UpM-11-2AC"/>
+                            <constraint firstItem="RJl-A1-UVL" firstAttribute="top" secondItem="YoK-HL-3v3" secondAttribute="bottom" constant="40" id="a5D-zU-lZ7"/>
+                            <constraint firstItem="rk8-bg-bLs" firstAttribute="top" secondItem="v3P-x9-kQo" secondAttribute="bottom" constant="49" id="bOf-m7-etc"/>
+                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="centerX" secondItem="RJl-A1-UVL" secondAttribute="centerX" id="dqh-xo-rN6"/>
+                            <constraint firstItem="v3P-x9-kQo" firstAttribute="top" secondItem="IGE-J2-Duz" secondAttribute="bottom" constant="41.5" id="fgv-o6-hWG"/>
+                            <constraint firstItem="IGE-J2-Duz" firstAttribute="top" secondItem="PqU-9a-Ffh" secondAttribute="bottom" constant="7.5" id="hOp-6r-D2D"/>
+                            <constraint firstItem="IGE-J2-Duz" firstAttribute="top" secondItem="PqU-9a-Ffh" secondAttribute="bottom" constant="7.5" id="lIi-bh-hnb"/>
+                            <constraint firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="qLf-n0-wlt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="9bn-Pv-4Ew" kind="custom" identifier="dismissLoc" customClass="DismissSegue" id="6ca-dO-5NX"/>
+                        <segue destination="eU3-LT-qhu" kind="custom" identifier="locToMap" customClass="DismissSegue" id="sRo-9n-ppJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AT1-Bh-CX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414" y="1590"/>
+            <point key="canvasLocation" x="376" y="1590"/>
         </scene>
         <!--Activity-->
         <scene sceneID="Lsh-Qy-Gxs">
@@ -413,6 +474,11 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
             <point key="canvasLocation" x="834" y="-760"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Location" width="225" height="70"/>
+        <image name="Tutorial1" width="281" height="295"/>
+        <image name="Welcome" width="225" height="70"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dnz-hZ-Odo"/>
     </inferredMetricsTieBreakers>
