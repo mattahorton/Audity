@@ -53,6 +53,7 @@
                     <connections>
                         <segue destination="hX3-PX-GJJ" kind="show" identifier="activity" id="1L1-6B-YCC"/>
                         <segue destination="ECs-SH-TLe" kind="show" identifier="settingsShow" id="I8D-rJ-nZG"/>
+                        <segue destination="jRK-gh-eu6" kind="show" identifier="mapToLoc" id="C8H-qe-fJn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ar-q6-LZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,6 +481,7 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
         <image name="Welcome" width="225" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="C8H-qe-fJn"/>
         <segue reference="dnz-hZ-Odo"/>
     </inferredMetricsTieBreakers>
 </document>

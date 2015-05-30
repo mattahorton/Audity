@@ -49,6 +49,16 @@
     [self.core muteAuditiesWithBool:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [super viewWillAppear:animated];
+    
+//    switch ([CLLocationManager authorizationStatus]) {
+//        case kCLAuthorizationStatusDenied:
+//        case kCLAuthorizationStatusRestricted:
+//            [self performSegueWithIdentifier:@"showLocReq" sender:self];
+//            break;
+//        default:
+//            break;
+//            
+//    }
 }
 
 -(void) redraw {
@@ -202,19 +212,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    /// THIS SHOULD BE MOVED
-    switch ([CLLocationManager authorizationStatus]) {
-        case kCLAuthorizationStatusDenied:
-        case kCLAuthorizationStatusRestricted:
-            [self performSegueWithIdentifier:@"showLocReq" sender:self];
-            break;
-        default:
-            break;
-            
-    }
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -397,7 +394,7 @@
         NSDictionary *dict = (NSDictionary *)sender;
         AUDNavViewController *destViewController = segue.destinationViewController;
         destViewController.info = dict;
-    } else if ([segue.identifier isEqualToString:@"showLocReq"]) {
+    } else if ([segue.identifier isEqualToString:@"mapToLoc"]) {
         AUDLocRequestController *dVC = segue.destinationViewController;
         dVC.fromMap = YES;
     }
@@ -429,6 +426,16 @@
 }
 
 -(void) appWillEnterForeground {
+    switch ([CLLocationManager authorizationStatus]) {
+        case kCLAuthorizationStatusDenied:
+        case kCLAuthorizationStatusRestricted:
+            [self performSegueWithIdentifier:@"mapToLoc" sender:self];
+            break;
+        default:
+            break;
+            
+    }
+    
     if(!self.core.geo.locationSetting) {
         mapView.showsUserLocation = YES;
     }
