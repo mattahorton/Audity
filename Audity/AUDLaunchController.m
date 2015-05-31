@@ -7,10 +7,14 @@
 //
 
 #import "AUDLaunchController.h"
-#import "MHCore.h"
 #import "AUDLocRequestController.h"
+#import "AUDReach.h"
 
 @implementation AUDLaunchController
+
+-(void) viewDidLoad {
+    self.reach = [AUDReach sharedInstance];
+}
 
 -(void) viewDidAppear:(BOOL)animated {
     // Find firstRun in defaults
@@ -29,26 +33,16 @@
             case kCLAuthorizationStatusAuthorizedAlways:
             case kCLAuthorizationStatusAuthorizedWhenInUse:
             default:
-                [MHCore testInternetConnectionWithTarget:self
-                                      andSuccessSelector:@selector(success)
-                                       andFailedSelector:@selector(failure)];
+                if (self.reach) {
+                    [self performSegueWithIdentifier:@"map" sender:self];
+                } else {
+                    
+                }
                 
                 break;
                 
         }
     }
-}
-
-#pragma mark Internet Connection Callbacks
-
--(void) success {
-    NSLog(@"SUCCESS");
-    
-    [self performSegueWithIdentifier:@"map" sender:self];
-}
-
--(void) failure {
-    NSLog(@"FAILURE");
 }
 
 

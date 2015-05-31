@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class AUDReach;
+
 
 @interface AUDLaunchController : UIPageViewController
+
+@property (strong, nonatomic) AUDReach *reach;
 
 @end

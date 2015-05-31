@@ -39,7 +39,6 @@
 @property (nonatomic) BOOL firstSoundPlayed;
 
 +(id) sharedInstance;
-+ (void)testInternetConnectionWithTarget:(AUDLaunchController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed;
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key;
 -(void) setAllAudioParameters;

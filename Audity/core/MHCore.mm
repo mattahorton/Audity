@@ -12,7 +12,6 @@
 #import "AEUtilities.h"
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
-#import "Reachability.h"
 #import "UICKeychainStore.h"
 #import "RNCryptor.h"
 #import "RNOpenSSLDecryptor.h"
@@ -579,40 +578,6 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
         }
     }
-}
-
-#pragma mark Reachability
-// Checks if we have an internet connection or not
-+ (void)testInternetConnectionWithTarget:(AUDLaunchController *)vc andSuccessSelector:(SEL)success andFailedSelector:(SEL)failed {
-    Reachability *internetReachableFoo;
-    
-    internetReachableFoo = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-    // Internet is reachable
-    internetReachableFoo.reachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
-            if(success) {
-                [vc performSelector:success];
-            }
-        });
-    };
-    
-    // Internet is not reachable
-    internetReachableFoo.unreachableBlock = ^(Reachability*reach)
-    {
-        // Update the UI on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Someone broke the internet :(");
-            if(failed) {
-                [vc performSelector:failed];
-            }
-        });
-    };
-    
-    [internetReachableFoo startNotifier];
 }
 
 @end

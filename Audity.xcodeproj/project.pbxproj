@@ -26,6 +26,7 @@
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
 		B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */; };
 		B94F97E61B1A807900E4428E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94F97E41B1A807900E4428E /* Main.storyboard */; };
+		B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */ = {isa = PBXBuildFile; fileRef = B94F97E81B1A86FA00E4428E /* AUDReach.m */; };
 		B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = B955EF131AA3E96A000A963B /* AUDGeo.m */; };
 		B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1B1AB3B12400BDD88A /* DislikeBG.png */; };
 		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
@@ -114,6 +115,8 @@
 		B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDSettingsViewController.h; sourceTree = "<group>"; };
 		B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDSettingsViewController.m; sourceTree = "<group>"; };
 		B94F97E51B1A807900E4428E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B94F97E71B1A86FA00E4428E /* AUDReach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDReach.h; sourceTree = "<group>"; };
+		B94F97E81B1A86FA00E4428E /* AUDReach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDReach.m; sourceTree = "<group>"; };
 		B955EF031AA3E819000A963B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		B955EF051AA3E81E000A963B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		B955EF071AA3E826000A963B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -300,6 +303,8 @@
 				B98B383D1AA5141C0085912F /* AUDS3.m */,
 				B99EE7341ADF0B1A002DDCB1 /* Secrets.m */,
 				B99EE7361ADF0B27002DDCB1 /* Secrets.h */,
+				B94F97E71B1A86FA00E4428E /* AUDReach.h */,
+				B94F97E81B1A86FA00E4428E /* AUDReach.m */,
 			);
 			name = core;
 			path = Audity/core;
@@ -558,6 +563,7 @@
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
 				B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */,
+				B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
