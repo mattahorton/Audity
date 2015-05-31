@@ -30,7 +30,7 @@
         {
             // Update the UI on the main thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Yayyy, we have the interwebs!");
+                //NSLog(@"Yayyy, we have the interwebs!");
                 weakSelf.online = YES;
             });
         };
@@ -40,7 +40,7 @@
         {
             // Update the UI on the main thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Someone broke the internet :(");
+                //NSLog(@"Someone broke the internet :(");
                 weakSelf.online = NO;
             });
         };

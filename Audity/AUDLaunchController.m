@@ -33,10 +33,11 @@
             case kCLAuthorizationStatusAuthorizedAlways:
             case kCLAuthorizationStatusAuthorizedWhenInUse:
             default:
-                if (self.reach) {
+                if (self.reach.online) {
+                    NSLog(@"going to map");
                     [self performSegueWithIdentifier:@"map" sender:self];
                 } else {
-                    
+                    [self performSegueWithIdentifier:@"launchNoData" sender:self];
                 }
                 
                 break;

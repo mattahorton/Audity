@@ -11,6 +11,7 @@
 #import "Mapbox.h"
 #import "AUDNavViewController.h"
 #import "AUDLocRequestController.h"
+#import "AUDReach.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #define BUTTON_HEIGHT 60
@@ -49,16 +50,6 @@
     [self.core muteAuditiesWithBool:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [super viewWillAppear:animated];
-    
-//    switch ([CLLocationManager authorizationStatus]) {
-//        case kCLAuthorizationStatusDenied:
-//        case kCLAuthorizationStatusRestricted:
-//            [self performSegueWithIdentifier:@"showLocReq" sender:self];
-//            break;
-//        default:
-//            break;
-//            
-//    }
 }
 
 -(void) redraw {
@@ -215,6 +206,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
+
     
     // Clear Temp Directory
     NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
@@ -449,6 +442,16 @@
     
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return newLength <= 22;
+}
+
+#pragma mark Reachability
+
+-(void) reachabilityDidChange {
+    if (![[AUDReach sharedInstance] online]) {
+        NSLog(@"DISCONNECTED");
+        
+        [self performSegueWithIdentifier:@"noData" sender:self];
+    }
 }
 
 @end
