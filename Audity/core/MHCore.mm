@@ -418,6 +418,11 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
         float scl = [self getScaleFactorFromDistance:distance]; // scale based on log(distance)
         
+        //Get CLLocationDirection for heading
+        //Convert heading to radians
+        //Add heading to radians mod 2*pi
+        //set radiansBearing equal to that
+        
         //set pan based on theta
         float pan = [self getPanFromBearing:radiansBearing];
         [fp setPan:pan];
