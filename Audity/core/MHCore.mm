@@ -30,6 +30,7 @@
     NSString *tempKey;
     AUDActivityViewController *audVC;
     UIButton *replayButton;
+    NSTimer *recordingTimer;
 }
 
 + (id)sharedInstance {
@@ -198,15 +199,17 @@
         [_recordingController addInputReceiver:_recorder];
     }
     
-    [NSTimer scheduledTimerWithTimeInterval:60.0
-                                     target:self
-                                   selector:@selector(endRecording)
-                                   userInfo:nil
-                                    repeats:NO];
+    recordingTimer = [NSTimer scheduledTimerWithTimeInterval:60.0
+                                                      target:self
+                                                    selector:@selector(endRecording)
+                                                    userInfo:nil
+                                                     repeats:NO];
 }
 
 - (void)endRecording {
     NSLog(@"entered endrecording");
+    if (recordingTimer.valid) [recordingTimer invalidate];
+    
     if (self.isRecording) {
         
         [_recordingController removeInputReceiver:_recorder];
@@ -242,6 +245,8 @@
 }
 
 -(void)endResponseWithDelegate:(UIViewController *)vc{
+    if (recordingTimer.valid) [recordingTimer invalidate];
+    
     [_recordingController removeInputReceiver:_recorder];
     [_recordingController removeOutputReceiver:_recorder];
     [_recorder finishRecording];
