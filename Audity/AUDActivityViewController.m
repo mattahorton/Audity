@@ -242,6 +242,29 @@
     }
 }
 
+- (IBAction)replayPress:(id)sender {
+//    NSLog(@"replay pressed");
+    UIButton *replayButton = (UIButton *)sender;
+    NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                 objectAtIndex:0];
+
+    if (!self.core.replaying) {
+        self.core.replaying = YES;
+        
+        [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        [self.core playRecorded:file withButton:replayButton];
+    } else {
+        self.core.recordedPlayer.channelIsPlaying = !self.core.recordedPlayer.channelIsPlaying;
+        if(self.core.recordedPlayer.channelIsPlaying) {
+            [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+        } else {
+            [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+        }
+    }
+}
+
+
 #pragma mark Add Response
 
 -(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key{

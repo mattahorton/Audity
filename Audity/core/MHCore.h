@@ -37,6 +37,8 @@
 @property (nonatomic) BOOL muteAudities;
 @property (nonatomic) BOOL muteSetting;
 @property (nonatomic) BOOL firstSoundPlayed;
+@property (strong, nonatomic) AEAudioFilePlayer *recordedPlayer;
+@property (nonatomic) BOOL replaying;
 
 +(id) sharedInstance;
 
@@ -57,5 +59,6 @@
 -(void) mute;
 -(void) playResponse:(NSURL *)file;
 -(void) muteAuditiesWithBool:(BOOL)val;
+-(void) playRecorded:(NSURL *)file withButton:(UIButton *)button;
 
 @end

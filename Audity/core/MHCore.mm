@@ -29,9 +29,7 @@
     NSUserDefaults *defaults;
     NSString *tempKey;
     AUDActivityViewController *audVC;
-    BOOL replaying;
     UIButton *replayButton;
-    AEAudioFilePlayer *recordedPlayer;
 }
 
 + (id)sharedInstance {
@@ -48,7 +46,7 @@
     self.isRecording = NO;
     self.muteAudities = NO;
     self.firstSoundPlayed = NO;
-    replaying = NO;
+    self.replaying = NO;
     
     self.audities = @{};
     
@@ -251,11 +249,19 @@
     
     audVC = (AUDActivityViewController *)vc;
     
+    replayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [replayButton addTarget:audVC action:@selector(replayPress:) forControlEvents:UIControlEventTouchUpInside];
+    [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+    [replayButton setTitle:@"replay" forState:UIControlStateNormal];
+    replayButton.frame = CGRectMake(0,0,80,80);
+    
     DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
     alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
     [alertViewStopRecording textFieldAtIndex:0].delegate = (AUDActivityViewController *)vc;
 //    alertViewStopRecording.textField
     [alertViewStopRecording show];
+    
+    alertViewStopRecording.contentView = replayButton;
 }
 
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
@@ -445,21 +451,26 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 #pragma mark Play/Stop Audio
 
--(void) playRecorded:(NSURL *)file {
+-(void) playRecorded:(NSURL *)file withButton:(UIButton *)button{
     //NSLog(@"time to play this response");
     NSError *errorFilePlayer = NULL;
     
-    recordedPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
-    [recordedPlayer setVolume:0.8];
-    [recordedPlayer setLoop:NO];
-    recordedPlayer.removeUponFinish = YES;
+    self.recordedPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
+    [self.recordedPlayer setVolume:0.8];
+    [self.recordedPlayer setLoop:NO];
+    self.recordedPlayer.removeUponFinish = YES;
+    
     __weak UIButton *replayButtonWeak = replayButton;
-    recordedPlayer.completionBlock = ^ () {
-        replaying = NO;
+    if (button) {
+        __weak UIButton *replayButtonWeak = button;
+    }
+    
+    self.recordedPlayer.completionBlock = ^ () {
+        self.replaying = NO;
         [replayButtonWeak setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
     };
     
-    if(recordedPlayer)[self.audioController addChannels:@[recordedPlayer]];
+    if(self.recordedPlayer)[self.audioController addChannels:@[self.recordedPlayer]];
     else NSLog(@"could not initialize fileplayer, it was nil or null or something");
 }
 
@@ -565,14 +576,14 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 - (IBAction)replayPress:(id)sender {
     NSLog(@"replay pressed");
-    if (!replaying) {
-        replaying = YES;
+    if (!self.replaying) {
+        self.replaying = YES;
         [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
         NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
-        [self playRecorded:file];
+        [self playRecorded:file withButton:nil];
     } else {
-        recordedPlayer.channelIsPlaying = !recordedPlayer.channelIsPlaying;
-        if(recordedPlayer.channelIsPlaying) {
+        self.recordedPlayer.channelIsPlaying = !self.recordedPlayer.channelIsPlaying;
+        if(self.recordedPlayer.channelIsPlaying) {
             [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
         } else {
             [replayButton setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
