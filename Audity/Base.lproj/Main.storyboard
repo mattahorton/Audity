@@ -371,7 +371,7 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-uD-9CM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoData" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-uD-9CM">
                                 <rect key="frame" x="159.5" y="14" width="281" height="295"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your connection to the Internet is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qJ-Rm-sgc">
@@ -543,13 +543,14 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
     </scenes>
     <resources>
         <image name="Location" width="225" height="70"/>
+        <image name="NoData" width="281" height="295"/>
         <image name="Tutorial1" width="281" height="295"/>
         <image name="Welcome" width="225" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dnz-hZ-Odo"/>
-        <segue reference="WXF-qQ-y04"/>
-        <segue reference="C8H-qe-fJn"/>
+        <segue reference="2Ja-11-tJX"/>
         <segue reference="ok0-NW-R3A"/>
+        <segue reference="C8H-qe-fJn"/>
     </inferredMetricsTieBreakers>
 </document>
