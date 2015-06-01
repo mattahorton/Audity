@@ -34,15 +34,22 @@
             case kCLAuthorizationStatusAuthorizedWhenInUse:
             default:
                 if (self.reach.online) {
-                    NSLog(@"going to map");
                     [self performSegueWithIdentifier:@"map" sender:self];
                 } else {
-                    [self performSegueWithIdentifier:@"launchNoData" sender:self];
+                    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(trigger:) userInfo:nil repeats:NO];
                 }
                 
                 break;
                 
         }
+    }
+}
+
+-(void) trigger:(NSTimer *)timer {
+    if (self.reach.online) {
+        [self performSegueWithIdentifier:@"map" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"launchNoData" sender:self];
     }
 }
 

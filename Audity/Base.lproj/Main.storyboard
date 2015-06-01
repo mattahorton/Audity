@@ -50,6 +50,15 @@
         <scene sceneID="tCh-Sp-fvt">
             <objects>
                 <viewController id="eU3-LT-qhu" customClass="MHViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Awp-R3-0Wf"/>
+                        <viewControllerLayoutGuide type="bottom" id="ykn-xi-BNX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iLF-08-GF5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="hX3-PX-GJJ" kind="show" identifier="activity" id="1L1-6B-YCC"/>
@@ -538,9 +547,9 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
         <image name="Welcome" width="225" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IeZ-Vy-bfh"/>
-        <segue reference="WXF-qQ-y04"/>
-        <segue reference="2wP-Ok-E2y"/>
         <segue reference="dnz-hZ-Odo"/>
+        <segue reference="WXF-qQ-y04"/>
+        <segue reference="C8H-qe-fJn"/>
+        <segue reference="ok0-NW-R3A"/>
     </inferredMetricsTieBreakers>
 </document>

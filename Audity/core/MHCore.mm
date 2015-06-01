@@ -91,9 +91,9 @@
     NSString *FBSECRET = self.apiKeys[@"FBSECRET"];
     [self.firebase authWithCustomToken:FBSECRET withCompletionBlock:^(NSError *error, FAuthData *authData) {
         if (error) {
-            NSLog(@"Login Failed! %@", error);
+            //NSLog(@"Login Failed! %@", error);
         } else {
-            NSLog(@"Login succeeded! %@", authData);
+            //NSLog(@"Login succeeded! %@", authData);
         }
     }];
     
@@ -479,7 +479,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
     if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
-        NSLog(@" play %@ ", file);
+//        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
         AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
