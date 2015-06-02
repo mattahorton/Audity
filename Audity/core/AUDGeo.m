@@ -61,6 +61,11 @@
     
     [locManager startUpdatingLocation];
     
+    if ([CLLocationManager headingAvailable]) {
+        locManager.headingFilter = 5;
+        [locManager startUpdatingHeading];
+    }
+    
     defaults = [NSUserDefaults standardUserDefaults];
     NSObject *boolCheck = [defaults objectForKey:@"locationSetting"];
     if (boolCheck) {
@@ -161,6 +166,24 @@
         [self.core setAllAudioParametersForAudityWithKey:key];
     }
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
+    if (newHeading.headingAccuracy < 0)
+        return;
+    
+    // Use the true heading if it is valid.
+    CLLocationDirection  theHeading = ((newHeading.trueHeading > 0) ?
+                                       newHeading.trueHeading : newHeading.magneticHeading);
+    
+    self.currentHeading = theHeading;
+    
+    NSArray *keys = [self.core.audities allKeys];
+    
+    for (NSString *key in keys){
+        [self.core setAllAudioParametersForAudityWithKey:key];
+    }
+}
+
 
 #pragma mark Interaction Methods
 

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) Firebase *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
 @property (nonatomic, strong) CLLocation *currentLoc;
+@property (nonatomic) CLLocationDirection currentHeading;
 @property (nonatomic, strong) MHCore *core;
 @property (nonatomic) BOOL inGodMode;
 @property (nonatomic, strong) CLLocation *godModeCenter;

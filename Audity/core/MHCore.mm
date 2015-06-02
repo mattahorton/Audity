@@ -43,7 +43,6 @@
 }
 
 -(void) coreInit {
-//    stk::Stk::setRawwavePath([[[NSBundle mainBundle] pathForResource:@"rawwaves" ofType:@"bundle"] UTF8String]);
     self.isRecording = NO;
     self.muteAudities = NO;
     self.firstSoundPlayed = NO;
@@ -418,10 +417,15 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
         float scl = [self getScaleFactorFromDistance:distance]; // scale based on log(distance)
         
-        //Get CLLocationDirection for heading
-        //Convert heading to radians
-        //Add heading to radians mod 2*pi
-        //set radiansBearing equal to that
+//        //Get CLLocationDirection for heading
+//        double heading = self.geo.currentHeading;
+//        //Convert heading to radians
+//        heading = DegreesToRadians(heading);
+//        //Add heading to radians mod 2*pi
+//        double trueBearing = (radiansBearing+2*M_PI-heading)/(2.0*M_PI);
+//        NSLog(@"%f radiansBearing", radiansBearing);
+//        NSLog(@"%f heading", heading);
+//        NSLog(@"%f trueBearing", trueBearing);
         
         //set pan based on theta
         float pan = [self getPanFromBearing:radiansBearing];
