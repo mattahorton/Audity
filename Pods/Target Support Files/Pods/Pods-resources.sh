@@ -72,8 +72,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "AWSiOSSDKv2/SNS/Resources/sns-2010-03-31.json"
   install_resource "AWSiOSSDKv2/SQS/Resources/sqs-2012-11-05.json"
   install_resource "AWSiOSSDKv2/SimpleDB/Resources/sdb-2009-04-15.json"
+  install_resource "${BUILT_PRODUCTS_DIR}/HockeySDKResources.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
-  install_resource "${BUILT_PRODUCTS_DIR}/rawwaves.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AWSiOSSDKv2/AWSCore/CognitoIdentity/Resources/cognito-identity-2014-06-30.json"
@@ -90,8 +90,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AWSiOSSDKv2/SNS/Resources/sns-2010-03-31.json"
   install_resource "AWSiOSSDKv2/SQS/Resources/sqs-2012-11-05.json"
   install_resource "AWSiOSSDKv2/SimpleDB/Resources/sdb-2009-04-15.json"
+  install_resource "${BUILT_PRODUCTS_DIR}/HockeySDKResources.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
-  install_resource "${BUILT_PRODUCTS_DIR}/rawwaves.bundle"
 fi
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

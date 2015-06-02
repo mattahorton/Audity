@@ -158,6 +158,7 @@ PODS:
   - GRMustache (7.3.0):
     - JRSwizzle (~> 1.0)
   - GZIP (1.0.3)
+  - HockeySDK (3.6.4)
   - JRSwizzle (1.0)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
@@ -171,7 +172,6 @@ PODS:
   - RNCryptor (2.2)
   - SMCalloutView (2.0)
   - SpinKit (1.2.0)
-  - STK (4.5.2)
   - TheAmazingAudioEngine (1.4.6)
   - TMCache (1.2.3)
   - UICKeyChainStore (2.0.4)
@@ -181,28 +181,23 @@ DEPENDENCIES:
   - AFAmazonS3Manager
   - AWSiOSSDKv2
   - DLAlertView
+  - HockeySDK (~> 3.6.4)
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - MBProgressHUD (~> 0.9.1)
   - Reachability
   - RNCryptor
   - SpinKit (~> 1.1)
-  - STK (from `https://github.com/mattahorton/stk.git`)
   - TheAmazingAudioEngine
   - UICKeyChainStore
 
 EXTERNAL SOURCES:
   Mapbox-iOS-SDK:
     :git: https://github.com/mattahorton/mapbox-ios-sdk.git
-  STK:
-    :git: https://github.com/mattahorton/stk.git
 
 CHECKOUT OPTIONS:
   Mapbox-iOS-SDK:
     :commit: 3179eb10aa6eadf099c5ddfda7a73b27101ff13d
     :git: https://github.com/mattahorton/mapbox-ios-sdk.git
-  STK:
-    :commit: 1f87d8cada31480f6e753c2a81a32ae0fff10475
-    :git: https://github.com/mattahorton/stk.git
 
 SPEC CHECKSUMS:
   AFAmazonS3Manager: 688f9238511bb86011159d0155fcda09838b0e0d
@@ -213,6 +208,7 @@ SPEC CHECKSUMS:
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   GRMustache: 6baee020c5644416c034f5afb1607f6219e7f753
   GZIP: f0863fda354e8f83316508c0a2c7bbe385e39129
+  HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
   Mapbox-iOS-SDK: 8710f321a5061fa304f1b563c3a893838e797b6a
@@ -221,7 +217,6 @@ SPEC CHECKSUMS:
   RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
   SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
-  STK: b18355d6f4dac95c45a6a0ef8f57a07b5825686f
   TheAmazingAudioEngine: 014e942f20456feaf5ccb48f440402306350abf8
   TMCache: 5f68bc38d741aa8df4c63131b847522783665d81
   UICKeyChainStore: 69eb0c3a6f669bccf16ba88de3b9069b71501361

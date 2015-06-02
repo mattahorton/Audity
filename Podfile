@@ -1,5 +1,4 @@
 pod 'TheAmazingAudioEngine'
-pod 'STK', :git => 'https://github.com/mattahorton/stk.git'
 pod 'Mapbox-iOS-SDK', :git=> 'https://github.com/mattahorton/mapbox-ios-sdk.git'
 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -17,3 +16,5 @@ pod 'Reachability'
 pod 'UICKeyChainStore'
 
 pod 'RNCryptor'
+
+pod 'HockeySDK', '~> 3.6.4'

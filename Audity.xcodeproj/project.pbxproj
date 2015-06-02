@@ -389,6 +389,7 @@
 				86C89C851A688DAD00799680 /* Frameworks */,
 				86C89C861A688DAD00799680 /* Resources */,
 				F5E1B5803B65B4EC730832C9 /* Copy Pods Resources */,
+				B95797EA1B1D7E220046C1F9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -515,6 +516,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		B95797EA1B1D7E220046C1F9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
 		B99EE7321ADF06D0002DDCB1 /* Encrypt Keys */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -709,7 +723,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"Pods-STK\"",
 					"-l\"Pods-TheAmazingAudioEngine\"",
 					"-framework",
 					"\"Accelerate\"",
@@ -745,7 +758,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"Pods-STK\"",
 					"-l\"Pods-TheAmazingAudioEngine\"",
 					"-framework",
 					"\"Accelerate\"",

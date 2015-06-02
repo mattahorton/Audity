@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "HockeySDK.h"
+#import "Secrets.h"
+#import "RNOpenSSLDecryptor.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,42 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Get path to encrypted data
+    NSString *encryptedPlistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"enc"];
+    
+    // Read in encrypted data
+    NSData *encryptedData = [NSData dataWithContentsOfFile:encryptedPlistPath];
+    
+    // Decrypt data
+    NSError *error;
+    NSData *decryptedData = [RNOpenSSLDecryptor decryptData:encryptedData
+                                               withSettings:kRNCryptorAES256Settings
+                                                   password:secretPwdForPlist
+                                                      error:&error];
+    
+    // Log any errors in decryption
+    if(error) {
+        NSLog(@"%@", error);
+    }
+    
+    // Get api keys
+    NSString *errr;
+    NSPropertyListFormat format;
+    NSDictionary *apiKeys = [NSPropertyListSerialization propertyListFromData:decryptedData mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&errr];
+    
+    // Log any errors in serialization
+    if(errr) {
+        NSLog(@"%@", errr);
+    }
+    
+    NSString *HOCKEYID = apiKeys[@"HOCKEYID"];
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEYID];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator
+     authenticateInstallation];
+
     return YES;
 }
 
