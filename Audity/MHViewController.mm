@@ -8,7 +8,7 @@
 
 #import "MHViewController.h"
 #import "MHCore.h"
-#import "Mapbox.h"
+#import <MapboxGL/MapboxGL.h>
 #import "AUDNavViewController.h"
 #import "AUDLocRequestController.h"
 #import "AUDReach.h"
@@ -99,15 +99,15 @@
     }
 }
 
--(void) setPlayingColorForAnnotation:(RMAnnotation *)annotation {
+-(void) setPlayingColorForAnnotation:(MGLAnnotation *)annotation {
     [self setColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0] forAnnotation:annotation];
 }
 
--(void) setNotPlayingColorForAnnotation:(RMAnnotation *)annotation {
+-(void) setNotPlayingColorForAnnotation:(MGLAnnotation *)annotation {
     [self setColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:0.2] forAnnotation:annotation];
 }
 
--(void) setColor:(UIColor *)color forAnnotation:(RMAnnotation *)annotation {
+-(void) setColor:(UIColor *)color forAnnotation:(MGLAnnotation *)annotation {
     RMMarker *marker = [self newAudityMarkerWithColor:color];
     [annotation setLayer:marker];
 }
@@ -123,13 +123,14 @@
     
     //public key access token for mapbox
     NSString *token = self.mapboxKey;
-    [[RMConfiguration sharedInstance] setAccessToken:token];
+//    [[RMConfiguration sharedInstance] setAccessToken:token];
     
     //get source for tiles
-    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:self.mapID];
+//    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:self.mapID];
     
     //get our mapview and add it to our view
-    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
+    mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds accessToken:self.mapboxKey];
+    mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     NSLog(@"%@ MAPVIEW", mapView);
     mapView.delegate = self;
     [self.view addSubview:mapView];

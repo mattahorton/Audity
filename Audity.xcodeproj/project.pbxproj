@@ -13,7 +13,7 @@
 		49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */; };
 		49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */; };
 		49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AED1AA3FD0F00A451BF /* libz.dylib */; };
-		5381B60AAEC5B644F347051B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C289A6CCD0326F366E69F0 /* libPods.a */; };
+		6C0F58648B4307C9D996373D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892105B26FD5B8693CE8B8A0 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		86C89C8E1A688DAD00799680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C8D1A688DAD00799680 /* main.m */; };
 		86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C901A688DAD00799680 /* AppDelegate.mm */; };
 		86C89C991A688DAD00799680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C981A688DAD00799680 /* Images.xcassets */; };
@@ -82,7 +82,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		494B887C1AE99A32007F4D86 /* encrypt.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
 		494B887E1AE99A8E007F4D86 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		86C89CFC1A68933800799680 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		86C89CFF1A689A5000799680 /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
 		86C89D001A689A5000799680 /* DismissSegue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DismissSegue.mm; sourceTree = "<group>"; };
+		892105B26FD5B8693CE8B8A0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9138AD61A6DB9E2009BFC86 /* MHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHViewController.h; sourceTree = "<group>"; };
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -193,8 +193,8 @@
 				B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */,
 				B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */,
 				86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */,
-				5381B60AAEC5B644F347051B /* libPods.a in Frameworks */,
 				B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */,
+				6C0F58648B4307C9D996373D /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +334,7 @@
 				B9138AD91A6DBCE1009BFC86 /* UIKit.framework */,
 				86C89CFC1A68933800799680 /* GLKit.framework */,
 				86C89CFA1A68923600799680 /* AudioToolbox.framework */,
-				39C289A6CCD0326F366E69F0 /* libPods.a */,
+				892105B26FD5B8693CE8B8A0 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -390,6 +390,7 @@
 				86C89C861A688DAD00799680 /* Resources */,
 				F5E1B5803B65B4EC730832C9 /* Copy Pods Resources */,
 				B95797EA1B1D7E220046C1F9 /* ShellScript */,
+				8A3D402B0DE357F5E1F38601 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -502,6 +503,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8A3D402B0DE357F5E1F38601 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A383AD2D4711DD38AA37A548 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -1,6 +1,0 @@
-#include "Pods-GRMustache.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/GRMustache" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFAmazonS3Manager" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AWSiOSSDKv2" "${PODS_ROOT}/Headers/Public/Bolts" "${PODS_ROOT}/Headers/Public/DLAlertView" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/GRMustache" "${PODS_ROOT}/Headers/Public/GZIP" "${PODS_ROOT}/Headers/Public/HockeySDK" "${PODS_ROOT}/Headers/Public/JRSwizzle" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/Mantle" "${PODS_ROOT}/Headers/Public/Mapbox-iOS-SDK" "${PODS_ROOT}/Headers/Public/RNCryptor" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/SMCalloutView" "${PODS_ROOT}/Headers/Public/SpinKit" "${PODS_ROOT}/Headers/Public/TMCache" "${PODS_ROOT}/Headers/Public/TheAmazingAudioEngine" "${PODS_ROOT}/Headers/Public/UICKeyChainStore" "${PODS_ROOT}/Headers/Public/XMLDictionary"
-OTHER_LDFLAGS = ${PODS_GRMUSTACHE_OTHER_LDFLAGS} -ObjC
-PODS_ROOT = ${SRCROOT}
-SKIP_INSTALL = YES

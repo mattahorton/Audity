@@ -155,22 +155,15 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - GRMustache (7.3.0):
-    - JRSwizzle (~> 1.0)
   - GZIP (1.0.3)
   - HockeySDK (3.6.4)
-  - JRSwizzle (1.0)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
-  - Mapbox-iOS-SDK (1.6.0):
-    - FMDB (~> 2.4)
-    - GRMustache (= 7.3.0)
-    - SMCalloutView (= 2.0)
+  - MapboxGL (0.3.1)
   - MBProgressHUD (0.9.1)
   - Reachability (3.2)
   - RNCryptor (2.2)
-  - SMCalloutView (2.0)
   - SpinKit (1.2.0)
   - TheAmazingAudioEngine (1.4.6)
   - TMCache (1.2.3)
@@ -182,22 +175,13 @@ DEPENDENCIES:
   - AWSiOSSDKv2
   - DLAlertView
   - HockeySDK (~> 3.6.4)
-  - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
+  - MapboxGL
   - MBProgressHUD (~> 0.9.1)
   - Reachability
   - RNCryptor
   - SpinKit (~> 1.1)
   - TheAmazingAudioEngine
   - UICKeyChainStore
-
-EXTERNAL SOURCES:
-  Mapbox-iOS-SDK:
-    :git: https://github.com/mattahorton/mapbox-ios-sdk.git
-
-CHECKOUT OPTIONS:
-  Mapbox-iOS-SDK:
-    :commit: 3179eb10aa6eadf099c5ddfda7a73b27101ff13d
-    :git: https://github.com/mattahorton/mapbox-ios-sdk.git
 
 SPEC CHECKSUMS:
   AFAmazonS3Manager: 688f9238511bb86011159d0155fcda09838b0e0d
@@ -206,16 +190,13 @@ SPEC CHECKSUMS:
   Bolts: e431c88fd02115d4a34016c2100bbfa4d2d5b146
   DLAlertView: 73cb9ef682c3c25b0f1f014eee583c941eb14bfe
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
-  GRMustache: 6baee020c5644416c034f5afb1607f6219e7f753
   GZIP: f0863fda354e8f83316508c0a2c7bbe385e39129
   HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
-  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
-  Mapbox-iOS-SDK: 8710f321a5061fa304f1b563c3a893838e797b6a
+  MapboxGL: c3de58589d99c678da9e2a8315c8b1e7054ddfa1
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
-  SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
   SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
   TheAmazingAudioEngine: 014e942f20456feaf5ccb48f440402306350abf8
   TMCache: 5f68bc38d741aa8df4c63131b847522783665d81

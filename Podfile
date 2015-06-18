@@ -1,5 +1,8 @@
+platform :ios, "7.0"
+pod 'MapboxGL'
+use_frameworks!
+
 pod 'TheAmazingAudioEngine'
-pod 'Mapbox-iOS-SDK', :git=> 'https://github.com/mattahorton/mapbox-ios-sdk.git'
 
 source 'https://github.com/CocoaPods/Specs.git'
 pod 'AWSiOSSDKv2'
