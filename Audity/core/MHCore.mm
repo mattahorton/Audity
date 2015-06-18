@@ -384,7 +384,7 @@
     bool neg = false;
     if(bearing < 0) neg = true; //left or right?
     
-    float bear_abs = fabs(fabs(bearing/3.14159) - 0.5);
+    float bear_abs = fabs(fabs(bearing/M_PI) - 0.5);
     pan = 1.0 - (2 * bear_abs);
     
     if(neg) pan = -pan;
@@ -417,18 +417,19 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         
         float scl = [self getScaleFactorFromDistance:distance]; // scale based on log(distance)
         
-//        //Get CLLocationDirection for heading
-//        double heading = self.geo.currentHeading;
-//        //Convert heading to radians
-//        heading = DegreesToRadians(heading);
-//        //Add heading to radians mod 2*pi
-//        double trueBearing = (radiansBearing+2*M_PI-heading)/(2.0*M_PI);
+        //Get CLLocationDirection for heading
+        double heading = self.geo.currentHeading;
+        //Convert heading to radians
+        heading = DegreesToRadians(heading);
+        radiansBearing = radiansBearing + M_PI;
+        
+        double trueBearing = heading - radiansBearing;
 //        NSLog(@"%f radiansBearing", radiansBearing);
 //        NSLog(@"%f heading", heading);
 //        NSLog(@"%f trueBearing", trueBearing);
         
         //set pan based on theta
-        float pan = [self getPanFromBearing:radiansBearing];
+        float pan = [self getPanFromBearing:trueBearing];
         [fp setPan:pan];
         
         AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
