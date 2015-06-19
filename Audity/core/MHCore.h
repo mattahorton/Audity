@@ -16,6 +16,7 @@
 #import <Firebase/Firebase.h>
 
 #define MAXRADIUS 500.0
+#define MAX_AUDITIES_PLAYING 5
 
 @class AUDGeo;
 @class AUDS3;

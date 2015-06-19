@@ -104,7 +104,7 @@
 }
 
 -(void) setNotPlayingColorForAnnotation:(RMAnnotation *)annotation {
-    [self setColor:[UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:0.2] forAnnotation:annotation];
+    [self setColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:0.2] forAnnotation:annotation];
 }
 
 -(void) setColor:(UIColor *)color forAnnotation:(RMAnnotation *)annotation {

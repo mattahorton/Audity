@@ -145,6 +145,8 @@
                                                            UInt32 frames,
                                                            AudioBufferList *audio) {
         
+        
+        
         for ( int i=0; i<frames; i++ ) {
             ((float*)audio->mBuffers[0].mData)[i] = ((float*)audio->mBuffers[1].mData)[i] = 0;
         }
@@ -391,6 +393,34 @@
     return pan;
 }
 
+-(void) playMoreAudities{
+    NSLog(@"PLAYING MORE AUDITIES NOW");
+    
+    int numPlaying = 0;
+    int numAudities = 0;
+    
+    NSArray *keys = [self.audities allKeys];
+    for (NSString *key in keys){
+        numAudities++;
+        NSLog(@"%@", [[self.audities objectForKey:key] valueForKey:@"filePlayer"]);
+        if([[[self.audities objectForKey:key] valueForKey:@"filePlayer"] channelIsPlaying]){
+            numPlaying++;
+        }
+    }
+                NSLog(@"Num playing is %d out of %d audities", numPlaying, numAudities);
+    while(numPlaying < MAX_AUDITIES_PLAYING && numPlaying != numAudities){
+        int r = arc4random_uniform(numAudities - 1);
+        NSString *key = keys[r];
+        if(![[[self.audities objectForKey:key] valueForKey:@"filePlayer"] channelIsPlaying]){ //if there is no fileplayer there
+            [self playAudio:[[self.audities objectForKey:key] valueForKey:@"localURL"] withKey:key];
+            NSLog(@"PLAYING a new audity");
+            numPlaying++;
+        }else{
+           NSLog(@"NOT gonna play that one because it is already playing");
+        }
+    }
+}
+
 double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
 double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
@@ -507,10 +537,16 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
 //        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
+        __weak MHCore *weakSelf = self;
 
         AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file audioController:[self audioController] error:&errorFilePlayer];
         [filePlayer setVolume:0];
-        [filePlayer setLoop:YES];
+        [filePlayer setLoop:NO];
+        filePlayer.removeUponFinish = YES;
+        filePlayer.completionBlock = ^(){
+            [weakSelf playMoreAudities];
+            [[weakSelf.audities objectForKey:key] setValue:nil forKey:@"filePlayer"];
+        };
         
         [self.audioController addChannels:@[filePlayer]];
         
@@ -553,7 +589,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         [filePlayer setVolume:0.0];
         if(filePlayer) {
             [self.audioController removeChannels:@[filePlayer]];
-            [self.audities removeObjectForKey:key];
+            //[self.audities removeObjectForKey:key];
         }
         
         [self.vc setNotPlayingColorForAnnotation:(RMAnnotation *) self.audities[key][@"annotation"]];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49D4013B1B33B5B600BCBE62 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49D4013A1B33B5B600BCBE62 /* keys.plist */; };
 		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
@@ -84,7 +85,7 @@
 /* Begin PBXFileReference section */
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		494B887C1AE99A32007F4D86 /* encrypt.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
-		494B887E1AE99A8E007F4D86 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		49D4013A1B33B5B600BCBE62 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -274,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				86C89C8C1A688DAD00799680 /* Info.plist */,
-				494B887E1AE99A8E007F4D86 /* keys.plist */,
+				49D4013A1B33B5B600BCBE62 /* keys.plist */,
 				86C89C8D1A688DAD00799680 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -430,7 +431,7 @@
 				TargetAttributes = {
 					86C89C871A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3N2PU8Q3L6;
+						DevelopmentTeam = AM6T4M5QD9;
 					};
 					86C89CA01A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -489,6 +490,7 @@
 				B9A0AD6A1AB2B37900F4F1C8 /* GodMode@100w.png in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
 				B9A0AD6C1AB2B37900F4F1C8 /* LocalMode@100w.png in Resources */,
+				49D4013B1B33B5B600BCBE62 /* keys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
