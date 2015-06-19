@@ -399,7 +399,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
         CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
         CLLocation *SelfLoc = self.geo.currentLoc;
-        int num_likes = [[[self.audities objectForKey:key] valueForKey:@"likes"] integerValue];
+        int num_likes = [[[self.audities objectForKey:key] valueForKey:@"likes"] intValue];
         
         //gotta get that theta
         float lat1 = DegreesToRadians(SelfLoc.coordinate.latitude);
