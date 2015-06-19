@@ -196,7 +196,7 @@
            if (task.result) {
                AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
                //File downloaded successfully.
-               if(!response)[strongSelf.core playAudio:downloadingFileURL withKey:key];
+               //if(!response)[strongSelf.core playAudio:downloadingFileURL withKey:key];
            }
            return nil;
         }];

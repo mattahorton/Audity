@@ -31,6 +31,7 @@
     AUDActivityViewController *audVC;
     UIButton *replayButton;
     NSTimer *recordingTimer;
+    NSTimer *playAuditiesTimer;
 }
 
 + (id)sharedInstance {
@@ -129,6 +130,12 @@
     if ( !result ) {
         NSLog(@"Error starting audio engine: %@", errorAudioSetup.localizedDescription);
     }
+    
+    playAuditiesTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                     target:self
+                                    selector:@selector(playMoreAudities)
+                                   userInfo:nil
+                                    repeats:YES];
     
     // Set up documents folder
     documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
@@ -394,29 +401,35 @@
 }
 
 -(void) playMoreAudities{
-    NSLog(@"PLAYING MORE AUDITIES NOW");
-    
-    int numPlaying = 0;
-    int numAudities = 0;
-    
-    NSArray *keys = [self.audities allKeys];
-    for (NSString *key in keys){
-        numAudities++;
-        NSLog(@"%@", [[self.audities objectForKey:key] valueForKey:@"filePlayer"]);
-        if([[[self.audities objectForKey:key] valueForKey:@"filePlayer"] channelIsPlaying]){
-            numPlaying++;
+    if(self.audities){
+        NSLog(@"PLAYING MORE AUDITIES NOW");
+        
+        int numPlaying = 0;
+        int numAudities = 0;
+        
+        NSArray *keys = [self.audities allKeys];
+        for (NSString *key in keys){
+            numAudities++;
+            if ([[self.audities objectForKey:key] valueForKey:@"filePlayer"] == nil) continue;
+            
+            NSLog(@"%@", [[self.audities objectForKey:key] valueForKey:@"filePlayer"]);
+            if([[[self.audities objectForKey:key] valueForKey:@"filePlayer"] channelIsPlaying]){
+                numPlaying++;
+            }
         }
-    }
-                NSLog(@"Num playing is %d out of %d audities", numPlaying, numAudities);
-    while(numPlaying < MAX_AUDITIES_PLAYING && numPlaying != numAudities){
-        int r = arc4random_uniform(numAudities - 1);
-        NSString *key = keys[r];
-        if(![[[self.audities objectForKey:key] valueForKey:@"filePlayer"] channelIsPlaying]){ //if there is no fileplayer there
-            [self playAudio:[[self.audities objectForKey:key] valueForKey:@"localURL"] withKey:key];
-            NSLog(@"PLAYING a new audity");
-            numPlaying++;
-        }else{
-           NSLog(@"NOT gonna play that one because it is already playing");
+                    NSLog(@"Num playing is %d out of %d audities", numPlaying, numAudities);
+        while(numPlaying < MAX_AUDITIES_PLAYING && numPlaying != numAudities){
+            int r = arc4random_uniform(numAudities - 1);
+            NSString *key = keys[r];
+            AEAudioFilePlayer *filePlayer = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
+            if(![filePlayer channelIsPlaying]){ //if there is no fileplayer there
+                
+                [self playAudio:[[self.audities objectForKey:key] valueForKey:@"localUrl"] withKey:key];
+                NSLog(@"PLAYING a new audity %@ with url %@", key, [[self.audities objectForKey:key] valueForKey:@"localUrl"]);
+                numPlaying++;
+            }else{
+               NSLog(@"NOT gonna play that one because it is already playing");
+            }
         }
     }
 }
@@ -534,8 +547,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
-    if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
-//        NSLog(@" play %@ ", file);
+    if(!self.audities[key][@"filePlayer"]){
+        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
         __weak MHCore *weakSelf = self;
 
@@ -544,8 +557,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         [filePlayer setLoop:NO];
         filePlayer.removeUponFinish = YES;
         filePlayer.completionBlock = ^(){
-            [weakSelf playMoreAudities];
-            [[weakSelf.audities objectForKey:key] setValue:nil forKey:@"filePlayer"];
+            [weakSelf stopAudioWithKey:key];
+            //[weakSelf playMoreAudities];
+            
         };
         
         [self.audioController addChannels:@[filePlayer]];
