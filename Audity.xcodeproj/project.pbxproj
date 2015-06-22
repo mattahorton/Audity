@@ -39,7 +39,6 @@
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
 		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
 		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
-		B98B383E1AA5141C0085912F /* AUDS3.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B383D1AA5141C0085912F /* AUDS3.m */; };
 		B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E31AE9B8B800897195 /* AUDTutorialController.m */; };
 		B99120E71AE9BE8F00897195 /* AUDLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E61AE9BE8F00897195 /* AUDLaunchController.m */; };
 		B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF031AA3E819000A963B /* libc++.dylib */; };
@@ -149,8 +148,6 @@
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
-		B98B383C1AA5141C0085912F /* AUDS3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDS3.h; sourceTree = "<group>"; };
-		B98B383D1AA5141C0085912F /* AUDS3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDS3.m; sourceTree = "<group>"; };
 		B99120E21AE9B8B800897195 /* AUDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDTutorialController.h; sourceTree = "<group>"; };
 		B99120E31AE9B8B800897195 /* AUDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDTutorialController.m; sourceTree = "<group>"; };
 		B99120E51AE9BE8F00897195 /* AUDLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDLaunchController.h; sourceTree = "<group>"; };
@@ -330,8 +327,6 @@
 				B945CB3A1A6A0AE200091DC3 /* MHCore.mm */,
 				B955EF121AA3E96A000A963B /* AUDGeo.h */,
 				B955EF131AA3E96A000A963B /* AUDGeo.m */,
-				B98B383C1AA5141C0085912F /* AUDS3.h */,
-				B98B383D1AA5141C0085912F /* AUDS3.m */,
 				B99EE7341ADF0B1A002DDCB1 /* Secrets.m */,
 				B99EE7361ADF0B27002DDCB1 /* Secrets.h */,
 				B94F97E71B1A86FA00E4428E /* AUDReach.h */,
@@ -613,7 +608,6 @@
 				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
 				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
-				B98B383E1AA5141C0085912F /* AUDS3.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
 				B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */,
