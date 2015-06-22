@@ -75,6 +75,7 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 		_buttonThemes = [NSMutableArray array];
 		
 		_dismissesOnBackdropTap = NO;
+		_pairButtons = YES;
 		
 		_minContentWidth = 200.0;
 		_maxContentWidth = 270.0;
@@ -366,7 +367,7 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 - (BOOL)isPrimaryButtonAtIndex:(NSUInteger)buttonIndex {
 	if (self.numberOfButtons == 1) {
 		return YES;
-	} else if (self.numberOfButtons == 2) {
+	} else if (self.numberOfButtons == 2 && self.pairButtons) {
 		if (self.cancelButtonIndex != -1) {
 			return (buttonIndex == self.cancelButtonIndex) ? NO : YES;
 		} else {
@@ -463,11 +464,10 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 }
 
 - (NSInteger)firstOtherButtonIndex  {
-	if (self.buttons.count == 1) {
-		return (self.cancelButtonIndex == -1) ? 0 : -1;
+	if (self.cancelButtonIndex == -1) {
+		return 0;
 	}
-	
-	return 1;
+	return (self.buttons.count == 1) ? -1 : 1;
 }
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex  {
@@ -717,11 +717,9 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 - (void)dismissWithBackdropTap {
 	if ([self.delegate respondsToSelector:@selector(alertViewCancel:)]) {
 		[self.delegate alertViewCancel:self];
-	} else if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-		[self.delegate alertView:self clickedButtonAtIndex:-1];
 	}
 	
-	[self didDismissWithClickedButtonIndex:-1 animated:YES];
+	[self dismissWithClickedButtonIndex:-1 animated:YES];
 }
 
 - (void)dismissWithButton:(UIButton *)sender {
@@ -1026,7 +1024,7 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 	
 	NSUInteger buttonCount = self.buttons.count;
 	// Layout buttons:
-	if (buttonCount == 2) {
+	if (buttonCount == 2 && self.pairButtons) {
 		[self layoutButtonPairWithTheme:theme inAlertWithSize:alertSize atVerticalOffset:&offset];
 	} else if (buttonCount != 0) {
 		[self layoutButtonsWithTheme:theme inAlertWithSize:alertSize atVerticalOffset:&offset];
@@ -1172,7 +1170,7 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 	DLAVTextControlMargins contentViewMargins = theme.contentViewMargins;
 	width = MAX(width, contentViewMargins.left + contentViewWidth + contentViewMargins.right);
 	
-	if (self.buttons.count == 2) {
+	if (self.buttons.count == 2 && self.pairButtons) {
 		CGFloat leftWidth = [[self class] optimalSizeForLabel:[self buttonAtIndex:0].titleLabel inMaxSize:maxContentSize].width;
 		CGFloat rightWidth = [[self class] optimalSizeForLabel:[self buttonAtIndex:1].titleLabel inMaxSize:maxContentSize].width;
 		DLAVAlertViewButtonTheme *leftButtonTheme = [self themeForButtonAtIndex:0];
@@ -1212,6 +1210,9 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 	// Message height:
 	if (self.message) {
 		DLAVTextControlMargins messageMargins = theme.messageMargins;
+		if (!self.title) {
+			messageMargins.top = theme.titleMargins.top;
+		}
 		height += messageMargins.top + [self messageHeight] + messageMargins.bottom;
 	}
 	
@@ -1233,7 +1234,7 @@ static const CGFloat DLAVAlertViewAnimationDuration = 0.3;
 	
 	// Button heights:
 	NSUInteger buttonCount = self.buttons.count;
-	if (buttonCount == 2) {
+	if (buttonCount == 2 && self.pairButtons) {
 		DLAVAlertViewButtonTheme *leftButtonTheme = [self themeForButtonAtIndex:0];
 		DLAVAlertViewButtonTheme *rightButtonTheme = [self themeForButtonAtIndex:1];
 		DLAVTextControlMargins leftButtonMargins = leftButtonTheme.margins;

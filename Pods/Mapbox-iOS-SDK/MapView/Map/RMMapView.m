@@ -3012,8 +3012,8 @@
 
         for (RMAnnotation *annotation in previousVisibleAnnotations)
         {
-            //if ( ! annotation.isUserLocationAnnotation)
-            //{
+            if ( ! annotation.isUserLocationAnnotation)
+            {
                 if (_delegateHasWillHideLayerForAnnotation)
                     [_delegate mapView:self willHideLayerForAnnotation:annotation];
 
@@ -3023,7 +3023,7 @@
                     [_delegate mapView:self didHideLayerForAnnotation:annotation];
 
                 [_visibleAnnotations removeObject:annotation];
-            //}
+            }
         }
 
         previousVisibleAnnotations = nil;

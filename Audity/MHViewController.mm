@@ -277,7 +277,6 @@
 -(IBAction)handleButtonPress:(id)sender {
     UIButton *button = (UIButton *)sender;
     if(!self.core.isRecording) {
-        NSLog(@"Recording");
         [self.core muteAuditiesWithBool:YES];
         
         [self.core startRecording];

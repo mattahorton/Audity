@@ -12,13 +12,13 @@
 #import "AUDLaunchController.h"
 #import "AERecorder.h"
 #import "AUDGeo.h"
-#import "AUDS3.h"
+#import "AUDParse.h"
 #import <Firebase/Firebase.h>
 
 #define MAXRADIUS 500.0
 
 @class AUDGeo;
-@class AUDS3;
+@class AUDParse;
 
 @interface MHCore : NSObject <UIAlertViewDelegate>
 
@@ -28,7 +28,7 @@
 @property (nonatomic) AEAudioController *recordingController;
 @property (nonatomic,strong) AUDGeo *geo;
 @property (nonatomic,strong) Firebase *firebase;
-@property (nonatomic,strong) AUDS3 *s3;
+@property (nonatomic,strong) AUDParse *parse;
 @property (nonatomic,strong) AERecorder *recorder;
 @property (nonatomic, strong) NSMutableDictionary *audities;
 @property (nonatomic, strong) NSString *userID;

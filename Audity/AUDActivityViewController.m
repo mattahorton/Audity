@@ -81,7 +81,9 @@
         unsigned long index = [dataArray count] - 1;
         NSDictionary *respDict = [dataArray objectAtIndex:index];
         NSLog(@"%@ respDict",respDict);
-        NSURL *localURL = [self.core.s3 downloadFileWithFilename:(NSString *)[respDict objectForKey:@"recording"] isResponse:YES];
+        NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
+        [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
+        NSURL *localURL = [NSURL URLWithString:filePath];
         [localURLS addObject:localURL];
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -268,11 +270,7 @@
 #pragma mark Add Response
 
 -(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key{
-    //NSString *url = @"https://s3.amazonaws.com/audity/";
-    //url = [[url stringByAppendingString:key] stringByAppendingString:@".aiff"];
     NSString *url = [key stringByAppendingString:@".aiff"];
-    //NSLog(@"WE ARE HERE");
-    //NSLog(url);
     
     NSDictionary *dict = @{@"recording":url,
                            @"userId":self.core.userID,
@@ -292,15 +290,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSDictionary *respDict = [dataArray objectAtIndex:[indexPath indexAtPosition:1]];
     unsigned long index = [indexPath indexAtPosition:1];
     if([localURLS count] > index){
         NSURL *localURL = [localURLS objectAtIndex:index];
         if (!self.core.muteSetting) [self.core playResponse:localURL];
     }
-    //NSLog([respDict objectForKey:@"recording"]);
-    //NSURL *localUrl = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
-    //NSLog([localUrl absoluteString]);
 }
 
 #pragma mark Text Field Delegate

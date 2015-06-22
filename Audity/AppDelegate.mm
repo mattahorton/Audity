@@ -10,6 +10,7 @@
 #import "HockeySDK.h"
 #import "Secrets.h"
 #import "RNOpenSSLDecryptor.h"
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -55,6 +56,20 @@
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator
      authenticateInstallation];
+    
+    NSString *PARSEAPPID = apiKeys[@"PARSEAPPID"];
+    NSString *PARSECLIENTKEY = apiKeys[@"PARSECLIENTKEY"];
+    
+    [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:PARSEAPPID
+                  clientKey:PARSECLIENTKEY];
+    
+    [PFUser enableAutomaticUser];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
     return YES;
 }

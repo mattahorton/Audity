@@ -108,11 +108,14 @@
                 
                 self.core.audities[key] = @"taken";
             
-                NSURL *localUrl = [self.core.s3 downloadFileWithFilename:[key stringByAppendingString:@".aiff"] isResponse:NO];
+                [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".aiff"] isResponse:NO];
+                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".aiff"]];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 
                 [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    NSLog(@"adding %@", key);
+                    NSLog(@"sig %@", snapshot.value[@"signature"]);
                     [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
                                                                                                  @"location":location,
                                                                                                  @"key":key,
@@ -200,7 +203,7 @@
     
     NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":signature, @"uploaded":[[NSDate date] description]};
     Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
-    
+    NSLog(@"dict %@", dict);
     [locRef setValue:dict];
 }
 

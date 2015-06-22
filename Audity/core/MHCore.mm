@@ -87,8 +87,8 @@
     [self.geo geoInit];
     
     // Set up s3
-    self.s3 = [AUDS3 sharedInstance];
-    self.s3.core = self;
+    self.parse = [AUDParse sharedInstance];
+    self.parse.core = self;
     
     Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
     
@@ -302,13 +302,13 @@
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
     NSString *filename = [key stringByAppendingString:@".aiff"];
-    [self.s3 uploadFile:file withFilename:filename andSignature:signature];
+    [self.parse uploadFile:file withFilename:filename andSignature:signature];
 }
 
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *) audityKey {
     tempKey = [NSString stringWithString:key];
     NSString *filename = [key stringByAppendingString:@".aiff"];
-    [self.s3 uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
+    [self.parse uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
 }
 
 -(void) addLocAfterUploadWithSignature:(NSString *)signature {

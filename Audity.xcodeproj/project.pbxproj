@@ -67,6 +67,14 @@
 		B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
+		B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DA2EC91B37A3E800265C64 /* AUDParse.m */; };
+		B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECB1B37A90500265C64 /* Bolts.framework */; };
+		B9DA2ECE1B37A90500265C64 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECC1B37A90500265C64 /* Parse.framework */; };
+		B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */; };
+		B9DA2ED21B37A94D00265C64 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED11B37A94D00265C64 /* StoreKit.framework */; };
+		B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */; };
+		B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED51B37A97200265C64 /* Accounts.framework */; };
+		B9DA2ED81B37A97700265C64 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED71B37A97700265C64 /* Social.framework */; };
 		B9DC39F11AB4FDD1008E741A /* Center.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DC39F01AB4FDD1008E741A /* Center.png */; };
 		B9DDBFB81AE87865005A764D /* keys.enc in Resources */ = {isa = PBXBuildFile; fileRef = B9DDBFB71AE87865005A764D /* keys.enc */; };
 /* End PBXBuildFile section */
@@ -167,6 +175,15 @@
 		B9A0AD731AB2B3F600F4F1C8 /* Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start.png; sourceTree = "<group>"; };
 		B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start@100w.png"; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B9DA2EC81B37A3E800265C64 /* AUDParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDParse.h; sourceTree = "<group>"; };
+		B9DA2EC91B37A3E800265C64 /* AUDParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDParse.m; sourceTree = "<group>"; };
+		B9DA2ECB1B37A90500265C64 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		B9DA2ECC1B37A90500265C64 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B9DA2ED11B37A94D00265C64 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B9DA2ED51B37A97200265C64 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		B9DA2ED71B37A97700265C64 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B9DC39F01AB4FDD1008E741A /* Center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Center.png; sourceTree = "<group>"; };
 		B9DDBFB71AE87865005A764D /* keys.enc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.enc; sourceTree = "<group>"; };
 		BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -178,8 +195,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */,
+				B9DA2ED81B37A97700265C64 /* Social.framework in Frameworks */,
+				B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */,
 				49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */,
+				B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */,
+				B9DA2ED21B37A94D00265C64 /* StoreKit.framework in Frameworks */,
+				B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */,
+				B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */,
 				49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */,
 				49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */,
 				49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */,
@@ -191,8 +213,10 @@
 				B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */,
 				B98B383A1AA450730085912F /* Firebase.framework in Frameworks */,
 				B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */,
+				B9DA2ECE1B37A90500265C64 /* Parse.framework in Frameworks */,
 				B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */,
 				86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */,
+				B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */,
 				5381B60AAEC5B644F347051B /* libPods.a in Frameworks */,
 				B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */,
 			);
@@ -215,6 +239,8 @@
 				494B887C1AE99A32007F4D86 /* encrypt.sh */,
 				49E84AA51AA3F28100A451BF /* Firebase.framework */,
 				49E84AA61AA3F28100A451BF /* GeoFire.framework */,
+				B9DA2ECB1B37A90500265C64 /* Bolts.framework */,
+				B9DA2ECC1B37A90500265C64 /* Parse.framework */,
 				B9B80B5D1A690B8300A08B9B /* Podfile */,
 				86C89CF61A6891BD00799680 /* core */,
 				86C89C8A1A688DAD00799680 /* Audity */,
@@ -310,6 +336,8 @@
 				B99EE7361ADF0B27002DDCB1 /* Secrets.h */,
 				B94F97E71B1A86FA00E4428E /* AUDReach.h */,
 				B94F97E81B1A86FA00E4428E /* AUDReach.m */,
+				B9DA2EC81B37A3E800265C64 /* AUDParse.h */,
+				B9DA2EC91B37A3E800265C64 /* AUDParse.m */,
 			);
 			name = core;
 			path = Audity/core;
@@ -318,6 +346,11 @@
 		86C89CFE1A68969900799680 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9DA2ED71B37A97700265C64 /* Social.framework */,
+				B9DA2ED51B37A97200265C64 /* Accounts.framework */,
+				B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */,
+				B9DA2ED11B37A94D00265C64 /* StoreKit.framework */,
+				B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */,
 				B98B38381AA450730085912F /* Firebase.framework */,
 				B98B38391AA450730085912F /* GeoFire.framework */,
 				B98B37961AA412560085912F /* CoreLocation.framework */,
@@ -575,6 +608,7 @@
 				B982CD801B19B5790053EBC7 /* AUDLocRequestController.m in Sources */,
 				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
 				B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */,
+				B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
 				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
