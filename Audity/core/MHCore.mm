@@ -78,12 +78,20 @@
         NSLog(@"%@", errr);
     }
     
-    // Set up backend
+    // Set up geo
     self.geo = [AUDGeo sharedInstance];
-    self.firebase = [self.geo fireRef];
+    self.firebase = [[Firebase alloc] initWithUrl:@"https://audity.firebaseio.com/"];
+    self.geo.recordingsRef = [self.firebase childByAppendingPath:@"recordings"];
+    self.geo.geofireRef = [self.firebase childByAppendingPath:@"geofire"];
+    self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
+    [self.geo geoInit];
+    
+    // Set up s3
     self.s3 = [AUDS3 sharedInstance];
-    Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
     self.s3.core = self;
+    
+    Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
+    
     
     // Auth to Firebase
     NSString *FBSECRET = self.apiKeys[@"FBSECRET"];
@@ -95,6 +103,7 @@
         }
     }];
     
+    // Get and set mute setting
     defaults = [NSUserDefaults standardUserDefaults];
     NSObject *boolCheck = [defaults objectForKey:@"muteSetting"];
     if (boolCheck) {
@@ -118,6 +127,7 @@
         Firebase *thisUser = [userRef childByAppendingPath:self.userID];
         [thisUser setValue:@{@"userId":self.userID}];
     }
+    
     
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]
@@ -151,6 +161,11 @@
     }];
 }
 
+
+
+
+#pragma mark Audio Methods
+
 -(void) recorderInit{
     self.recordingController = [[AEAudioController alloc]
                                 initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
@@ -165,19 +180,6 @@
 
 -(void) destroyRecorder{
     self.recordingController = nil;
-}
-
--(void) centerMap:(CLLocation *)loc{
-    [self.vc changeMapCenterWithLocation:loc];
-//    [self.vc moveAudityToLocation:loc forKey:@"You"];
-}
-
--(void)unmute{
-    [audioOut setChannelIsMuted:NO];
-}
-
--(void)mute{
-    [audioOut setChannelIsMuted:YES];
 }
 
 -(void) startRecording {
@@ -231,10 +233,10 @@
         [alertViewStopRecording textFieldAtIndex:0].delegate = self.vc;
         [alertViewStopRecording show];
         
-       /* UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
-        content.frame = CGRectMake(0,0,80,80);
-        alertViewStopRecording.contentView = content;
-        */
+        /* UIImageView *content = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Focus.png"]];
+         content.frame = CGRectMake(0,0,80,80);
+         alertViewStopRecording.contentView = content;
+         */
         
         alertViewStopRecording.contentView = replayButton;
         
@@ -262,22 +264,51 @@
     DLAVAlertView *alertViewStopRecording = [[DLAVAlertView alloc]initWithTitle:@"Sign Your Response" message:nil delegate:vc cancelButtonTitle:@"Cancel" otherButtonTitles:@"Upload", nil];
     alertViewStopRecording.alertViewStyle=DLAVAlertViewStylePlainTextInput;
     [alertViewStopRecording textFieldAtIndex:0].delegate = (AUDActivityViewController *)vc;
-//    alertViewStopRecording.textField
+    //    alertViewStopRecording.textField
     [alertViewStopRecording show];
     
     alertViewStopRecording.contentView = replayButton;
 }
 
+-(void)unmute{
+    [audioOut setChannelIsMuted:NO];
+}
+
+-(void)mute{
+    [audioOut setChannelIsMuted:YES];
+}
+
+
+
+
+
+
+
+
+
+#pragma mark Location Methods
+
+-(void) centerMap:(CLLocation *)loc{
+    [self.vc changeMapCenterWithLocation:loc];
+//    [self.vc moveAudityToLocation:loc forKey:@"You"];
+}
+
+
+
+
+
+
+
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
-    key = [key stringByAppendingString:@".aiff"];
-    [self.s3 uploadFile:file withKey:key andSignature:signature];
+    NSString *filename = [key stringByAppendingString:@".aiff"];
+    [self.s3 uploadFile:file withFilename:filename andSignature:signature];
 }
 
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *) audityKey {
     tempKey = [NSString stringWithString:key];
-    key = [key stringByAppendingString:@".aiff"];
-    [self.s3 uploadResponse:file withKey:key andSignature:signature forAudity:audityKey];
+    NSString *filename = [key stringByAppendingString:@".aiff"];
+    [self.s3 uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
 }
 
 -(void) addLocAfterUploadWithSignature:(NSString *)signature {
@@ -326,6 +357,15 @@
     }
     return num_likes;
 }
+
+
+
+
+
+
+
+
+
 
 #pragma mark Filtering Methods
 
@@ -464,6 +504,14 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     }
 }
 
+
+
+
+
+
+
+
+
 #pragma mark Play/Stop Audio
 
 -(void) playRecorded:(NSURL *)file withButton:(UIButton *)button{
@@ -476,12 +524,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     self.recordedPlayer.removeUponFinish = YES;
     
     __weak UIButton *replayButtonWeak = replayButton;
+    __weak MHCore *weakSelf = self;
     if (button) {
-        __weak UIButton *replayButtonWeak = button;
+        replayButtonWeak = button;
     }
     
     self.recordedPlayer.completionBlock = ^ () {
-        self.replaying = NO;
+        weakSelf.replaying = NO;
         [replayButtonWeak setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
     };
     
@@ -504,7 +553,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
-    if(!self.audities[key][@"filePlayer"] && !self.audities[key]){
+    
+    if(self.audities[key] && !self.audities[key][@"filePlayer"]){
 //        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
@@ -564,6 +614,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     self.muteAudities = val;
     [self setAllAudioParameters];
 }
+
+
+
+
+
+
+
 
 #pragma mark View Callbacks
 

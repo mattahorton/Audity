@@ -38,6 +38,8 @@
     UIImageView *centerGodMarker;
 }
 
+#pragma mark View Delegate Methods
+
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.core muteAuditiesWithBool:YES];
@@ -52,9 +54,158 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Setup notifications for background, foreground, and lost Internet connection
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
+    
+    
+    // Clear Temp Directory
+    NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+    for (NSString *file in tmpDirectory) {
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+    }
+    
+    
+    // Init size values for MapBox
+    viewHeight = [[UIScreen mainScreen] bounds].size.height;
+    viewWidth = [[UIScreen mainScreen] bounds].size.width;
+    
+    // Set status bar style
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    
+    // Init the core
+    self.core = [MHCore sharedInstance];
+    self.core.vc = self;
+    
+    // initialize core
+    [self.core coreInit];
+    
+    focusButtons = [NSMutableArray arrayWithArray:@[]];
+    
+    [self initMapBox];
+    [self initButtons];
+    [self initRadius];
+    
+}
+
 -(void) redraw {
     [mapView setNeedsDisplay];
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    if ([self isViewLoaded] && ([[self view] window] == nil)) {
+        self.view = nil;
+        
+    }
+    
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+
+
+
+#pragma mark UI Init Methods
+
+- (void)initMapBox {
+    self.mapboxKey = self.core.apiKeys[@"MAPBOX"];
+    self.mapID = self.core.apiKeys[@"MAPID"];
+    
+    //public key access token for mapbox
+    NSString *token = self.mapboxKey;
+    [[RMConfiguration sharedInstance] setAccessToken:token];
+    
+    //get source for tiles
+    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:self.mapID];
+    
+    //get our mapview and add it to our view
+    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
+    NSLog(@"%@ MAPVIEW", mapView);
+    mapView.delegate = self;
+    [self.view addSubview:mapView];
+    
+    // disable dragging on the map
+    mapView.draggingEnabled = NO;
+    mapView.zoomingInPivotsAroundCenter = YES;
+    //    mapView.clusteringEnabled = YES;
+    mapView.userInteractionEnabled = NO;
+    mapView.showsUserLocation = YES;
+    
+    // init the dict for on-screen audities
+    self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
+    
+    mapView.minZoom = MIN_ZOOM;
+    mapView.maxZoom = MAX_ZOOM;
+    mapView.bouncingEnabled = YES;
+    
+    [mapView setZoom:MAX_ZOOM animated:NO];
+    
+    [MBProgressHUD showHUDAddedTo:mapView animated:YES];
+    
+}
+
+- (void) initButtons {
+    addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    [addButton setTitle:@"Record Audity" forState:UIControlStateNormal];
+    [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
+    addButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                                 viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
+                                 BUTTON_WIDTH, BUTTON_HEIGHT);
+    [addButton setEnabled:NO];
+    [mapView addSubview:addButton];
+    
+    godButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
+    [godButton setTitle:@"God Mode" forState:UIControlStateNormal];
+    [godButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
+    godButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
+                                 viewHeight - 2*BUTTON_HEIGHT - BUTTON_BORDER_OFFSET,
+                                 BUTTON_WIDTH, BUTTON_HEIGHT);
+    [godButton setEnabled:NO];
+    [mapView addSubview:godButton];
+    
+    //center button so I can see where the center is
+    centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
+    centerGodMarker.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/8,
+                                       viewHeight/2 - BUTTON_HEIGHT/8,
+                                       BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
+    centerGodMarker.hidden = YES;
+    [mapView addSubview:centerGodMarker];
+    
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton addTarget:self action:@selector(settingsPress:) forControlEvents:UIControlEventTouchUpInside];
+    [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
+    settingsButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH,
+                                      BUTTON_BORDER_OFFSET*2,
+                                      BUTTON_WIDTH, BUTTON_HEIGHT);
+    [settingsButton setEnabled:NO];
+    [mapView addSubview:settingsButton];
+    
+}
+
+-(void)initRadius{
+    RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
+    
+    //do some stuff
+}
+
+
+
+
+
+
+#pragma Audity Methods
 
 -(RMMarker *) newAudityMarkerWithColor:(UIColor *)color {
     RMMarker *marker = [[RMMarker alloc] initWithMapboxMarkerImage:nil tintColor:color];
@@ -117,134 +268,11 @@
     //mapView.centerCoordinate = loc.coordinate;
 }
 
-- (void)initMapBox {
-    self.mapboxKey = self.core.apiKeys[@"MAPBOX"];
-    self.mapID = self.core.apiKeys[@"MAPID"];
-    
-    //public key access token for mapbox
-    NSString *token = self.mapboxKey;
-    [[RMConfiguration sharedInstance] setAccessToken:token];
-    
-    //get source for tiles
-    RMMapboxSource *source = [[RMMapboxSource alloc] initWithMapID:self.mapID];
-    
-    //get our mapview and add it to our view
-    mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
-    NSLog(@"%@ MAPVIEW", mapView);
-    mapView.delegate = self;
-    [self.view addSubview:mapView];
-    
-    // disable dragging on the map
-    mapView.draggingEnabled = NO;
-    mapView.zoomingInPivotsAroundCenter = YES;
-//    mapView.clusteringEnabled = YES;
-    mapView.userInteractionEnabled = NO;
-    mapView.showsUserLocation = YES;
 
-    // init the dict for on-screen audities
-    self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
 
-    mapView.minZoom = MIN_ZOOM;
-    mapView.maxZoom = MAX_ZOOM;
-    mapView.bouncingEnabled = YES;
-    
-    [mapView setZoom:MAX_ZOOM animated:NO];
-    
-    [MBProgressHUD showHUDAddedTo:mapView animated:YES];
-    
-}
 
-- (void) initButton {
-    addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton addTarget:self action:@selector(handleButtonPress:) forControlEvents:UIControlEventTouchUpInside];
-    [addButton setTitle:@"Record Audity" forState:UIControlStateNormal];
-    [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
-    addButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
-                              viewHeight - BUTTON_HEIGHT - (BUTTON_BORDER_OFFSET / 2),
-                              BUTTON_WIDTH, BUTTON_HEIGHT);
-    [addButton setEnabled:NO];
-    [mapView addSubview:addButton];
-    
-    godButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [godButton addTarget:self action:@selector(godModePress:) forControlEvents:UIControlEventTouchUpInside];
-    [godButton setTitle:@"God Mode" forState:UIControlStateNormal];
-    [godButton setImage:[UIImage imageNamed:@"GodMode.png"] forState:UIControlStateNormal];
-    godButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH - (BUTTON_BORDER_OFFSET * 2),
-                              viewHeight - 2*BUTTON_HEIGHT - BUTTON_BORDER_OFFSET,
-                              BUTTON_WIDTH, BUTTON_HEIGHT);
-    [godButton setEnabled:NO];
-    [mapView addSubview:godButton];
-    
-    //center button so I can see where the center is
-    centerGodMarker = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Center.png"]];
-    centerGodMarker.frame = CGRectMake(viewWidth/2 - BUTTON_WIDTH/8,
-                                 viewHeight/2 - BUTTON_HEIGHT/8,
-                                 BUTTON_WIDTH/4, BUTTON_HEIGHT/4);
-    centerGodMarker.hidden = YES;
-    [mapView addSubview:centerGodMarker];
-    
-    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [settingsButton addTarget:self action:@selector(settingsPress:) forControlEvents:UIControlEventTouchUpInside];
-    [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
-    [settingsButton setImage:[UIImage imageNamed:@"Settings.png"] forState:UIControlStateNormal];
-    settingsButton.frame = CGRectMake(viewWidth - BUTTON_WIDTH,
-                                 BUTTON_BORDER_OFFSET*2,
-                                 BUTTON_WIDTH, BUTTON_HEIGHT);
-    [settingsButton setEnabled:NO];
-    [mapView addSubview:settingsButton];
-    
-}
 
--(void)initRadius{
-    RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
-    
-//do some stuff
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
-
-    
-    // Clear Temp Directory
-    NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
-    for (NSString *file in tmpDirectory) {
-        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
-    }
-    
-    viewHeight = [[UIScreen mainScreen] bounds].size.height;
-    viewWidth = [[UIScreen mainScreen] bounds].size.width;
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-    
-    //Init the core
-    self.core = [MHCore sharedInstance];
-    self.core.vc = self;
-    // initialize core
-    [self.core coreInit];
-
-    focusButtons = [NSMutableArray arrayWithArray:@[]];
-    
-    [self initMapBox];
-    [self initButton];
-    [self initRadius];
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-    if ([self isViewLoaded] && ([[self view] window] == nil)) {
-        self.view = nil;
-        
-    }
-    
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark UI Interactions
 
 -(IBAction)handleButtonPress:(id)sender {
     UIButton *button = (UIButton *)sender;
@@ -300,6 +328,13 @@
     [self.core.geo updateAfterDragWithCenter:[[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude]];
 }
 
+
+
+
+
+
+
+
 #pragma mark MapView Delegate Methods
 //37.42077700331567, -122.1722705104595
 
@@ -324,6 +359,7 @@
 - (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
     UIButton * button = (UIButton *)control;
+    
     if([[button currentTitle] isEqualToString:@"respond"]){
         NSArray *keys = [self.core.audities allKeys];
         
@@ -380,6 +416,11 @@
     //NSLog(@"You tapped the callout button!");
 }
 
+
+
+
+
+
 #pragma mark Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -389,6 +430,13 @@
         destViewController.info = dict;
     }
 }
+
+
+
+
+
+
+
 
 #pragma mark Outside Access to Views
 - (void) stopSpinner {
@@ -405,6 +453,15 @@
 -(void)resetNewAudityButton {
     [addButton setImage:[UIImage imageNamed:@"RecButton.png"] forState:UIControlStateNormal];
 }
+
+
+
+
+
+
+
+
+
 
 #pragma mark Background/Foreground
 
@@ -431,6 +488,14 @@
     }
 }
 
+
+
+
+
+
+
+
+
 #pragma mark Text Field Delegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -443,6 +508,13 @@
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return newLength <= 22;
 }
+
+
+
+
+
+
+
 
 #pragma mark Reachability
 

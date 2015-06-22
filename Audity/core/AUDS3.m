@@ -49,11 +49,11 @@
     _transferManager = [[AWSS3TransferManager alloc] initWithConfiguration:_configuration identifier:@"S3"];
 }
 
--(void) uploadFile:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature {
+-(void) uploadFile:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature {
     
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = @"audity";
-    uploadRequest.key = key;
+    uploadRequest.key = filename;
     uploadRequest.body = file;
     
     [[self.transferManager upload:uploadRequest] continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -78,7 +78,7 @@
         }
         
         if (task.result) {
-            AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
+//            AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
             // The file uploaded successfully.
             NSLog(@"file uploaded successfully");
             
@@ -96,17 +96,17 @@
     uploadRequest.uploadProgress =  ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend){
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
-            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
+//            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
 //            NSLog(@"%f percent complete", percent*100);
         });
     };
 }
 
--(void) uploadResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
+-(void) uploadResponse:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
     
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = @"audity";
-    uploadRequest.key = key;
+    uploadRequest.key = filename;
     uploadRequest.body = file;
     
     [[self.transferManager upload:uploadRequest] continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -131,7 +131,7 @@
         }
         
         if (task.result) {
-            AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
+//            AWSS3TransferManagerUploadOutput *uploadOutput = task.result;
             // The file uploaded successfully.
             NSLog(@"file uploaded successfully");
             
@@ -149,16 +149,17 @@
     uploadRequest.uploadProgress =  ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend){
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
-            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
+//            double percent = (double)totalBytesSent/(double)totalBytesExpectedToSend;
 //            NSLog(@"%f percent complete", percent*100);
         });
     };
 }
 
-//-(NSURL *) downloadFileWithKey:(NSString *)key{
--(NSURL *) downloadFileWithKey:(NSString *)key isResponse:(BOOL)response{
+
+-(NSURL *) downloadFileWithFilename:(NSString *)filename isResponse:(BOOL)response{
+    
     // Construct the NSURL for the download location.
-    NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:key];
+    NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:filename];
     NSURL *downloadingFileURL = [NSURL fileURLWithPath:downloadingFilePath];
     [[NSFileManager defaultManager] removeItemAtPath:downloadingFilePath error:NULL];
     
@@ -166,9 +167,8 @@
     AWSS3TransferManagerDownloadRequest *downloadRequest = [AWSS3TransferManagerDownloadRequest new];
     
     downloadRequest.bucket = @"audity";
-    downloadRequest.key = key;
+    downloadRequest.key = filename;
     downloadRequest.downloadingFileURL = downloadingFileURL;
-    NSString * urlstring =[downloadingFileURL absoluteString];
     
     __weak AUDS3 *weakSelf = self;
     // Download the file.
@@ -194,8 +194,10 @@
            }
            
            if (task.result) {
-               AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
+//               AWSS3TransferManagerDownloadOutput *downloadOutput = task.result;
                //File downloaded successfully.
+               NSString *key = [filename stringByDeletingPathExtension];
+               NSLog(@"%@ key by removing extension",key);
                if(!response)[strongSelf.core playAudio:downloadingFileURL withKey:key];
            }
            return nil;
@@ -204,7 +206,7 @@
     downloadRequest.downloadProgress =  ^(int64_t bytesReceived, int64_t totalBytesReceived, int64_t totalBytesExpectedToReceive){
         dispatch_async(dispatch_get_main_queue(), ^{
             //Update progress
-            double percent = (double)totalBytesReceived/(double)totalBytesExpectedToReceive;
+//            double percent = (double)totalBytesReceived/(double)totalBytesExpectedToReceive;
 //            NSLog(@"%f percent complete", percent*100);
         });
     };

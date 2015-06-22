@@ -16,7 +16,6 @@
 
 @interface AUDGeo : NSObject <CLLocationManagerDelegate>
 
-@property (nonatomic, strong) Firebase *fireRef;
 @property (nonatomic, strong) Firebase *recordingsRef;
 @property (nonatomic, strong) Firebase *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
@@ -29,6 +28,7 @@
 @property (nonatomic) BOOL locationSetting;
 
 + (id)sharedInstance;
+-(void) geoInit;
 -(void)addLoc:(NSString *) uuid bySignature:(NSString *)signature;
 -(void)updateAfterDragWithCenter:(CLLocation *)center;
 

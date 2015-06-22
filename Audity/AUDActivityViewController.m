@@ -40,7 +40,7 @@
     if(_audity != nil) _viewTitle.title = _audity[@"signature"];
     
     self.core = [MHCore sharedInstance];
-    _firebase = self.core.geo.fireRef;
+    _firebase = self.core.firebase;
     recordingsRef = [_firebase childByAppendingPath:@"recordings"];
     responsesRef = [_firebase childByAppendingPath:@"responses"];
     
@@ -81,7 +81,7 @@
         unsigned long index = [dataArray count] - 1;
         NSDictionary *respDict = [dataArray objectAtIndex:index];
         NSLog(@"%@ respDict",respDict);
-        NSURL *localURL = [self.core.s3 downloadFileWithKey:[respDict objectForKey:@"recording"] isResponse:YES];
+        NSURL *localURL = [self.core.s3 downloadFileWithFilename:(NSString *)[respDict objectForKey:@"recording"] isResponse:YES];
         [localURLS addObject:localURL];
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];

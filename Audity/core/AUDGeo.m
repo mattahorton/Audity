@@ -32,12 +32,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.fireRef = [[Firebase alloc] initWithUrl:@"https://audity.firebaseio.com/"];
-        self.recordingsRef = [self.fireRef childByAppendingPath:@"recordings"];
-        self.geofireRef = [self.fireRef childByAppendingPath:@"geofire"];
-        self.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geofireRef];
-        [self geoInit];
-        
+        // Setup foreground and background notifications
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
@@ -92,6 +87,7 @@
     center = self.currentLoc;
     [circleQuery setCenter:center];
     
+    
     if (!oldLocation) {
         center = [[CLLocation alloc] initWithLatitude:center.coordinate.latitude longitude:center.coordinate.longitude];
         
@@ -112,7 +108,7 @@
                 
                 self.core.audities[key] = @"taken";
             
-                NSURL *localUrl = [self.core.s3 downloadFileWithKey:[key stringByAppendingString:@".aiff"] isResponse:NO];
+                NSURL *localUrl = [self.core.s3 downloadFileWithFilename:[key stringByAppendingString:@".aiff"] isResponse:NO];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 
