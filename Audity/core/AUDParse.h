@@ -20,6 +20,7 @@
 
 -(void) uploadFile:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature;
 -(void) uploadResponse:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature forAudity:(NSString *)audityKey;
+// Add callback?
 -(void) downloadFileWithFilename:(NSString *)filename isResponse:(BOOL)response;
 
 

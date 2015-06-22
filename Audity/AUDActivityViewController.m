@@ -84,6 +84,7 @@
 
             NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
             
+            // Lets add a callback here and only make the cell enabled after download is done
             [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
             NSURL *localURL = [NSURL URLWithString:filePath];
             [localURLS addObject:localURL];
@@ -288,8 +289,6 @@
     Firebase *recRespRef = [[[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"responses"] childByAppendingPath:key];
     
     [recRespRef setValue:key];
-    
-//    [self reloadData];
 }
 
 
