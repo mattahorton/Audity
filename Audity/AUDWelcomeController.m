@@ -12,7 +12,6 @@
 
 - (IBAction)welcomeTapped:(id)sender {
     [self.containerController welcomeTapped];
-    NSLog(@"WHAT");
 }
 
 @end

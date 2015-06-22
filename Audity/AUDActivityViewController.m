@@ -67,7 +67,7 @@
     
     [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:(NSString *)self.audity[@"key"]]
         observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"%@", snapshot.value[@"recording"]);
+//        NSLog(@"%@", snapshot.value[@"recording"]);
             
         [dataArray addObject:(NSDictionary *)snapshot.value];
         [self reloadData];
@@ -81,9 +81,9 @@
 
         for (int index = (int)[localURLS count]; index < [dataArray count]; index++) {
             NSDictionary *respDict = [dataArray objectAtIndex:index];
-            NSLog(@"%@ respDict",respDict);
+
             NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
-            NSLog(@"gonna download");
+            
             [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
             NSURL *localURL = [NSURL URLWithString:filePath];
             [localURLS addObject:localURL];

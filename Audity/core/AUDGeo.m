@@ -114,8 +114,7 @@
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 
                 [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                    NSLog(@"adding %@", key);
-                    NSLog(@"sig %@", snapshot.value[@"signature"]);
+
                     [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
                                                                                                  @"location":location,
                                                                                                  @"key":key,
@@ -203,7 +202,7 @@
     
     NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":signature, @"uploaded":[[NSDate date] description]};
     Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
-    NSLog(@"dict %@", dict);
+
     [locRef setValue:dict];
 }
 

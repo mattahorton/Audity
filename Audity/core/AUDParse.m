@@ -39,9 +39,8 @@
 
 -(void) uploadResponse:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
     
-    NSLog(@"Uploading");
+
     PFObject *fileObject = [PFObject objectWithClassName:@"Response"];
-    NSLog(@"%@ filename | %@ file", filename, file);
     PFFile *parseFile = [PFFile fileWithName:filename contentsAtPath:[file path]];
     fileObject[@"audio"] = parseFile;
     fileObject[@"key"] = [filename stringByDeletingPathExtension];

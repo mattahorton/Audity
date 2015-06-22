@@ -37,8 +37,6 @@
                     animated:NO completion:nil];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.6 alpha:1];
-    
-    NSLog(@"loaded!");
 }
 
 -(void) viewDidAppear:(BOOL)animated {
