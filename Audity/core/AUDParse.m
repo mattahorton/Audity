@@ -20,9 +20,8 @@
 }
 
 -(void) uploadFile:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature {
-    NSLog(@"Uploading");
+
     PFObject *fileObject = [PFObject objectWithClassName:@"Audity"];
-    NSLog(@"%@ filename | %@ file", filename, file);
     PFFile *parseFile = [PFFile fileWithName:filename contentsAtPath:[file path]];
     fileObject[@"audio"] = parseFile;
     fileObject[@"key"] = [filename stringByDeletingPathExtension];
@@ -40,13 +39,30 @@
 
 -(void) uploadResponse:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
     
+    NSLog(@"Uploading");
+    PFObject *fileObject = [PFObject objectWithClassName:@"Response"];
+    NSLog(@"%@ filename | %@ file", filename, file);
+    PFFile *parseFile = [PFFile fileWithName:filename contentsAtPath:[file path]];
+    fileObject[@"audio"] = parseFile;
+    fileObject[@"key"] = [filename stringByDeletingPathExtension];
+    fileObject[@"audity"] = audityKey;
+    
+    [fileObject saveInBackgroundWithBlock: ^(BOOL succeeded, NSError *error) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                     objectAtIndex:0];
+        [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"] error:nil];
+        
+        [self.core addResponseToViewAfterUploadWithSignature:signature];
+        
+    }];
+    
     
     
 }
 
 -(void) downloadFileWithFilename:(NSString *)filename isResponse:(BOOL)response {
-    
-    NSLog(@"downloading");
+
     // Construct the NSURL for the download location.
     NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:filename];
     NSURL *downloadingFileURL = [NSURL URLWithString:downloadingFilePath];
@@ -57,7 +73,13 @@
     
     __weak AUDParse *weakSelf = self;
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Audity"];
+    PFQuery *query;
+    if(!response) {
+         query = [PFQuery queryWithClassName:@"Audity"];
+    } else {
+        query = [PFQuery queryWithClassName:@"Response"];
+    }
+    
     [query whereKey:@"key" equalTo:key];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -69,6 +91,7 @@
                 [data writeToFile:downloadingFilePath atomically:NO];
                 
                 if(!response)[weakSelf.core playAudio:downloadingFileURL withKey:key];
+
             } progressBlock:^(int percentDone) {
                 
             }];

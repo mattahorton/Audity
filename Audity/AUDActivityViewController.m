@@ -76,19 +76,22 @@
     }];
 }
 
--(void)reloadData{
-    if (!localURLS || !([localURLS count] > 0)) {
-        unsigned long index = [dataArray count] - 1;
-        NSDictionary *respDict = [dataArray objectAtIndex:index];
-        NSLog(@"%@ respDict",respDict);
-        NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
-        [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
-        NSURL *localURL = [NSURL URLWithString:filePath];
-        [localURLS addObject:localURL];
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-        UITableViewCell *cell = [self tableView:self.tblView cellForRowAtIndexPath:indexPath];
-        [self setEnabled:YES forCell:cell];
+-(void)reloadData{    
+    if (!localURLS || ([localURLS count] < [dataArray count])) {
+
+        for (int index = (int)[localURLS count]; index < [dataArray count]; index++) {
+            NSDictionary *respDict = [dataArray objectAtIndex:index];
+            NSLog(@"%@ respDict",respDict);
+            NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
+            NSLog(@"gonna download");
+            [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
+            NSURL *localURL = [NSURL URLWithString:filePath];
+            [localURLS addObject:localURL];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            UITableViewCell *cell = [self tableView:self.tblView cellForRowAtIndexPath:indexPath];
+            [self setEnabled:YES forCell:cell];
+        }
     }
 }
 
@@ -119,7 +122,7 @@
     NSDictionary *response = dataArray[indexPath.row];
     cell.textLabel.text = response[@"signature"];
     cell.detailTextLabel.text = response[@"uploaded"];
-    NSLog(@"%ld section", (long)indexPath.section);
+
     if (!localURLS || indexPath.row >= localURLS.count || !localURLS[indexPath.row]) [self setEnabled:NO forCell:cell];
 
     return cell;
@@ -285,6 +288,8 @@
     Firebase *recRespRef = [[[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"responses"] childByAppendingPath:key];
     
     [recRespRef setValue:key];
+    
+//    [self reloadData];
 }
 
 
@@ -293,7 +298,9 @@
     unsigned long index = [indexPath indexAtPosition:1];
     if([localURLS count] > index){
         NSURL *localURL = [localURLS objectAtIndex:index];
-        if (!self.core.muteSetting) [self.core playResponse:localURL];
+        NSString *localString = [localURL absoluteString];
+        NSString *downloadingFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:localString];
+        if (!self.core.muteSetting) [self.core playResponse:[NSURL URLWithString:downloadingFilePath]];
     }
 }
 
