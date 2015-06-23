@@ -187,11 +187,11 @@
         [self recorderInit];
         self.isRecording = YES;
         self.recorder = [[AERecorder alloc] initWithAudioController:_recordingController];
-        NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.aiff"];
+        NSString *filePath = [documentsFolder stringByAppendingPathComponent:@"Recording.m4a"];
         // Start the recording process
         NSError *error = NULL;
         if ( ![_recorder beginRecordingToFileAtPath:filePath
-                                           fileType:kAudioFileAIFFType
+                                           fileType:kAudioFileM4AType
                                               error:&error] ) {
             // Report error
             return;
@@ -301,13 +301,13 @@
 
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
-    NSString *filename = [key stringByAppendingString:@".aiff"];
+    NSString *filename = [key stringByAppendingString:@".m4a"];
     [self.parse uploadFile:file withFilename:filename andSignature:signature];
 }
 
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *) audityKey {
     tempKey = [NSString stringWithString:key];
-    NSString *filename = [key stringByAppendingString:@".aiff"];
+    NSString *filename = [key stringByAppendingString:@".m4a"];
     [self.parse uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
 }
 
@@ -636,7 +636,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             }
         }
         
-        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];
         [self uploadNewAudity:file withKey:uuid andSignature:signature];
     }
@@ -651,7 +651,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
     if (!self.replaying) {
         self.replaying = YES;
         [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
-        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"]];
         [self playRecorded:file withButton:nil];
     } else {
         self.recordedPlayer.channelIsPlaying = !self.recordedPlayer.channelIsPlaying;

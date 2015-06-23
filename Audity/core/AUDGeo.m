@@ -108,8 +108,8 @@
                 
                 self.core.audities[key] = @"taken";
             
-                [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".aiff"] isResponse:NO];
-                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".aiff"]];
+                [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".m4a"] isResponse:NO];
+                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".m4a"]];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 
@@ -197,8 +197,8 @@
               }
     }];
     
-    NSString *url = @"https://s3.amazonaws.com/audity/";
-    url = [[url stringByAppendingString:uuid] stringByAppendingString:@".aiff"];
+    NSString *url = @"";
+    url = [[url stringByAppendingString:uuid] stringByAppendingString:@".m4a"];
     
     NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":signature, @"uploaded":[[NSDate date] description]};
     Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];

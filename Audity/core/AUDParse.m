@@ -30,7 +30,7 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                      objectAtIndex:0];
-        [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"] error:nil];
+        [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"] error:nil];
         
         [self.core addLocAfterUploadWithSignature:signature];
         
@@ -50,7 +50,7 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                      objectAtIndex:0];
-        [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"] error:nil];
+        [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"] error:nil];
         
         [self.core addResponseToViewAfterUploadWithSignature:signature];
         

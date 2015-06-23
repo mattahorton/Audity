@@ -240,7 +240,7 @@
         
         NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
     objectAtIndex:0];
-        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];
         [self.core uploadNewAudityResponse:file withKey:uuid andSignature:signature forAudity:(NSString *)self.audity[@"key"]];
     } else {
@@ -258,7 +258,7 @@
         self.core.replaying = YES;
         
         [replayButton setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
-        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.aiff"]];
+        NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"]];
         [self.core playRecorded:file withButton:replayButton];
     } else {
         self.core.recordedPlayer.channelIsPlaying = !self.core.recordedPlayer.channelIsPlaying;
@@ -274,7 +274,7 @@
 #pragma mark Add Response
 
 -(void)addResponseToAudityWithSignature:(NSString *)signature andKey:(NSString *)key{
-    NSString *url = [key stringByAppendingString:@".aiff"];
+    NSString *url = [key stringByAppendingString:@".m4a"];
     
     NSDictionary *dict = @{@"recording":url,
                            @"userId":self.core.userID,
