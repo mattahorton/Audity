@@ -12,10 +12,9 @@
 #import "AEUtilities.h"
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
-#import "UICKeychainStore.h"
-#import "RNCryptor.h"
-#import "RNOpenSSLDecryptor.h"
 #import "Secrets.h"
+#import "AUDFirebase.h"
+#import "AUDUser.h"
 
 #define SRATE 24000
 #define FRAMESIZE 512
@@ -50,37 +49,12 @@
     
     self.audities = @{};
     
-    // Get path to encrypted data
-    NSString *encryptedPlistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"enc"];
-    
-    // Read in encrypted data
-    NSData *encryptedData = [NSData dataWithContentsOfFile:encryptedPlistPath];
-    
-    // Decrypt data
-    NSError *error;
-    NSData *decryptedData = [RNOpenSSLDecryptor decryptData:encryptedData
-                                               withSettings:kRNCryptorAES256Settings
-                                               password:secretPwdForPlist
-                                                      error:&error];
-
-    // Log any errors in decryption
-    if(error) {
-        NSLog(@"%@", error);
-    }
-
-    // Get api keys
-    NSString *errr;
-    NSPropertyListFormat format;
-    self.apiKeys = [NSPropertyListSerialization propertyListFromData:decryptedData mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&errr];
-    
-    // Log any errors in serialization
-    if(errr) {
-        NSLog(@"%@", errr);
-    }
+    Secrets *secrets = [Secrets sharedInstance];
+    self.apiKeys = secrets.apiKeys;
     
     // Set up geo
     self.geo = [AUDGeo sharedInstance];
-    self.firebase = [[Firebase alloc] initWithUrl:@"https://audity.firebaseio.com/"];
+    self.firebase = [AUDFirebase sharedInstance].firebase;
     self.geo.recordingsRef = [self.firebase childByAppendingPath:@"recordings"];
     self.geo.geofireRef = [self.firebase childByAppendingPath:@"geofire"];
     self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
@@ -89,19 +63,6 @@
     // Set up s3
     self.parse = [AUDParse sharedInstance];
     self.parse.core = self;
-    
-    Firebase *userRef = [self.firebase childByAppendingPath:@"users"];
-    
-    
-    // Auth to Firebase
-    NSString *FBSECRET = self.apiKeys[@"FBSECRET"];
-    [self.firebase authWithCustomToken:FBSECRET withCompletionBlock:^(NSError *error, FAuthData *authData) {
-        if (error) {
-            //NSLog(@"Login Failed! %@", error);
-        } else {
-            //NSLog(@"Login succeeded! %@", authData);
-        }
-    }];
     
     // Get and set mute setting
     defaults = [NSUserDefaults standardUserDefaults];
@@ -113,21 +74,9 @@
         [defaults setBool:_muteSetting forKey:@"muteSetting"];
     }
     
-    // Find user ID in keychain
-    UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
-    self.userID = [keychain stringForKey:@"userId"];
-    
-    if (!self.userID) {
-        // Generate ID if there is none
-        self.userID = [[NSUUID UUID] UUIDString];
-        // Store ID in keychain
-        [keychain setString:self.userID forKey:@"userId"];
-        
-        // Store ID in Firebase
-        Firebase *thisUser = [userRef childByAppendingPath:self.userID];
-        [thisUser setValue:@{@"userId":self.userID}];
-    }
-    
+    AUDUser *audUser = [AUDUser sharedInstance];
+    [audUser authAnon];
+    self.userID = audUser.userID;
     
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]

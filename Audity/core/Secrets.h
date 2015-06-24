@@ -14,3 +14,11 @@
 extern NSString *secretPwdForPlist;
 
 #endif
+
+@interface Secrets : NSObject
+
+@property (strong,nonatomic) NSDictionary *apiKeys;
+
++(id)sharedInstance;
+
+@end
