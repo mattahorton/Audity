@@ -1421,6 +1421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
 		95ADC1FBD6AB04DEC9E2BC1E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1467,12 +1468,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				400B05F0A27ABDE968E2421B /* Foundation.framework in Frameworks */,
+				72D592A212B08CFF338DB2C8 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+
 		0C86297196CEE66CDDDDD68C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1490,9 +1494,10 @@
 			children = (
 				E1D31472011C6ABD6150B411 /* iOS */,
 			);
-			name = Frameworks;
+			path = RNCryptor;
 			sourceTree = "<group>";
 		};
+
 		14FF66ADC142AE225B3EBE2A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1952,6 +1957,7 @@
 			path = "../Target Support Files/Pods-HockeySDK";
 			sourceTree = "<group>";
 		};
+
 		82EC4C7354ED94FD29FA5809 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2363,6 +2369,7 @@
 			path = "Mapbox-iOS-SDK";
 			sourceTree = "<group>";
 		};
+
 		F41664AB9F5904FA34BAD735 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -2750,6 +2757,19 @@
 			buildRules = (
 			);
 			dependencies = (
+				97929C0C4CB760CCBCE5FDBF /* PBXTargetDependency */,
+				4FA92DB89FF07A6873D4B5F9 /* PBXTargetDependency */,
+				348DB2AE5F0F391C8F89A067 /* PBXTargetDependency */,
+				65027FB71BE56D0EC54577FD /* PBXTargetDependency */,
+				920532A35E7C579DBA48645A /* PBXTargetDependency */,
+				1BD042C07ED014F80FCF254D /* PBXTargetDependency */,
+				DE6DFB6840F018BE45B9FEBD /* PBXTargetDependency */,
+				1F723D194A94EF10929EB0EF /* PBXTargetDependency */,
+				BB3016DEF900A1C89393F990 /* PBXTargetDependency */,
+				A55EA26221E35989EE99A4E7 /* PBXTargetDependency */,
+				CFFBA01EB5815F86C42F13D4 /* PBXTargetDependency */,
+				515C650084AEADAE0A86A47B /* PBXTargetDependency */,
+				0FA741A1768C51EED1DB0BB8 /* PBXTargetDependency */,
 			);
 			name = "Pods-UICKeyChainStore";
 			productName = "Pods-UICKeyChainStore";
@@ -2972,6 +2992,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D38165223B23B3E77241AE28 /* PBXTargetDependency */,
 			);
 			name = "Pods-DLAlertView";
 			productName = "Pods-DLAlertView";
@@ -3023,6 +3044,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				53934E7AF97D9D6CCEAA1E44 /* PBXTargetDependency */,
 			);
 			name = "Pods-HockeySDK-HockeySDKResources";
 			productName = "Pods-HockeySDK-HockeySDKResources";
@@ -3276,6 +3298,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4151E9DB5383BA69EF5676 /* Pods-SMCalloutView-dummy.m in Sources */,
+				65664B3F9407298C1DB920BC /* SMCalloutView.m in Sources */,
+				938803CBE18FEA61A4C792BC /* SMClassicCalloutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3622,6 +3647,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -3648,14 +3674,14 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-HockeySDK/Pods-HockeySDK-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 		2CB60D8ED3DFB7CFFD75B943 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3679,7 +3705,7 @@
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -3687,7 +3713,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 		4AC4F67699D104276FE07019 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3723,7 +3749,7 @@
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -3731,7 +3757,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		69C2016804C4DB5DCBEF2583 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3802,12 +3828,16 @@
 			baseConfigurationReference = 87D33166BE01A50E8D5B0619 /* Pods-HockeySDK-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = HockeySDKResources;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SMCalloutView/Pods-SMCalloutView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
 			};
-			name = Release;
+			name = Debug;
 		};
 		87833CA5F606AF64EEE02AF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3822,6 +3852,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -3942,14 +3973,14 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
-			name = Debug;
+			name = Release;
 		};
 		A78154A9CDAC0B9CF0BE0258 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FEAFC2CF6D71C36AD2B7587A /* Pods-UICKeyChainStore-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-UICKeyChainStore/Pods-UICKeyChainStore-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-DLAlertView/Pods-DLAlertView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -4111,6 +4142,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -4321,6 +4353,7 @@
 			buildConfigurations = (
 				928AD82D309DAB3EB72F00A1 /* Debug */,
 				A7C3D790081A28FD1364C1B6 /* Release */,
+
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4330,6 +4363,7 @@
 			buildConfigurations = (
 				4AC4F67699D104276FE07019 /* Debug */,
 				16D9D615B07C91FD03CEE166 /* Release */,
+
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4337,4 +4371,5 @@
 /* End XCConfigurationList section */
 	};
 	rootObject = ADF8DC74B7DBE374301E0145 /* Project object */;
+
 }
