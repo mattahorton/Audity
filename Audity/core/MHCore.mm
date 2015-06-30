@@ -407,11 +407,12 @@
                           0);
 }
 
--(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes{
+-(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes andBackFrontScaling:(float)bfs{
     int total_likes = [self getTotalNumLikes];
     float volume = 0.5 + (float)likes/(float)total_likes; //set the base volume based on likes
     if (total_likes == 0) volume = 0.75;
     if(volume > 1.0) volume = 1.0;
+    volume = volume * .3 + volume * (bfs) * .7; // scale volume based on back/front position
     volume = volume - (scl * volume); //scale volume based on distance
     if(volume <= 0.0) volume = 0.0;
     //NSLog(@"volume being set to %f because it has %d likes and %f scale factor", volume, likes, scl);
@@ -464,9 +465,11 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         radiansBearing = radiansBearing + M_PI;
         
         double trueBearing = heading - radiansBearing;
-//        NSLog(@"%f radiansBearing", radiansBearing);
+        NSLog(@"%f radiansBearing", radiansBearing);
 //        NSLog(@"%f heading", heading);
-//        NSLog(@"%f trueBearing", trueBearing);
+        NSLog(@"%f trueBearing", trueBearing); //if truebearing is
+        double backFrontVolumeScale = 1.0 - (fabs(trueBearing + M_PI)) / M_PI; //how behind of you is the thing?
+        NSLog(@"%f backFromtVolumeScale", backFrontVolumeScale);
         
         //set pan based on theta
         float pan = [self getPanFromBearing:trueBearing];
@@ -487,7 +490,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
             [self setFilterParametersForLP:lp withFocus: focus];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
         }else if (!self.muteAudities && !self.muteSetting){
-            [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes];
+            [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes andBackFrontScaling:backFrontVolumeScale];
             [self setFilterParametersForLP:lp withScaleFactor:scl];
             [self setFilterParametersForReverb:reverb withScaleFactor:scl];
         }else if (self.muteAudities || self.muteSetting){
