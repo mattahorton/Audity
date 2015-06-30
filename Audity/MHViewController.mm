@@ -138,7 +138,7 @@
     mapView.zoomingInPivotsAroundCenter = YES;
     //    mapView.clusteringEnabled = YES;
     mapView.userInteractionEnabled = NO;
-    mapView.showsUserLocation = YES;
+    mapView.showsUserLocation = NO;
     
     // init the dict for on-screen audities
     self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
@@ -195,8 +195,6 @@
 }
 
 -(void)initRadius{
-    RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
-    
     //do some stuff
 }
 
@@ -340,14 +338,7 @@
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
     if (annotation.isUserLocationAnnotation){
-        
-        RMCircle *circle = [[RMCircle alloc] initWithView:mapView radiusInMeters:MAXRADIUS];
-        circle.lineColor = [UIColor colorWithRed:102.0/255.0 green:51.0/255.0 blue:153.0/255.0 alpha:1.0];
-        circle.fillColor = [UIColor colorWithRed:226.0/255.0 green:220.0/255.0 blue:255.0/255.0 alpha:0.2];
-        circle.lineWidthInPixels = 2.0;
-        annotation.enabled= NO;
-        
-        return circle;
+        return nil;
     }
     
     RMMarker *marker =  [self newAudityMarkerWithColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0]];
@@ -483,7 +474,7 @@
     }
     
     if(!self.core.geo.locationSetting) {
-        mapView.showsUserLocation = YES;
+        mapView.showsUserLocation = NO;
     }
 }
 
