@@ -105,7 +105,7 @@
     return aData;
 }
 
--(FAuthData *)authTwitter {
+-(void)authTwitterWithTarget:(NSObject *)target andSelector:(SEL)selector{
     __block FAuthData *aData;
     
     self.userID = [self findUserID];
@@ -133,33 +133,41 @@
                     // Error authenticating account
                     aData = nil;
                     NSLog(@"Error authenticating");
+                    
+                    // WHAT HAPPENS IF WE FAIL?
+                    
                 } else {
                     // User logged in!
                     aData = authData;
+                    
+                    self.authData = aData;
+                    NSLog(@"authData %@", aData);
+                    
+                    if (aData) {
+                        self.userRef = [self.firebase childByAppendingPath:@"users"];
+                        
+                        if (!self.userID) {
+                            self.userID = self.authData.uid;
+                            [self storeUserID:self.userID];
+                        }
+                        
+                        Firebase *twRef = [[self.userRef childByAppendingPath:self.userID] childByAppendingPath:@"twitter"];
+                        [twRef setValue:aData.providerData];
+                    }
+
                 }
+                
+                if([target respondsToSelector:selector]) {
+                    [target performSelector:selector withObject:aData];
+                }
+                
+                // WHAT HAPPENS IF IT DOESN'T RESPOND?
             }];
         }
     }];
-    
-    self.authData = aData;
-    NSLog(@"authData %@", aData);
-    
-    if (aData) {
-        self.userRef = [self.firebase childByAppendingPath:@"users"];
-
-        if (!self.userID) {
-            self.userID = self.authData.uid;
-            [self storeUserID:self.userID];
-        }
-        
-        Firebase *twRef = [[self.userRef childByAppendingPath:self.userID] childByAppendingPath:@"twitter"];
-        [twRef setValue:aData.providerData];
-    }
-    
-    return aData;
 }
 
--(FAuthData *)authAnon {
+-(void)authAnonWithTarget:(NSObject *)target andSelector:(SEL)selector {
     
     __block FAuthData *aData;
     
@@ -176,21 +184,26 @@
         } else {
             //NSLog(@"Login succeeded! %@", authData);
             aData = authData;
+            
+            self.authData = aData;
+            
+            NSLog(@"%@",aData);
+            NSLog(@"%@",aData.uid);
+            
+            if(aData) {
+                self.userRef = [self.firebase childByAppendingPath:@"users"];
+                
+                if (!self.userID) {
+                    self.userID = self.authData.uid;
+                    [self storeUserID:self.userID];
+                }                
+            }
+            
+            if([target respondsToSelector:selector]) {
+                [target performSelector:selector withObject:aData];
+            }
         }
     }];
-    
-    self.authData = aData;
-    
-    if(aData) {
-        self.userRef = [self.firebase childByAppendingPath:@"users"];
-
-        if (!self.userID) {
-            self.userID = self.authData.uid;
-            [self storeUserID:self.userID];
-        }
-    }
-    
-    return aData;
 }
 
 @end

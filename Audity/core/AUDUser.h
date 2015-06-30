@@ -19,7 +19,7 @@
 +(id) sharedInstance;
 
 -(FAuthData *)authFacebook;
--(FAuthData *)authTwitter;
--(FAuthData *)authAnon;
+-(void)authTwitterWithTarget:(NSObject *)target andSelector:(SEL)selector;
+-(void)authAnonWithTarget:(NSObject *)target andSelector:(SEL)selector;
 
 @end

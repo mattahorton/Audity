@@ -30,6 +30,7 @@
     AUDActivityViewController *audVC;
     UIButton *replayButton;
     NSTimer *recordingTimer;
+    AUDUser *audUser;
 }
 
 + (id)sharedInstance {
@@ -42,27 +43,19 @@
 }
 
 -(void) coreInit {
+    
+    // Initialize
     self.isRecording = NO;
     self.muteAudities = NO;
     self.firstSoundPlayed = NO;
     self.replaying = NO;
     
-    self.audities = @{};
+    self.audities = [NSMutableDictionary dictionaryWithDictionary:@{}];
     
+    // Get API keys
     Secrets *secrets = [Secrets sharedInstance];
     self.apiKeys = secrets.apiKeys;
     
-    // Set up geo
-    self.geo = [AUDGeo sharedInstance];
-    self.firebase = [AUDFirebase sharedInstance].firebase;
-    self.geo.recordingsRef = [self.firebase childByAppendingPath:@"recordings"];
-    self.geo.geofireRef = [self.firebase childByAppendingPath:@"geofire"];
-    self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
-    [self.geo geoInit];
-    
-    // Set up s3
-    self.parse = [AUDParse sharedInstance];
-    self.parse.core = self;
     
     // Get and set mute setting
     defaults = [NSUserDefaults standardUserDefaults];
@@ -74,11 +67,11 @@
         [defaults setBool:_muteSetting forKey:@"muteSetting"];
     }
     
-    AUDUser *audUser = [AUDUser sharedInstance];
-//    [audUser authAnon];
-    [audUser authTwitter];
-    self.userID = audUser.userID;
-    NSLog(@"%@", self.userID);
+    
+    // Authenticate
+    audUser = [AUDUser sharedInstance];
+    [audUser authAnonWithTarget:self andSelector:@selector(afterAuth:)];
+//    [audUser authTwitterWithTarget:self andSelector:@selector(afterAuth:)];
     
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]
@@ -110,6 +103,26 @@
             ((float*)audio->mBuffers[0].mData)[i] = ((float*)audio->mBuffers[1].mData)[i] = 0;
         }
     }];
+}
+
+#pragma mark Authentication Callback
+-(void)afterAuth:(FAuthData *) aData {
+    
+    self.userID = audUser.userID;
+    NSLog(@"%@", self.userID);
+    
+    // Set up geo
+    self.geo = [AUDGeo sharedInstance];
+    self.firebase = [AUDFirebase sharedInstance].firebase;
+    self.geo.recordingsRef = [self.firebase childByAppendingPath:@"recordings"];
+    self.geo.geofireRef = [self.firebase childByAppendingPath:@"geofire"];
+    self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
+    [self.geo geoInit];
+    
+    // Set up s3
+    self.parse = [AUDParse sharedInstance];
+    self.parse.core = self;
+
 }
 
 
@@ -416,11 +429,8 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         radiansBearing = radiansBearing + M_PI;
         
         double trueBearing = heading - radiansBearing;
-        NSLog(@"%f radiansBearing", radiansBearing);
-//        NSLog(@"%f heading", heading);
-        NSLog(@"%f trueBearing", trueBearing); //if truebearing is
-        double backFrontVolumeScale = 1.0 - (fabs(trueBearing + M_PI)) / M_PI; //how behind of you is the thing?
-        NSLog(@"%f backFromtVolumeScale", backFrontVolumeScale);
+        double backFrontVolumeScale = fabs(1.0 - (fabs(trueBearing + M_PI)) / M_PI); //how behind of you is the thing?
+        
         
         //set pan based on theta
         float pan = [self getPanFromBearing:trueBearing];
@@ -432,9 +442,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         if([self isInFocusMode] && !self.muteAudities && !self.muteSetting){
             BOOL focus = [[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue];
             if(focus){
+                NSLog(@"%f radiansBearing", radiansBearing);
+                NSLog(@"%f trueBearing", trueBearing); //if truebearing is
+                NSLog(@"%f backFromtVolumeScale", backFrontVolumeScale);
                 //NSLog(@"The scale factor for distance %f is %f", distance, scl);
                 //NSLog(@"The bearing is %fpi which gives real pan of %f and final pan of %f", radiansBearing/3.14159, real_pan, pan);
                 [fp setVolume:(0.8 - (scl * 0.5))]; //in focus, make it a bit louder
+                [self setVolumeForFP:fp withScaleFactor:scl andLikes:num_likes andBackFrontScaling:backFrontVolumeScale];
             }else{
                 [fp setVolume:(0.3 - (scl * 0.5))]; //out of focus, make it a bit softer
             }
