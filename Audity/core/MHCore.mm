@@ -75,8 +75,10 @@
     }
     
     AUDUser *audUser = [AUDUser sharedInstance];
-    [audUser authAnon];
+//    [audUser authAnon];
+    [audUser authTwitter];
     self.userID = audUser.userID;
+    NSLog(@"%@", self.userID);
     
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]

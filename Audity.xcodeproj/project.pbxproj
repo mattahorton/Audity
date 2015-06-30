@@ -20,6 +20,7 @@
 		86C89CA81A688DAD00799680 /* AudityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89CA71A688DAD00799680 /* AudityTests.m */; };
 		86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C89CFA1A68923600799680 /* AudioToolbox.framework */; };
 		86C89D011A689A5000799680 /* DismissSegue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89D001A689A5000799680 /* DismissSegue.mm */; };
+		B90FF0781B3BDD0B00688C6C /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B90FF0771B3BDD0B00688C6C /* TwitterAuthHelper.m */; };
 		B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */; };
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
 		B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */; };
@@ -116,6 +117,8 @@
 		86C89CFC1A68933800799680 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		86C89CFF1A689A5000799680 /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
 		86C89D001A689A5000799680 /* DismissSegue.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DismissSegue.mm; sourceTree = "<group>"; };
+		B90FF0761B3BDD0B00688C6C /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
+		B90FF0771B3BDD0B00688C6C /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		B9138AD61A6DB9E2009BFC86 /* MHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHViewController.h; sourceTree = "<group>"; };
 		B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHViewController.mm; sourceTree = "<group>"; };
 		B9138AD91A6DBCE1009BFC86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -351,6 +354,8 @@
 				B99EC8971B3A70F900337657 /* AUDFirebase.m */,
 				B99EC8991B3A72D800337657 /* AUDUser.h */,
 				B99EC89A1B3A72D800337657 /* AUDUser.m */,
+				B90FF0761B3BDD0B00688C6C /* TwitterAuthHelper.h */,
+				B90FF0771B3BDD0B00688C6C /* TwitterAuthHelper.m */,
 			);
 			name = core;
 			path = Audity/core;
@@ -622,6 +627,7 @@
 				B99EC8981B3A70F900337657 /* AUDFirebase.m in Sources */,
 				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
 				B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */,
+				B90FF0781B3BDD0B00688C6C /* TwitterAuthHelper.m in Sources */,
 				B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
 				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
