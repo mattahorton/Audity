@@ -70,6 +70,8 @@
 		B9A0AD751AB2B3F600F4F1C8 /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD731AB2B3F600F4F1C8 /* Start.png */; };
 		B9A0AD761AB2B3F600F4F1C8 /* Start@100w.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */; };
 		B9A5CC971A6B286000CC50A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C9A1A688DAD00799680 /* LaunchScreen.xib */; };
+		B9AC5D2F1B5323E300B90DB0 /* Audity.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AC5D2E1B5323E300B90DB0 /* Audity.m */; };
+		B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AC5D311B5323F200B90DB0 /* AudityManager.m */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
 		B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DA2EC91B37A3E800265C64 /* AUDParse.m */; };
 		B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECB1B37A90500265C64 /* Bolts.framework */; };
@@ -184,6 +186,10 @@
 		B9A0AD661AB2B37900F4F1C8 /* Unfocus@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unfocus@100w.png"; sourceTree = "<group>"; };
 		B9A0AD731AB2B3F600F4F1C8 /* Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start.png; sourceTree = "<group>"; };
 		B9A0AD741AB2B3F600F4F1C8 /* Start@100w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Start@100w.png"; sourceTree = "<group>"; };
+		B9AC5D2D1B5323E300B90DB0 /* Audity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audity.h; sourceTree = "<group>"; };
+		B9AC5D2E1B5323E300B90DB0 /* Audity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audity.m; sourceTree = "<group>"; };
+		B9AC5D301B5323F200B90DB0 /* AudityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudityManager.h; sourceTree = "<group>"; };
+		B9AC5D311B5323F200B90DB0 /* AudityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudityManager.m; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B9DA2EC81B37A3E800265C64 /* AUDParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDParse.h; sourceTree = "<group>"; };
 		B9DA2EC91B37A3E800265C64 /* AUDParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDParse.m; sourceTree = "<group>"; };
@@ -256,7 +262,6 @@
 				B9DA2ECB1B37A90500265C64 /* Bolts.framework */,
 				B9DA2ECC1B37A90500265C64 /* Parse.framework */,
 				B9B80B5D1A690B8300A08B9B /* Podfile */,
-				86C89CF61A6891BD00799680 /* core */,
 				86C89C8A1A688DAD00799680 /* Audity */,
 				86C89CA41A688DAD00799680 /* AudityTests */,
 				86C89CFE1A68969900799680 /* Frameworks */,
@@ -277,35 +282,16 @@
 		86C89C8A1A688DAD00799680 /* Audity */ = {
 			isa = PBXGroup;
 			children = (
+				86C89CF61A6891BD00799680 /* core */,
+				B9AC5D2C1B53237B00B90DB0 /* Segues */,
+				B9AC5D2B1B53235300B90DB0 /* ViewControllers */,
 				B9A0AD771AB2B50A00F4F1C8 /* buttons */,
 				86C89C8F1A688DAD00799680 /* AppDelegate.h */,
 				86C89C901A688DAD00799680 /* AppDelegate.mm */,
-				86C89CFF1A689A5000799680 /* DismissSegue.h */,
-				86C89D001A689A5000799680 /* DismissSegue.mm */,
 				B94F97E41B1A807900E4428E /* Main.storyboard */,
 				86C89C981A688DAD00799680 /* Images.xcassets */,
 				86C89C9A1A688DAD00799680 /* LaunchScreen.xib */,
 				86C89C8B1A688DAD00799680 /* Supporting Files */,
-				B9138AD61A6DB9E2009BFC86 /* MHViewController.h */,
-				B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */,
-				B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */,
-				B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */,
-				B942DC8A1AB3C6DD00D4ED15 /* AUDNavViewController.h */,
-				B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */,
-				B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */,
-				B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */,
-				B99120E21AE9B8B800897195 /* AUDTutorialController.h */,
-				B99120E31AE9B8B800897195 /* AUDTutorialController.m */,
-				B99120E51AE9BE8F00897195 /* AUDLaunchController.h */,
-				B99120E61AE9BE8F00897195 /* AUDLaunchController.m */,
-				B982CD7B1B19B2890053EBC7 /* AUDWelcomeController.h */,
-				B982CD7C1B19B2890053EBC7 /* AUDWelcomeController.m */,
-				B982CD7E1B19B5790053EBC7 /* AUDLocRequestController.h */,
-				B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */,
-				B982CD811B19C2450053EBC7 /* PushNoAnimationSegue.h */,
-				B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */,
-				B94F97EA1B1A8E8C00E4428E /* AUDNoDataController.h */,
-				B94F97EB1B1A8E8C00E4428E /* AUDNoDataController.m */,
 			);
 			path = Audity;
 			sourceTree = "<group>";
@@ -356,9 +342,12 @@
 				B99EC89A1B3A72D800337657 /* AUDUser.m */,
 				B90FF0761B3BDD0B00688C6C /* TwitterAuthHelper.h */,
 				B90FF0771B3BDD0B00688C6C /* TwitterAuthHelper.m */,
+				B9AC5D2D1B5323E300B90DB0 /* Audity.h */,
+				B9AC5D2E1B5323E300B90DB0 /* Audity.m */,
+				B9AC5D301B5323F200B90DB0 /* AudityManager.h */,
+				B9AC5D311B5323F200B90DB0 /* AudityManager.m */,
 			);
-			name = core;
-			path = Audity/core;
+			path = core;
 			sourceTree = "<group>";
 		};
 		86C89CFE1A68969900799680 /* Frameworks */ = {
@@ -425,6 +414,42 @@
 				B9A0AD661AB2B37900F4F1C8 /* Unfocus@100w.png */,
 			);
 			name = buttons;
+			sourceTree = "<group>";
+		};
+		B9AC5D2B1B53235300B90DB0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B94F97EA1B1A8E8C00E4428E /* AUDNoDataController.h */,
+				B94F97EB1B1A8E8C00E4428E /* AUDNoDataController.m */,
+				B9138AD61A6DB9E2009BFC86 /* MHViewController.h */,
+				B9138AD71A6DB9E2009BFC86 /* MHViewController.mm */,
+				B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */,
+				B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */,
+				B942DC8A1AB3C6DD00D4ED15 /* AUDNavViewController.h */,
+				B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */,
+				B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */,
+				B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */,
+				B99120E21AE9B8B800897195 /* AUDTutorialController.h */,
+				B99120E31AE9B8B800897195 /* AUDTutorialController.m */,
+				B99120E51AE9BE8F00897195 /* AUDLaunchController.h */,
+				B99120E61AE9BE8F00897195 /* AUDLaunchController.m */,
+				B982CD7B1B19B2890053EBC7 /* AUDWelcomeController.h */,
+				B982CD7C1B19B2890053EBC7 /* AUDWelcomeController.m */,
+				B982CD7E1B19B5790053EBC7 /* AUDLocRequestController.h */,
+				B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B9AC5D2C1B53237B00B90DB0 /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				86C89CFF1A689A5000799680 /* DismissSegue.h */,
+				86C89D001A689A5000799680 /* DismissSegue.mm */,
+				B982CD811B19C2450053EBC7 /* PushNoAnimationSegue.h */,
+				B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */,
+			);
+			name = Segues;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -634,7 +659,9 @@
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
 				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
+				B9AC5D2F1B5323E300B90DB0 /* Audity.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
+				B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */,
 				B99EC89B1B3A72D800337657 /* AUDUser.m in Sources */,
 				B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */,
 				B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */,
