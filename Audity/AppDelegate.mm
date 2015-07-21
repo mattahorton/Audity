@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "HockeySDK.h"
 #import "Secrets.h"
 #import "RNOpenSSLDecryptor.h"
 #import <Parse/Parse.h>
@@ -26,13 +25,6 @@
     
     Secrets *secrets = [Secrets sharedInstance];
     NSDictionary *apiKeys = [secrets apiKeys];
-    
-    NSString *HOCKEYID = apiKeys[@"HOCKEYID"];
-    
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:HOCKEYID];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator
-     authenticateInstallation];
     
     NSString *PARSEAPPID = apiKeys[@"PARSEAPPID"];
     NSString *PARSECLIENTKEY = apiKeys[@"PARSECLIENTKEY"];

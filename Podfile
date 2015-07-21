@@ -13,5 +13,3 @@ pod 'Reachability'
 pod 'UICKeyChainStore'
 
 pod 'RNCryptor'
-
-pod 'HockeySDK', '~> 3.6.4'

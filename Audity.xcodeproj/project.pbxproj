@@ -30,6 +30,7 @@
 		B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */ = {isa = PBXBuildFile; fileRef = B94F97E81B1A86FA00E4428E /* AUDReach.m */; };
 		B94F97EC1B1A8E8C00E4428E /* AUDNoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94F97EB1B1A8E8C00E4428E /* AUDNoDataController.m */; };
 		B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = B955EF131AA3E96A000A963B /* AUDGeo.m */; };
+		B95D5E021B5DD6790044F616 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95D5E011B5DD6790044F616 /* StoreKit.framework */; };
 		B9665A1D1AB3B12400BDD88A /* DislikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1B1AB3B12400BDD88A /* DislikeBG.png */; };
 		B9665A1E1AB3B12400BDD88A /* LikeBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B9665A1C1AB3B12400BDD88A /* LikeBG.png */; };
 		B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9665A201AB3B37100BDD88A /* AUDActivityViewController.m */; };
@@ -77,7 +78,6 @@
 		B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECB1B37A90500265C64 /* Bolts.framework */; };
 		B9DA2ECE1B37A90500265C64 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECC1B37A90500265C64 /* Parse.framework */; };
 		B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */; };
-		B9DA2ED21B37A94D00265C64 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED11B37A94D00265C64 /* StoreKit.framework */; };
 		B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */; };
 		B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED51B37A97200265C64 /* Accounts.framework */; };
 		B9DA2ED81B37A97700265C64 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED71B37A97700265C64 /* Social.framework */; };
@@ -143,6 +143,7 @@
 		B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B955EF121AA3E96A000A963B /* AUDGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDGeo.h; sourceTree = "<group>"; };
 		B955EF131AA3E96A000A963B /* AUDGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDGeo.m; sourceTree = "<group>"; };
+		B95D5E011B5DD6790044F616 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B9665A1B1AB3B12400BDD88A /* DislikeBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DislikeBG.png; sourceTree = "<group>"; };
 		B9665A1C1AB3B12400BDD88A /* LikeBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LikeBG.png; sourceTree = "<group>"; };
 		B9665A1F1AB3B37100BDD88A /* AUDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDActivityViewController.h; sourceTree = "<group>"; };
@@ -196,7 +197,6 @@
 		B9DA2ECB1B37A90500265C64 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B9DA2ECC1B37A90500265C64 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B9DA2ED11B37A94D00265C64 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B9DA2ED51B37A97200265C64 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		B9DA2ED71B37A97700265C64 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -211,11 +211,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B95D5E021B5DD6790044F616 /* StoreKit.framework in Frameworks */,
 				B9DA2ED81B37A97700265C64 /* Social.framework in Frameworks */,
 				B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */,
 				49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */,
 				B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */,
-				B9DA2ED21B37A94D00265C64 /* StoreKit.framework in Frameworks */,
 				B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */,
 				B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */,
 				49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */,
@@ -353,10 +353,10 @@
 		86C89CFE1A68969900799680 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B95D5E011B5DD6790044F616 /* StoreKit.framework */,
 				B9DA2ED71B37A97700265C64 /* Social.framework */,
 				B9DA2ED51B37A97200265C64 /* Accounts.framework */,
 				B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */,
-				B9DA2ED11B37A94D00265C64 /* StoreKit.framework */,
 				B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */,
 				B98B38381AA450730085912F /* Firebase.framework */,
 				B98B38391AA450730085912F /* GeoFire.framework */,
@@ -507,6 +507,11 @@
 					86C89C871A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 3N2PU8Q3L6;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					86C89CA01A688DAD00799680 = {
 						CreatedOnToolsVersion = 6.1.1;
