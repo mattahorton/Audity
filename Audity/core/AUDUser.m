@@ -149,7 +149,6 @@
                     aData = authData;
                     
                     self.authData = aData;
-                    NSLog(@"authData %@", aData);
                     
                     if (aData) {
                         self.userRef = [self.firebase childByAppendingPath:@"users"];
@@ -194,9 +193,6 @@
             aData = authData;
             
             self.authData = aData;
-            
-            NSLog(@"%@ aData",aData);
-//            NSLog(@"%@ aData.uid",aData.uid);
             
             if(aData) {
                 self.userRef = [self.firebase childByAppendingPath:@"users"];

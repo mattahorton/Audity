@@ -133,7 +133,6 @@
     
     //get our mapview and add it to our view
     mapView = [[RMMapView alloc] initWithFrame:self.view.bounds andTilesource:source];
-    NSLog(@"%@ MAPVIEW", mapView);
     mapView.delegate = self;
     [self.view addSubview:mapView];
     
@@ -319,7 +318,6 @@
 }
 
 -(IBAction)settingsPress:(id)sender {
-    NSLog(@"settings");
     [self performSegueWithIdentifier:@"settingsShow" sender:nil];
 }
 
@@ -328,7 +326,6 @@
 }
 
 -(void)afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction {
-//    NSLog(@"map moved");
     [self.core.geo updateAfterDragWithCenter:[[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude]];
 }
 
@@ -379,11 +376,9 @@
             if (audity && audity.downloaded) {
                 if(audity.annotation == annotation){ // we want to toggle this focus
                     if(audity.focused){ //if it is already being focused on, unfocus
-                        //NSLog(@"setting focus to false");
                         audity.focused = NO;
                         [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
                     } else { //This audity is not focused on, so focus on it
-                        //NSLog(@"setting focus to true");
                         audity.focused = YES;
                         [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];
                     }
@@ -408,7 +403,6 @@
             }
         }
     }
-    //NSLog(@"You tapped the callout button!");
 }
 
 

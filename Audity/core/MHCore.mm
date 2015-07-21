@@ -453,9 +453,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         if([self isInFocusMode] && !self.muteAudities && !self.muteSetting){
             BOOL focus = audity.focused;
             if(focus){
-                NSLog(@"%f radiansBearing", radiansBearing);
-                NSLog(@"%f trueBearing", trueBearing); //if truebearing is
-                NSLog(@"%f backFromtVolumeScale", backFrontVolumeScale);
+//                NSLog(@"%f radiansBearing", radiansBearing);
+//                NSLog(@"%f trueBearing", trueBearing); //if truebearing is
+//                NSLog(@"%f backFromtVolumeScale", backFrontVolumeScale);
                 //NSLog(@"The scale factor for distance %f is %f", distance, scl);
                 //NSLog(@"The bearing is %fpi which gives real pan of %f and final pan of %f", radiansBearing/3.14159, real_pan, pan);
                 [fp setVolume:(0.8 - (scl * 0.5))]; //in focus, make it a bit louder

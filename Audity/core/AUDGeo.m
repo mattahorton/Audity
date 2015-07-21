@@ -110,9 +110,9 @@
             
 //            NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
 //            NSLog(@"It is %f meters away from you",distance);
-            NSLog(@"%@ KEY!", key);
+
             if ([self.audityManager audities][key] == nil){
-                NSLog(@"KEY NOT HERE YET!");
+
 //                NSLog(@"adding %@", key);
 //                NSLog(@"audity value %@",self.core.audities[key]);
                 
