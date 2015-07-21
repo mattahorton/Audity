@@ -15,8 +15,9 @@
 
 + (id)sharedInstance;
 
-- (void)addAudity:(Audity *)audity withKey:(NSString *)key;
+- (void) setAudity:(Audity *)audity forKey:(NSString *)key;
 - (Audity *)removeAudityWithKey:(NSString *)key;
+- (NSArray *)allKeys;
 
 
 @end

@@ -10,6 +10,6 @@
 
 @interface AUDNavViewController : UINavigationController
 
-@property (strong, nonatomic) NSDictionary *info;
+@property (strong, nonatomic) NSString *info;
 
 @end

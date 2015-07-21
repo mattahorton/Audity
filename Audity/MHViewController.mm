@@ -36,6 +36,7 @@
     UIButton *godButton;
     UIButton *settingsButton;
     UIImageView *centerGodMarker;
+    AudityManager *audityManager;
 }
 
 #pragma mark View Delegate Methods
@@ -76,6 +77,9 @@
     
     // Set status bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    
+    // Set AudityManager
+    audityManager = [AudityManager sharedInstance];
     
     // Init the core
     self.core = [MHCore sharedInstance];
@@ -139,9 +143,6 @@
     //    mapView.clusteringEnabled = YES;
     mapView.userInteractionEnabled = NO;
     mapView.showsUserLocation = NO;
-    
-    // init the dict for on-screen audities
-    self.core.audities = [[NSMutableDictionary alloc] initWithDictionary:@{}];
     
     mapView.minZoom = MIN_ZOOM;
     mapView.maxZoom = MAX_ZOOM;
@@ -229,22 +230,28 @@
 }
 
 - (void) addAudityToMapWithLocation:(CLLocation *)loc andTitle:(NSString *)title andKey:(NSString *)key{
-    if (![self.core.audities[key] isEqual:@"taken"]) {
+    Audity *audity = [audityManager audities][key];
+    
+    if (audity && audity.downloaded) {
         RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:mapView coordinate:loc.coordinate andTitle:title];
         
         [mapView addAnnotation:annotation];
-        [self.core.audities[key] setObject:annotation forKey:@"annotation"];
+        audity.annotation = annotation;
     }
 }
 
 -(void) removeAudityFromMapWithKey:(NSString *)key{
-    if (![self.core.audities[key] isEqual:@"taken"]) [mapView removeAnnotation:self.core.audities[key][@"annotation"]];
+    Audity *audity = [audityManager audities][key];
+    
+    if (audity && audity.downloaded) [mapView removeAnnotation:audity.annotation];
 }
 
 -(void) moveAudityToLocation:(CLLocation*)loc forKey:(NSString *)key{
-    if (![self.core.audities[key] isEqual:@"taken"]) {
-        RMAnnotation *audity = (RMAnnotation *)[self.core.audities objectForKey:key];
-        [audity setCoordinate:loc.coordinate];
+    Audity *audity = [audityManager audities][key];
+    
+    if (audity && audity.downloaded) {
+        RMAnnotation *audityAnnotation = audity.annotation;
+        [audityAnnotation setCoordinate:loc.coordinate];
     }
 }
 
@@ -351,42 +358,40 @@
     UIButton * button = (UIButton *)control;
     
     if([[button currentTitle] isEqualToString:@"respond"]){
-        NSArray *keys = [self.core.audities allKeys];
+        NSArray *keys = [audityManager allKeys];
         
         for (NSString *key in keys){ // Iterate through keys
-            if (![self.core.audities[key] isEqual:@"taken"]) {
-                NSDictionary *audity = (NSDictionary *)[self.core.audities objectForKey:key];
-                if([audity objectForKey:@"annotation"] == annotation){  // This is the Audity we want
-        
-//                    NSDictionary *dict = @{@"key":key,@"signature":(NSString *)audity[@"signature"]};
-                    [self performSegueWithIdentifier:@"activity" sender:audity];
+            Audity *audity = [audityManager audities][key];
+
+            if(audity && audity.downloaded){
+                if(audity.annotation == annotation){  // This is the Audity we want
+                    [self performSegueWithIdentifier:@"activity" sender:audity.key];
                 }
             }
         }
     }
     if([[button currentTitle] isEqualToString:@"focus"]){
-        NSArray *keys = [self.core.audities allKeys];
+        NSArray *keys = [audityManager allKeys];
         
         for (NSString *key in keys){ // Iterate through keys
-            if (![self.core.audities[key] isEqual:@"taken"]) {
-                if([[self.core.audities objectForKey:key] objectForKey:@"annotation"] == annotation){ // we want to toggle this focus
-                    if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it is already being focused on, unfocus
+            Audity *audity = [audityManager audities][key];
+            
+            if (audity && audity.downloaded) {
+                if(audity.annotation == annotation){ // we want to toggle this focus
+                    if(audity.focused){ //if it is already being focused on, unfocus
                         //NSLog(@"setting focus to false");
-                        NSNumber *num = [NSNumber numberWithBool:NO];
-                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                        audity.focused = NO;
                         [button setImage:[UIImage imageNamed:@"Focus.png"] forState:UIControlStateNormal];
-                    }else{                                                              //This audity is not focused on, so focus on it
+                    } else { //This audity is not focused on, so focus on it
                         //NSLog(@"setting focus to true");
-                        NSNumber *num = [NSNumber numberWithBool:YES];
-                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                        audity.focused = YES;
                         [button setImage:[UIImage imageNamed:@"Unfocus.png"] forState:UIControlStateNormal];
                     }
                     
                 } else { //This iteration is not the audity we tapped on
                     
-                    if([[[self.core.audities objectForKey:key] objectForKey:@"focus"] boolValue]){ //if it's focused, unfocus
-                        NSNumber *num = [NSNumber numberWithBool:NO];
-                        [[self.core.audities objectForKey:key] setObject:num forKey:@"focus"];
+                    if(audity.focused){ //if it's focused, unfocus
+                        audity.focused = NO;
                     }
                     
                 }
@@ -415,9 +420,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"activity"]) {
-        NSDictionary *dict = (NSDictionary *)sender;
+        NSString *key = (NSString *)sender;
         AUDNavViewController *destViewController = segue.destinationViewController;
-        destViewController.info = dict;
+        destViewController.info = key;
     }
 }
 

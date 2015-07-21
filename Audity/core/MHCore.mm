@@ -42,6 +42,13 @@
     return instance;
 }
 
+-(id) init {
+    if(self = [super init]) {
+        self.audityManager = [AudityManager sharedInstance];
+    }
+    return self;
+}
+
 -(void) coreInit {
     
     // Initialize
@@ -49,8 +56,6 @@
     self.muteAudities = NO;
     self.firstSoundPlayed = NO;
     self.replaying = NO;
-    
-    self.audities = [NSMutableDictionary dictionaryWithDictionary:@{}];
     
     // Get API keys
     Secrets *secrets = [Secrets sharedInstance];
@@ -297,11 +302,13 @@
 }
 
 -(bool) isInFocusMode{
-    NSArray *keys = [self.audities allKeys];
+    NSArray *keys = [self.audityManager allKeys];
     
     for (NSString *key in keys){
-        if(![self.audities[key] isEqual:@"taken"]){
-            if([[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue]){
+        Audity *audity = [self.audityManager audities][key];
+        
+        if(audity && audity.downloaded){
+            if(audity.focused){
     //            NSLog(@"We are in focus mode");
                 return true;
             }
@@ -310,13 +317,15 @@
     return false;
 }
 
--(int) getTotalNumLikes{
-    NSArray *keys = [self.audities allKeys];
-    int num_likes = 0;
+-(long) getTotalNumLikes{
+    NSArray *keys = [self.audityManager allKeys];
+    long num_likes = 0;
     
     for (NSString *key in keys){
-        if(![self.audities[key] isEqual:@"taken"]){
-            num_likes += [[[self.audities objectForKey:key] objectForKey:@"likes"] intValue];
+        Audity *audity = [self.audityManager audities][key];
+        
+        if(audity && audity.downloaded){
+            num_likes += audity.likes;
         }
     }
     return num_likes;
@@ -400,11 +409,13 @@ double DegreesToRadians(double degrees) {return degrees * M_PI / 180;};
 double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) setAllAudioParametersForAudityWithKey:(NSString *)key{
-    if(![self.audities[key]  isEqual: @"taken"]) {
-        AEAudioFilePlayer *fp = [[self.audities objectForKey:key] valueForKey:@"filePlayer"];
-        CLLocation *AudLoc = [[self.audities objectForKey:key] valueForKey:@"location"];
+    Audity *audity = [self.audityManager audities][key];
+    
+    if(audity && audity.downloaded){
+        AEAudioFilePlayer *fp = audity.filePlayer;
+        CLLocation *AudLoc = audity.location;
         CLLocation *SelfLoc = self.geo.currentLoc;
-        int num_likes = [[[self.audities objectForKey:key] valueForKey:@"likes"] intValue];
+        long num_likes = audity.likes;
         
         //gotta get that theta
         float lat1 = DegreesToRadians(SelfLoc.coordinate.latitude);
@@ -436,11 +447,11 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
         float pan = [self getPanFromBearing:trueBearing];
         [fp setPan:pan];
         
-        AEAudioUnitFilter *reverb = [[self.audities objectForKey:key] valueForKey:@"reverb"];
-        AEAudioUnitFilter *lp = [[self.audities objectForKey:key] valueForKey:@"lp"];
+        AEAudioUnitFilter *reverb = audity.reverb;
+        AEAudioUnitFilter *lp = audity.lp;
         
         if([self isInFocusMode] && !self.muteAudities && !self.muteSetting){
-            BOOL focus = [[[self.audities objectForKey:key] objectForKey:@"focus"] boolValue];
+            BOOL focus = audity.focused;
             if(focus){
                 NSLog(@"%f radiansBearing", radiansBearing);
                 NSLog(@"%f trueBearing", trueBearing); //if truebearing is
@@ -465,7 +476,7 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 }
 
 -(void) setAllAudioParameters {
-    NSArray *keys = [self.audities allKeys];
+    NSArray *keys = [self.audityManager allKeys];
     
     for (NSString *key in keys){
         [self setAllAudioParametersForAudityWithKey:key];
@@ -521,8 +532,9 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) playAudio:(NSURL *)file withKey:(NSString *)key {
     // Play audio
-    
-    if(self.audities[key] && !self.audities[key][@"filePlayer"]){
+    Audity *audity = [self.audityManager audities][key];
+
+    if(audity && !audity.filePlayer){
 //        NSLog(@" play %@ ", file);
         NSError *errorFilePlayer = NULL;
 
@@ -548,16 +560,16 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
         // Save file player and filters to the audities object
         key = [key stringByDeletingPathExtension];
-        [[self.audities objectForKey:key] setValue:filePlayer forKey:@"filePlayer"];
-        [[self.audities objectForKey:key] setValue:reverb forKey:@"reverb"];
-        [[self.audities objectForKey:key] setValue:lp forKey:@"lp"];
+        audity.filePlayer = filePlayer;
+        audity.reverb = reverb;
+        audity.lp = lp;
         
         [self setAllAudioParametersForAudityWithKey:key];
         
         [self.audioController addFilter:reverb toChannel:filePlayer];
         [self.audioController addFilter:lp toChannel:filePlayer];
 
-        [self.vc setPlayingColorForAnnotation:(RMAnnotation *) self.audities[key][@"annotation"]];
+        [self.vc setPlayingColorForAnnotation:audity.annotation];
     }
     
     if(!self.firstSoundPlayed)[self.vc stopSpinner];
@@ -566,15 +578,17 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
 
 -(void) stopAudioWithKey:(NSString *)key {
     NSLog(@"stopping %@", key);
-    if(self.audities[key] && ![self.audities[key] isEqual:@"taken"]) {
-        AEAudioFilePlayer *filePlayer = self.audities[key][@"filePlayer"];
+    Audity *audity = [self.audityManager audities][key];
+
+    if(audity && audity.filePlayer) {
+        AEAudioFilePlayer *filePlayer = audity.filePlayer;
         [filePlayer setVolume:0.0];
         if(filePlayer) {
             [self.audioController removeChannels:@[filePlayer]];
-            [self.audities removeObjectForKey:key];
+            [self.audityManager removeAudityWithKey:key];
         }
         
-        [self.vc setNotPlayingColorForAnnotation:(RMAnnotation *) self.audities[key][@"annotation"]];
+        [self.vc setNotPlayingColorForAnnotation:audity.annotation];
     }
 }
 

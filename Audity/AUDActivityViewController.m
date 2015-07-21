@@ -9,12 +9,14 @@
 #import "AUDActivityViewController.h"
 #import "AUDNavViewController.h"
 #import "MHCore.h"
+#import "AudityManager.h"
 #import <Firebase/Firebase.h>
 
 @interface AUDActivityViewController ()
 
 @property (strong, nonatomic) MHCore *core;
 @property (strong, nonatomic) Firebase *firebase;
+@property (strong, nonatomic) AudityManager* audityManager;
 
 @end
 
@@ -34,10 +36,11 @@
     _tblView.dataSource = self;
     
     defaults = [NSUserDefaults standardUserDefaults];
+    _audityManager = [AudityManager sharedInstance];
     
     parent = (AUDNavViewController *)self.parentViewController;
-    _audity = (NSMutableDictionary *)parent.info;
-    if(_audity != nil) _viewTitle.title = _audity[@"signature"];
+    _audity = [_audityManager audities][parent.info];
+    if(_audity != nil) _viewTitle.title = _audity.signature;
     
     self.core = [MHCore sharedInstance];
     _firebase = self.core.firebase;
@@ -45,12 +48,12 @@
     responsesRef = [_firebase childByAppendingPath:@"responses"];
     
     if(_audity != nil) {
-        NSNumber *num = (NSNumber *)_audity[@"likes"];
+        NSNumber *num = [NSNumber numberWithLong:self.audity.likes];
         _likesLabel.text = [num stringValue];
     }
     
     NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
-    NSString *key = self.audity[@"key"];
+    NSString *key = self.audity.key;
 
     if((dict != nil) && (dict[key] != nil)) {
         self.likeButton.enabled = NO;
@@ -65,7 +68,7 @@
     dataArray = [[NSMutableArray alloc] init];
     localURLS = [[NSMutableArray alloc] init];
     
-    [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:(NSString *)self.audity[@"key"]]
+    [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:self.audity.key]
         observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
 //        NSLog(@"%@", snapshot.value[@"recording"]);
             
@@ -146,21 +149,20 @@
 
 - (IBAction)dislike:(id)sender {
     NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
-    NSString *key = self.audity[@"key"];
+    NSString *key = self.audity.key;
     
     if(!dict || !dict[key]) {
-        Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
-        int current = 0;
-        if(self.audity[@"likes"] != nil) {
-            NSNumber *num = (NSNumber *)self.audity[@"likes"];
-            current = [num intValue];
-        }
+        Firebase *likesRef = [[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"likes"];
+        long current = 0;
         
+        current = self.audity.likes;
         current = current - 1;
-        self.audity[@"likes"] = [NSNumber numberWithInt:current];
-        self.core.audities[self.audity[@"key"]] = self.audity;
-        [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
-        self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+        self.audity.likes = current;
+        
+        [self.audityManager setAudity:self.audity forKey:self.audity.key];
+        
+        [likesRef setValue:[NSNumber numberWithInteger:self.audity.likes]];
+        self.likesLabel.text = [[NSNumber numberWithLong:current] stringValue];
         
         if (dict) {
             dict[key] = @1;
@@ -180,21 +182,20 @@
 
 - (IBAction)like:(id)sender {
     NSMutableDictionary *dict = [[defaults dictionaryForKey:@"audityLikes"] mutableCopy];
-    NSString *key = self.audity[@"key"];
+    NSString *key = self.audity.key;
     
     if(!dict || !dict[key]) {
-        Firebase *likesRef = [[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"likes"];
-        int current = 0;
-        if(self.audity[@"likes"] != nil) {
-            NSNumber *num = (NSNumber *)self.audity[@"likes"];
-            current = [num intValue];
-        }
+        Firebase *likesRef = [[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"likes"];
+        long current = 0;
         
+        current = self.audity.likes;
         current = current + 1;
-        self.audity[@"likes"] = [NSNumber numberWithInt:current];
-        self.core.audities[self.audity[@"key"]] = self.audity;
-        [likesRef setValue:(NSNumber *)self.audity[@"likes"]];
-        self.likesLabel.text = [[NSNumber numberWithInt:current] stringValue];
+        self.audity.likes = current;
+        
+        [self.audityManager setAudity:self.audity forKey:self.audity.key];
+        
+        [likesRef setValue:[NSNumber numberWithInteger:self.audity.likes]];
+        self.likesLabel.text = [[NSNumber numberWithLong:current] stringValue];
         
         if (dict) {
             dict[key] = @1;
@@ -242,7 +243,7 @@
     objectAtIndex:0];
         NSURL *file = [NSURL fileURLWithPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"]];
         NSString *uuid = [[NSUUID UUID] UUIDString];
-        [self.core uploadNewAudityResponse:file withKey:uuid andSignature:signature forAudity:(NSString *)self.audity[@"key"]];
+        [self.core uploadNewAudityResponse:file withKey:uuid andSignature:signature forAudity:self.audity.key];
     } else {
         self.core.isRecording = NO;
     }
@@ -280,13 +281,13 @@
                            @"userId":self.core.userID,
                            @"signature":signature,
                            @"uploaded":[[NSDate date] description],
-                           @"audity":(NSString *)self.audity[@"key"],
+                           @"audity":self.audity.key,
                            };
     Firebase *respRef = [responsesRef childByAppendingPath:key];
     
     [respRef setValue:dict];
     
-    Firebase *recRespRef = [[[recordingsRef childByAppendingPath:(NSString *)self.audity[@"key"]] childByAppendingPath:@"responses"] childByAppendingPath:key];
+    Firebase *recRespRef = [[[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"responses"] childByAppendingPath:key];
     
     [recRespRef setValue:key];
 }

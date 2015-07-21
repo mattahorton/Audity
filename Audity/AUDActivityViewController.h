@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Audity.h"
 
 @interface AUDActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
@@ -15,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet UIButton *dislikeButton;
-@property (strong, nonatomic) NSMutableDictionary *audity;
+@property (strong, nonatomic) Audity *audity;
 
 - (IBAction)dislike:(id)sender;
 - (IBAction)like:(id)sender;

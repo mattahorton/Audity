@@ -7,6 +7,14 @@
 //
 
 #import "AUDGeo.h"
+#import "Audity.h"
+#import "AudityManager.h"
+
+@interface AUDGeo ()
+
+@property (strong, nonatomic) AudityManager *audityManager;
+
+@end
 
 @implementation AUDGeo {
     CLLocationManager *locManager;
@@ -35,6 +43,7 @@
         // Setup foreground and background notifications
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+        self.audityManager = [AudityManager sharedInstance];
     }
     return self;
 }
@@ -101,37 +110,37 @@
             
 //            NSLog(@"Key '%@' entered the search area and is at location '%@'", key, location);
 //            NSLog(@"It is %f meters away from you",distance);
-            
-            if ([self.core.audities objectForKey:key] == nil){
+            NSLog(@"%@ KEY!", key);
+            if ([self.audityManager audities][key] == nil){
+                NSLog(@"KEY NOT HERE YET!");
 //                NSLog(@"adding %@", key);
 //                NSLog(@"audity value %@",self.core.audities[key]);
                 
-                self.core.audities[key] = @"taken";
+                [self.audityManager setAudity:[[Audity alloc] init] forKey:key];
             
                 [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".m4a"] isResponse:NO];
-                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".m4a"]];
+//                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".m4a"]];
                 
                 Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
                 
                 [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
 
-                    [self.core.audities setObject:[NSMutableDictionary dictionaryWithDictionary:@{
-                                                                                                 @"location":location,
-                                                                                                 @"key":key,
-                                                                                                 @"signature":snapshot.value[@"signature"],
-                                                                                                 @"userId":snapshot.value[@"userId"],
-                                                                                                 @"localUrl": localUrl,
-                                                                                                 @"focus": [NSNumber numberWithBool:NO],
-                                                                                                 @"likes": @0,
-                                                                                                 }]
-                                           forKey:key];
+                    Audity *audity = [self.audityManager audities][key];
+                    
+                    audity.location = location;
+                    audity.key = key;
+                    audity.signature = snapshot.value[@"signature"];
+                    audity.userId = snapshot.value[@"userId"];
+                    audity.focused = NO;
+                    audity.downloaded = YES;
+
                     if (snapshot.value[@"likes"] != nil) {
                         NSNumber *likes = (NSNumber *) snapshot.value[@"likes"];
-                        self.core.audities[key][@"likes"] = likes;
+                        audity.likes = [likes integerValue];
                     }
                     
                     [self.core.vc addAudityToMapWithLocation:location andTitle:snapshot.value[@"signature"] andKey:key];
-                    
+
                     if ([objectEnteredQuery isEqualToNumber:@0] && (accuracy < 50.0)) objectEnteredQuery = @1;
                 }];
             } else {
@@ -158,7 +167,7 @@
     
     if(!self.inGodMode)[self.core centerMap:self.currentLoc];
     
-    NSArray *keys = [self.core.audities allKeys];
+    NSArray *keys = [self.audityManager allKeys];
     
     for (NSString *key in keys){
         [self.core setAllAudioParametersForAudityWithKey:key];
@@ -175,7 +184,7 @@
     
     self.currentHeading = theHeading;
     
-    NSArray *keys = [self.core.audities allKeys];
+    NSArray *keys = [self.audityManager allKeys];
     
     for (NSString *key in keys){
         [self.core setAllAudioParametersForAudityWithKey:key];
@@ -212,7 +221,7 @@
     [circleQuery setCenter:self.currentLoc];
     
     
-    NSArray *keys = [self.core.audities allKeys];
+    NSArray *keys = [self.audityManager allKeys];
     
     for (NSString *key in keys){
         [self.core setAllAudioParametersForAudityWithKey:key];

@@ -41,15 +41,23 @@
 
 }
 
--(void)storeUserID: (NSString *)id {
+-(void)storeUserID: (NSString *)toStore {
     UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
     
+    NSString *storeThisId = toStore;
+    
+    if(!storeThisId) {
+        // Generate ID if there is none
+        self.userID = [[NSUUID UUID] UUIDString];
+        storeThisId = self.userID;
+    }
+    
     // Store ID in keychain
-    [keychain setString:id forKey:@"userId"];
+    [keychain setString:storeThisId forKey:@"userId"];
     
     // Store ID in Firebase
-    Firebase *thisUser = [[self.userRef childByAppendingPath:id] childByAppendingPath:@"userId"];
-    [thisUser setValue:id];
+    Firebase *thisUser = [[self.userRef childByAppendingPath:storeThisId] childByAppendingPath:@"userId"];
+    [thisUser setValue:storeThisId];
 }
 
 -(FAuthData *)authFacebook {
@@ -187,8 +195,8 @@
             
             self.authData = aData;
             
-            NSLog(@"%@",aData);
-            NSLog(@"%@",aData.uid);
+            NSLog(@"%@ aData",aData);
+//            NSLog(@"%@ aData.uid",aData.uid);
             
             if(aData) {
                 self.userRef = [self.firebase childByAppendingPath:@"users"];

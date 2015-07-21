@@ -13,6 +13,7 @@
 #import "AERecorder.h"
 #import "AUDGeo.h"
 #import "AUDParse.h"
+#import "AudityManager.h"
 #import <Firebase/Firebase.h>
 
 #define MAXRADIUS 500.0
@@ -30,7 +31,6 @@
 @property (nonatomic,strong) Firebase *firebase;
 @property (nonatomic,strong) AUDParse *parse;
 @property (nonatomic,strong) AERecorder *recorder;
-@property (nonatomic, strong) NSMutableDictionary *audities;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDictionary *apiKeys;
 @property (nonatomic) BOOL isRecording;
@@ -39,6 +39,7 @@
 @property (nonatomic) BOOL firstSoundPlayed;
 @property (strong, nonatomic) AEAudioFilePlayer *recordedPlayer;
 @property (nonatomic) BOOL replaying;
+@property (strong, nonatomic) AudityManager *audityManager;
 
 +(id) sharedInstance;
 

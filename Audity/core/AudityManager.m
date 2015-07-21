@@ -37,7 +37,7 @@
     _mutableAudities = [audities mutableCopy];
 }
 
-- (void) addAudity:(Audity *)audity withKey:(NSString *)key {
+- (void) setAudity:(Audity *)audity forKey:(NSString *)key {
     [_mutableAudities setObject:audity forKey:key];
 }
 
@@ -45,6 +45,10 @@
     Audity * audity = _mutableAudities[key];
     [_mutableAudities removeObjectForKey:key];
    return audity;
+}
+
+- (NSArray *)allKeys {
+    return [self.audities allKeys];
 }
 
 @end
