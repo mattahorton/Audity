@@ -10,6 +10,6 @@
 
 @interface AUDTutorialController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
--(void) welcomeTapped;
+-(void) welcomeTappedWithEmail:(NSString *)email andPassword:(NSString *)password;
 
 @end

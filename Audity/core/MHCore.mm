@@ -7,9 +7,6 @@
 //
 
 #import "MHCore.h"
-#import "AEBlockAudioReceiver.h"
-#import "AEAudioFilePlayer.h"
-#import "AEUtilities.h"
 #import "AUDActivityViewController.h"
 #import <DLAlertView/DLAVAlertView.h>
 #import "Secrets.h"
@@ -30,7 +27,6 @@
     AUDActivityViewController *audVC;
     UIButton *replayButton;
     NSTimer *recordingTimer;
-    AUDUser *audUser;
 }
 
 + (id)sharedInstance {
@@ -72,12 +68,6 @@
         [defaults setBool:_muteSetting forKey:@"muteSetting"];
     }
     
-    
-    // Authenticate
-    audUser = [AUDUser sharedInstance];
-    [audUser authAnonWithTarget:self andSelector:@selector(afterAuth:)];
-//    [audUser authTwitterWithTarget:self andSelector:@selector(afterAuth:)];
-    
     // Set up audio controller
     self.audioController = [[AEAudioController alloc]
                             initWithAudioDescription:[AEAudioController nonInterleavedFloatStereoAudioDescription]
@@ -108,13 +98,14 @@
             ((float*)audio->mBuffers[0].mData)[i] = ((float*)audio->mBuffers[1].mData)[i] = 0;
         }
     }];
+    
+    [self setupProperties];
 }
 
 #pragma mark Authentication Callback
--(void)afterAuth:(FAuthData *) aData {
+-(void) setupProperties {
     
-    self.userID = audUser.userID;
-    NSLog(@"%@", self.userID);
+    self.userID = ((AUDUser *)[AUDUser sharedInstance]).userID;
     
     // Set up geo
     self.geo = [AUDGeo sharedInstance];
@@ -548,14 +539,13 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
                                                                          kAudioUnitType_Effect,
                                                                          kAudioUnitSubType_Reverb2);
         
-        NSError *error = NULL;
-        AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
+        AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc];
         
         desc = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
                                                kAudioUnitType_Effect,
                                                kAudioUnitSubType_LowPassFilter);
         
-        AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&error];
+        AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc];
         
 
         // Save file player and filters to the audities object

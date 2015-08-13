@@ -10,14 +10,18 @@
 #import "AUDTutorialController.h"
 #import "AUDWelcomeController.h"
 #import "AUDLocRequestController.h"
+#import "AUDUser.h"
 
 @implementation AUDTutorialController {
     NSArray *myViewControllers;
+    AUDUser *audUser;
 }
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    audUser = [AUDUser sharedInstance];
     
     self.delegate = self;
     self.dataSource = self;
@@ -25,7 +29,7 @@
     AUDWelcomeController *p1 = [self.storyboard
                             instantiateViewControllerWithIdentifier:@"IntroTitle"];
     AUDLocRequestController *p2 = [self.storyboard
-                            instantiateViewControllerWithIdentifier:@"LocationRequest"];
+                                   instantiateViewControllerWithIdentifier:@"LocationRequest"];
     
     myViewControllers = @[p1,p2];
     
@@ -50,7 +54,15 @@
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController
      viewControllerBeforeViewController:(UIViewController *)viewController
 {
+    if (!audUser.loggedIn) {
+        return nil;
+    }
+    
     NSUInteger currentIndex = [myViewControllers indexOfObject:viewController];
+    
+    if (audUser.loggedIn && ((currentIndex-1) == 0)) {
+        return nil;
+    }
     
     if (!(currentIndex <= 0)) {
         --currentIndex;
@@ -66,6 +78,10 @@
       viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSUInteger currentIndex = [myViewControllers indexOfObject:viewController];
+    
+    if (!audUser.loggedIn && ((currentIndex+1) > 0)) {
+        return nil;
+    }
     
     if (!(currentIndex >= myViewControllers.count - 1)) {
         ++currentIndex;
@@ -102,8 +118,14 @@
 
 #pragma mark Helper Methods
 
--(void) welcomeTapped {
-    [self setViewControllers:@[myViewControllers[1]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+-(void) welcomeTappedWithEmail:(NSString *)email andPassword:(NSString *)password {
+    // Authenticate
+    [audUser authWithEmail:email password:password target:self andSelector:@selector(afterAuth:)];
+}
+
+#pragma mark After Auth Callback
+-(void)afterAuth:(FAuthData *)aData {
+    if(aData) [self setViewControllers:@[myViewControllers[1]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
 }
 
 

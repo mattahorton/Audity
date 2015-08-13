@@ -49,12 +49,12 @@
 
 #pragma mark Location Delegate Methods
 -(void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    [self setFirstRunIfNeeded];
     
     switch (status) {
         case kCLAuthorizationStatusAuthorizedAlways:
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             if (self.containerController != nil) {
+                [self setFirstRunIfNeeded];
                 [self.containerController performSegueWithIdentifier:@"finishTutorial" sender:self.containerController];
             } else {
                 [self performSegueWithIdentifier:@"dismissLoc" sender:self];

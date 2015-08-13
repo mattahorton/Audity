@@ -7,6 +7,7 @@ PODS:
     - FMDB/common
   - GRMustache (7.3.0):
     - JRSwizzle (~> 1.0)
+  - IQKeyboardManager (3.2.4)
   - JRSwizzle (1.0)
   - Mapbox-iOS-SDK (1.6.0):
     - FMDB (~> 2.4)
@@ -17,11 +18,12 @@ PODS:
   - RNCryptor (2.2)
   - SMCalloutView (2.0)
   - SpinKit (1.2.0)
-  - TheAmazingAudioEngine (1.4.6)
+  - TheAmazingAudioEngine (1.4.8)
   - UICKeyChainStore (2.0.6)
 
 DEPENDENCIES:
   - DLAlertView
+  - IQKeyboardManager
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - MBProgressHUD (~> 0.9.1)
   - Reachability
@@ -43,6 +45,7 @@ SPEC CHECKSUMS:
   DLAlertView: 774c1242cc854177fdc07634ed3f8c250a38864d
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   GRMustache: 6baee020c5644416c034f5afb1607f6219e7f753
+  IQKeyboardManager: 555b1231fefafb21b19278d7cca72986a27b748b
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Mapbox-iOS-SDK: 8710f321a5061fa304f1b563c3a893838e797b6a
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
@@ -50,7 +53,7 @@ SPEC CHECKSUMS:
   RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
   SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
-  TheAmazingAudioEngine: 014e942f20456feaf5ccb48f440402306350abf8
+  TheAmazingAudioEngine: 347664d1d5a7784a92badc4d77ed1eabc0f88776
   UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

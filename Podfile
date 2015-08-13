@@ -13,3 +13,5 @@ pod 'Reachability'
 pod 'UICKeyChainStore'
 
 pod 'RNCryptor'
+
+pod 'IQKeyboardManager'

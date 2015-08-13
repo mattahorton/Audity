@@ -9,6 +9,7 @@
 #import "AUDLaunchController.h"
 #import "AUDLocRequestController.h"
 #import "AUDReach.h"
+#import "UICKeyChainStore.h"
 
 @implementation AUDLaunchController
 
@@ -17,13 +18,18 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    // Find firstRun in defaults
     
+    // Find firstRun in defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSObject *firstRunCheck = [defaults objectForKey:@"firstRun"];
 
     if (firstRunCheck == nil) {
+        // Empty keychain
+        UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
+        [keychain removeAllItems];
+        
         [self performSegueWithIdentifier:@"tutorial" sender:self];
+        NSLog(@"showing tut");
     } else {
         switch ([CLLocationManager authorizationStatus]) {
             case kCLAuthorizationStatusDenied:

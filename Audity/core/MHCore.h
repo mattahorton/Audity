@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "MHViewController.h"
 #import "AUDLaunchController.h"
+#import "TheAmazingAudioEngine.h"
 #import "AERecorder.h"
 #import "AUDGeo.h"
 #import "AUDParse.h"

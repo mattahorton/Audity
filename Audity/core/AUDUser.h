@@ -15,11 +15,11 @@
 @property (nonatomic,strong) Firebase *userRef;
 @property (nonatomic,strong) NSString *userID;
 @property (nonatomic,strong) FAuthData *authData;
+@property (nonatomic) BOOL loggedIn;
 
 +(id) sharedInstance;
 
--(FAuthData *)authFacebook;
--(void)authTwitterWithTarget:(NSObject *)target andSelector:(SEL)selector;
 -(void)authAnonWithTarget:(NSObject *)target andSelector:(SEL)selector;
+-(void)authWithEmail:(NSString *)email password:(NSString *)pwd target:(NSObject *)target andSelector:(SEL)selector;
 
 @end
