@@ -213,15 +213,10 @@ extern "C" {
  }];
  @endcode
  
- The block will be called with three parameters: 
- 
- - A timestamp that corresponds to the time the audio will reach the device audio output. If latency compensation
-   is important, this should be offset by the value returned from 
-   @link  AEAudioController::AEAudioControllerOutputLatency AEAudioControllerOutputLatency @endlink. This can also
-   can be performed automatically if you use AEAudioController's
-   @link AEAudioController::automaticLatencyManagement automaticLatencyManagement @endlink feature);
- - the number of audio frames you are expected to produce, and 
- - an AudioBufferList in which to store the generated audio.
+ The block will be called with a timestamp which, when adjusted by the value returned from
+ @link AEAudioControllerOutputLatency AEAudioController::AEAudioControllerOutputLatency @endlink,
+ corresponds to the time the audio will reach the device audio output; the number of audio frames 
+ you are expected to produce, and an AudioBufferList in which to store the generated audio.
  
  @section Object-Channels Objective-C Object Channels
  
@@ -266,25 +261,15 @@ extern "C" {
  self.channel = [[MyChannelClass alloc] init];
  @endcode
  
- The render callback will be called with five parameters:
- 
- - A reference to your class,
- - A reference to the AEAudioController instance,
- - A timestamp that corresponds to the time the audio will reach the device audio output. If latency compensation
-   is important, this should be offset by the value returned from
-   @link AEAudioController::AEAudioControllerOutputLatency AEAudioControllerOutputLatency @endlink. This can also
-   can be performed automatically if you use AEAudioController's
-   @link AEAudioController::automaticLatencyManagement automaticLatencyManagement @endlink feature);
- - the number of audio frames you are expected to produce, and
- - an AudioBufferList in which to store the generated audio.
- 
  @section Audio-Unit-Channels Audio Unit Channels
  
  The AEAudioUnitChannel class acts as a host for audio units, allowing you to use any generator audio unit as an
  audio source.
  
- To use it, call @link AEAudioUnitChannel::initWithComponentDescription: initWithComponentDescription: @endlink,
- passing in an `AudioComponentDescription` structure (you can use the utility function @link AEAudioComponentDescriptionMake @endlink for this).
+ To use it, call @link AEAudioUnitChannel::initWithComponentDescription:audioController:error: initWithComponentDescription:audioController:error: @endlink,
+ passing in an `AudioComponentDescription` structure (you can use the utility function @link AEAudioComponentDescriptionMake @endlink for this),
+ along with a reference to the AEAudioController instance, and optionally, a pointer to an NSError to be filled if the audio unit
+ creation failed.
  
  @code
  AudioComponentDescription component
@@ -292,13 +277,18 @@ extern "C" {
                                       kAudioUnitType_MusicDevice,
                                       kAudioUnitSubType_Sampler)
  
- self.sampler = [[AEAudioUnitChannel alloc] initWithComponentDescription:component];
+ NSError *error = NULL;
+ self.sampler = [[AEAudioUnitChannel alloc]
+                       initWithComponentDescription:component
+                                    audioController:_audioController
+                                              error:&error];
+ 
+ if ( !_sampler ) {
+    // Report error
+ }
  @endcode
  
- Once you have added the channel to the audio controller, you can then access the audio unit directly via the 
- [audioUnit](@ref AEAudioUnitChannel::audioUnit) property. You can also add your own initialization step via the
- @link AEAudioUnitChannel::initWithComponentDescription:preInitializeBlock: initWithComponentDescription:preInitializeBlock: @endlink
- initializer.
+ You can then access the audio unit directly via the [audioUnit](@ref AEAudioUnitFilter::audioUnit) property.
  
  @section Adding-Channels Adding Channels
  
@@ -422,8 +412,10 @@ self.filter = [AEBlockFilter filterWithBlock:^(AEAudioControllerFilterProducer p
  
  The AEAudioUnitFilter class allows you to use audio units to apply effects to audio.
  
- To use it, call @link AEAudioUnitFilter::initWithComponentDescription: initWithComponentDescription: @endlink,
- passing in an `AudioComponentDescription` structure (you can use the utility function @link AEAudioComponentDescriptionMake @endlink for this):
+ To use it, call @link AEAudioUnitFilter::initWithComponentDescription:audioController:error: initWithComponentDescription:audioController:error: @endlink,
+ passing in an `AudioComponentDescription` structure (you can use the utility function @link AEAudioComponentDescriptionMake @endlink for this),
+ along with a reference to the AEAudioController instance, and optionally, a pointer to an NSError to be filled if the audio unit
+ creation failed.
  
  @code
  AudioComponentDescription component
@@ -431,13 +423,18 @@ self.filter = [AEBlockFilter filterWithBlock:^(AEAudioControllerFilterProducer p
                                       kAudioUnitType_Effect,
                                       kAudioUnitSubType_Reverb2)
  
- self.reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:component];
+ NSError *error = NULL;
+ self.reverb = [[AEAudioUnitFilter alloc]
+                       initWithComponentDescription:component
+                                    audioController:_audioController
+                                              error:&error];
+ 
+ if ( !_reverb ) {
+    // Report error
+ }
  @endcode
  
- Once you have added the filter to a channel, channel group or main output, you can then access the audio unit directly via the
- [audioUnit](@ref AEAudioUnitFilter::audioUnit) property. You can also add your own initialization step via the
- @link AEAudioUnitFilter::initWithComponentDescription:preInitializeBlock: initWithComponentDescription:preInitializeBlock: @endlink
- initializer.
+ You can then access the audio unit directly via the [audioUnit](@ref AEAudioUnitFilter::audioUnit) property:
  
  @code
  AudioUnitSetParameter(_reverb.audioUnit,
@@ -514,17 +511,6 @@ self.filter = [AEBlockFilter filterWithBlock:^(AEAudioControllerFilterProducer p
     // Do something with 'audio'
  }];
  @endcode
- 
- In both cases, your callback or block will be passed:
- 
- - An opaque identifier indicating the audio source,
- - A timestamp that corresponds to the time the audio hit the device audio input. If latency compensation
-   is important, this should be offset by the value returned from
-   @link AEAudioController::AEAudioControllerInputLatency AEAudioControllerInputLatency @endlink. This can also
-   can be performed automatically if you use AEAudioController's
-   @link AEAudioController::automaticLatencyManagement automaticLatencyManagement @endlink feature);
- - the number of audio frames available, and
- - an AudioBufferList containing the audio.
  
  Then, add the receiver to the source of your choice:
  

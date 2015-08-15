@@ -27,7 +27,10 @@
 #import <Accelerate/Accelerate.h>
 #import "AEFloatConverter.h"
 #import <libkern/OSAtomic.h>
-#import "AEUtilities.h"
+#import <mach/mach_time.h>
+
+static double __hostTicksToSeconds = 0.0;
+static double __secondsToHostTicks = 0.0;
 
 typedef enum {
     kStateClosed,
@@ -71,6 +74,13 @@ typedef void (^AECalibrateCompletionBlock)(void);
 @implementation AEExpanderFilter
 @synthesize ratio = _ratio, attack = _attack, decay = _decay, calibrateCompletionBlock = _calibrateCompletionBlock, floatConverter = _floatConverter, audioController = _audioController;
 @dynamic threshold, hysteresis;
+
++(void)initialize {
+    mach_timebase_info_data_t tinfo;
+    mach_timebase_info(&tinfo);
+    __hostTicksToSeconds = ((double)tinfo.numer / tinfo.denom) * 1.0e-9;
+    __secondsToHostTicks = 1.0 / __hostTicksToSeconds;
+}
 
 - (id)initWithAudioController:(AEAudioController *)audioController {
     if ( !(self = [super init]) ) return nil;
@@ -167,7 +177,7 @@ typedef void (^AECalibrateCompletionBlock)(void);
     self.calibrateCompletionBlock = block;
     _calibrationMaxValue = 2;
     OSMemoryBarrier();
-    _calibrationStartTime = AECurrentTimeInHostTicks();
+    _calibrationStartTime = mach_absolute_time();
 }
 
 - (void)setRatio:(float)ratio {
@@ -246,7 +256,7 @@ static OSStatus filterCallback(__unsafe_unretained AEExpanderFilter *THIS,
         // Calibrating
         if ( max > THIS->_calibrationMaxValue ) THIS->_calibrationMaxValue = max;
         
-        if ( AECurrentTimeInHostTicks()-THIS->_calibrationStartTime >= AEHostTicksFromSeconds(kCalibrationTime) ) {
+        if ( mach_absolute_time()-THIS->_calibrationStartTime >= kCalibrationTime*__secondsToHostTicks ) {
             THIS->_calibrationStartTime = 0;
             AEAudioControllerSendAsynchronousMessageToMainThread(audioController, completeCalibration, &THIS, sizeof(AEExpanderFilter*));
             return noErr;

@@ -18,7 +18,7 @@ PODS:
   - RNCryptor (2.2)
   - SMCalloutView (2.0)
   - SpinKit (1.2.0)
-  - TheAmazingAudioEngine (1.4.8)
+  - TheAmazingAudioEngine (1.4.6)
   - UICKeyChainStore (2.0.6)
 
 DEPENDENCIES:
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - Reachability
   - RNCryptor
   - SpinKit (~> 1.1)
-  - TheAmazingAudioEngine
+  - TheAmazingAudioEngine (= 1.4.6)
   - UICKeyChainStore
 
 EXTERNAL SOURCES:
@@ -53,7 +53,7 @@ SPEC CHECKSUMS:
   RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950
   SpinKit: 65906a8b534a4e14cbfd3f8b0b6c329131faef4a
-  TheAmazingAudioEngine: 347664d1d5a7784a92badc4d77ed1eabc0f88776
+  TheAmazingAudioEngine: 014e942f20456feaf5ccb48f440402306350abf8
   UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
 
 COCOAPODS: 0.38.2

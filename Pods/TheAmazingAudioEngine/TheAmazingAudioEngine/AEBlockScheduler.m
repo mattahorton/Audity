@@ -122,7 +122,7 @@ struct _schedule_t {
 }
 
 -(NSArray *)schedules {
-	return [NSArray arrayWithArray:_scheduledIdentifiers];
+    return _scheduledIdentifiers;
 }
 
 -(void)cancelScheduleWithIdentifier:(id<NSCopying>)identifier {
@@ -154,16 +154,15 @@ struct _schedule_t {
         }
     }];
 
-	if ( [_scheduledIdentifiers containsObject:identifier] ) {
-		[_scheduledIdentifiers removeObject:identifier];
-		for ( int i=0; i<scheduleCount; i++ ) {
-			CFBridgingRelease(values[i].block);
-			if ( values[i].responseBlock ) {
-				CFBridgingRelease(values[i].responseBlock);
-			}
-			CFBridgingRelease(values[i].identifier);
-		}
-	}
+    [_scheduledIdentifiers removeObject:identifier];
+    
+    for ( int i=0; i<scheduleCount; i++ ) {
+        CFBridgingRelease(values[i].block);
+        if ( values[i].responseBlock ) {
+            CFBridgingRelease(values[i].responseBlock);
+        }
+        CFBridgingRelease(values[i].identifier);
+    }
 }
 
 - (NSDictionary*)infoForScheduleWithIdentifier:(id<NSCopying>)identifier {

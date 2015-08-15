@@ -539,13 +539,15 @@ double RadiansToDegrees(double radians) {return radians * 180/M_PI;};
                                                                          kAudioUnitType_Effect,
                                                                          kAudioUnitSubType_Reverb2);
         
-        AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc];
+        NSError *err;
+        
+        AEAudioUnitFilter *reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&err];
         
         desc = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
                                                kAudioUnitType_Effect,
                                                kAudioUnitSubType_LowPassFilter);
         
-        AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc];
+        AEAudioUnitFilter *lp = [[AEAudioUnitFilter alloc] initWithComponentDescription:desc audioController:self.audioController error:&err];
         
 
         // Save file player and filters to the audities object

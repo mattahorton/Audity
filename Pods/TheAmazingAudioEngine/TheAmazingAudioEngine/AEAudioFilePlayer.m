@@ -84,12 +84,10 @@
 }
 
 -(NSTimeInterval)currentTime {
-    if (_lengthInFrames == 0) return 0.0;
-    else return ((double)_playhead / (double)_lengthInFrames) * [self duration];
+    return ((double)_playhead / (double)_lengthInFrames) * [self duration];
 }
 
 -(void)setCurrentTime:(NSTimeInterval)currentTime {
-    if (_lengthInFrames == 0) return;
     _playhead = (int32_t)((currentTime / [self duration]) * _lengthInFrames) % _lengthInFrames;
 }
 

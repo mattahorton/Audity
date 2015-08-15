@@ -105,22 +105,8 @@ static inline BOOL _checkResult(OSStatus result, const char *operation, const ch
 }
 
 - (BOOL)beginWritingToFileAtPath:(NSString*)path fileType:(AudioFileTypeID)fileType error:(NSError**)error {
-    return [self beginWritingToFileAtPath:path fileType:fileType bitDepth:16 channels:0 error:error];
-}
-
-- (BOOL)beginWritingToFileAtPath:(NSString*)path fileType:(AudioFileTypeID)fileType bitDepth:(UInt32)bits error:(NSError**)error {
-    return [self beginWritingToFileAtPath:path fileType:fileType bitDepth:16 channels:0 error:error];
-}
-
-- (BOOL)beginWritingToFileAtPath:(NSString*)path fileType:(AudioFileTypeID)fileType bitDepth:(UInt32)bits channels:(UInt32)channels error:(NSError**)error
-{
-
     OSStatus status;
-
-    if (channels == 0) {
-        channels = _audioDescription.mChannelsPerFrame;
-    }
-
+    
     if ( fileType == kAudioFileM4AType ) {
         if ( ![AEAudioFileWriter AACEncodingAvailable] ) {
             if ( error ) *error = [NSError errorWithDomain:AEAudioFileWriterErrorDomain 
@@ -148,7 +134,7 @@ static inline BOOL _checkResult(OSStatus result, const char *operation, const ch
         // Get the output audio description
         AudioStreamBasicDescription destinationFormat;
         memset(&destinationFormat, 0, sizeof(destinationFormat));
-        destinationFormat.mChannelsPerFrame = channels;
+        destinationFormat.mChannelsPerFrame = _audioDescription.mChannelsPerFrame;
         destinationFormat.mSampleRate = _audioDescription.mSampleRate;
         destinationFormat.mFormatID = kAudioFormatMPEG4AAC;
         size = sizeof(destinationFormat);
@@ -194,10 +180,9 @@ static inline BOOL _checkResult(OSStatus result, const char *operation, const ch
         AudioStreamBasicDescription audioDescription = _audioDescription;
         audioDescription.mFormatFlags = (fileType == kAudioFileAIFFType ? kLinearPCMFormatFlagIsBigEndian : 0) | kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
         audioDescription.mFormatID = kAudioFormatLinearPCM;
-        audioDescription.mBitsPerChannel = bits;
-        audioDescription.mChannelsPerFrame = channels;
+        audioDescription.mBitsPerChannel = 16;
         audioDescription.mBytesPerPacket =
-        audioDescription.mBytesPerFrame = channels * (audioDescription.mBitsPerChannel/8);
+            audioDescription.mBytesPerFrame = audioDescription.mChannelsPerFrame * (audioDescription.mBitsPerChannel/8);
         audioDescription.mFramesPerPacket = 1;
         
         // Create the file

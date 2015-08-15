@@ -92,9 +92,6 @@ extern "C" {
  */
 @property (nonatomic, copy) void (^audioReceiverBlock)(AudioBufferList *audio, UInt32 lengthInFrames);
 
-@property (nonatomic, copy) void (^completedBlock)();
-
-
 /*!
  * The loaded audio, once operation has completed, unless @link audioReceiverBlock @endlink is set.
  *

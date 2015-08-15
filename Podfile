@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'TheAmazingAudioEngine'
+pod 'TheAmazingAudioEngine', '1.4.6'
 pod 'Mapbox-iOS-SDK', :git=> 'https://github.com/mattahorton/mapbox-ios-sdk.git'
 
 pod 'SpinKit', '~> 1.1'

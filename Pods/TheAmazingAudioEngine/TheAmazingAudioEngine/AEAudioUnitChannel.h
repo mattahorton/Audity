@@ -44,31 +44,28 @@ extern "C" {
  * Create a new Audio Unit channel
  *
  * @param audioComponentDescription The structure that identifies the audio unit
+ * @param audioController The audio controller
+ * @param error On output, if not NULL, will point to an error if a problem occurred
  * @return The initialised channel
  */
-- (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription;
+- (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription
+                   audioController:(AEAudioController*)audioController
+                             error:(NSError**)error;
 
 /*!
  * Create a new Audio Unit channel, with a block to run before initialization of the unit 
  *
  * @param audioComponentDescription The structure that identifies the audio unit
+ * @param audioController The audio controller
  * @param preInitializeBlock A block to run before the audio unit is initialized.
  *              This can be used to set some properties that needs to be set before the unit is initialized.
+ * @param error On output, if not NULL, will point to an error if a problem occurred
  * @return The initialised channel
  */
 - (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription
-                preInitializeBlock:(void(^)(AudioUnit audioUnit))block;
-
-/*!
- * Retrieve audio unit reference
- *
- *  This method, for use on the realtime audio thread, allows subclasses and external
- *  classes to access the audio unit.
- *
- * @param channel The channel
- * @returns Audio unit reference
- */
-AudioUnit AEAudioUnitChannelGetAudioUnit(__unsafe_unretained AEAudioUnitChannel * channel);
+                   audioController:(AEAudioController*)audioController
+                preInitializeBlock:(void(^)(AudioUnit audioUnit))block
+                             error:(NSError**)error;
 
 /*!
  * Track volume
@@ -103,6 +100,11 @@ AudioUnit AEAudioUnitChannelGetAudioUnit(__unsafe_unretained AEAudioUnitChannel 
  * The audio unit
  */
 @property (nonatomic, readonly) AudioUnit audioUnit;
+
+/*!
+ * The audio graph node
+ */
+@property (nonatomic, readonly) AUNode audioGraphNode;
 
 @end
 

@@ -44,55 +44,68 @@ extern "C" {
  * Create a new Audio Unit filter
  *
  * @param audioComponentDescription The structure that identifies the audio unit
- * @return The initialised filter
+ * @param audioController The audio controller
+ * @param error On output, if not NULL, will point to an error if a problem occurred
+ * @return The initialised filter, or nil if an error occurred
  */
-- (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription;
+- (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription
+                   audioController:(AEAudioController*)audioController
+                             error:(NSError**)error;
+
+/*!
+ * Create a new Audio Unit filter, using the default input audio description
+ *
+ * @param audioComponentDescription The structure that identifies the audio unit
+ * @param audioController The audio controller
+ * @param useDefaultInputFormat Whether to always use the audio unit's default input audio format.
+ *              This can be used as a workaround for audio units that misidentify the TAAE system
+ *              audio description as being compatible. Audio will automatically be converted from
+ *              the source audio format to this format.
+ * @param error On output, if not NULL, will point to an error if a problem occurred
+ * @return The initialised filter, or nil if an error occurred
+ */
+- (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription
+                   audioController:(AEAudioController*)audioController
+             useDefaultInputFormat:(BOOL)useDefaultInputFormat
+                             error:(NSError**)error;
 
 /*!
  * Create a new Audio Unit filter, with a block to run before initialization of the unit 
  *
  * @param audioComponentDescription The structure that identifies the audio unit
+ * @param audioController The audio controller
+ * @param useDefaultInputFormat Whether to always use the audio unit's default input audio format.
+ *              This can be used as a workaround for audio units that misidentify the TAAE system
+ *              audio description as being compatible. Audio will automatically be converted from
+ *              the source audio format to this format.
  * @param preInitializeBlock A block to run before the audio unit is initialized.
  *              This can be used to set some properties that needs to be set before the unit is initialized.
- * @return The initialised filter
+ * @param error On output, if not NULL, will point to an error if a problem occurred
+ * @return The initialised filter, or nil if an error occurred
  */
 - (id)initWithComponentDescription:(AudioComponentDescription)audioComponentDescription
-                preInitializeBlock:(void(^)(AudioUnit audioUnit))block;
+                   audioController:(AEAudioController*)audioController
+             useDefaultInputFormat:(BOOL)useDefaultInputFormat
+                preInitializeBlock:(void(^)(AudioUnit audioUnit))block
+                             error:(NSError**)error;
 
-/*!
- * Retrieve audio unit reference
- *
- *  This method, for use on the realtime audio thread, allows subclasses and external
- *  classes to access the audio unit.
- *
- * @param filter The filter
- * @returns Audio unit reference
- */
-AudioUnit AEAudioUnitFilterGetAudioUnit(__unsafe_unretained AEAudioUnitFilter * filter);
-
+    
 /*!
  * The audio unit
  */
 @property (nonatomic, readonly) AudioUnit audioUnit;
 
 /*!
- * Audio Unit effect bypass. Default is false.
- *
- * Toggle this state at any time and it will begin taking effect on the next
- * render cycle.
+ * The audio graph node
  */
-@property (nonatomic, assign) BOOL bypassed;
+@property (nonatomic, readonly) AUNode audioGraphNode;
 
 /*!
- * Whether to always use the audio unit's default input audio format.
- *
- * This can be used as a workaround for audio units that misidentify the TAAE system
- * audio description as being compatible. Audio will automatically be converted from
- * the source audio format to this format.
- *
- * Default: NO
+ * Audio Unit effect bypass. Default is false.
+ * Toggle this state at any time and it will begin taking effect 
+ * on the next render cycle.
  */
-@property (nonatomic, assign) BOOL useDefaultInputFormatWorkaround;
+@property (nonatomic, assign) bool bypassed;
 
 @end
 
