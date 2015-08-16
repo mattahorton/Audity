@@ -13,4 +13,10 @@
 
 @property (strong, nonatomic) AUDReach *reach;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pinTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pinLeft;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pinRight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *textBottom;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *pinHeight;
+
 @end

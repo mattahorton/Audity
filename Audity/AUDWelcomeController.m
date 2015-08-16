@@ -12,8 +12,8 @@
 
 - (void)updateViewConstraints {
     [super updateViewConstraints];
+    
     float screenHeight = [UIScreen mainScreen].bounds.size.height;
-    NSLog(@"%f", screenHeight);
     
     if (screenHeight == 480.0f) {
         self.audityTop.constant = 43;
