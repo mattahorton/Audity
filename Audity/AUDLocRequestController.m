@@ -10,6 +10,48 @@
 
 @implementation AUDLocRequestController
 
+- (void)updateViewConstraints {
+    [super updateViewConstraints];
+    
+    float screenHeight = [UIScreen mainScreen].bounds.size.height;
+    
+    if (screenHeight == 480.0f) {
+        self.imageRight.constant = 67;
+        self.imageLeft.constant = 67;
+        self.imageTop.constant = 36;
+        self.enableLeft.constant = 46;
+        self.enableRight.constant = 46;
+        self.buttonBottom.constant = 30;
+        
+        self.soundPlaceLabel.hidden = YES;
+        self.enableLabel.font = [UIFont fontWithName:@"Avenir Next" size:18];
+        
+    } else if (screenHeight == 568.0f) {
+        self.imageRight.constant = 67;
+        self.imageLeft.constant = 67;
+        self.imageTop.constant = 36;
+        self.soundPlaceLeft.constant = 46;
+        self.soundPlaceRight.constant = 46;
+        self.enableLeft.constant = 46;
+        self.enableRight.constant = 46;
+        self.buttonBottom.constant = 30;
+        
+        self.soundPlaceLabel.font = [UIFont fontWithName:@"Avenir Next" size:20];
+        self.enableLabel.font = [UIFont fontWithName:@"Avenir Next" size:20];
+        
+    } else if (screenHeight == 667.0f) {
+        self.imageRight.constant = 67;
+        self.imageLeft.constant = 67;
+        self.imageTop.constant = 62;
+        self.soundPlaceLeft.constant = 61;
+        self.soundPlaceRight.constant = 60;
+        self.enableLeft.constant = 61;
+        self.enableRight.constant = 60;
+        self.buttonBottom.constant = 50;
+    }
+    
+}
+
 -(void) viewDidLoad {
     self.locManager = [[CLLocationManager alloc] init];
     self.locManager.delegate = self;

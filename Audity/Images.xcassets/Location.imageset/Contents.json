@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Location.png"
+      "filename" : "Loc.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Location@2x.png"
+      "filename" : "Loc@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Location@3x.png"
+      "filename" : "Loc@3x.png"
     }
   ],
   "info" : {

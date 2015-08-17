@@ -276,14 +276,14 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Audity" translatesAutoresizingMaskIntoConstraints="NO" id="6y7-BB-0mH">
                                 <rect key="frame" x="84" y="151" width="432" height="99"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EOB-4s-yTN">
-                                <rect key="frame" x="75" y="282" width="450" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EOB-4s-yTN">
+                                <rect key="frame" x="75" y="280" width="450" height="31"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22.510000228881836"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-8t-BOG">
-                                <rect key="frame" x="75" y="359" width="450" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-8t-BOG">
+                                <rect key="frame" x="75" y="358" width="450" height="31"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22.510000228881836"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -333,7 +333,11 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3P-x9-kQo">
-                                <rect key="frame" x="187" y="481" width="225" height="70"/>
+                                <rect key="frame" x="192" y="487" width="215" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Eui-YG-Sc3"/>
+                                    <constraint firstAttribute="width" constant="215" id="SsA-Qq-dao"/>
+                                </constraints>
                                 <state key="normal" backgroundImage="Location">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -341,44 +345,48 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                                     <action selector="enableLoc:" destination="jRK-gh-eu6" eventType="touchUpInside" id="se2-JJ-Gd7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Audity is a sound attached to a place." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJl-A1-UVL">
-                                <rect key="frame" x="132.5" y="349.5" width="333.5" height="25"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable location to create and discover Audities." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJl-A1-UVL">
+                                <rect key="frame" x="80" y="380" width="440" height="60.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To create and listen to Audities," textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-9a-Ffh">
-                                <rect key="frame" x="171" y="382" width="256.5" height="25"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Audity is a sound attached to a place." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLO-Ns-2qk">
+                                <rect key="frame" x="80" y="327" width="440" height="30.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you'll need to enable location access." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGE-J2-Duz">
-                                <rect key="frame" x="146" y="414.5" width="307" height="25"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="YoK-HL-3v3">
-                                <rect key="frame" x="159" y="14.5" width="281" height="295"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LocReq" translatesAutoresizingMaskIntoConstraints="NO" id="YoK-HL-3v3">
+                                <rect key="frame" x="87" y="88" width="427" height="273"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="v3P-x9-kQo" firstAttribute="centerX" secondItem="IGE-J2-Duz" secondAttribute="centerX" id="1GC-fr-46i"/>
-                            <constraint firstItem="YoK-HL-3v3" firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="EBF-HP-qDE"/>
-                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="LLw-OP-4iJ"/>
-                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="top" secondItem="RJl-A1-UVL" secondAttribute="bottom" constant="7.5" id="UpM-11-2AC"/>
-                            <constraint firstItem="RJl-A1-UVL" firstAttribute="top" secondItem="YoK-HL-3v3" secondAttribute="bottom" constant="40" id="a5D-zU-lZ7"/>
-                            <constraint firstItem="rk8-bg-bLs" firstAttribute="top" secondItem="v3P-x9-kQo" secondAttribute="bottom" constant="49" id="bOf-m7-etc"/>
-                            <constraint firstItem="PqU-9a-Ffh" firstAttribute="centerX" secondItem="RJl-A1-UVL" secondAttribute="centerX" id="dqh-xo-rN6"/>
-                            <constraint firstItem="v3P-x9-kQo" firstAttribute="top" secondItem="IGE-J2-Duz" secondAttribute="bottom" constant="41.5" id="fgv-o6-hWG"/>
-                            <constraint firstItem="IGE-J2-Duz" firstAttribute="top" secondItem="PqU-9a-Ffh" secondAttribute="bottom" constant="7.5" id="hOp-6r-D2D"/>
-                            <constraint firstItem="IGE-J2-Duz" firstAttribute="top" secondItem="PqU-9a-Ffh" secondAttribute="bottom" constant="7.5" id="lIi-bh-hnb"/>
-                            <constraint firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="qLf-n0-wlt"/>
+                            <constraint firstItem="RJl-A1-UVL" firstAttribute="leading" secondItem="zxF-Jj-1Dy" secondAttribute="leading" constant="80" id="172-jK-Xub"/>
+                            <constraint firstAttribute="centerX" secondItem="v3P-x9-kQo" secondAttribute="centerX" id="2Ay-aZ-pwi"/>
+                            <constraint firstAttribute="trailing" secondItem="RJl-A1-UVL" secondAttribute="trailing" constant="80" id="2ig-7z-Jzl"/>
+                            <constraint firstItem="fLO-Ns-2qk" firstAttribute="leading" secondItem="zxF-Jj-1Dy" secondAttribute="leading" constant="80" id="F1d-8n-1S9"/>
+                            <constraint firstItem="YoK-HL-3v3" firstAttribute="leading" secondItem="zxF-Jj-1Dy" secondAttribute="leading" constant="87" id="Nv5-mU-akC"/>
+                            <constraint firstAttribute="trailing" secondItem="YoK-HL-3v3" secondAttribute="trailing" constant="86" id="bXQ-6J-3qi"/>
+                            <constraint firstAttribute="trailing" secondItem="fLO-Ns-2qk" secondAttribute="trailing" constant="80" id="bwv-Qw-y3x"/>
+                            <constraint firstItem="v3P-x9-kQo" firstAttribute="top" secondItem="RJl-A1-UVL" secondAttribute="bottom" constant="46.5" id="itc-lv-a4N"/>
+                            <constraint firstItem="YoK-HL-3v3" firstAttribute="top" secondItem="zxF-Jj-1Dy" secondAttribute="top" constant="88" id="tDv-ru-NRa"/>
+                            <constraint firstItem="rk8-bg-bLs" firstAttribute="top" secondItem="v3P-x9-kQo" secondAttribute="bottom" constant="68" id="w19-jl-DGW"/>
+                            <constraint firstItem="RJl-A1-UVL" firstAttribute="top" secondItem="fLO-Ns-2qk" secondAttribute="bottom" constant="22.5" id="zoL-rR-tjx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonBottom" destination="w19-jl-DGW" id="XsT-Yf-tUG"/>
+                        <outlet property="enableLabel" destination="RJl-A1-UVL" id="OUe-Mm-TNi"/>
+                        <outlet property="enableLeft" destination="172-jK-Xub" id="R4A-KY-7BQ"/>
+                        <outlet property="enableRight" destination="2ig-7z-Jzl" id="CkQ-hd-NrO"/>
+                        <outlet property="imageLeft" destination="Nv5-mU-akC" id="Lpi-bO-u9L"/>
+                        <outlet property="imageRight" destination="bXQ-6J-3qi" id="jjv-pK-bvi"/>
+                        <outlet property="imageTop" destination="tDv-ru-NRa" id="huc-50-TgC"/>
+                        <outlet property="soundPlaceLabel" destination="fLO-Ns-2qk" id="N6l-9f-s85"/>
+                        <outlet property="soundPlaceLeft" destination="F1d-8n-1S9" id="A5x-db-1gg"/>
+                        <outlet property="soundPlaceRight" destination="bwv-Qw-y3x" id="fnL-cO-KqQ"/>
                         <segue destination="9bn-Pv-4Ew" kind="custom" identifier="dismissLoc" customClass="DismissSegue" id="6ca-dO-5NX"/>
                     </connections>
                 </viewController>
@@ -399,7 +407,7 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoData" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-uD-9CM">
-                                <rect key="frame" x="111" y="76" width="378" height="295"/>
+                                <rect key="frame" x="111" y="76" width="378" height="332"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please turn on Wi-Fi or mobile data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciN-Hx-8Ji">
                                 <rect key="frame" x="195" y="416" width="210.5" height="55"/>
@@ -563,15 +571,15 @@ Icon credits: Austin Condiff, Jardson A., Luboš Volkov, The Noun Project</strin
     </scenes>
     <resources>
         <image name="Audity" width="272" height="99"/>
-        <image name="Location" width="225" height="70"/>
+        <image name="LocReq" width="273" height="273"/>
+        <image name="Location" width="215" height="45"/>
         <image name="Login" width="215" height="45"/>
-        <image name="NoData" width="281" height="295"/>
-        <image name="Tutorial1" width="281" height="295"/>
+        <image name="NoData" width="226" height="332"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dnz-hZ-Odo"/>
-        <segue reference="2Ja-11-tJX"/>
-        <segue reference="2wP-Ok-E2y"/>
+        <segue reference="6ca-dO-5NX"/>
         <segue reference="IeZ-Vy-bfh"/>
+        <segue reference="2wP-Ok-E2y"/>
     </inferredMetricsTieBreakers>
 </document>
