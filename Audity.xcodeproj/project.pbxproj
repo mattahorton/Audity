@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA51AA3F28100A451BF /* Firebase.framework */; };
 		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
 		49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */; };
@@ -47,8 +46,6 @@
 		B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF0B1AA3E836000A963B /* SystemConfiguration.framework */; };
 		B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF091AA3E82D000A963B /* Security.framework */; };
 		B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF071AA3E826000A963B /* CFNetwork.framework */; };
-		B99EC8941B3A6B9000337657 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99EC8921B3A6B9000337657 /* FBSDKCoreKit.framework */; };
-		B99EC8951B3A6B9000337657 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99EC8931B3A6B9000337657 /* FBSDKLoginKit.framework */; };
 		B99EC8981B3A70F900337657 /* AUDFirebase.m in Sources */ = {isa = PBXBuildFile; fileRef = B99EC8971B3A70F900337657 /* AUDFirebase.m */; };
 		B99EC89B1B3A72D800337657 /* AUDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B99EC89A1B3A72D800337657 /* AUDUser.m */; };
 		B99EE72F1ADE09A1002DDCB1 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = B99EE72D1ADE09A1002DDCB1 /* Pause.png */; };
@@ -74,8 +71,6 @@
 		B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AC5D311B5323F200B90DB0 /* AudityManager.m */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
 		B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DA2EC91B37A3E800265C64 /* AUDParse.m */; };
-		B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECB1B37A90500265C64 /* Bolts.framework */; };
-		B9DA2ECE1B37A90500265C64 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECC1B37A90500265C64 /* Parse.framework */; };
 		B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */; };
 		B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */; };
 		B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED51B37A97200265C64 /* Accounts.framework */; };
@@ -98,7 +93,6 @@
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		494B887C1AE99A32007F4D86 /* encrypt.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
 		494B887E1AE99A8E007F4D86 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
-		49E84AA51AA3F28100A451BF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -159,8 +153,6 @@
 		B99120E31AE9B8B800897195 /* AUDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDTutorialController.m; sourceTree = "<group>"; };
 		B99120E51AE9BE8F00897195 /* AUDLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDLaunchController.h; sourceTree = "<group>"; };
 		B99120E61AE9BE8F00897195 /* AUDLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDLaunchController.m; sourceTree = "<group>"; };
-		B99EC8921B3A6B9000337657 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		B99EC8931B3A6B9000337657 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		B99EC8961B3A70F900337657 /* AUDFirebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDFirebase.h; sourceTree = "<group>"; };
 		B99EC8971B3A70F900337657 /* AUDFirebase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDFirebase.m; sourceTree = "<group>"; };
 		B99EC8991B3A72D800337657 /* AUDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDUser.h; sourceTree = "<group>"; };
@@ -191,8 +183,6 @@
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B9DA2EC81B37A3E800265C64 /* AUDParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDParse.h; sourceTree = "<group>"; };
 		B9DA2EC91B37A3E800265C64 /* AUDParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDParse.m; sourceTree = "<group>"; };
-		B9DA2ECB1B37A90500265C64 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		B9DA2ECC1B37A90500265C64 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B9DA2ED51B37A97200265C64 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -219,19 +209,14 @@
 				49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */,
 				49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */,
 				B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */,
-				49E84AA71AA3F28100A451BF /* Firebase.framework in Frameworks */,
 				49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */,
 				B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */,
 				B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */,
-				B99EC8941B3A6B9000337657 /* FBSDKCoreKit.framework in Frameworks */,
 				B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */,
 				B98B383A1AA450730085912F /* Firebase.framework in Frameworks */,
 				B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */,
-				B9DA2ECE1B37A90500265C64 /* Parse.framework in Frameworks */,
-				B99EC8951B3A6B9000337657 /* FBSDKLoginKit.framework in Frameworks */,
 				B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */,
 				86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */,
-				B9DA2ECD1B37A90500265C64 /* Bolts.framework in Frameworks */,
 				5381B60AAEC5B644F347051B /* libPods.a in Frameworks */,
 				B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */,
 			);
@@ -252,12 +237,7 @@
 			children = (
 				B9DDBFB71AE87865005A764D /* keys.enc */,
 				494B887C1AE99A32007F4D86 /* encrypt.sh */,
-				B99EC8921B3A6B9000337657 /* FBSDKCoreKit.framework */,
-				B99EC8931B3A6B9000337657 /* FBSDKLoginKit.framework */,
-				49E84AA51AA3F28100A451BF /* Firebase.framework */,
 				49E84AA61AA3F28100A451BF /* GeoFire.framework */,
-				B9DA2ECB1B37A90500265C64 /* Bolts.framework */,
-				B9DA2ECC1B37A90500265C64 /* Parse.framework */,
 				B9B80B5D1A690B8300A08B9B /* Podfile */,
 				86C89C8A1A688DAD00799680 /* Audity */,
 				86C89CA41A688DAD00799680 /* AudityTests */,
@@ -775,6 +755,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -810,6 +791,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

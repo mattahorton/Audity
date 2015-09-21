@@ -59,10 +59,12 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "Parse/Parse/Resources/en.lproj"
   install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "Parse/Parse/Resources/en.lproj"
   install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
 fi
 

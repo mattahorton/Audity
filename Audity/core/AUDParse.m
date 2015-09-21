@@ -86,6 +86,7 @@
             
             // Download audio
             PFFile *file = object[@"audio"];
+            // Replace the following block by just calling playAudio: with [file url]
             [file getDataInBackgroundWithBlock: ^(NSData *data, NSError *error) {
                 [data writeToFile:downloadingFilePath atomically:NO];
                 

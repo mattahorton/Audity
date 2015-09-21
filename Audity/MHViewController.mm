@@ -139,7 +139,7 @@
     // disable dragging on the map
     mapView.draggingEnabled = NO;
     mapView.zoomingInPivotsAroundCenter = YES;
-    //    mapView.clusteringEnabled = YES;
+//    mapView.clusteringEnabled = YES;
     mapView.userInteractionEnabled = NO;
     mapView.showsUserLocation = NO;
     
@@ -344,6 +344,32 @@
     if (annotation.isUserLocationAnnotation){
         return nil;
     }
+    
+//    if (annotation.isClusterAnnotation) {
+//        
+//        RMMarker *layer = [self newAudityMarkerWithColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0]];
+//        
+//        layer.opacity = 0.75;
+//        
+//        // set the size of the circle
+//        layer.bounds = CGRectMake(0, 0, 50, 50);
+//        
+//        // change the size of the circle depending on the cluster's size
+//        if ([annotation.clusteredAnnotations count] > 2) {
+//            layer.bounds = CGRectMake(0, 0, 70, 70);
+//        } else if ([annotation.clusteredAnnotations count] > 3) {
+//            layer.bounds = CGRectMake(0, 0, 100, 100);
+//        } else if ([annotation.clusteredAnnotations count] > 5) {
+//            layer.bounds = CGRectMake(0, 0, 120, 120);
+//        }
+//        
+//        [(RMMarker *)layer setTextForegroundColor:[UIColor whiteColor]];
+//        
+//        [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%lu",
+//                                                 (unsigned long)[annotation.clusteredAnnotations count]]];
+//        
+//        return layer;
+//    }
     
     RMMarker *marker =  [self newAudityMarkerWithColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0]];
     

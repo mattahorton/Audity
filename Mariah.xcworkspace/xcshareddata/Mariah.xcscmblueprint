@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A19541179C75A25C62EEC13AA0F98EC65A08E604",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A19541179C75A25C62EEC13AA0F98EC65A08E604" : 0,
+    "8186169DE1ADDD22E2AD242F943BE626AE355EC5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9D301853-4F5A-414F-8FE4-5CC9A79BA386",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A19541179C75A25C62EEC13AA0F98EC65A08E604" : "Audity",
+    "8186169DE1ADDD22E2AD242F943BE626AE355EC5" : "Mariah"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Mariah",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Mariah.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mattahorton\/Mariah.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8186169DE1ADDD22E2AD242F943BE626AE355EC5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mattahorton\/Audity.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A19541179C75A25C62EEC13AA0F98EC65A08E604"
+    }
+  ]
+}

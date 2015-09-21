@@ -8,8 +8,6 @@
 
 #import "AUDUser.h"
 #import "AUDFirebase.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "UICKeychainStore.h"
 #import "Secrets.h"
 

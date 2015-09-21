@@ -62,6 +62,7 @@
     locManager.delegate = self;
     locManager.distanceFilter = 50.0;
     locManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locManager.allowsBackgroundLocationUpdates = YES;
     
     [locManager startUpdatingLocation];
     

@@ -1,5 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+pod 'Firebase', '>= 2.3.3'
+
+pod 'Parse'
+
 pod 'TheAmazingAudioEngine', '1.4.6'
 pod 'Mapbox-iOS-SDK', :git=> 'https://github.com/mattahorton/mapbox-ios-sdk.git'
 
@@ -12,6 +16,6 @@ pod 'Reachability'
 
 pod 'UICKeyChainStore'
 
-pod 'RNCryptor'
+pod 'RNCryptor', '2.2'
 
 pod 'IQKeyboardManager'
