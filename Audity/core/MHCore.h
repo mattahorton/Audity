@@ -14,6 +14,7 @@
 #import "AERecorder.h"
 #import "AUDGeo.h"
 #import "AUDParse.h"
+#import "AUDStorage.h"
 #import "AudityManager.h"
 #import <Firebase/Firebase.h>
 
@@ -21,6 +22,7 @@
 
 @class AUDGeo;
 @class AUDParse;
+@class AUDStorage;
 
 @interface MHCore : NSObject <UIAlertViewDelegate>
 
@@ -31,6 +33,7 @@
 @property (nonatomic,strong) AUDGeo *geo;
 @property (nonatomic,strong) FIRDatabaseReference *firebase;
 @property (nonatomic,strong) AUDParse *parse;
+@property (nonatomic,strong) AUDStorage *storage;
 @property (nonatomic,strong) AERecorder *recorder;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDictionary *apiKeys;

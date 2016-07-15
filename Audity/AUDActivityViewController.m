@@ -88,7 +88,7 @@
             NSString *filePath = (NSString *)[respDict objectForKey:@"recording"];
             
             // Lets add a callback here and only make the cell enabled after download is done
-            [self.core.parse downloadFileWithFilename:filePath isResponse:YES];
+            [self.core.storage downloadFileWithFilename:filePath isResponse:YES];
             NSURL *localURL = [NSURL URLWithString:filePath];
             [localURLS addObject:localURL];
             

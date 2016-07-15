@@ -28,6 +28,7 @@
 		B94C9B531D38831200F91973 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B4D1D38831200F91973 /* GFGeoHashQuery.m */; };
 		B94C9B541D38831200F91973 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B4F1D38831200F91973 /* GFQuery.m */; };
 		B94C9B551D38849E00F91973 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B94C9B3A1D387D1800F91973 /* GoogleService-Info.plist */; };
+		B94C9B581D38908800F91973 /* AUDStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B571D38908800F91973 /* AUDStorage.m */; };
 		B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */; };
 		B94F97E61B1A807900E4428E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94F97E41B1A807900E4428E /* Main.storyboard */; };
 		B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */ = {isa = PBXBuildFile; fileRef = B94F97E81B1A86FA00E4428E /* AUDReach.m */; };
@@ -138,6 +139,8 @@
 		B94C9B4D1D38831200F91973 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
 		B94C9B4E1D38831200F91973 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		B94C9B4F1D38831200F91973 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		B94C9B561D38908800F91973 /* AUDStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDStorage.h; sourceTree = "<group>"; };
+		B94C9B571D38908800F91973 /* AUDStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDStorage.m; sourceTree = "<group>"; };
 		B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDSettingsViewController.h; sourceTree = "<group>"; };
 		B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDSettingsViewController.m; sourceTree = "<group>"; };
 		B94F97E51B1A807900E4428E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				B94F97E81B1A86FA00E4428E /* AUDReach.m */,
 				B9DA2EC81B37A3E800265C64 /* AUDParse.h */,
 				B9DA2EC91B37A3E800265C64 /* AUDParse.m */,
+				B94C9B561D38908800F91973 /* AUDStorage.h */,
+				B94C9B571D38908800F91973 /* AUDStorage.m */,
 				B99EC8961B3A70F900337657 /* AUDFirebase.h */,
 				B99EC8971B3A70F900337657 /* AUDFirebase.m */,
 				B99EC8991B3A72D800337657 /* AUDUser.h */,
@@ -698,6 +703,7 @@
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				B9AC5D2F1B5323E300B90DB0 /* Audity.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
+				B94C9B581D38908800F91973 /* AUDStorage.m in Sources */,
 				B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */,
 				B99EC89B1B3A72D800337657 /* AUDUser.m in Sources */,
 				B94C9B541D38831200F91973 /* GFQuery.m in Sources */,

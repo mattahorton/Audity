@@ -119,7 +119,7 @@
                 
                 [self.audityManager setAudity:[[Audity alloc] init] forKey:key];
             
-                [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".m4a"] isResponse:NO];
+                [self.core.storage downloadFileWithFilename:[key stringByAppendingString:@".m4a"] isResponse:NO];
 //                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".m4a"]];
                 
                 FIRDatabaseReference *audityRef = [self.recordingsRef child:key];

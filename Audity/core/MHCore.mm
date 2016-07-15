@@ -119,6 +119,8 @@
     self.parse = [AUDParse sharedInstance];
     self.parse.core = self;
 
+    self.storage = [AUDStorage sharedInstance];
+    self.storage.core = self;
 }
 
 
