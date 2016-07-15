@@ -15,14 +15,14 @@
 @interface AUDActivityViewController ()
 
 @property (strong, nonatomic) MHCore *core;
-@property (strong, nonatomic) Firebase *firebase;
+@property (strong, nonatomic) FIRDatabaseReference *firebase;
 @property (strong, nonatomic) AudityManager* audityManager;
 
 @end
 
 @implementation AUDActivityViewController {
-    Firebase *recordingsRef;
-    Firebase *responsesRef;
+    FIRDatabaseReference *recordingsRef;
+    FIRDatabaseReference *responsesRef;
     AUDNavViewController *parent;
     NSUserDefaults *defaults;
     NSMutableArray *dataArray;
@@ -44,8 +44,8 @@
     
     self.core = [MHCore sharedInstance];
     _firebase = self.core.firebase;
-    recordingsRef = [_firebase childByAppendingPath:@"recordings"];
-    responsesRef = [_firebase childByAppendingPath:@"responses"];
+    recordingsRef = [_firebase child:@"recordings"];
+    responsesRef = [_firebase child:@"responses"];
     
     if(_audity != nil) {
         NSNumber *num = [NSNumber numberWithLong:self.audity.likes];
@@ -69,7 +69,7 @@
     localURLS = [[NSMutableArray alloc] init];
     
     [[[responsesRef queryOrderedByChild:@"audity"] queryEqualToValue:self.audity.key]
-        observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
 //        NSLog(@"%@", snapshot.value[@"recording"]);
             
         [dataArray addObject:(NSDictionary *)snapshot.value];
@@ -152,7 +152,7 @@
     NSString *key = self.audity.key;
     
     if(!dict || !dict[key]) {
-        Firebase *likesRef = [[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"likes"];
+        FIRDatabaseReference*likesRef = [[recordingsRef child:self.audity.key] child:@"likes"];
         long current = 0;
         
         current = self.audity.likes;
@@ -185,7 +185,7 @@
     NSString *key = self.audity.key;
     
     if(!dict || !dict[key]) {
-        Firebase *likesRef = [[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"likes"];
+        FIRDatabaseReference *likesRef = [[recordingsRef child:self.audity.key] child:@"likes"];
         long current = 0;
         
         current = self.audity.likes;
@@ -283,11 +283,11 @@
                            @"uploaded":[[NSDate date] description],
                            @"audity":self.audity.key,
                            };
-    Firebase *respRef = [responsesRef childByAppendingPath:key];
+    FIRDatabaseReference *respRef = [responsesRef child:key];
     
     [respRef setValue:dict];
     
-    Firebase *recRespRef = [[[recordingsRef childByAppendingPath:self.audity.key] childByAppendingPath:@"responses"] childByAppendingPath:key];
+    FIRDatabaseReference *recRespRef = [[[recordingsRef child:self.audity.key] child:@"responses"] child:key];
     
     [recRespRef setValue:key];
 }

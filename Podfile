@@ -1,6 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'Firebase', '>= 2.3.3'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Firebase/Database'
 
 pod 'Parse'
 

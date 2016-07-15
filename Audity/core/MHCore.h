@@ -29,7 +29,7 @@
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioController *recordingController;
 @property (nonatomic,strong) AUDGeo *geo;
-@property (nonatomic,strong) Firebase *firebase;
+@property (nonatomic,strong) FIRDatabaseReference *firebase;
 @property (nonatomic,strong) AUDParse *parse;
 @property (nonatomic,strong) AERecorder *recorder;
 @property (nonatomic, strong) NSString *userID;

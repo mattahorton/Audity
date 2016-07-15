@@ -11,10 +11,10 @@
 
 @interface AUDUser : NSObject
 
-@property (nonatomic,strong) Firebase *firebase;
-@property (nonatomic,strong) Firebase *userRef;
+@property (nonatomic,strong) FIRDatabaseReference *firebase;
+@property (nonatomic,strong) FIRDatabaseReference *userRef;
 @property (nonatomic,strong) NSString *userID;
-@property (nonatomic,strong) FAuthData *authData;
+@property (nonatomic,strong) FIRUser *firUser;
 @property (nonatomic) BOOL loggedIn;
 
 +(id) sharedInstance;

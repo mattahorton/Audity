@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A19541179C75A25C62EEC13AA0F98EC65A08E604",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A19541179C75A25C62EEC13AA0F98EC65A08E604" : 0,
+    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0BD94E71-FBE0-4DDE-8135-3FD8F251B43B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A19541179C75A25C62EEC13AA0F98EC65A08E604" : "Audity",
+    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : "Audity\/geofire-objc\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Audity",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Audity.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/firebase\/geofire-objc.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78BC981234DC9ACF745E820B97CE28D46F6D69E7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mattahorton\/Audity.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A19541179C75A25C62EEC13AA0F98EC65A08E604"
+    }
+  ]
+}

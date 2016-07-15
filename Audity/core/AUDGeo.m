@@ -122,9 +122,9 @@
                 [self.core.parse downloadFileWithFilename:[key stringByAppendingString:@".m4a"] isResponse:NO];
 //                NSURL *localUrl = [NSURL URLWithString:[key stringByAppendingString:@".m4a"]];
                 
-                Firebase *audityRef = [self.recordingsRef childByAppendingPath:key];
+                FIRDatabaseReference *audityRef = [self.recordingsRef child:key];
                 
-                [audityRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                [audityRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
 
                     Audity *audity = [self.audityManager audities][key];
                     
@@ -211,7 +211,7 @@
     url = [[url stringByAppendingString:uuid] stringByAppendingString:@".m4a"];
     
     NSDictionary *dict = @{@"recording":url,@"userId":self.core.userID,@"signature":signature, @"uploaded":[[NSDate date] description]};
-    Firebase *locRef = [self.recordingsRef childByAppendingPath:uuid];
+    FIRDatabaseReference *locRef = [self.recordingsRef child:uuid];
 
     [locRef setValue:dict];
 }

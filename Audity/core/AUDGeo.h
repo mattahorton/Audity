@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
-#import <GeoFire/GeoFire.h>
+#import "GeoFire.h"
 #import <CoreLocation/CoreLocation.h>
 #import "MHCore.h"
 
@@ -16,8 +16,8 @@
 
 @interface AUDGeo : NSObject <CLLocationManagerDelegate>
 
-@property (nonatomic, strong) Firebase *recordingsRef;
-@property (nonatomic, strong) Firebase *geofireRef;
+@property (nonatomic, strong) FIRDatabaseReference *recordingsRef;
+@property (nonatomic, strong) FIRDatabaseReference *geofireRef;
 @property (nonatomic, strong) GeoFire *geoFire;
 @property (nonatomic, strong) CLLocation *currentLoc;
 @property (nonatomic) CLLocationDirection currentHeading;

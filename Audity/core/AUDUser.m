@@ -54,41 +54,41 @@
     [keychain setString:storeThisId forKey:@"userId"];
     
     // Store ID in Firebase
-    Firebase *thisUser = [[self.userRef childByAppendingPath:storeThisId] childByAppendingPath:@"userId"];
+    FIRDatabaseReference *thisUser = [[self.userRef child:storeThisId] child:@"userId"];
     [thisUser setValue:storeThisId];
 }
 
 -(void)authAnonWithTarget:(NSObject *)target andSelector:(SEL)selector {
     
-    __block FAuthData *aData;
+    __block FIRUser *fUser;
     
     self.userID = [self findUserID];
     
-    [self.firebase authAnonymouslyWithCompletionBlock:^(NSError *error, FAuthData *authData) {
+    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *firUser, NSError *error) {
         if (error) {
             //NSLog(@"Login Failed! %@", error);
             self.loggedIn = NO;
             
-            aData = nil;
+            fUser = nil;
         } else {
             //NSLog(@"Login succeeded! %@", authData);
             self.loggedIn = YES;
             
-            aData = authData;
+            fUser = firUser;
             
-            self.authData = aData;
+            self.firUser = fUser;
             
-            if(aData) {
-                self.userRef = [self.firebase childByAppendingPath:@"users"];
+            if(fUser) {
+                self.userRef = [self.firebase child:@"users"];
                 
                 if (!self.userID) {
-                    self.userID = self.authData.uid;
+                    self.userID = self.firUser.uid;
                     [self storeUserID:self.userID];
                 }                
             }
             
             if([target respondsToSelector:selector]) {
-                [target performSelector:selector withObject:aData];
+                [target performSelector:selector withObject:fUser];
             }
         }
     }];
@@ -96,30 +96,30 @@
 
 -(void)authWithEmail:(NSString *)email password:(NSString *)pwd target:(NSObject *)target andSelector:(SEL)selector {
     
-    __block FAuthData *aData;
+    __block FIRUser *fUser;
     UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
     
     self.userID = [self findUserID];
 
-    [self.firebase authUser:email password:pwd withCompletionBlock:^(NSError *error, FAuthData *authData) {
+    [[FIRAuth auth] signInWithEmail:email password:pwd completion:^(FIRUser *firUser, NSError *error) {
         if (error) {
             //NSLog(@"Login Failed! %@", error);
             self.loggedIn = NO;
             
-            aData = nil;
+            fUser = nil;
         } else {
             //NSLog(@"Login succeeded! %@", authData);
             self.loggedIn = YES;
             
-            aData = authData;
+            fUser = firUser;
             
-            self.authData = aData;
+            self.firUser = fUser;
             
-            if(aData) {
-                self.userRef = [self.firebase childByAppendingPath:@"users"];
+            if(fUser) {
+                self.userRef = [self.firebase child:@"users"];
                 
                 if (!self.userID) {
-                    self.userID = self.authData.uid;
+                    self.userID = self.firUser.uid;
                     [self storeUserID:self.userID];
                 }
                 
@@ -129,7 +129,7 @@
             }
             
             if([target respondsToSelector:selector]) {
-                [target performSelector:selector withObject:aData];
+                [target performSelector:selector withObject:fUser];
             }
         }
 

@@ -11,7 +11,7 @@
 
 @interface AUDFirebase : NSObject
 
-@property (nonatomic,strong) Firebase *firebase;
+@property (nonatomic,strong) FIRDatabaseReference *firebase;
 
 +(instancetype) sharedInstance;
 

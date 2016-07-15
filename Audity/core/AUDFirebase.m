@@ -22,7 +22,7 @@
 -(instancetype) init {
     self = [super init];
     if(self) {
-        self.firebase = [[Firebase alloc] initWithUrl:@"https://audity.firebaseio.com/"];
+        self.firebase = [[FIRDatabase database] reference];
     }
     
     return self;

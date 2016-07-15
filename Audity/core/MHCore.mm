@@ -110,8 +110,8 @@
     // Set up geo
     self.geo = [AUDGeo sharedInstance];
     self.firebase = [AUDFirebase sharedInstance].firebase;
-    self.geo.recordingsRef = [self.firebase childByAppendingPath:@"recordings"];
-    self.geo.geofireRef = [self.firebase childByAppendingPath:@"geofire"];
+    self.geo.recordingsRef = [self.firebase child:@"recordings"];
+    self.geo.geofireRef = [self.firebase child:@"geofire"];
     self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
     [self.geo geoInit];
     
@@ -372,7 +372,7 @@
 }
 
 -(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes andBackFrontScaling:(float)bfs{
-    int total_likes = [self getTotalNumLikes];
+    long total_likes = [self getTotalNumLikes];
     float volume = 0.5 + (float)likes/(float)total_likes; //set the base volume based on likes
     if (total_likes == 0) volume = 0.75;
     if(volume > 1.0) volume = 1.0;

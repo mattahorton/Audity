@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AA61AA3F28100A451BF /* GeoFire.framework */; };
 		49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE71AA3FCE000A451BF /* CoreLocation.framework */; };
 		49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */; };
 		49E84AEC1AA3FCFE00A451BF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */; };
 		49E84AEE1AA3FD0F00A451BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E84AED1AA3FD0F00A451BF /* libz.dylib */; };
 		5381B60AAEC5B644F347051B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C289A6CCD0326F366E69F0 /* libPods.a */; };
 		86C89C8E1A688DAD00799680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C8D1A688DAD00799680 /* main.m */; };
-		86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C901A688DAD00799680 /* AppDelegate.mm */; };
+		86C89C911A688DAD00799680 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89C901A688DAD00799680 /* AppDelegate.m */; };
 		86C89C991A688DAD00799680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C89C981A688DAD00799680 /* Images.xcassets */; };
 		86C89CA81A688DAD00799680 /* AudityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C89CA71A688DAD00799680 /* AudityTests.m */; };
 		86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C89CFA1A68923600799680 /* AudioToolbox.framework */; };
@@ -23,6 +22,12 @@
 		B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9138AD91A6DBCE1009BFC86 /* UIKit.framework */; };
 		B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */; };
 		B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = B945CB3A1A6A0AE200091DC3 /* MHCore.mm */; };
+		B94C9B501D38831200F91973 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B471D38831200F91973 /* GeoFire.m */; };
+		B94C9B511D38831200F91973 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B491D38831200F91973 /* GFBase32Utils.m */; };
+		B94C9B521D38831200F91973 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B4B1D38831200F91973 /* GFGeoHash.m */; };
+		B94C9B531D38831200F91973 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B4D1D38831200F91973 /* GFGeoHashQuery.m */; };
+		B94C9B541D38831200F91973 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C9B4F1D38831200F91973 /* GFQuery.m */; };
+		B94C9B551D38849E00F91973 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B94C9B3A1D387D1800F91973 /* GoogleService-Info.plist */; };
 		B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */; };
 		B94F97E61B1A807900E4428E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94F97E41B1A807900E4428E /* Main.storyboard */; };
 		B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */ = {isa = PBXBuildFile; fileRef = B94F97E81B1A86FA00E4428E /* AUDReach.m */; };
@@ -37,8 +42,6 @@
 		B982CD801B19B5790053EBC7 /* AUDLocRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = B982CD7F1B19B5790053EBC7 /* AUDLocRequestController.m */; };
 		B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */; };
 		B98B37971AA412560085912F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B37961AA412560085912F /* CoreLocation.framework */; };
-		B98B383A1AA450730085912F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38381AA450730085912F /* Firebase.framework */; };
-		B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B98B38391AA450730085912F /* GeoFire.framework */; };
 		B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E31AE9B8B800897195 /* AUDTutorialController.m */; };
 		B99120E71AE9BE8F00897195 /* AUDLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99120E61AE9BE8F00897195 /* AUDLaunchController.m */; };
 		B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B955EF031AA3E819000A963B /* libc++.dylib */; };
@@ -93,7 +96,6 @@
 		39C289A6CCD0326F366E69F0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		494B887C1AE99A32007F4D86 /* encrypt.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = encrypt.sh; sourceTree = "<group>"; };
 		494B887E1AE99A8E007F4D86 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
-		49E84AA61AA3F28100A451BF /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		49E84AE71AA3FCE000A451BF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		49E84AE91AA3FCEB00A451BF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -102,7 +104,7 @@
 		86C89C8C1A688DAD00799680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C89C8D1A688DAD00799680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86C89C8F1A688DAD00799680 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		86C89C901A688DAD00799680 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		86C89C901A688DAD00799680 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		86C89C981A688DAD00799680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		86C89C9B1A688DAD00799680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		86C89CA11A688DAD00799680 /* AudityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,22 @@
 		B942DC8B1AB3C6DD00D4ED15 /* AUDNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDNavViewController.m; sourceTree = "<group>"; };
 		B945CB391A6A0AE200091DC3 /* MHCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHCore.h; sourceTree = "<group>"; };
 		B945CB3A1A6A0AE200091DC3 /* MHCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MHCore.mm; sourceTree = "<group>"; };
+		B94C9B3A1D387D1800F91973 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B94C9B401D38831200F91973 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		B94C9B411D38831200F91973 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		B94C9B421D38831200F91973 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		B94C9B431D38831200F91973 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		B94C9B441D38831200F91973 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		B94C9B461D38831200F91973 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		B94C9B471D38831200F91973 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		B94C9B481D38831200F91973 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		B94C9B491D38831200F91973 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		B94C9B4A1D38831200F91973 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		B94C9B4B1D38831200F91973 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		B94C9B4C1D38831200F91973 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		B94C9B4D1D38831200F91973 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		B94C9B4E1D38831200F91973 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		B94C9B4F1D38831200F91973 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		B94D2EA01AE84B11008E2260 /* AUDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDSettingsViewController.h; sourceTree = "<group>"; };
 		B94D2EA11AE84B11008E2260 /* AUDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDSettingsViewController.m; sourceTree = "<group>"; };
 		B94F97E51B1A807900E4428E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -147,8 +165,6 @@
 		B982CD811B19C2450053EBC7 /* PushNoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNoAnimationSegue.h; sourceTree = "<group>"; };
 		B982CD821B19C2450053EBC7 /* PushNoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNoAnimationSegue.m; sourceTree = "<group>"; };
 		B98B37961AA412560085912F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B98B38381AA450730085912F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
-		B98B38391AA450730085912F /* GeoFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GeoFire.framework; sourceTree = "<group>"; };
 		B99120E21AE9B8B800897195 /* AUDTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDTutorialController.h; sourceTree = "<group>"; };
 		B99120E31AE9B8B800897195 /* AUDTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDTutorialController.m; sourceTree = "<group>"; };
 		B99120E51AE9BE8F00897195 /* AUDLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDLaunchController.h; sourceTree = "<group>"; };
@@ -209,16 +225,13 @@
 				49E84AEA1AA3FCEB00A451BF /* QuartzCore.framework in Frameworks */,
 				49E84AE81AA3FCE000A451BF /* CoreLocation.framework in Frameworks */,
 				B9961FBC1AA3EC89002F2005 /* CFNetwork.framework in Frameworks */,
-				49E84AA81AA3F28100A451BF /* GeoFire.framework in Frameworks */,
 				B9961FBB1AA3EC81002F2005 /* Security.framework in Frameworks */,
 				B9961FBA1AA3EC67002F2005 /* SystemConfiguration.framework in Frameworks */,
 				B9961FB91AA3EC57002F2005 /* libicucore.dylib in Frameworks */,
-				B98B383A1AA450730085912F /* Firebase.framework in Frameworks */,
 				B9961FB81AA3EC52002F2005 /* libc++.dylib in Frameworks */,
 				B9138ADA1A6DBCE1009BFC86 /* UIKit.framework in Frameworks */,
 				86C89CFB1A68923600799680 /* AudioToolbox.framework in Frameworks */,
 				5381B60AAEC5B644F347051B /* libPods.a in Frameworks */,
-				B98B383B1AA450740085912F /* GeoFire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,8 +250,8 @@
 			children = (
 				B9DDBFB71AE87865005A764D /* keys.enc */,
 				494B887C1AE99A32007F4D86 /* encrypt.sh */,
-				49E84AA61AA3F28100A451BF /* GeoFire.framework */,
 				B9B80B5D1A690B8300A08B9B /* Podfile */,
+				B94C9B3E1D38831200F91973 /* GeoFire */,
 				86C89C8A1A688DAD00799680 /* Audity */,
 				86C89CA41A688DAD00799680 /* AudityTests */,
 				86C89CFE1A68969900799680 /* Frameworks */,
@@ -264,7 +277,7 @@
 				B9AC5D2B1B53235300B90DB0 /* ViewControllers */,
 				B9A0AD771AB2B50A00F4F1C8 /* buttons */,
 				86C89C8F1A688DAD00799680 /* AppDelegate.h */,
-				86C89C901A688DAD00799680 /* AppDelegate.mm */,
+				86C89C901A688DAD00799680 /* AppDelegate.m */,
 				B94F97E41B1A807900E4428E /* Main.storyboard */,
 				86C89C981A688DAD00799680 /* Images.xcassets */,
 				86C89C9A1A688DAD00799680 /* LaunchScreen.xib */,
@@ -276,6 +289,7 @@
 		86C89C8B1A688DAD00799680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B94C9B3A1D387D1800F91973 /* GoogleService-Info.plist */,
 				86C89C8C1A688DAD00799680 /* Info.plist */,
 				494B887E1AE99A8E007F4D86 /* keys.plist */,
 				86C89C8D1A688DAD00799680 /* main.m */,
@@ -333,8 +347,6 @@
 				B9DA2ED51B37A97200265C64 /* Accounts.framework */,
 				B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */,
 				B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */,
-				B98B38381AA450730085912F /* Firebase.framework */,
-				B98B38391AA450730085912F /* GeoFire.framework */,
 				B98B37961AA412560085912F /* CoreLocation.framework */,
 				49E84AED1AA3FD0F00A451BF /* libz.dylib */,
 				49E84AEB1AA3FCFE00A451BF /* libsqlite3.dylib */,
@@ -361,6 +373,45 @@
 				BF7AEC140F5D9CD117BD9E64 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B94C9B3E1D38831200F91973 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				B94C9B3F1D38831200F91973 /* API */,
+				B94C9B441D38831200F91973 /* GeoFire-Prefix.pch */,
+				B94C9B451D38831200F91973 /* Implementation */,
+			);
+			name = GeoFire;
+			path = "geofire-objc/GeoFire";
+			sourceTree = "<group>";
+		};
+		B94C9B3F1D38831200F91973 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B94C9B401D38831200F91973 /* GeoFire.h */,
+				B94C9B411D38831200F91973 /* GFCircleQuery.h */,
+				B94C9B421D38831200F91973 /* GFQuery.h */,
+				B94C9B431D38831200F91973 /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B94C9B451D38831200F91973 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				B94C9B461D38831200F91973 /* GeoFire+Private.h */,
+				B94C9B471D38831200F91973 /* GeoFire.m */,
+				B94C9B481D38831200F91973 /* GFBase32Utils.h */,
+				B94C9B491D38831200F91973 /* GFBase32Utils.m */,
+				B94C9B4A1D38831200F91973 /* GFGeoHash.h */,
+				B94C9B4B1D38831200F91973 /* GFGeoHash.m */,
+				B94C9B4C1D38831200F91973 /* GFGeoHashQuery.h */,
+				B94C9B4D1D38831200F91973 /* GFGeoHashQuery.m */,
+				B94C9B4E1D38831200F91973 /* GFQuery+Private.h */,
+				B94C9B4F1D38831200F91973 /* GFQuery.m */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		B9A0AD771AB2B50A00F4F1C8 /* buttons */ = {
@@ -440,6 +491,7 @@
 				86C89C851A688DAD00799680 /* Frameworks */,
 				86C89C861A688DAD00799680 /* Resources */,
 				F5E1B5803B65B4EC730832C9 /* Copy Pods Resources */,
+				919B8F0F838F806D5217BAD8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -544,6 +596,7 @@
 				B9A0AD6A1AB2B37900F4F1C8 /* GodMode@100w.png in Resources */,
 				86C89C991A688DAD00799680 /* Images.xcassets in Resources */,
 				B9A0AD6C1AB2B37900F4F1C8 /* LocalMode@100w.png in Resources */,
+				B94C9B551D38849E00F91973 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +610,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		919B8F0F838F806D5217BAD8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A383AD2D4711DD38AA37A548 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -611,10 +679,13 @@
 				B99120E71AE9BE8F00897195 /* AUDLaunchController.m in Sources */,
 				B94F97EC1B1A8E8C00E4428E /* AUDNoDataController.m in Sources */,
 				B945CB3B1A6A0AE200091DC3 /* MHCore.mm in Sources */,
+				B94C9B531D38831200F91973 /* GFGeoHashQuery.m in Sources */,
 				B942DC8C1AB3C6DD00D4ED15 /* AUDNavViewController.m in Sources */,
 				B9138AD81A6DB9E2009BFC86 /* MHViewController.mm in Sources */,
-				86C89C911A688DAD00799680 /* AppDelegate.mm in Sources */,
+				86C89C911A688DAD00799680 /* AppDelegate.m in Sources */,
+				B94C9B501D38831200F91973 /* GeoFire.m in Sources */,
 				B982CD801B19B5790053EBC7 /* AUDLocRequestController.m in Sources */,
+				B94C9B511D38831200F91973 /* GFBase32Utils.m in Sources */,
 				B99EC8981B3A70F900337657 /* AUDFirebase.m in Sources */,
 				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
 				B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */,
@@ -623,11 +694,13 @@
 				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
 				B9665A211AB3B37100BDD88A /* AUDActivityViewController.m in Sources */,
+				B94C9B521D38831200F91973 /* GFGeoHash.m in Sources */,
 				B955EF141AA3E96A000A963B /* AUDGeo.m in Sources */,
 				B9AC5D2F1B5323E300B90DB0 /* Audity.m in Sources */,
 				86C89D011A689A5000799680 /* DismissSegue.mm in Sources */,
 				B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */,
 				B99EC89B1B3A72D800337657 /* AUDUser.m in Sources */,
+				B94C9B541D38831200F91973 /* GFQuery.m in Sources */,
 				B99EE7351ADF0B1A002DDCB1 /* Secrets.m in Sources */,
 				B94F97E91B1A86FA00E4428E /* AUDReach.m in Sources */,
 			);

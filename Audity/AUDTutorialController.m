@@ -124,8 +124,8 @@
 }
 
 #pragma mark After Auth Callback
--(void)afterAuth:(FAuthData *)aData {
-    if(aData) [self setViewControllers:@[myViewControllers[1]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+-(void)afterAuth:(FIRUser *)fUser {
+    if(fUser) [self setViewControllers:@[myViewControllers[1]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
 }
 
 
