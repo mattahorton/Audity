@@ -5,8 +5,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Database'
 
-pod 'Parse'
-
 pod 'TheAmazingAudioEngine', '1.4.6'
 pod 'Mapbox-iOS-SDK', :git=> 'https://github.com/mattahorton/mapbox-ios-sdk.git'
 

@@ -27,6 +27,44 @@
     return self;
 }
 
+- (void) uploadFile:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature {
+    FIRStorageReference *fileRef = [[self.core.storage.storageRef child:@"recordings"] child:filename];
+    
+    FIRStorageUploadTask *uploadTask = [fileRef putFile:file metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+            NSLog(@"%@", error.userInfo);
+        } else {
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                         objectAtIndex:0];
+            [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"] error:nil];
+            
+            [self.core addLocAfterUploadWithSignature:signature];
+        }
+    }];
+}
+
+- (void) uploadResponse:(NSURL *)file withFilename:(NSString *)filename andSignature:(NSString *)signature forAudity:(NSString *)audityKey {
+    FIRStorageReference *fileRef = [[self.core.storage.storageRef child:@"responses"] child:filename];
+    
+    FIRStorageUploadTask *uploadTask = [fileRef putFile:file metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+            NSLog(@"%@", error.userInfo);
+        } else {
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *documentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                                         objectAtIndex:0];
+            [fileManager removeItemAtPath:[documentsFolder stringByAppendingPathComponent:@"Recording.m4a"] error:nil];
+            
+            [self.core addResponseToViewAfterUploadWithSignature:signature];
+        }
+    }];
+}
+
 - (void) downloadFileWithFilename:(NSString *)filename isResponse:(BOOL)response {
     
     // Construct the NSURL for the download location.
@@ -44,8 +82,6 @@
     } else {
         ref = [[self.storageRef child:@"responses"] child:filename];
     }
-    
-    NSLog(@"%@", downloadingFileURL);
     
     // Download to the local filesystem
     FIRStorageDownloadTask *downloadTask = [ref writeToFile:downloadingFileURL completion:^(NSURL *URL, NSError *error){

@@ -114,10 +114,6 @@
     self.geo.geofireRef = [self.firebase child:@"geofire"];
     self.geo.geoFire = [[GeoFire alloc] initWithFirebaseRef:self.geo.geofireRef];
     [self.geo geoInit];
-    
-    // Set up s3
-    self.parse = [AUDParse sharedInstance];
-    self.parse.core = self;
 
     self.storage = [AUDStorage sharedInstance];
     self.storage.core = self;
@@ -264,13 +260,13 @@
 -(void) uploadNewAudity:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature{
     tempKey = [NSString stringWithString:key];
     NSString *filename = [key stringByAppendingString:@".m4a"];
-    [self.parse uploadFile:file withFilename:filename andSignature:signature];
+    [self.storage uploadFile:file withFilename:filename andSignature:signature];
 }
 
 -(void) uploadNewAudityResponse:(NSURL *)file withKey:(NSString *)key andSignature:(NSString *)signature forAudity:(NSString *) audityKey {
     tempKey = [NSString stringWithString:key];
     NSString *filename = [key stringByAppendingString:@".m4a"];
-    [self.parse uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
+    [self.storage uploadResponse:file withFilename:filename andSignature:signature forAudity:audityKey];
 }
 
 -(void) addLocAfterUploadWithSignature:(NSString *)signature {
@@ -373,7 +369,7 @@
                           0);
 }
 
--(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(int)likes andBackFrontScaling:(float)bfs{
+-(void) setVolumeForFP:(AEAudioFilePlayer *)fp withScaleFactor:(float)scl andLikes:(long)likes andBackFrontScaling:(float)bfs{
     long total_likes = [self getTotalNumLikes];
     float volume = 0.5 + (float)likes/(float)total_likes; //set the base volume based on likes
     if (total_likes == 0) volume = 0.75;

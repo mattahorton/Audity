@@ -1,5 +1,4 @@
 PODS:
-  - Bolts/Tasks (1.2.2)
   - DLAlertView (1.2.5)
   - Firebase/Analytics (3.3.0):
     - FirebaseAnalytics (= 3.2.1)
@@ -54,8 +53,6 @@ PODS:
     - GRMustache (= 7.3.0)
     - SMCalloutView (= 2.0)
   - MBProgressHUD (0.9.1)
-  - Parse (1.8.5):
-    - Bolts/Tasks (>= 1.2.2)
   - Reachability (3.2)
   - RNCryptor (2.2)
   - SMCalloutView (2.0)
@@ -72,7 +69,6 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Mapbox-iOS-SDK (from `https://github.com/mattahorton/mapbox-ios-sdk.git`)
   - MBProgressHUD (~> 0.9.1)
-  - Parse
   - Reachability
   - RNCryptor (= 2.2)
   - SpinKit (~> 1.1)
@@ -89,7 +85,6 @@ CHECKOUT OPTIONS:
     :git: https://github.com/mattahorton/mapbox-ios-sdk.git
 
 SPEC CHECKSUMS:
-  Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
   DLAlertView: 774c1242cc854177fdc07634ed3f8c250a38864d
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
   FirebaseAnalytics: 0fd6532cb2c3d03cd5cf26ad295ccb091efd3104
@@ -108,7 +103,6 @@ SPEC CHECKSUMS:
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Mapbox-iOS-SDK: 8710f321a5061fa304f1b563c3a893838e797b6a
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  Parse: 17ad8e0677ed682f7f00503860fcda0f4eb74168
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   SMCalloutView: f758edd824b18bf4f42de00df1e299861a2d1950

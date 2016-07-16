@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "Secrets.h"
 #import "RNOpenSSLDecryptor.h"
-#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -25,21 +24,7 @@
     [FIRApp configure];
     
     Secrets *secrets = [Secrets sharedInstance];
-    NSDictionary *apiKeys = [secrets apiKeys];
-    
-    NSString *PARSEAPPID = apiKeys[@"PARSEAPPID"];
-    NSString *PARSECLIENTKEY = apiKeys[@"PARSECLIENTKEY"];
-    
-    [Parse enableLocalDatastore];
-    
-    // Initialize Parse.
-    [Parse setApplicationId:PARSEAPPID
-                  clientKey:PARSECLIENTKEY];
-    
-    [PFUser enableAutomaticUser];
-    
-    // [Optional] Track statistics around application opens.
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+//    NSDictionary *apiKeys = [secrets apiKeys];
 
     return YES;
 }

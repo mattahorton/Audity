@@ -74,7 +74,6 @@
 		B9AC5D2F1B5323E300B90DB0 /* Audity.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AC5D2E1B5323E300B90DB0 /* Audity.m */; };
 		B9AC5D321B5323F200B90DB0 /* AudityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AC5D311B5323F200B90DB0 /* AudityManager.m */; };
 		B9B80B5E1A690B8300A08B9B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9B80B5D1A690B8300A08B9B /* Podfile */; };
-		B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DA2EC91B37A3E800265C64 /* AUDParse.m */; };
 		B9DA2ED01B37A93100265C64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */; };
 		B9DA2ED41B37A95400265C64 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */; };
 		B9DA2ED61B37A97200265C64 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DA2ED51B37A97200265C64 /* Accounts.framework */; };
@@ -200,8 +199,6 @@
 		B9AC5D301B5323F200B90DB0 /* AudityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudityManager.h; sourceTree = "<group>"; };
 		B9AC5D311B5323F200B90DB0 /* AudityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudityManager.m; sourceTree = "<group>"; };
 		B9B80B5D1A690B8300A08B9B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B9DA2EC81B37A3E800265C64 /* AUDParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUDParse.h; sourceTree = "<group>"; };
-		B9DA2EC91B37A3E800265C64 /* AUDParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUDParse.m; sourceTree = "<group>"; };
 		B9DA2ECF1B37A93100265C64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B9DA2ED31B37A95400265C64 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B9DA2ED51B37A97200265C64 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -328,8 +325,6 @@
 				B99EE7361ADF0B27002DDCB1 /* Secrets.h */,
 				B94F97E71B1A86FA00E4428E /* AUDReach.h */,
 				B94F97E81B1A86FA00E4428E /* AUDReach.m */,
-				B9DA2EC81B37A3E800265C64 /* AUDParse.h */,
-				B9DA2EC91B37A3E800265C64 /* AUDParse.m */,
 				B94C9B561D38908800F91973 /* AUDStorage.h */,
 				B94C9B571D38908800F91973 /* AUDStorage.m */,
 				B99EC8961B3A70F900337657 /* AUDFirebase.h */,
@@ -694,7 +689,6 @@
 				B99EC8981B3A70F900337657 /* AUDFirebase.m in Sources */,
 				B99120E41AE9B8B800897195 /* AUDTutorialController.m in Sources */,
 				B982CD831B19C2450053EBC7 /* PushNoAnimationSegue.m in Sources */,
-				B9DA2ECA1B37A3E800265C64 /* AUDParse.m in Sources */,
 				86C89C8E1A688DAD00799680 /* main.m in Sources */,
 				B982CD7D1B19B2890053EBC7 /* AUDWelcomeController.m in Sources */,
 				B94D2EA21AE84B11008E2260 /* AUDSettingsViewController.m in Sources */,
