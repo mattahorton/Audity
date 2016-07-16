@@ -32,11 +32,18 @@
     return self;
 }
 
+-(NSString *)userID {
+    if (!_userID) {
+        return [self findUserID];
+    }
+    
+    return _userID;
+}
+
 -(NSString *)findUserID {
     // Find user ID in keychain
     UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.mattahorton.Audity"];
     return [keychain stringForKey:@"userId"];
-
 }
 
 -(void)storeUserID: (NSString *)toStore {
